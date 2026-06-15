@@ -68,6 +68,30 @@ def validate(path: Path = DEFAULT_AUTHORITY) -> list[str]:
                     errors.append("hid_1_11 imported topic must be Class-Specific Requests")
                 if usage_entry.get("status") != "scaffolded":
                     errors.append("hid_1_11 imported usage status must be scaffolded")
+        future_usage = hid_1_11.get("future_authorized_usage")
+        if not isinstance(future_usage, list) or len(future_usage) != 1:
+            errors.append("hid_1_11.future_authorized_usage must contain exactly one entry")
+        else:
+            future_entry = future_usage[0]
+            if not isinstance(future_entry, dict):
+                errors.append("hid_1_11.future_authorized_usage[0] must be a mapping")
+            else:
+                if future_entry.get("section") != "6.2.1":
+                    errors.append("future authorized HID descriptor section must be 6.2.1")
+                if future_entry.get("topic") != "HID Descriptor":
+                    errors.append("future authorized HID descriptor topic must be HID Descriptor")
+                if future_entry.get("status") != "authorized_not_imported":
+                    errors.append("HID Descriptor must remain authorized_not_imported")
+                if future_entry.get("status") in {"imported", "scaffolded", "verified"}:
+                    errors.append("HID Descriptor must not be imported, scaffolded, or verified in Phase 1.8")
+
+        sections = [
+            entry.get("section")
+            for entry in usage
+            if isinstance(usage, list) and isinstance(entry, dict)
+        ]
+        if "6.2.1" in sections:
+            errors.append("HID Descriptor section 6.2.1 must not appear in current_imported_usage")
 
     secondary_sources = data.get("secondary_sources")
     if not isinstance(secondary_sources, list):

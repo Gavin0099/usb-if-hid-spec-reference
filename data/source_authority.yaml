@@ -18,9 +18,16 @@ primary_sources:
           - data/hid_class_request_matrix.yaml
           - specs/hid_class_requests.md
           - specs/en/hid_class_requests.md
-    not_yet_imported:
+    future_authorized_usage:
       - section: "6.2.1"
         topic: "HID Descriptor"
+        status: authorized_not_imported
+        allowed_next_surface:
+          - data/hid_descriptor_fields_matrix.yaml
+          - specs/hid_descriptor_fields.md
+          - specs/en/hid_descriptor_fields.md
+        authorization_scope: "Descriptor field scaffold only; no tracked entries exist yet."
+    not_yet_imported:
       - section: "6.2.2"
         topic: "Report Descriptor"
       - section: "6.2.2.4-6.2.2.8"

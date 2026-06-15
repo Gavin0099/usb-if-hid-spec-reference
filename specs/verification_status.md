@@ -24,6 +24,7 @@ Source authority status: locked.
 |---|---|
 | Primary source | HID 1.11 PDF registered |
 | Current imported usage | Section 7.2 Class-Specific Requests only |
+| HID Descriptor | authorized_not_imported |
 | HID Usage Tables | not imported |
 | HID over I2C | excluded |
 | OS input stack behavior | excluded |
@@ -42,3 +43,4 @@ Source authority status: locked.
 - 本頁不宣告任何 governed table 已完成 verified promotion。
 - 本頁不宣告 firmware implementation truth。
 - 本頁不宣告 HID Usage Tables 已導入。
+- 本頁不宣告 HID descriptor fields 已導入。

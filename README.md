@@ -36,6 +36,7 @@ Current primary source:
 - Publisher: USB Implementers Forum
 - URL: `https://www.usb.org/sites/default/files/documents/hid1_11.pdf`
 - Current imported usage: Section 7.2 Class-Specific Requests scaffold only
+- Future authorized usage: Section 6.2.1 HID Descriptor is authorized but not imported
 
 Source authority is registered in:
 

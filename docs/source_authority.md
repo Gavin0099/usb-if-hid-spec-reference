@@ -23,11 +23,16 @@ Primary source URL:
 |---|---|---|---|
 | 7.2 | Class-Specific Requests | scaffolded | `data/hid_class_request_matrix.yaml` |
 
+## Future Authorized Usage
+
+| Section | Topic | Status | Boundary |
+|---|---|---|---|
+| 6.2.1 | HID Descriptor | authorized_not_imported | Descriptor field scaffold may be introduced in a later phase, but no descriptor entry is tracked yet |
+
 ## Not Yet Imported
 
 | Source area | Status |
 |---|---|
-| HID Descriptor fields | not imported |
 | Report Descriptor item types | not imported |
 | HID Usage Tables | not imported |
 
@@ -61,5 +66,6 @@ Registering a source does not promote any HID entry to `verified`.
 
 - This repo does not claim full HID spec coverage.
 - This repo does not claim HID Usage Tables coverage.
+- This repo does not claim HID descriptor fields are imported.
 - This repo does not claim HID request behavior is verified.
 - This repo does not claim firmware implementation correctness.
