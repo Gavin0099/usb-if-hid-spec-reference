@@ -66,8 +66,12 @@ Forbidden in this repo:
 - `specs/en/index.md` - English HID reference entry
 - `specs/hid_scope.md` - initial HID reference scope and boundaries
 - `specs/en/hid_scope.md` - English scope counterpart
+- `specs/hid_class_requests.md` - HID class request scaffold summary
+- `specs/en/hid_class_requests.md` - English HID class request counterpart
 - `specs/verification_status.md` - zh-TW verification status
 - `specs/en/verification_status.md` - English verification status
+- `data/hid_class_request_matrix.yaml` - HID class request machine-readable scaffold
+- `docs/claim_boundary.md` - current claim ceiling and claim level definitions
 - `governance/AUTHORITY.md` - repo-local governance authority registry
 - `governance/REVIEW_CRITERIA.md` - review/audit guidance
 - `governance/framework.lock.json` - imported governance framework baseline

@@ -10,8 +10,9 @@ class sub-surface.
 ## Current Status
 
 - Canonical visible reference surface: `specs/` and `specs/en/`
-- Initial focus: HID scope boundary and reference structure
-- Tracked entries: 0
+- Initial focus: HID class request scaffold
+- Tracked entries: 6
+- Scaffold entries: 6
 - Verified entries: 0
 - Reviewed entries: 0
 - Inferred entries: 0
@@ -36,7 +37,15 @@ This repo does not cover:
 
 ## Claim Boundary
 
-Until evidence packets and governed tables are introduced, all content in this
-repo is orientation-level reference material only.
+Until evidence packets and reviewed/verified governed tables are introduced,
+all content in this repo is scaffold or orientation-level reference material
+only.
 
 No verified HID entries are claimed yet.
+
+## Reference Entry Points
+
+- `specs/hid_scope.md`
+- `specs/hid_class_requests.md`
+- `specs/verification_status.md`
+- `docs/claim_boundary.md`

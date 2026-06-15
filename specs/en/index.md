@@ -5,14 +5,15 @@ consuming firmware repositories.
 
 ## Current Status
 
-- No governed entry table is defined yet.
+- HID class request governed matrix scaffold exists.
 - No evidence packet is defined yet.
 - No verified HID entry is claimed yet.
-- Current content is reference-scope initialization only.
+- Current content is reference scaffold and scope boundary only.
 
 ## Reference Entry Points
 
 - [HID Scope](hid_scope.md)
+- [HID Class Requests](hid_class_requests.md)
 - [Verification Status](verification_status.md)
 - [zh-TW Index](../index.md)
 

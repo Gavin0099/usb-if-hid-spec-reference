@@ -6,9 +6,15 @@
 |---|---:|---:|---:|---:|---:|
 | HID descriptors | 0 | 0 | 0 | 0 | 0 |
 | HID report descriptors | 0 | 0 | 0 | 0 | 0 |
-| HID class requests | 0 | 0 | 0 | 0 | 0 |
+| HID class requests | 6 | 0 | 0 | 0 | 0 |
 | Report / boot / idle semantics | 0 | 0 | 0 | 0 | 0 |
-| **Total** | **0** | **0** | **0** | **0** | **0** |
+| **Total** | **6** | **0** | **0** | **0** | **0** |
+
+## Scaffold Summary
+
+| Area | Scaffold entries | Source |
+|---|---:|---|
+| HID class requests | 6 | `data/hid_class_request_matrix.yaml` |
 
 ## Evidence Packet Summary
 

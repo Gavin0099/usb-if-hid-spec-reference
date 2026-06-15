@@ -12,7 +12,7 @@ treating reference text as firmware implementation truth.
 |---|---|---|
 | HID descriptors | planned | Descriptor structure and field identity only |
 | HID report descriptors | planned | Item/tag/value reference boundary only |
-| HID class requests | planned | Request linkage and recipient boundary only |
+| HID class requests | scaffolded | Request identity, direction, and recipient boundary only |
 | Report / boot / idle semantics | planned | Standard-side semantic reference only |
 | Evidence packets | planned | No packets exist yet |
 

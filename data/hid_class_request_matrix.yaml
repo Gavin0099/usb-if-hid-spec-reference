@@ -1,0 +1,79 @@
+matrix_id: hid_class_request_matrix
+matrix_version: 0.1.0
+status: scaffold
+source_refs:
+  - source_id: hid_spec_1_11
+    title: "Device Class Definition for Human Interface Devices (HID), Version 1.11"
+    url: "https://www.usb.org/sites/default/files/documents/hid1_11.pdf"
+    section: "7.2"
+    scope_note: "Class-specific request identity and setup direction reference only."
+claim_boundary:
+  claim_level_default: scaffold
+  evidence_status_default: not_introduced
+  verified_entries: 0
+  non_claims:
+    - firmware_handler_correctness
+    - complete_request_behavior
+    - host_os_driver_behavior
+    - report_payload_semantics
+entries:
+  - request_id: hid_get_report
+    name: GET_REPORT
+    b_request: "0x01"
+    direction: device_to_host
+    request_type: class
+    recipient: interface
+    purpose: "Return a HID report from the device to the host."
+    setup_scope: "Request identity, direction, and interface recipient only."
+    claim_level: scaffold
+    evidence_status: not_introduced
+  - request_id: hid_set_report
+    name: SET_REPORT
+    b_request: "0x09"
+    direction: host_to_device
+    request_type: class
+    recipient: interface
+    purpose: "Send a HID report from the host to the device."
+    setup_scope: "Request identity, direction, and interface recipient only."
+    claim_level: scaffold
+    evidence_status: not_introduced
+  - request_id: hid_get_idle
+    name: GET_IDLE
+    b_request: "0x02"
+    direction: device_to_host
+    request_type: class
+    recipient: interface
+    purpose: "Return the current idle rate for a HID report."
+    setup_scope: "Request identity, direction, and interface recipient only."
+    claim_level: scaffold
+    evidence_status: not_introduced
+  - request_id: hid_set_idle
+    name: SET_IDLE
+    b_request: "0x0A"
+    direction: host_to_device
+    request_type: class
+    recipient: interface
+    purpose: "Set the idle rate for a HID report."
+    setup_scope: "Request identity, direction, and interface recipient only."
+    claim_level: scaffold
+    evidence_status: not_introduced
+  - request_id: hid_get_protocol
+    name: GET_PROTOCOL
+    b_request: "0x03"
+    direction: device_to_host
+    request_type: class
+    recipient: interface
+    purpose: "Return the active HID protocol selection."
+    setup_scope: "Request identity, direction, and interface recipient only."
+    claim_level: scaffold
+    evidence_status: not_introduced
+  - request_id: hid_set_protocol
+    name: SET_PROTOCOL
+    b_request: "0x0B"
+    direction: host_to_device
+    request_type: class
+    recipient: interface
+    purpose: "Select HID boot protocol or report protocol."
+    setup_scope: "Request identity, direction, and interface recipient only."
+    claim_level: scaffold
+    evidence_status: not_introduced
