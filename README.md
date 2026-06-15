@@ -10,9 +10,9 @@ class sub-surface.
 ## Current Status
 
 - Canonical visible reference surface: `specs/` and `specs/en/`
-- Initial focus: HID class request scaffold
-- Tracked entries: 6
-- Scaffold entries: 6
+- Initial focus: HID class request and HID descriptor field scaffold
+- Tracked entries: 13
+- Scaffold entries: 13
 - Verified entries: 0
 - Reviewed entries: 0
 - Inferred entries: 0
@@ -28,6 +28,12 @@ This repo may cover:
 - Boot protocol, report protocol, and idle-rate semantics
 - Claim boundary and evidence tracking
 
+Current covered surface:
+
+- HID class requests scaffold (7 entries)
+- HID descriptor field scaffold (7 entries)
+- No verified or fully interpreted behavior claims
+
 ## Source Authority
 
 Current primary source:
@@ -35,8 +41,7 @@ Current primary source:
 - Device Class Definition for Human Interface Devices (HID), Version 1.11
 - Publisher: USB Implementers Forum
 - URL: `https://www.usb.org/sites/default/files/documents/hid1_11.pdf`
-- Current imported usage: Section 7.2 Class-Specific Requests scaffold only
-- Future authorized usage: Section 6.2.1 HID Descriptor is authorized but not imported
+- Current imported usage: Section 7.2 Class-Specific Requests and Section 6.2.1 HID Descriptor are scaffolded
 
 Source authority is registered in:
 
@@ -62,6 +67,7 @@ No verified HID entries are claimed yet.
 
 - `specs/hid_scope.md`
 - `specs/hid_class_requests.md`
+- `specs/hid_descriptor_fields.md`
 - `specs/verification_status.md`
 - `docs/claim_boundary.md`
 - `docs/source_authority.md`

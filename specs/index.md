@@ -14,6 +14,7 @@ repos 查找 HID descriptor、report descriptor、class request 與相關語義�
 
 - [HID Scope](hid_scope.md)
 - [HID Class Requests](hid_class_requests.md)
+- [HID Descriptor Fields](hid_descriptor_fields.md)
 - [Verification Status](verification_status.md)
 - [English Index](en/index.md)
 

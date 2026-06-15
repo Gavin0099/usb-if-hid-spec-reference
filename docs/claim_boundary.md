@@ -9,6 +9,7 @@ At the current stage, the repo may claim:
 - HID reference repo scaffold exists.
 - Repo-local governance boundary exists.
 - HID class request identity scaffold exists.
+- HID descriptor field scaffold exists.
 - Visible zh/en reference pages describe scaffold status.
 
 The repo must not claim:
