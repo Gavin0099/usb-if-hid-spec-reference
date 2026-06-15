@@ -68,6 +68,17 @@ Forbidden in this repo:
 - `specs/en/hid_scope.md` - English scope counterpart
 - `specs/verification_status.md` - zh-TW verification status
 - `specs/en/verification_status.md` - English verification status
+- `governance/AUTHORITY.md` - repo-local governance authority registry
+- `governance/REVIEW_CRITERIA.md` - review/audit guidance
+- `governance/framework.lock.json` - imported governance framework baseline
+
+## Review Tasks
+
+If the agent is asked to perform `review` or `audit` work:
+
+- The agent must read `governance/REVIEW_CRITERIA.md` before producing review output.
+- The agent must not skip that read step.
+- The final review output must include a `Review Inputs Checked` block.
 
 ## Commit Checkpoint
 
