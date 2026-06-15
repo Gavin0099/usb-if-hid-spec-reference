@@ -1,0 +1,50 @@
+authority_id: hid_source_authority
+authority_version: 0.1.0
+status: locked
+locked_at: "2026-06-15"
+primary_sources:
+  - id: hid_1_11
+    title: "Device Class Definition for Human Interface Devices (HID)"
+    version: "1.11"
+    publisher: "USB Implementers Forum"
+    url: "https://www.usb.org/sites/default/files/documents/hid1_11.pdf"
+    role: primary
+    status: active
+    current_imported_usage:
+      - section: "7.2"
+        topic: "Class-Specific Requests"
+        status: scaffolded
+        covered_surface:
+          - data/hid_class_request_matrix.yaml
+          - specs/hid_class_requests.md
+          - specs/en/hid_class_requests.md
+    not_yet_imported:
+      - section: "6.2.1"
+        topic: "HID Descriptor"
+      - section: "6.2.2"
+        topic: "Report Descriptor"
+      - section: "6.2.2.4-6.2.2.8"
+        topic: "Report descriptor Main / Global / Local item types"
+secondary_sources:
+  - id: hid_usage_tables
+    title: "HID Usage Tables"
+    publisher: "USB Implementers Forum"
+    role: secondary
+    status: not_imported
+    usage_rule: "May be added only after this source authority file is updated and reviewed."
+excluded_sources:
+  - id: hid_over_i2c
+    reason: "Not USB HID core reference scope."
+  - id: os_input_stack_behavior
+    reason: "Host OS behavior is outside this reference repo."
+  - id: firmware_handler_correctness
+    reason: "Implementation behavior belongs to consuming firmware repos."
+  - id: hub_class_behavior
+    reason: "Hub class behavior belongs to usb-if-hub-spec-reference."
+  - id: report_payload_semantics_beyond_identity_scaffold
+    reason: "Report payload semantics require a separate governed surface and evidence boundary."
+source_import_rules:
+  - "Do not cite a new HID or USB document as authority until it is registered here."
+  - "Do not treat secondary or excluded sources as primary authority."
+  - "Do not promote any entry to verified solely because a source is listed here."
+  - "Do not use this repo as firmware implementation truth."

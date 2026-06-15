@@ -28,6 +28,20 @@ This repo may cover:
 - Boot protocol, report protocol, and idle-rate semantics
 - Claim boundary and evidence tracking
 
+## Source Authority
+
+Current primary source:
+
+- Device Class Definition for Human Interface Devices (HID), Version 1.11
+- Publisher: USB Implementers Forum
+- URL: `https://www.usb.org/sites/default/files/documents/hid1_11.pdf`
+- Current imported usage: Section 7.2 Class-Specific Requests scaffold only
+
+Source authority is registered in:
+
+- `data/source_authority.yaml`
+- `docs/source_authority.md`
+
 This repo does not cover:
 
 - Hub class behavior
@@ -49,3 +63,4 @@ No verified HID entries are claimed yet.
 - `specs/hid_class_requests.md`
 - `specs/verification_status.md`
 - `docs/claim_boundary.md`
+- `docs/source_authority.md`

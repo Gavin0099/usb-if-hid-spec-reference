@@ -43,7 +43,9 @@
 | `specs/verification_status.md` | agent-on-demand | reference | false | AGENTS.md | on-demand |
 | `specs/en/verification_status.md` | agent-on-demand | reference | false | AGENTS.md | on-demand |
 | `data/hid_class_request_matrix.yaml` | agent-on-demand | reference | false | AGENTS.md | on-demand |
+| `data/source_authority.yaml` | agent-on-demand | canonical | false | AGENTS.md | on-demand |
 | `docs/claim_boundary.md` | agent-on-demand | reference | false | AGENTS.md | on-demand |
+| `docs/source_authority.md` | agent-on-demand | reference | false | data/source_authority.yaml | on-demand |
 | `governance/AUTHORITY.md` | agent-on-demand | canonical | false | AGENTS.md | on-demand |
 | `governance/REVIEW_CRITERIA.md` | human-only | reference | false | AGENTS.md | never |
 | `governance/RESPONSE_ENVELOPE_CONTRACT.md` | agent-on-demand | reference | false | AGENTS.md | on-demand |

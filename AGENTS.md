@@ -32,6 +32,26 @@ This repository must not be used to:
 - Define operating-system input stack behavior unless explicitly grounded in a
   cited HID source
 
+## Source Authority Rule
+
+Agents must not cite or import additional HID/USB documents as authority until
+they are registered in `data/source_authority.yaml`.
+
+Current primary source authority:
+
+- Device Class Definition for Human Interface Devices (HID), Version 1.11
+- USB Implementers Forum
+- `https://www.usb.org/sites/default/files/documents/hid1_11.pdf`
+- Current imported usage: Section 7.2 Class-Specific Requests scaffold only
+
+Explicitly excluded unless separately scoped:
+
+- HID over I2C
+- OS input stack behavior
+- firmware handler correctness
+- hub class behavior
+- report payload semantics beyond identity-level scaffold
+
 ## Standard Conflict Resolution
 
 When a consuming repo detects a conflict between this spec reference and a
@@ -71,7 +91,9 @@ Forbidden in this repo:
 - `specs/verification_status.md` - zh-TW verification status
 - `specs/en/verification_status.md` - English verification status
 - `data/hid_class_request_matrix.yaml` - HID class request machine-readable scaffold
+- `data/source_authority.yaml` - HID source authority registry
 - `docs/claim_boundary.md` - current claim ceiling and claim level definitions
+- `docs/source_authority.md` - human-readable source authority boundary
 - `governance/AUTHORITY.md` - repo-local governance authority registry
 - `governance/REVIEW_CRITERIA.md` - review/audit guidance
 - `governance/framework.lock.json` - imported governance framework baseline
