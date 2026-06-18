@@ -427,3 +427,36 @@
   - This is bookkeeping-only; it does not add substantive HID request semantic content.
 - Requested approval:
   - Continue to await human checkpoint approval for HID-REQ-1 before any status transition or HID-REQ-2 start.
+
+## Checkpoint Envelope: HID-REQ-1 Closure
+
+Commit Checkpoint:
+- Commit: 8057fac
+- Scope: HID-REQ-1 Level 2 checkpoint envelope update after GET_REPORT setup wording expansion and queue/roadmap pointer synchronization.
+- Changed files:
+  - `docs/hid_long_running_checkpoint_rollup.md`
+  - `docs/hid_long_running_roadmap.md`
+  - `governance/hid_work_queue.yaml`
+- Validation:
+  - PASS `python -X utf8 scripts/validate_source_authority.py`
+  - PASS `python -X utf8 scripts/validate_hid_class_request_matrix.py`
+  - PASS `python -X utf8 scripts/validate_verification_status.py`
+  - PASS `python -m unittest discover -s tests`
+- Stats before/after:
+  - reviewed: unchanged
+  - verified: unchanged
+  - scaffold: unchanged
+- Review level: 2 (quick human checkpoint prep)
+- Can claim:
+  - `HID-REQ-1` has an active checkpoint chain ending at commit `939a61b`.
+  - queue/roadmap now points to the same checkpoint for consistent handoff.
+  - `HID-REQ-1` content remains docs-only identity-level scaffold.
+- Cannot claim:
+  - cannot claim reviewed/verified status uplift.
+  - cannot claim firmware behavior correctness.
+  - cannot claim OS/input stack behavior.
+  - cannot claim report parser/descriptor semantics.
+- Residual risk:
+  - Pending human checkpoint approval blocks any review-status promotion or HID-REQ-2 start.
+- Next recommended slice:
+  - Remain on `HID-REQ-1` checkpoint hold; await human checkpoint approval before any new request draft starts.
