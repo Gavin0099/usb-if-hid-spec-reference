@@ -154,7 +154,7 @@ queue:
   - id: HID-EXT-1
     title: Source authority extension preflight
     authority: HID source authority boundary extension
-    status: scaffold
+    status: reviewed
     allowed_status_change: scaffold_to_reviewed
     requires_human_approval: true
     review_level: 2
@@ -167,8 +167,10 @@ queue:
       - verified status uplift without evidence
     notes: >
       Prepare governance-safe preflight for additional source authority import, scope
-      expansion candidate mapping, and future LRA handoff.
-      Active slice: HID-LRA-11 source-authority preflight.
-      checkpoint commit: this scope preflight (planned).
+      scope expansion candidate mapping, and future LRA handoff.
+      HID-LRA-11 preflight work completed at this checkpoint.
+      checkpoint commit: this checkpoint.
+      scope is authority extension preflight only; this does not add imported
+      semantics.
 
 

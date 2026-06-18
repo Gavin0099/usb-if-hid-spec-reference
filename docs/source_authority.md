@@ -11,7 +11,7 @@ Machine-readable source:
 
 | Source | Version | Publisher | Current usage |
 |---|---|---|---|
-| Device Class Definition for Human Interface Devices (HID) | 1.11 | USB Implementers Forum | Section 7.2 Class-Specific Requests and Section 6.2.1 HID Descriptor are scaffolded |
+| Device Class Definition for Human Interface Devices (HID) | 1.11 | USB Implementers Forum | Section 7.2 Class-Specific Requests and Section 6.2.1 HID Descriptor are scaffolded; Section 6.2.2 is registered as preflight. |
 
 Primary source URL:
 
@@ -26,7 +26,9 @@ Primary source URL:
 
 ## Future Authorized Usage
 
-No additional future authorized usage is registered yet.
+| Source area | Status |
+|---|---|
+| Report Descriptor item types (`6.2.2`) | scaffolded_preflight |
 
 ## Not Yet Imported
 

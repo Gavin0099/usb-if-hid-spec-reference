@@ -1473,3 +1473,42 @@ Commit Checkpoint:
 - Next recommended slice:
   - Complete `HID-EXT-1` preflight definition and gate in a user-approved authority import decision.
 
+## Batch: HID-LRA-39 (HID-EXT-1 preflight close)
+
+- Commit: this checkpoint
+- Scope: close `HID-EXT-1` preflight gate with registered future authority scope for `hid_1_11` section `6.2.2`.
+- Changed files:
+  - `data/source_authority.yaml`
+  - `scripts/validate_source_authority.py`
+  - `tests/test_source_authority.py`
+  - `docs/source_authority.md`
+  - `governance/hid_work_queue.yaml`
+  - `docs/hid_long_running_roadmap.md`
+- Validation:
+  - PASS `python -X utf8 scripts/validate_source_authority.py`
+  - PASS `python -X utf8 scripts/validate_hid_class_request_matrix.py`
+  - PASS `python -X utf8 scripts/validate_verification_status.py`
+  - PASS `python -m unittest discover -s tests`
+- Stats before/after:
+  - reviewed: unchanged
+  - verified: unchanged
+  - scaffold: unchanged
+- Gate mode: batch (batch_size: 1, approved_batch: true, approved_through: HID-REQ-6)
+- Review level: 2 (quick human checkpoint prep)
+- Can claim:
+  - `HID-EXT-1` is now marked `reviewed` and scoped as preflight-complete.
+  - `HID-LRA-11` preflight is closed with `future_authorized_usage` registering section `6.2.2` as `scaffolded_preflight`.
+  - No status/count movement in class-request or descriptor content.
+- Cannot claim:
+  - cannot claim reviewed/verified count uplift.
+  - cannot claim imported scope completion for `6.2.2`.
+  - cannot claim firmware behavior correctness.
+  - cannot claim OS/input stack behavior.
+  - cannot claim report parser/descriptor semantics.
+- Residual risk:
+  - This closes preflight registration only; no report-descriptor item semantics are imported yet.
+- Requested approval:
+  - Human approval required before promoting any `6.2.2` content to imported authority or next LRA implementation status transitions.
+- Next recommended slice:
+  - Start `HID-LRA-12` with explicit import-eligibility criteria and checkpoint-ready scope definition.
+

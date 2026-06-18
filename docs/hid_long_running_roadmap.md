@@ -81,8 +81,16 @@
 
 ### HID-LRA-11: Source Authority Extension Preflight
 
-- status: Active
+- status: Completed
 - objective: define next source-authority expansion scope and preflight constraints before importing additional HID governance surface.
+- latest checkpoint: this checkpoint
 - gate: source authority registration and LRA kickoff bookkeeping only (no count movement).
+
+### HID-LRA-12: Source Authority Extension Import Eligibility
+
+- status: Active
+- objective: define the explicit criteria to move `6.2.2` to current imported usage and launch governed import implementation work.
+- dependencies: user-approved `HID-EXT-1` preflight and follow-up claim-ceiling update.
+- gate: no scope-semantic imports until explicit scope and review checkpoint are set.
 
 
