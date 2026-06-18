@@ -1512,3 +1512,39 @@ Commit Checkpoint:
 - Next recommended slice:
   - Start `HID-LRA-12` with explicit import-eligibility criteria and checkpoint-ready scope definition.
 
+## Batch: HID-LRA-40 (HID-LRA-12 / HID-EXT-2 setup)
+
+- Commit: this checkpoint
+- Scope: produce `HID 6.2.2` import-eligibility artifact and open `HID-EXT-2` to define move conditions from future-authorized to current usage.
+- Changed files:
+  - `governance/hid_work_queue.yaml`
+  - `docs/hid_long_running_roadmap.md`
+  - `docs/hid_6_2_2_import_eligibility.md`
+- Validation:
+  - PASS `python -X utf8 scripts/validate_source_authority.py`
+  - PASS `python -X utf8 scripts/validate_hid_class_request_matrix.py`
+  - PASS `python -X utf8 scripts/validate_verification_status.py`
+  - PASS `python -m unittest discover -s tests`
+- Stats before/after:
+  - reviewed: unchanged
+  - verified: unchanged
+  - scaffold: unchanged
+- Gate mode: batch (batch_size: 1, approved_batch: true, approved_through: HID-REQ-6)
+- Review level: 2 (quick human checkpoint prep)
+- Can claim:
+  - `HID-EXT-2` is now scaffolded with defined criteria for 6.2.2 import.
+  - `HID-LRA-12` now has a concrete implementation artifact path.
+  - No behavior semantics or counts are changed.
+- Cannot claim:
+  - cannot claim imported source authority completion.
+  - cannot claim reviewed/verified count uplift.
+  - cannot claim firmware behavior correctness.
+  - cannot claim OS/input stack behavior.
+  - cannot claim report parser/descriptor semantics.
+- Residual risk:
+  - This step defines gates only; real `6.2.2` content import has not started.
+- Requested approval:
+  - Human approval required before moving `HID-EXT-2` to reviewed and before executing any source import work.
+- Next recommended slice:
+  - Execute `HID-EXT-2` checkpoint in repo-native shell gate (or promote to Level 2 reviewed-draft once artifacts are accepted).
+

@@ -91,6 +91,8 @@
 - status: Active
 - objective: define the explicit criteria to move `6.2.2` to current imported usage and launch governed import implementation work.
 - dependencies: user-approved `HID-EXT-1` preflight and follow-up claim-ceiling update.
+- latest checkpoint: this checkpoint
 - gate: no scope-semantic imports until explicit scope and review checkpoint are set.
+- artifact: `docs/hid_6_2_2_import_eligibility.md`
 
 

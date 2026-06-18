@@ -167,10 +167,31 @@ queue:
       - verified status uplift without evidence
     notes: >
       Prepare governance-safe preflight for additional source authority import, scope
-      scope expansion candidate mapping, and future LRA handoff.
+      expansion candidate mapping, and future LRA handoff.
       HID-LRA-11 preflight work completed at this checkpoint.
       checkpoint commit: this checkpoint.
       scope is authority extension preflight only; this does not add imported
       semantics.
+
+  - id: HID-EXT-2
+    title: Define 6.2.2 import eligibility
+    authority: HID 1.11 Section 6.2.2
+    status: scaffold
+    allowed_status_change: scaffold_to_reviewed
+    requires_human_approval: true
+    review_level: 2
+    gate: checkpoint_required
+    future_authorized: true
+    forbidden_claims:
+      - firmware behavior correctness
+      - report parser semantics
+      - usage table parser behavior
+      - verified status uplift without evidence
+    notes: >
+      Define explicit eligibility criteria and evidence shell for promoting
+      `future_authorized_usage` entry `6.2.2` to current imported usage.
+      Evidence artifact: `docs/hid_6_2_2_import_eligibility.md`
+      This level defines required documentation and review gates only.
+      checkpoint commit: this scope prep (planned).
 
 
