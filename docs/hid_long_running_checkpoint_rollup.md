@@ -1083,6 +1083,38 @@ Commit Checkpoint:
 - Next recommended slice:
   - If you are ready, perform the next Level 3 status-promotion slice.
 
+## Batch: HID-LRA-29 (roadmap completion alignment)
+
+- Commit: this checkpoint
+- Scope: align roadmap status labels for completed reviewed-draft shell checkpoints (HID-REQ-1 through HID-REQ-6).
+- Changed files:
+  - `docs/hid_long_running_roadmap.md`
+- Validation:
+  - PASS `python -X utf8 scripts/validate_source_authority.py`
+  - PASS `python -X utf8 scripts/validate_hid_class_request_matrix.py`
+  - PASS `python -X utf8 scripts/validate_verification_status.py`
+  - PASS `python -m unittest discover -s tests`
+- Stats before/after:
+  - reviewed: unchanged
+  - verified: unchanged
+  - scaffold: unchanged
+- Gate mode: batch (batch_size: 1, approved_batch: true, approved_through: HID-REQ-6)
+- Review level: 1 (docs-only housekeeping)
+- Can claim:
+  - `HID-LRA-3` through `HID-LRA-8` are labeled completed for shell readiness.
+  - The roadmap now reflects that no pending reviewed-draft closure remains.
+- Cannot claim:
+  - cannot claim reviewed/verified status uplift.
+  - cannot claim firmware behavior correctness.
+  - cannot claim OS/input stack behavior.
+  - cannot claim report parser/descriptor semantics.
+- Residual risk:
+  - No status-promotion was applied; reviewed/verified counts remain unchanged.
+- Requested approval:
+  - Await explicit user instruction for the next Level 3 content promotion.
+- Next recommended slice:
+  - Start next authorized scope once provided.
+
 ## Batch: HID-LRA-25 (HID-REQ-2 closure)
 
 - Commit: this checkpoint
