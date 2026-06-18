@@ -164,11 +164,11 @@ it does not claim product-specific protocol policy.
   - Recipient: interface
 - `bRequest`: `0x03`
 - `wValue`
-  - Reserved/zero in this request identity context
+  - Reserved (should be set to `0` for request identity in this scaffold)
 - `wIndex`
   - Interface context for the request target
 - `wLength`
-  - Bytes expected in the response payload
+  - Payload bytes expected in the response (`1` in this request identity context)
 
 Source anchor:
 
@@ -189,8 +189,8 @@ imported source. It does not advance this repo’s verification state.
   - Recipient: interface
 - `bRequest`: `0x0B`
 - `wValue`
-  - Low byte: selected protocol value (identity signal)
   - High byte: reserved in this request identity context
+  - Low byte: selected protocol value (`0` = Boot Protocol, `1` = Report Protocol)
 - `wIndex`
   - Interface context for the request target
 - `wLength`
