@@ -786,7 +786,7 @@ Commit Checkpoint:
 
 ## Batch: HID-LRA-22 (HID-REQ-6 start)
 
-- Commit: TBD
+- Commit: 12a058b
 - Scope: close HID-REQ-5 closure bookkeeping and start `SET_PROTOCOL` reviewed-draft setup-field drafting.
 - Changed files:
   - `governance/hid_work_queue.yaml`
