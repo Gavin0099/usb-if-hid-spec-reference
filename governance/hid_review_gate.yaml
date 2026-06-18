@@ -1,0 +1,9 @@
+gate_mode: batch
+# pr: default (PR per Level 2/3 checkpoint)
+# batch: collect up to batch_size checkpoints and approve once
+mode_settings:
+  batch_size: 3
+  approved_batch: false
+  approved_through: HID-REQ-0
+  auto_advance_level2: true
+  remarks: "Batch mode enabled for this run to reduce PR churn."
