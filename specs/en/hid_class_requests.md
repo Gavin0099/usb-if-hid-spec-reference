@@ -214,18 +214,29 @@ it does not claim product-specific protocol policy.
 
 #### Setup fields (identity-level only)
 
+- USB request packet setup sequence (identity-level): `bmRequestType`, `bRequest`, `wValue`, `wIndex`, `wLength`.
 - Request: `GET_PROTOCOL` (`hid_get_protocol`)
 - `bmRequestType`: `0xA1`
+  - Bitfield interpretation (identity-level): `bmRequestType[7:5]=1` (dir=Device→Host),
+    `bmRequestType[4:2]=001` (Class), `bmRequestType[1:0]=01` (Interface)
+  - Binary value: `1000 0001`
   - Direction: device-to-host
   - Type: class
   - Recipient: interface
 - `bRequest`: `0x03`
 - `wValue`
-  - Reserved (should be set to `0` for request identity in this scaffold)
+  - High byte: reserved in request setup identity context
+  - Low byte: reserved in request setup identity context
+  - Validation boundary:
+    - `wValue` is interpreted here only as field-identity scope in the request setup.
+- `wValue` setup packet byte sequence:
+  - setup packet bytes 2-3
 - `wIndex`
-  - Interface context for the request target
+  - Interface context for the request target.
+- `wIndex` setup packet bytes 4-5
 - `wLength`
-  - Payload bytes expected in the response (`1` in this request identity context)
+  - 16-bit little-endian length field in setup packet (identity-level scope only).
+  - Payload bytes expected in the response (`1` in this request identity context; identity-level framing only).
 
 Source anchor:
 
