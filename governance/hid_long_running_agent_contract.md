@@ -1,6 +1,6 @@
 # HID Long-Running Agent Contract (LRA)
 
-> Version: 1.2.0
+> Version: 1.3.0
 > Established: 2026-06-18
 > Scope: `usb-if-hid-spec-reference` repository
 > Claim ceiling: `scaffold_identity_reference_only`
@@ -71,18 +71,28 @@ While operating under this contract, Codex must not assert:
 
 ## Review Gate Modes (Level 2/3)
 
-Active mode follows `governance/hid_review_gate.yaml`; if `gate_mode: batch`, use rollup mode.
+Active mode follows `governance/hid_review_gate.yaml`; this repo defaults to batch.
 
-PR mode flow:
+### Batch gate (default)
+
+1. Use one rolling branch: `agent/hid-lra-rollup`.
+2. Execute Level 2/3 slices sequentially and record each checkpoint in
+   `docs/hid_long_running_checkpoint_rollup.md`.
+3. Do not exceed `batch_size` checkpoints in one batch.
+4. Pause only when checkpoint batch is full or a Level 3 item appears.
+5. User approves the batch in `governance/hid_review_gate.yaml` by setting:
+   - `approved_batch: true`
+   - `approved_through: HID-REQ-<N>`
+
+### PR mode (optional fallback)
+
+Use PR mode only when explicitly requested.
 
 1. Create branch: `agent/<item-id>-<short-description>`
    - Example: `agent/hid-req-5-get-protocol`
 2. Do not start the next slice on `main`.
 3. Commit checkpoint changes on the branch.
-4. Open PR with title:
-   - `HID-REQ-<N>: <request> reviewed draft preparation`
-5. Stop and wait for approval before starting the next slice.
-6. PR body must include:
+4. PR body must include:
    - Commit
    - Scope
    - Changed files
@@ -94,22 +104,6 @@ PR mode flow:
    - Residual risk
    - Requested approval
 
-Alternative review mode: batch gate (via `governance/hid_review_gate.yaml`)
-
-When `gate_mode: batch` is configured:
-
-1. Use one rolling branch `agent/hid-lra-rollup`.
-2. Execute Level 2/3 slices sequentially and record each checkpoint in
-   `docs/hid_long_running_checkpoint_rollup.md`.
-3. Do not exceed `batch_size` checkpoints in one batch.
-4. Pause only when checkpoint batch is full or a Level 3 item appears.
-5. User approves the batch in `governance/hid_review_gate.yaml` by setting:
-   - `approved_batch: true`
-   - `approved_through: HID-REQ-<N>`
-
-The `gate_mode` value controls the active mode. Batch mode is recommended when you want
-to avoid PR churn; keep PR mode for strict PR-per-slice review.
-
 ## Checkpoint Gate
 
 Every slice must satisfy this gate before the next slice starts:
@@ -117,8 +111,8 @@ Every slice must satisfy this gate before the next slice starts:
 1. Commit created.
 2. Required validation ran and passed.
 3. For Level 2/3, checkpoint artifacts exist and reference required fields.
-   - PR mode: PR body includes required fields.
    - Batch mode: `docs/hid_long_running_checkpoint_rollup.md` includes required fields.
+   - PR mode: PR body includes required fields.
 4. Checkpoint block recorded in exact required format.
 5. Review level classification appended.
 6. Reviewed/verified count changes are explicitly approved by level.
@@ -132,7 +126,7 @@ Batch mode exception:
 
 If any point is missing, codex must stop and wait.
 
-Level 1 fast lane exception:
+## Level 1 fast lane exception:
 
 - Level 1 may continue autonomously when validation passes and reviewed/verified
   counts remain unchanged.
@@ -188,8 +182,9 @@ slice; a PASS must be explicitly recorded.
 ## Commit / Branch Discipline
 
 - Use short, intentful commit titles with `HID-LRA-<N>` tags.
-- Level 1: commit directly.
-- Level 2/3: in PR mode, commit on branch `agent/<item-id>-<short-description>` then PR; in batch mode, commit to `agent/hid-lra-rollup` and append to `docs/hid_long_running_checkpoint_rollup.md`.
+- Level 2/3 default: commit to `agent/hid-lra-rollup` and append to
+  `docs/hid_long_running_checkpoint_rollup.md`.
+- Optional PR mode: branch + PR only when explicitly requested.
 - A commit may include docs-only files plus linked checkpoint artifacts.
 - Do not commit if any required validator fails.
 

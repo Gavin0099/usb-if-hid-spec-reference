@@ -106,9 +106,11 @@ queue:
   - id: HID-DESC-1
     title: HID Descriptor field wording alignment pass
     authority: HID 1.11 Section 6.2.1
-    status: pending
+    status: waiting_level3_approval
     allowed_status_change: scaffold_to_reviewed
     requires_human_approval: true
+    review_level: 2
+    gate: checkpoint_required
     future_authorized: true
     forbidden_claims:
       - firmware behavior correctness
@@ -117,3 +119,4 @@ queue:
     notes: >
       Documentation and claim-boundary cleanup only. Any reviewed wording change
       must be approved before claim promotion.
+

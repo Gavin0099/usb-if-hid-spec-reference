@@ -53,3 +53,9 @@
 - status: Waiting for level 2/3 review gate
 - objective: SET_PROTOCOL reviewed draft under Section 7.2 with quick human checkpoint.
 - gate: reviewed-draft preparation only.
+### HID-LRA-9: HID-DESC-1 Slice
+
+- status: In Progress
+- objective: HID Descriptor field wording alignment pass under Section 6.2.1 with scaffold identity constraints.
+- gate: reviewed-draft preparation only.
+

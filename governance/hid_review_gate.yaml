@@ -3,7 +3,7 @@ gate_mode: batch
 # batch: collect up to batch_size checkpoints and approve once
 mode_settings:
   batch_size: 3
-  approved_batch: false
-  approved_through: HID-REQ-0
+  approved_batch: true
+  approved_through: HID-REQ-6
   auto_advance_level2: true
-  remarks: "Batch mode enabled for this run to reduce PR churn."
+  remarks: "Batch mode approved through HID-REQ-6, continue with next Level 2/LRA checkpoint batch."
