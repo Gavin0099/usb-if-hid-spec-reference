@@ -49,7 +49,7 @@ or firmware handler correctness.
 - `wIndex`
   - Interface number context for the request
 - `wLength`
-  - Expected bytes for the response payload
+  - Number of bytes carried in the report payload response (identity-level scope only)
 
 Source anchor:
 
@@ -75,7 +75,7 @@ imported source. It does not advance this repo’s verification state.
 - `wIndex`
   - Interface context for the request target
 - `wLength`
-  - Expected bytes carried by the outgoing report payload
+  - Number of bytes in the outgoing report payload (identity-level scope only)
 
 Source anchor:
 
@@ -109,7 +109,7 @@ or host stack behavior.
 - `wIndex`
   - Interface context for the request target
 - `wLength`
-  - Number of bytes expected in the returned idle value payload
+  - Payload bytes expected in the returned idle value (`1` in this request identity context)
 
 Source anchor:
 
@@ -135,7 +135,7 @@ imported source. It does not advance this repo’s verification state.
 - `wIndex`
   - Interface context for the request target
 - `wLength`
-  - Usually zero for this request payload
+  - Usually zero for this request payload (`0` in this request identity context)
 
 Source anchor:
 

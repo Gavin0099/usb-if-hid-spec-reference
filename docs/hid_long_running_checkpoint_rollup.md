@@ -33,3 +33,32 @@
   - `wValue` protocol numeric note for `SET_PROTOCOL` is scaffold-level and not yet verified behavior mapping in a consumer implementation.
 - Requested approval:
   - Continue batch without PR if `approved_batch: false` and pending Level 2 slices remain; otherwise set `approved_batch: true` and `approved_through` at your pace.
+
+### Checkpoint 2 in batch HID-LRA-7/8
+
+- Commit: 5ac00f6
+- Scope: HID class request setup-field identity expansion for GET/SET_REQUEST entries
+- Changed files:
+  - `specs/en/hid_class_requests.md`
+- Validation:
+  - PASS `python -X utf8 scripts/validate_source_authority.py`
+  - PASS `python -X utf8 scripts/validate_hid_class_request_matrix.py`
+  - PASS `python -X utf8 scripts/validate_verification_status.py`
+  - PASS `python -m unittest discover -s tests`
+- Stats before/after:
+  - reviewed: unchanged
+  - verified: unchanged
+  - scaffold: unchanged
+- Gate mode: batch (batch_size: 3, approved_batch: false)
+- Review level: 2 (quick checkpoint prep)
+- Approved-through: HID-REQ-0
+- Can claim:
+  - GET_REPORT, SET_REPORT, GET_IDLE, SET_IDLE setup-field identity wording is complete and consistent.
+- Cannot claim:
+  - reviewed/verified status uplift
+  - firmware correctness or OS/input stack behavior
+  - report payload parser semantics
+- Residual risk:
+  - Added protocol byte framing remains unverified identity-level scaffold, not evidence-backed behavior.
+- Requested approval:
+  - Continue batch if approved batch remains false and up to 3 checkpoints total are allowed.
