@@ -23,6 +23,7 @@
 - status: Waiting for human checkpoint review (reviewed-draft closure prepared)
 - objective: GET_REPORT reviewed draft under Section 7.2 with human approval.
 - gate: no scaffold status promotion without approval.
+- latest checkpoint commit: 939a61b
 
 ### HID-LRA-4: HID-REQ-2 Slice
 
