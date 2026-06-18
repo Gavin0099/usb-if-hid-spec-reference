@@ -497,6 +497,7 @@ Commit Checkpoint:
 ## Batch: HID-LRA-17 (HID-REQ-2 start)
 
 - Commit Checkpoint:
+- Commit: b3aae30
 - Scope: prepare `SET_REPORT` reviewed-draft shell expansion and open Level 2 queue/roadmap handoff.
 - Changed files:
   - `governance/hid_review_gate.yaml`
