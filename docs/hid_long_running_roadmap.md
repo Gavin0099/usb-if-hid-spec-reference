@@ -28,16 +28,18 @@
 
 ### HID-LRA-4: HID-REQ-2 Slice
 
-- status: In Progress (Level 2 checkpoint slice started)
+- status: Waiting for human checkpoint review (reviewed-draft closure prepared)
 - objective: SET_REPORT reviewed draft under Section 7.2 with quick human checkpoint.
 - gate: reviewed-draft preparation only.
 - latest checkpoint commit: 3d158d1
+- latest checkpoint status: human closure review pending; keep counts unchanged.
 
 ### HID-LRA-5: HID-REQ-3 Slice
 
-- status: Waiting for level 2/3 review gate
+- status: In Progress (Level 2 checkpoint slice started)
 - objective: GET_IDLE reviewed draft under Section 7.2 with quick human checkpoint.
 - gate: reviewed-draft preparation only.
+- latest checkpoint commit: 5f2ee16
 
 ### HID-LRA-6: HID-REQ-4 Slice
 

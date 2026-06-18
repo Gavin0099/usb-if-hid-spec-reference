@@ -44,14 +44,14 @@ queue:
       - report parser semantics
     notes: >
       Same boundary as HID-REQ-1.
-      active slice: SET_REPORT reviewed-draft preparation starts now.
+      active slice: SET_REPORT reviewed-draft checkpoint closure completed.
       checkpoint commit: 3d158d1 (Level 2 reviewed-draft setup-field wording)
       Do not change reviewed/verified counts in this slice.
 
   - id: HID-REQ-3
     title: GET_IDLE reviewed draft
     authority: HID 1.11 Section 7.2
-    status: waiting_level3_approval
+    status: waiting_level2_review
     allowed_status_change: scaffold_to_reviewed
     requires_human_approval: true
     review_level: 2
@@ -62,6 +62,9 @@ queue:
       - report parser semantics
     notes: >
       Prepare GET_IDLE reviewed wording and setup-field identity explanation.
+      active slice: GET_IDLE reviewed-draft preparation starts now.
+      checkpoint commit: 5f2ee16 (Level 2 reviewed-draft setup-field wording)
+      Do not change reviewed/verified counts in this slice.
 
   - id: HID-REQ-4
     title: SET_IDLE reviewed draft

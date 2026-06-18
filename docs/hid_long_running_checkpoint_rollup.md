@@ -590,3 +590,37 @@ Commit Checkpoint:
   - Human checkpoint review required before any status promotion.
 - Next recommended slice:
   - Await checkpoint closure for `HID-REQ-2` (reviewed-draft shell) before moving to `HID-REQ-3`.
+
+## Batch: HID-LRA-19 (HID-REQ-3 start)
+
+- Commit: 5f2ee16
+- Scope: prepare `GET_IDLE` reviewed-draft setup-byte identity wording.
+- Changed files:
+  - `specs/en/hid_class_requests.md`
+  - `governance/hid_work_queue.yaml`
+  - `docs/hid_long_running_roadmap.md`
+- Validation:
+  - PASS `python -X utf8 scripts/validate_source_authority.py`
+  - PASS `python -X utf8 scripts/validate_hid_class_request_matrix.py`
+  - PASS `python -X utf8 scripts/validate_verification_status.py`
+  - PASS `python -m unittest discover -s tests`
+- Stats before/after:
+  - reviewed: unchanged
+  - verified: unchanged
+  - scaffold: unchanged
+- Gate mode: batch (batch_size: 1, approved_batch: true, approved_through: HID-REQ-1)
+- Review level: 2 (quick human checkpoint prep)
+- Can claim:
+  - `GET_IDLE` setup-field identity now documents setup packet byte order and field-scope mapping.
+  - `HID-REQ-3` queue/roadmap now point to closure checkpoint commit `5f2ee16`.
+- Cannot claim:
+  - cannot claim reviewed/verified status uplift.
+  - cannot claim firmware behavior correctness.
+  - cannot claim OS/input stack behavior.
+  - cannot claim report parser/descriptor semantics.
+- Residual risk:
+  - Scope remains field identity only; idle-rate runtime behavior remains outside this slice.
+- Requested approval:
+  - Human checkpoint review required before any reviewed/verified promotion.
+- Next recommended slice:
+  - Await checkpoint closure for `HID-REQ-3` and then proceed to `HID-REQ-4`.
