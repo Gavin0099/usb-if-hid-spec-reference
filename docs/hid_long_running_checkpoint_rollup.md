@@ -250,3 +250,34 @@
   - `wValue` interpretation still remains identity-level, not implementation verified.
 - Requested approval:
   - Do not start HID-REQ-2; await human checkpoint review for HID-REQ-1 Level 2.
+
+### Checkpoint update in batch HID-LRA-12
+
+- Commit: 0956bf6
+- Scope: Record HID-REQ-1 checkpoint metadata updates in roadmap and work queue notes.
+- Changed files:
+  - `docs/hid_long_running_roadmap.md`
+  - `governance/hid_work_queue.yaml`
+- Validation:
+  - PASS `python -X utf8 scripts/validate_source_authority.py`
+  - PASS `python -X utf8 scripts/validate_hid_class_request_matrix.py`
+  - PASS `python -X utf8 scripts/validate_verification_status.py`
+  - PASS `python -m unittest discover -s tests`
+- Stats before/after:
+  - reviewed: unchanged
+  - verified: unchanged
+  - scaffold: unchanged
+- Gate mode: batch (batch_size: 3, approved_batch: true, approved_through: HID-REQ-6)
+- Review level: 1 (docs-only housekeeping)
+- Can claim:
+  - HID-REQ-1 roadmap status now explicitly denotes waiting for human checkpoint closure.
+  - work queue notes now point to the active checkpoint commit and approval precondition.
+- Cannot claim:
+  - cannot claim reviewed/verified status uplift.
+  - cannot claim firmware behavior correctness.
+  - cannot claim OS/input stack behavior.
+  - cannot claim report parser/descriptor semantics.
+- Residual risk:
+  - This is operational bookkeeping only; it does not add substantive GET_REPORT field semantics evidence.
+- Requested approval:
+  - Await HID-REQ-1 human review before moving to HID-REQ-2.
