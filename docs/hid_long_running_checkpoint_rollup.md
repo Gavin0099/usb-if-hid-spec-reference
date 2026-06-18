@@ -1222,3 +1222,40 @@ Commit Checkpoint:
 - Next recommended slice:
   - Proceed to `HID-REQ-3` for Level 3 promotion when approved.
 
+## Batch: HID-LRA-32 (HID-REQ-3 scaffold -> reviewed)
+
+- Commit: this checkpoint
+- Scope: promote `GET_IDLE` (`HID-REQ-3`) from scaffold to reviewed; update roadmap and validation counts.
+- Changed files:
+  - `data/hid_class_request_matrix.yaml`
+  - `specs/verification_status.md`
+  - `specs/en/verification_status.md`
+  - `governance/hid_work_queue.yaml`
+  - `docs/hid_long_running_roadmap.md`
+- Validation:
+  - PASS `python -X utf8 scripts/validate_source_authority.py`
+  - PASS `python -X utf8 scripts/validate_hid_class_request_matrix.py`
+  - PASS `python -X utf8 scripts/validate_verification_status.py`
+  - PASS `python -m unittest discover -s tests`
+- Stats before/after:
+  - reviewed: 2 -> 3
+  - verified: 0 -> 0
+  - scaffold: 11 -> 10
+- Gate mode: batch (batch_size: 1, approved_batch: true, approved_through: HID-REQ-6)
+- Review level: 3 (human approval)
+- Can claim:
+  - `GET_IDLE` (`HID-REQ-3`) claim level is now `reviewed`.
+  - `HID-REQ-3` is marked as reviewed in queue/roadmap alignment artifacts.
+  - Verification pages now reflect reviewed count increment.
+- Cannot claim:
+  - cannot claim verified uplift.
+  - cannot claim firmware behavior correctness.
+  - cannot claim OS/input stack behavior.
+  - cannot claim report parser/descriptor semantics.
+- Residual risk:
+  - `GET_IDLE` behavior claims remain limited to identity-scope framing in existing text.
+- Requested approval:
+  - Human approval is required before any further scope-level status transition.
+- Next recommended slice:
+  - Proceed to `HID-REQ-4` for Level 3 promotion when approved.
+
