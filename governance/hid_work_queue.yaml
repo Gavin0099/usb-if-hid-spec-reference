@@ -42,8 +42,10 @@ queue:
       - host stack behavior
       - report parser semantics
     notes: >
-      Same boundary as HID-REQ-1. Queue ready but not started until HID-REQ-1 is
-      approved.
+      Same boundary as HID-REQ-1.
+      Blocked by: HID-REQ-1 pending human checkpoint approval.
+      checkpoint commit: pending
+      Do not start without queue gate release in `governance/hid_review_gate.yaml` and HID-REQ-1 approval record.
 
   - id: HID-REQ-3
     title: GET_IDLE reviewed draft
