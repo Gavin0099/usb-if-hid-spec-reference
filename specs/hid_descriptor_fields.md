@@ -31,6 +31,12 @@
 - 不宣告 Host stack 行為。
 - 不宣告 report descriptor semantics。
 
+## 識別層限制
+
+- 僅記錄欄位名稱與身份層意圖。
+- 數值語意限制於 scaffold 級別，不承諾任何執行時語意。
+- 此頁與矩陣不作行為層規範文件。
+
 ## 關係備註
 
 - `bNumDescriptors` 是 subordinate descriptor 的項目數。
@@ -50,4 +56,3 @@
 - 本頁不宣告 firmware descriptor parsing 行為。
 - 本頁不宣告 report descriptor semantics。
 - 本頁不宣告任何 evidence-backed verified 升級。
-

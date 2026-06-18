@@ -30,6 +30,13 @@ This page records identity-level field intent only.
 - It does not claim firmware descriptor parsing behavior.
 - It does not claim host stack semantics.
 - It does not claim report descriptor semantics.
+- It does not claim runtime transport, framing, or timing semantics.
+
+## Identity Conventions
+
+- Scope is field-name identity and type intent only.
+- Numeric semantics are intentionally limited to scaffold-level description.
+- This page and matrix are not a behavioral spec.
 
 ## Relationship Notes
 
