@@ -13,7 +13,7 @@ respecting the repo claim ceiling and forbidden domains.
 4. Determine review level.
 5. For Level 1, apply changes directly and produce one commit checkpoint entry using
    the repository contract format.
-6. For Level 2/3, create a branch and PR checkpoint.
+6. For Level 2/3, follow gate mode in `governance/hid_review_gate.yaml`.
 7. Classify review level and gate outcome.
 8. Produce one commit checkpoint entry using the repository contract format.
 9. Perform only allowed autonomous work (docs, wording cleanup, consistency checks).
@@ -21,20 +21,29 @@ respecting the repo claim ceiling and forbidden domains.
 
 ## Review Level Gate
 
-- Level 1 tasks: auto-pass tasks (roadmap, queue state, shell evidence, boundary
-  docs) -> checkpoint with `Review level: Level 1` and continue automatically when
-  gate passes.
+- Level 1 tasks: auto-pass tasks (roadmap, queue state, shell evidence,
+  boundary docs) -> checkpoint with `Review level: Level 1` and continue
+  automatically when gate passes.
 - Level 2 tasks: reviewed-draft preparations (for example HID request entry
   text) -> quick human checkpoint required before moving on.
-- Level 3 tasks: reviewed/verified uplift, source import, new matrix, descriptor
-  semantic imports -> must stop and await explicit human approval.
+- Level 3 tasks: reviewed/verified uplift, source import, new matrix,
+  descriptor semantic imports -> must stop and await explicit human approval.
 
 ## Checkpoint modes (Level 2/3)
 
 For Level 2 and Level 3 work, checkpoint mode is controlled by
 `governance/hid_review_gate.yaml`.
 
-### PR mode
+### Batch mode (default)
+
+- Use branch `agent/hid-lra-rollup`.
+- Record each checkpoint in `docs/hid_long_running_checkpoint_rollup.md`.
+- Respect `gate_mode` and `batch_size` in `governance/hid_review_gate.yaml`.
+- Pause when the batch quota is full or a Level 3 item appears.
+- Continue only after user marks approval in `governance/hid_review_gate.yaml`
+  (`approved_batch: true` and `approved_through` set).
+
+### PR mode (optional, explicit request only)
 
 - Create a branch in the form `agent/<item-id>-<short-kebab>` before changes.
 - Open one PR with body required by
@@ -43,15 +52,6 @@ For Level 2 and Level 3 work, checkpoint mode is controlled by
 - PR title should follow:
   `HID-REQ-<N>: <request> reviewed draft preparation` (or equivalent title for
   reviewed/verified uplifts).
-
-### Batch mode
-
-- Use branch `agent/hid-lra-rollup`.
-- Record each checkpoint in `docs/hid_long_running_checkpoint_rollup.md`.
-- Respect `gate_mode` and `batch_size` in `governance/hid_review_gate.yaml`.
-- Pause when the batch quota is full or a Level 3 item appears.
-- Continue only after user marks approval in `governance/hid_review_gate.yaml`
-  (`approved_batch: true` and `approved_through` set).
 
 ## Required Slice Gate
 

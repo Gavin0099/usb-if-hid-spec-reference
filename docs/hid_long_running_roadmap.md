@@ -59,3 +59,9 @@
 - objective: HID Descriptor field wording alignment pass under Section 6.2.1 with scaffold identity constraints.
 - gate: reviewed-draft preparation only.
 
+### HID-LRA-10: Consumer Integration & Validation Surface
+
+- status: Completed
+- objective: Add repo-local evidence/consumer-integration contract + validator plumbing for the governed HID reference surface.
+- verification: no review-count uplift; contract and fixture surface stabilized.
+
