@@ -5,6 +5,6 @@ gate_mode: batch
 mode_settings:
   batch_size: 1
   approved_batch: true
-  approved_through: HID-REQ-1
+  approved_through: HID-REQ-6
   auto_advance_level2: false
-  remarks: "HID-REQ-1 checkpoint approved; proceed to HID-REQ-2 with human checkpoint before each subsequent reviewed-draft boundary."
+  remarks: "All HID-REQ-1 through HID-REQ-6 checkpoint closures are user-approved for reviewed-draft shell readiness; status promotions remain explicitly gated."
