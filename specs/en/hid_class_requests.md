@@ -76,19 +76,32 @@ imported source. It does not advance this repo’s verification state.
 
 #### Setup fields (identity-level only)
 
+- USB request packet setup sequence (identity-level): `bmRequestType`, `bRequest`, `wValue`, `wIndex`, `wLength`.
 - Request: `SET_REPORT` (`hid_set_report`)
+- Setup-byte intent (identity-level):
+  - `bmRequestType` setup packet byte 0
+  - `bRequest` setup packet byte 1
+  - `wValue` setup packet bytes 2-3
+  - `wIndex` setup packet bytes 4-5
+  - `wLength` setup packet bytes 6-7
 - `bmRequestType`: `0x21`
+  - Bitfield interpretation (identity-level): `bmRequestType[7:5]=0` (dir=Host→Device),
+    `bmRequestType[4:2]=001` (Class), `bmRequestType[1:0]=01` (Interface)
+  - Binary value: `0010 0001`
   - Direction: host-to-device
   - Type: class
   - Recipient: interface
 - `bRequest`: `0x09`
 - `wValue`
-  - High byte (`ReportType`): indicates input/output/feature report type selector
+  - High byte (`ReportType`): report type selector field in identity context
   - Low byte (`ReportID`): report identifier selector
+  - Validation boundary:
+    - `wValue` is interpreted here only as field-identity identity-level identity in the request setup.
 - `wIndex`
-  - Interface context for the request target
+  - Interface number that identifies the addressed interface
 - `wLength`
-  - Number of bytes in the outgoing report payload (identity-level scope only)
+  - 16-bit little-endian length field in setup packet (identity-level scope only).
+  - Number of bytes in the outgoing report payload (identity-level scope only).
 
 Source anchor:
 

@@ -24,10 +24,11 @@
 - objective: GET_REPORT reviewed draft under Section 7.2 with human approval.
 - gate: no scaffold status promotion without approval.
 - latest checkpoint commit: 939a61b
+- latest checkpoint status: approved by user; transition held at reviewed-draft shell level.
 
 ### HID-LRA-4: HID-REQ-2 Slice
 
-- status: Waiting for level 2/3 review gate
+- status: In Progress (Level 2 checkpoint slice started)
 - objective: SET_REPORT reviewed draft under Section 7.2 with quick human checkpoint.
 - gate: reviewed-draft preparation only.
 
