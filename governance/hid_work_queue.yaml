@@ -26,7 +26,7 @@ queue:
     notes: >
       Prepare reviewed wording draft for GET_REPORT while keeping verified count at 0.
       No source extension and no section imports are allowed in this slice.
-      checkpoint commit: a5180cd (Level 2 reviewed-draft shell)
+      checkpoint commit: 939a61b (Level 2 reviewed-draft setup-packet identity scope)
       await human approval before changing status promotion.
 
   - id: HID-REQ-2
