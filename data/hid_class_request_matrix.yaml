@@ -55,7 +55,7 @@ entries:
     recipient: interface
     purpose: "Set the idle rate for a HID report."
     setup_scope: "Request identity, direction, and interface recipient only."
-    claim_level: scaffold
+    claim_level: reviewed
     evidence_status: not_introduced
   - request_id: hid_get_protocol
     name: GET_PROTOCOL
