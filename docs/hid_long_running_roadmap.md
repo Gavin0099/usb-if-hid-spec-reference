@@ -70,7 +70,7 @@
 - status: In Progress (scope-alignment iteration)
 - objective: HID Descriptor field wording alignment pass under Section 6.2.1 with scaffold identity constraints.
 - gate: reviewed-draft preparation only.
-- latest checkpoint commit: pending
+- latest checkpoint commit: this checkpoint
 - latest checkpoint status: reviewed-draft closure in progress; keep counts unchanged.
 - pending user checkpoint review.
 

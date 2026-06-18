@@ -850,12 +850,13 @@ Commit Checkpoint:
 ## Batch: HID-LRA-24 (HID-DESC-1 scope alignment iteration)
 
 - Commit Checkpoint:
-- Commit: 543e911
+- Commit: this checkpoint
 - Scope: continue `HID-DESC-1` scope-alignment iteration and language-boundary harmonization after `HID-REQ-6` user approval.
 - Changed files:
-  - `specs/hid_descriptor_fields.md`
-  - `governance/hid_work_queue.yaml`
   - `docs/hid_long_running_roadmap.md`
+  - `docs/hid_long_running_checkpoint_rollup.md`
+  - `governance/hid_work_queue.yaml`
+  - `specs/hid_descriptor_fields.md`
 - Validation:
   - PASS `python -X utf8 scripts/validate_source_authority.py`
   - PASS `python -X utf8 scripts/validate_hid_class_request_matrix.py`
@@ -881,4 +882,39 @@ Commit Checkpoint:
   - Human checkpoint review required before any reviewed/verified promotion or usage-semantic claims.
 - Next recommended slice:
    - Await user checkpoint review for `HID-DESC-1` closure.
+
+### Checkpoint continuation in batch HID-LRA-24
+
+- Commit: this checkpoint
+- Scope: finalize HID-DESC-1 Chinese descriptor scaffold wording with explicit identity-boundary language and checkpoint bookkeeping alignment.
+- Changed files:
+  - `specs/hid_descriptor_fields.md`
+  - `governance/hid_work_queue.yaml`
+  - `docs/hid_long_running_roadmap.md`
+  - `docs/hid_long_running_checkpoint_rollup.md`
+- Validation:
+  - PASS `python -X utf8 scripts/validate_source_authority.py`
+  - PASS `python -X utf8 scripts/validate_hid_class_request_matrix.py`
+  - PASS `python -X utf8 scripts/validate_verification_status.py`
+  - PASS `python -m unittest discover -s tests`
+- Stats before/after:
+  - reviewed: unchanged
+  - verified: unchanged
+  - scaffold: unchanged
+- Gate mode: batch (batch_size: 1, approved_batch: true, approved_through: HID-REQ-1)
+- Review level: 2 (quick human checkpoint prep)
+- Can claim:
+  - HID-DESC-1 Chinese descriptor field scaffold now has normalized identity-language and explicit scope boundaries.
+  - Queue/roadmap checkpoint pointers for `HID-DESC-1` now use a stable "this checkpoint" marker.
+- Cannot claim:
+  - cannot claim reviewed/verified status uplift.
+  - cannot claim firmware behavior correctness.
+  - cannot claim OS/input stack behavior.
+  - cannot claim report parser/descriptor semantics.
+- Residual risk:
+  - Wording remains identity-level; transport, framing, and runtime interpretation are still out-of-scope.
+- Requested approval:
+  - Human checkpoint review required before any status promotion.
+- Next recommended slice:
+  - Await user checkpoint review for `HID-DESC-1` closure.
 
