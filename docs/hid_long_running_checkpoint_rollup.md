@@ -1376,3 +1376,35 @@ Commit Checkpoint:
 - Next recommended slice:
   - All HID-REQ-* Level 3 request transitions are now complete.
 
+## Batch: HID-LRA-36 (HID-DESC-1 scope completion)
+
+- Commit: this checkpoint
+- Scope: close `HID-DESC-1` queue gate state after user-approved scope alignment.
+- Changed files:
+  - `governance/hid_work_queue.yaml`
+- Validation:
+  - PASS `python -X utf8 scripts/validate_source_authority.py`
+  - PASS `python -X utf8 scripts/validate_hid_class_request_matrix.py`
+  - PASS `python -X utf8 scripts/validate_verification_status.py`
+  - PASS `python -m unittest discover -s tests`
+- Stats before/after:
+  - reviewed: unchanged
+  - verified: unchanged
+  - scaffold: unchanged
+- Gate mode: batch (batch_size: 1, approved_batch: true, approved_through: HID-REQ-6)
+- Review level: 2 (quick human checkpoint prep)
+- Can claim:
+  - `HID-DESC-1` checkpoint state is now marked complete in queue.
+  - No status or count promotion performed.
+- Cannot claim:
+  - cannot claim reviewed/verified uplift.
+  - cannot claim firmware behavior correctness.
+  - cannot claim OS/input stack behavior.
+  - cannot claim report parser/descriptor semantics.
+- Residual risk:
+  - This step only updates governance bookkeeping; no content semantics were changed.
+- Requested approval:
+  - Human approval already recorded in prior checkpoints; no further approvals required for this bookkeeping step.
+- Next recommended slice:
+  - Ready for full-project completion review if requested.
+
