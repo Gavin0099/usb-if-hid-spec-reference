@@ -1016,6 +1016,40 @@ Commit Checkpoint:
 - Next recommended slice:
   - Await human checkpoint approval for `HID-REQ-3`, then `HID-REQ-4`, then `HID-REQ-5`.
 
+## Batch: HID-LRA-27 (HID-REQ-3/4/5 closure approval)
+
+- Commit: this checkpoint
+- Scope: record user checkpoint approval for `HID-REQ-3`, `HID-REQ-4`, and `HID-REQ-5`.
+- Changed files:
+  - `governance/hid_work_queue.yaml`
+  - `docs/hid_long_running_roadmap.md`
+- Validation:
+  - PASS `python -X utf8 scripts/validate_source_authority.py`
+  - PASS `python -X utf8 scripts/validate_hid_class_request_matrix.py`
+  - PASS `python -X utf8 scripts/validate_verification_status.py`
+  - PASS `python -m unittest discover -s tests`
+- Stats before/after:
+  - reviewed: unchanged
+  - verified: unchanged
+  - scaffold: unchanged
+- Gate mode: batch (batch_size: 1, approved_batch: true, approved_through: HID-REQ-1)
+- Review level: 2 (quick human checkpoint prep)
+- Can claim:
+  - `HID-REQ-3` checkpoint status is now user-approved checkpoint-complete.
+  - `HID-REQ-4` checkpoint status is now user-approved checkpoint-complete.
+  - `HID-REQ-5` checkpoint status is now user-approved checkpoint-complete.
+- Cannot claim:
+  - cannot claim reviewed/verified status uplift.
+  - cannot claim firmware behavior correctness.
+  - cannot claim OS/input stack behavior.
+  - cannot claim report parser/descriptor semantics.
+- Residual risk:
+  - This checkpoint approval does not imply reviewed/verified count promotion.
+- Requested approval:
+  - Ready for next user-authorized slice.
+- Next recommended slice:
+  - No pending `HID-REQ-*` slices remain at Level 2/3 checkpoint state.
+
 ## Batch: HID-LRA-25 (HID-REQ-2 closure)
 
 - Commit: this checkpoint

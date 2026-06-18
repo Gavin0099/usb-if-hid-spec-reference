@@ -36,27 +36,27 @@
 
 ### HID-LRA-5: HID-REQ-3 Slice
 
-- status: Waiting for human checkpoint review (reviewed-draft closure prepared)
+- status: Human checkpoint review complete (reviewed-draft shell complete)
 - objective: GET_IDLE reviewed draft under Section 7.2 with quick human checkpoint.
 - gate: reviewed-draft preparation only.
 - latest checkpoint commit: f114274
-- latest checkpoint status: human closure review pending; keep counts unchanged.
+- latest checkpoint status: approved by user; keep counts unchanged.
 
 ### HID-LRA-6: HID-REQ-4 Slice
 
-- status: Waiting for human checkpoint review (reviewed-draft closure prepared)
+- status: Human checkpoint review complete (reviewed-draft shell complete)
 - objective: SET_IDLE reviewed draft under Section 7.2 with quick human checkpoint.
 - gate: reviewed-draft preparation only.
 - latest checkpoint commit: 2425f09
-- latest checkpoint status: human closure review pending; keep counts unchanged.
+- latest checkpoint status: approved by user; keep counts unchanged.
 
 ### HID-LRA-7: HID-REQ-5 Slice
 
-- status: Waiting for human checkpoint review (reviewed-draft closure prepared)
+- status: Human checkpoint review complete (reviewed-draft shell complete)
 - objective: GET_PROTOCOL reviewed draft under Section 7.2 with quick human checkpoint.
 - gate: reviewed-draft preparation only.
 - latest checkpoint commit: c3939e8
-- latest checkpoint status: human closure review pending; keep counts unchanged.
+- latest checkpoint status: approved by user; keep counts unchanged.
 
 ### HID-LRA-8: HID-REQ-6 Slice
 

@@ -66,7 +66,7 @@ queue:
       active slice: GET_IDLE reviewed-draft preparation completed.
       checkpoint commit: f114274 (Level 2 reviewed-draft setup-field wording completion)
       Do not change reviewed/verified counts in this slice.
-      user approved: human checkpoint review pending.
+      user approved: human checkpoint review complete.
 
   - id: HID-REQ-4
     title: SET_IDLE reviewed draft
@@ -85,7 +85,7 @@ queue:
       active slice: SET_IDLE reviewed-draft preparation completed.
       checkpoint commit: 2425f09 (Level 2 reviewed-draft setup-field wording)
       Do not change reviewed/verified counts in this slice.
-      user approved: human checkpoint review pending.
+      user approved: human checkpoint review complete.
 
   - id: HID-REQ-5
     title: GET_PROTOCOL reviewed draft
@@ -104,7 +104,7 @@ queue:
       active slice: GET_PROTOCOL reviewed-draft preparation completed.
       checkpoint commit: c3939e8 (Level 2 reviewed-draft setup-field wording)
       Do not change reviewed/verified counts in this slice.
-      user approved: human checkpoint review pending.
+      user approved: human checkpoint review complete.
   - id: HID-REQ-6
     title: SET_PROTOCOL reviewed draft
     authority: HID 1.11 Section 7.2
