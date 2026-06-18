@@ -36,7 +36,7 @@ For Level 2 and Level 3 work, checkpoint mode is controlled by
 
 ### Batch mode (default)
 
-- Use branch `agent/hid-lra-rollup`.
+- Use an agent branch under `agent/` (example: `agent/hid-lra-rollup`).
 - Record each checkpoint in `docs/hid_long_running_checkpoint_rollup.md`.
 - Respect `gate_mode` and `batch_size` in `governance/hid_review_gate.yaml`.
 - Pause when the batch quota is full or a Level 3 item appears.

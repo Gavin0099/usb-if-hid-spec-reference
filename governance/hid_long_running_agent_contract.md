@@ -75,7 +75,7 @@ Active mode follows `governance/hid_review_gate.yaml`; this repo defaults to bat
 
 ### Batch gate (default)
 
-1. Use one rolling branch: `agent/hid-lra-rollup`.
+1. Use one rolling branch under the agent namespace (example: `agent/hid-lra-rollup`).
 2. Execute Level 2/3 slices sequentially and record each checkpoint in
    `docs/hid_long_running_checkpoint_rollup.md`.
 3. Do not exceed `batch_size` checkpoints in one batch.
@@ -182,7 +182,7 @@ slice; a PASS must be explicitly recorded.
 ## Commit / Branch Discipline
 
 - Use short, intentful commit titles with `HID-LRA-<N>` tags.
-- Level 2/3 default: commit to `agent/hid-lra-rollup` and append to
+- Level 2/3 default: commit on the active agent branch under `agent/` and append to
   `docs/hid_long_running_checkpoint_rollup.md`.
 - Optional PR mode: branch + PR only when explicitly requested.
 - A commit may include docs-only files plus linked checkpoint artifacts.
