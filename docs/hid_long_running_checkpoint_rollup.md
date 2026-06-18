@@ -2,7 +2,7 @@
 
 ## Batch: HID-LRA-7/8
 
-- Commit: bf1184d
+- Commit: 1885c26
 - Scope: HID-REQ-6 Set protocol draft wording refinement (scaffold/identity-level)
 - Changed files:
   - `specs/en/hid_class_requests.md`
@@ -36,7 +36,7 @@
 
 ### Checkpoint 2 in batch HID-LRA-7/8
 
-- Commit: 5ac00f6
+- Commit: 91a5e58
 - Scope: HID class request setup-field identity expansion for GET/SET_REQUEST entries
 - Changed files:
   - `specs/en/hid_class_requests.md`
@@ -62,3 +62,34 @@
   - Added protocol byte framing remains unverified identity-level scaffold, not evidence-backed behavior.
 - Requested approval:
   - Continue batch if approved batch remains false and up to 3 checkpoints total are allowed.
+
+### Checkpoint 3 in batch HID-LRA-7/8
+
+- Commit: 2859fcd
+- Scope: zh/zh-TW reviewed draft field identity synchronization for HID protocol and request setup sections
+- Changed files:
+  - `specs/hid_class_requests.md`
+- Validation:
+  - PASS `python -X utf8 scripts/validate_source_authority.py`
+  - PASS `python -X utf8 scripts/validate_hid_class_request_matrix.py`
+  - PASS `python -X utf8 scripts/validate_verification_status.py`
+  - PASS `python -m unittest discover -s tests`
+- Stats before/after:
+  - reviewed: unchanged
+  - verified: unchanged
+  - scaffold: unchanged
+- Gate mode: batch (batch_size: 3, approved_batch: false)
+- Review level: 2
+- Approved-through: HID-REQ-0
+- Can claim:
+  - zh-HID class request setup-field identity is aligned with EN wording for all 6 requests.
+  - Explicit `wValue` byte-order and `wLength` identity expectations documented for protocol requests.
+- Cannot claim:
+  - reviewed/verified uplift
+  - firmware correctness
+  - OS/input stack behavior
+  - parser/runtime semantics
+- Residual risk:
+  - `SET_PROTOCOL` protocol-value mapping remains scaffold-level identity and is not implementation behavior.
+- Requested approval:
+  - Batch quota reached (3). Pause until you set `approved_batch: true` and `approved_through` in `governance/hid_review_gate.yaml`.

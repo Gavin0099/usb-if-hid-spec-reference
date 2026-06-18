@@ -46,7 +46,7 @@ correctness。
 - `wIndex`
   - 對應目前介面的 request context
 - `wLength`
-  - 回應 payload 預期位元組長度
+  - 回應 payload 預期位元組長度（身份層意涵）
 
 來源：
 
@@ -70,7 +70,7 @@ verified/reviewed 狀態。
 - `wIndex`
   - 對應目前介面的 request context
 - `wLength`
-  - 指定要傳送的 report payload 預期位元組長度
+  - 指定要傳送的 report payload 預期位元組長度（身份層意涵）
 
 來源：
 
@@ -94,7 +94,7 @@ verified/reviewed 狀態。
 - `wIndex`
   - 對應目前介面的 request context
 - `wLength`
-  - 回傳 idle value payload 的位元組數
+  - 回傳 idle value payload 的位元組數（本請求身份層通常為 `1`）
 
 來源：
 
@@ -118,7 +118,7 @@ verified/reviewed 狀態。
 - `wIndex`
   - 對應目前介面的 request context
 - `wLength`
-  - 常見情況為 0
+  - 常見情況為 `0`
 
 來源：
 
@@ -148,7 +148,7 @@ verified/reviewed 狀態。
 - `wIndex`
   - 對應目前介面的 request context
 - `wLength`
-  - 回傳 protocol value payload 的位元組數
+  - 回傳 protocol value payload 的位元組數（本請求身份層為 `1`）
 
 來源：
 
@@ -167,8 +167,8 @@ verified/reviewed 狀態。
   - Recipient：interface
 - `bRequest`: `0x0B`
 - `wValue`
-  - 低位元組：protocol select 訊號（身份層意涵）
   - 高位元組：保留
+  - 低位元組：protocol select 訊號（身份層意涵；`0`=Boot Protocol、`1`=Report Protocol）
 - `wIndex`
   - 對應目前介面的 request context
 - `wLength`
