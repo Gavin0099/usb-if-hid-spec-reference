@@ -146,8 +146,10 @@ or host stack behavior.
 - `wValue`
   - High byte (`ReportID`): report selector in identity context
   - Low byte (`0`): reserved in this request identity context
+- Validation boundary:
+  - `wValue` is interpreted here only as field-identity scope in the request setup.
 - `wIndex`
-  - Interface context for the request target
+  - Interface context for the request target.
 - `wLength`
   - Payload bytes expected in the returned idle value (`1` in this request identity context; identity-level framing only).
 
