@@ -28,11 +28,11 @@
 
 ### HID-LRA-4: HID-REQ-2 Slice
 
-- status: Completed (reviewed-draft shell complete, no count change)
+- status: Completed (reviewed)
 - objective: SET_REPORT reviewed draft under Section 7.2 with quick human checkpoint.
 - gate: reviewed-draft preparation only.
 - latest checkpoint commit: 3d158d1
-- latest checkpoint status: approved by user; keep counts unchanged.
+- latest checkpoint status: approved by user; scaffold->reviewed transition completed.
 
 ### HID-LRA-5: HID-REQ-3 Slice
 

@@ -8,9 +8,9 @@ Source authority status: locked.
 |---|---:|---:|---:|---:|---:|
 | HID descriptors | 7 | 0 | 0 | 0 | 0 |
 | HID report descriptors | 0 | 0 | 0 | 0 | 0 |
-| HID class requests | 6 | 0 | 1 | 0 | 0 |
+| HID class requests | 6 | 0 | 2 | 0 | 0 |
 | Report / boot / idle semantics | 0 | 0 | 0 | 0 | 0 |
-| **Total** | **13** | **0** | **1** | **0** | **0** |
+| **Total** | **13** | **0** | **2** | **0** | **0** |
 
 ## Scaffold Summary
 
