@@ -1,6 +1,6 @@
 # HID Long-Running Agent Contract (LRA)
 
-> Version: 1.1.0
+> Version: 1.2.0
 > Established: 2026-06-18
 > Scope: `usb-if-hid-spec-reference` repository
 > Claim ceiling: `scaffold_identity_reference_only`
@@ -15,14 +15,15 @@ repo without broadening scope or accidentally creating verified claims.
 - No OS/input-stack behavior claims.
 - No parser runtime behavior claims.
 - No source-authority expansion.
-- No verification count changes (`verified`, `reviewed`, `inferred`) unless explicitly approved.
+- No verification count changes (`verified`, `reviewed`, `inferred`) unless explicitly
+  approved.
 - No HID semantic completion beyond imported scope.
 
 ## Review Levels
 
-- Level 1 (Auto-pass): roadmap/queue/evidence-shell/navigation/residual
-  claim-boundary cleanup tasks. These tasks do not claim HID behavior and do not
-  modify review state.
+- Level 1 (Auto-pass): roadmap/queue/evidence-shell/navigation/residual claim
+  ceiling cleanup tasks. These tasks do not claim HID behavior and do not modify
+  review state.
 - Level 2 (Quick human checkpoint): reviewed-draft preparation for HID request
   content (for example, GET_REPORT field wording). Human review is required to
   verify:
@@ -31,9 +32,9 @@ repo without broadening scope or accidentally creating verified claims.
   3) reviewed/verified counts unchanged,
   4) no firmware/OS/parser behavior claim was added,
   5) no shell artifact was promoted to verified truth.
-- Level 3 (Human approval): reviewed count change, reviewed→verified change, source
-  imports, new governed matrix, HID Descriptor scope import, and Report Descriptor /
-  Usage Table semantic additions.
+- Level 3 (Human approval): reviewed/verified uplift, source imports, new governed
+  matrix, HID Descriptor scope import, and Report Descriptor / Usage Table semantic
+  additions.
 
 ## Allowed Autonomous Work
 
@@ -65,7 +66,31 @@ While operating under this contract, Codex must not assert:
 - product-specific HID policy.
 - report descriptor parser behavior.
 - HID Usage Table semantic correctness.
-- "verified" status for any entry unless evidence packets and review gates are explicitly satisfied.
+- `"verified"` status for any entry unless evidence packets and review gates are
+  explicitly satisfied.
+
+## PR-based Checkpoint Gate (Level 2/3)
+
+For Level 2 and Level 3 slices, Codex must follow branch + PR checkpoint flow:
+
+1. Create branch: `agent/<item-id>-<short-description>`
+   - Example: `agent/hid-req-5-get-protocol`
+2. Do not start the next slice on `main`.
+3. Commit checkpoint changes on the branch.
+4. Open PR with title:
+   - `HID-REQ-<N>: <request> reviewed draft preparation`
+5. Stop and wait for approval before starting the next slice.
+6. PR body must include:
+   - Commit
+   - Scope
+   - Changed files
+   - Validation
+   - Stats before/after
+   - Review level
+   - Can claim
+   - Cannot claim
+   - Residual risk
+   - Requested approval
 
 ## Checkpoint Gate
 
@@ -73,11 +98,18 @@ Every slice must satisfy this gate before the next slice starts:
 
 1. Commit created.
 2. Required validation ran and passed.
-3. Checkpoint block recorded in exact required format.
-4. Review level classification appended.
-5. Reviewed/verified count changes are explicitly approved by level.
+3. For Level 2/3, PR checkpoint exists and references the required fields.
+4. Checkpoint block recorded in exact required format.
+5. Review level classification appended.
+6. Reviewed/verified count changes are explicitly approved by level.
 
 If any point is missing, codex must stop and wait.
+
+Level 1 fast lane exception:
+
+- Level 1 may continue autonomously when validation passes and reviewed/verified
+  counts remain unchanged.
+- Level 1 does not require PR creation for autonomous continuation.
 
 ## Commit Checkpoint Format
 
@@ -123,12 +155,14 @@ slice; a PASS must be explicitly recorded.
 - Only one `in_progress` item may be active in `governance/hid_work_queue.yaml`.
 - Human-gated items must have `requires_human_approval: true`.
 - Codex may execute only items marked allowed for autonomous work.
-- Any item changing status semantics (for example, scaffold→reviewed) requires approval.
+- Any item changing status semantics requires approval.
 - Queue updates must keep item history append-only and do not alter task IDs.
 
 ## Commit / Branch Discipline
 
 - Use short, intentful commit titles with `HID-LRA-<N>` tags.
+- Level 1: commit directly.
+- Level 2/3: commit on branch `agent/<item-id>-<short-description>`, then PR.
 - A commit may include docs-only files plus linked checkpoint artifacts.
 - Do not commit if any required validator fails.
 
@@ -138,4 +172,3 @@ slice; a PASS must be explicitly recorded.
 - evidence packet claim is requested without approved source scope.
 - a user asks to add behavior-level claims.
 - any instruction conflicts with `docs/source_authority.md` or `docs/claim_boundary.md`.
-

@@ -10,10 +10,14 @@ respecting the repo claim ceiling and forbidden domains.
 1. Pick the next queue item from `governance/hid_work_queue.yaml`.
 2. Verify item status and required approval fields.
 3. Run the required validation pass for the slice.
-4. Produce one commit checkpoint entry using the repository contract format.
-5. Classify review level and gate outcome.
-6. Perform only allowed autonomous work (docs, wording cleanup, consistency checks).
-7. Do not change reviewed/verified counts in YAML data tables.
+4. Determine review level.
+5. For Level 1, apply changes directly and produce one commit checkpoint entry using
+   the repository contract format.
+6. For Level 2/3, create a branch and PR checkpoint.
+7. Classify review level and gate outcome.
+8. Produce one commit checkpoint entry using the repository contract format.
+9. Perform only allowed autonomous work (docs, wording cleanup, consistency checks).
+10. Do not change reviewed/verified counts in YAML data tables.
 
 ## Review Level Gate
 
@@ -24,6 +28,18 @@ respecting the repo claim ceiling and forbidden domains.
   text) -> quick human checkpoint required before moving on.
 - Level 3 tasks: reviewed/verified uplift, source import, new matrix, descriptor
   semantic imports -> must stop and await explicit human approval.
+
+## PR-based checkpoint (Level 2/3)
+
+For Level 2 and Level 3 work:
+
+- Create a branch in the form `agent/<item-id>-<short-kebab>` before changes.
+- Open one PR with body required by
+  `governance/hid_long_running_agent_contract.md`.
+- Do not start the next queue slice until review approval is recorded.
+- PR title should follow:
+  `HID-REQ-<N>: <request> reviewed draft preparation` (or equivalent title for
+  reviewed/verified uplifts).
 
 ## Required Slice Gate
 
@@ -40,7 +56,7 @@ A slice is not complete unless all of the following exist:
 
 ## Human-Approval Gating
 
-- Level 2 and Level 3 tasks require human checkpoint.
+- Level 2 and Level 3 tasks require PR-based checkpoint and human approval.
 - Any requested status promotion or claim that may alter scope requires human sign-off
   before execution continues.
 - If approval is not present, Codex records a stop checkpoint and pauses on the
