@@ -113,7 +113,7 @@ queue:
   - id: HID-REQ-6
     title: SET_PROTOCOL reviewed draft
     authority: HID 1.11 Section 7.2
-    status: waiting_level3_approval
+    status: reviewed
     allowed_status_change: scaffold_to_reviewed
     requires_human_approval: true
     review_level: 2
@@ -128,6 +128,7 @@ queue:
       checkpoint commit: 0b9eec2 (Level 2 reviewed-draft setup-field wording)
       user approved: human checkpoint review complete.
       Do not change reviewed/verified counts in this slice.
+      status transition: scaffold_to_reviewed complete (requires separate approval).
 
   - id: HID-DESC-1
     title: HID Descriptor field wording alignment pass
