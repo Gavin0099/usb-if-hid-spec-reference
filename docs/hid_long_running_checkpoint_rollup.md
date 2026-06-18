@@ -220,3 +220,33 @@
   - queue progression still depends on external task sequencing and manual `governance/hid_work_queue.yaml` updates.
 - Requested approval:
   - Continue batch mode for next governed checkpoints until a user-level review stop is required.
+
+## Batch: HID-LRA-12
+
+- Commit: a5180cd
+- Scope: Prepare HID-REQ-1 reviewed draft content for GET_REPORT setup-field identity wording.
+- Changed files:
+  - `specs/en/hid_class_requests.md`
+- Validation:
+  - PASS `python -X utf8 scripts/validate_source_authority.py`
+  - PASS `python -X utf8 scripts/validate_hid_class_request_matrix.py`
+  - PASS `python -X utf8 scripts/validate_verification_status.py`
+  - PASS `python -m unittest discover -s tests`
+- Stats before/after:
+  - reviewed: unchanged
+  - verified: unchanged
+  - scaffold: unchanged
+- Gate mode: batch (batch_size: 3, approved_batch: true, approved_through: HID-REQ-6)
+- Review level: 2 (quick checkpoint prep)
+- Can claim:
+  - GET_REPORT reviewed draft now has clearer identity-level `wValue` byte wording (report-type selector + report-id selector).
+  - Scope remains docs-only and evidence-shell level only.
+- Cannot claim:
+  - cannot claim reviewed/verified status uplift.
+  - cannot claim firmware behavior correctness.
+  - cannot claim OS/input stack behavior.
+  - cannot claim report parser/descriptor semantics.
+- Residual risk:
+  - `wValue` interpretation still remains identity-level, not implementation verified.
+- Requested approval:
+  - Do not start HID-REQ-2; await human checkpoint review for HID-REQ-1 Level 2.
