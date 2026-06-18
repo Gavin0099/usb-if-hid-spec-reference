@@ -558,3 +558,35 @@ Commit Checkpoint:
   - Checkpoint bookkeeping does not validate request behavior semantics.
 - Requested approval:
   - Continue checkpoint protocol and await human checkpoint review before any reviewed/verified transition.
+
+### Checkpoint continuation in batch HID-LRA-17
+
+- Commit: 3d158d1
+- Scope: refine SET_REPORT reviewed-draft setup-field identity wording without changing review status semantics.
+- Changed files:
+  - `specs/en/hid_class_requests.md`
+- Validation:
+  - PASS `python -X utf8 scripts/validate_source_authority.py`
+  - PASS `python -X utf8 scripts/validate_hid_class_request_matrix.py`
+  - PASS `python -X utf8 scripts/validate_verification_status.py`
+  - PASS `python -m unittest discover -s tests`
+- Stats before/after:
+  - reviewed: unchanged
+  - verified: unchanged
+  - scaffold: unchanged
+- Gate mode: batch (batch_size: 1, approved_batch: true, approved_through: HID-REQ-1)
+- Review level: 2 (quick human checkpoint prep)
+- Can claim:
+  - `SET_REPORT` request setup-field identity wording now explicitly states wValue byte-role and data-phase framing.
+  - `HID-REQ-2` checkpoint state in queue and roadmap points to `3d158d1`.
+- Cannot claim:
+  - cannot claim reviewed/verified status uplift.
+  - cannot claim firmware behavior correctness.
+  - cannot claim OS/input stack behavior.
+  - cannot claim report parser/descriptor semantics.
+- Residual risk:
+  - This remains scaffold-level field identity only; request payload semantics are not claimed verified.
+- Requested approval:
+  - Human checkpoint review required before any status promotion.
+- Next recommended slice:
+  - Await checkpoint closure for `HID-REQ-2` (reviewed-draft shell) before moving to `HID-REQ-3`.

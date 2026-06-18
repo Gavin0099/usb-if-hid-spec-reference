@@ -31,7 +31,7 @@
 - status: In Progress (Level 2 checkpoint slice started)
 - objective: SET_REPORT reviewed draft under Section 7.2 with quick human checkpoint.
 - gate: reviewed-draft preparation only.
-- latest checkpoint commit: b3aae30
+- latest checkpoint commit: 3d158d1
 
 ### HID-LRA-5: HID-REQ-3 Slice
 
