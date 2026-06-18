@@ -39,15 +39,17 @@ or firmware handler correctness.
 
 - Request: `GET_REPORT` (`hid_get_report`)
 - `bmRequestType`: `0xA1`
+  - Bitfield interpretation (identity-level): `1 01 00001` (Dir=1, Type=01, Recipient=00001)
+  - Binary value: `1000 0001`
   - Direction: device-to-host
   - Type: class
   - Recipient: interface
-- `bRequest`: `0x01`
+- `bRequest`: `0x01` (`GET_REPORT`)
 - `wValue`
-  - High byte (`ReportType`): scope selector byte (input/output/feature request class in HID identity context)
-  - Low byte (`ReportID`): report identifier selector
+  - High byte (`ReportType`): request scope selector byte in HID identity context (input/output/feature selector)
+  - Low byte (`ReportID`): report identifier selector (0 is host-selected if no ReportID)
 - `wIndex`
-  - Interface number context for the request
+  - Interface number that identifies the addressed interface
 - `wLength`
   - Number of bytes carried in the report payload response (identity-level scope only)
 
