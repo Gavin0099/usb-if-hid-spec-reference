@@ -814,3 +814,35 @@ Commit Checkpoint:
   - No `SET_PROTOCOL` request wording added yet in this commit.
 - Requested approval:
   - Human checkpoint review required before status transitions or behavior-level claims.
+
+### Checkpoint continuation in batch HID-LRA-23
+
+- Commit: 0b9eec2
+- Scope: complete `SET_PROTOCOL` reviewed-draft setup-field identity wording.
+- Changed files:
+  - `specs/en/hid_class_requests.md`
+- Validation:
+  - PASS `python -X utf8 scripts/validate_source_authority.py`
+  - PASS `python -X utf8 scripts/validate_hid_class_request_matrix.py`
+  - PASS `python -X utf8 scripts/validate_verification_status.py`
+  - PASS `python -m unittest discover -s tests`
+- Stats before/after:
+  - reviewed: unchanged
+  - verified: unchanged
+  - scaffold: unchanged
+- Gate mode: batch (batch_size: 1, approved_batch: true, approved_through: HID-REQ-1)
+- Review level: 2 (quick human checkpoint prep)
+- Can claim:
+  - `SET_PROTOCOL` setup-field identity now documents setup-packet byte mapping and `wValue` scope.
+  - `HID-REQ-6` queue/roadmap checkpoint pointer now points to `0b9eec2`.
+- Cannot claim:
+  - cannot claim reviewed/verified status uplift.
+  - cannot claim firmware behavior correctness.
+  - cannot claim OS/input stack behavior.
+  - cannot claim report parser/descriptor semantics.
+- Residual risk:
+  - Protocol mode runtime semantics remain outside this scaffold-only scope.
+- Requested approval:
+  - Human checkpoint review required before any status promotion.
+- Next recommended slice:
+  - `HID-DESC-1` or next governance gate item can be started after human closure of `HID-REQ-6`.

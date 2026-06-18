@@ -60,9 +60,11 @@
 
 ### HID-LRA-8: HID-REQ-6 Slice
 
-- status: In Progress (Level 2 checkpoint slice started)
+- status: Waiting for human checkpoint review (reviewed-draft closure prepared)
 - objective: SET_PROTOCOL reviewed draft under Section 7.2 with quick human checkpoint.
 - gate: reviewed-draft preparation only.
+- latest checkpoint commit: 0b9eec2
+- latest checkpoint status: human closure review pending; keep counts unchanged.
 ### HID-LRA-9: HID-DESC-1 Slice
 
 - status: In Progress
