@@ -96,8 +96,8 @@ def validate(path: Path = DEFAULT_MATRIX) -> list[str]:
             errors.append(f"{name}.request_type must be class")
         if entry.get("recipient") != "interface":
             errors.append(f"{name}.recipient must be interface")
-        if entry.get("claim_level") != "scaffold":
-            errors.append(f"{name}.claim_level must remain scaffold")
+        if entry.get("claim_level") not in {"scaffold", "reviewed", "verified"}:
+            errors.append(f"{name}.claim_level must be scaffold, reviewed, or verified")
         if entry.get("evidence_status") != "not_introduced":
             errors.append(f"{name}.evidence_status must remain not_introduced")
 
