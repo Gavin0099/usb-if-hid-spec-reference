@@ -527,3 +527,34 @@ Commit Checkpoint:
   - Scope remains field-identity scaffold only; behavior-level semantics remain unverified.
 - Requested approval:
   - Human checkpoint approval required before any reviewed/verified promotion.
+
+### Checkpoint update in batch HID-LRA-17
+
+- Commit:  (pending)
+- Scope: record HID-REQ-2 checkpoint pointer updates in queue/roadmap.
+- Changed files:
+  - `governance/hid_work_queue.yaml`
+  - `docs/hid_long_running_roadmap.md`
+- Validation:
+  - PASS `python -X utf8 scripts/validate_source_authority.py`
+  - PASS `python -X utf8 scripts/validate_hid_class_request_matrix.py`
+  - PASS `python -X utf8 scripts/validate_verification_status.py`
+  - PASS `python -m unittest discover -s tests`
+- Stats before/after:
+  - reviewed: unchanged
+  - verified: unchanged
+  - scaffold: unchanged
+- Gate mode: batch (batch_size: 1, approved_batch: true, approved_through: HID-REQ-1)
+- Review level: 1 (docs-only housekeeping)
+- Can claim:
+  - queue note for `HID-REQ-2` now references the active checkpoint commit.
+  - roadmap checkpoint pointer for HID-LRA-4 now points to `b3aae30`.
+- Cannot claim:
+  - cannot claim reviewed/verified status uplift.
+  - cannot claim firmware behavior correctness.
+  - cannot claim OS/input stack behavior.
+  - cannot claim report parser/descriptor semantics.
+- Residual risk:
+  - Checkpoint bookkeeping does not validate request behavior semantics.
+- Requested approval:
+  - Continue checkpoint protocol and await human checkpoint review before any reviewed/verified transition.

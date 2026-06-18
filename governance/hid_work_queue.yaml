@@ -45,7 +45,7 @@ queue:
     notes: >
       Same boundary as HID-REQ-1.
       active slice: SET_REPORT reviewed-draft preparation starts now.
-      checkpoint commit: pending
+      checkpoint commit: b3aae30 (Level 2 reviewed-draft shell expansion)
       Do not change reviewed/verified counts in this slice.
 
   - id: HID-REQ-3
