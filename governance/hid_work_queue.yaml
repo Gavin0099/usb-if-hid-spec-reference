@@ -115,8 +115,8 @@ queue:
       - report parser semantics
     notes: >
       Prepare SET_PROTOCOL reviewed wording and setup-field identity explanation.
-      active slice: SET_PROTOCOL reviewed-draft preparation starts now.
-      checkpoint commit: pending
+      active slice: SET_PROTOCOL reviewed-draft preparation completed.
+      checkpoint commit: 0b9eec2 (Level 2 reviewed-draft setup-field wording)
       Do not change reviewed/verified counts in this slice.
 
   - id: HID-DESC-1
