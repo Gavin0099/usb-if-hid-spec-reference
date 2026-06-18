@@ -983,6 +983,39 @@ Commit Checkpoint:
 - Next recommended slice:
   - Start next user-authorized slice (requested by `future_authorized` queue items or manual user instruction).
 
+## Batch: HID-LRA-26 (HID-REQ-3/4/5 closure gating)
+
+- Commit: this checkpoint
+- Scope: advance `HID-REQ-3`, `HID-REQ-4`, and `HID-REQ-5` into Level 3 checkpoint gate state without changing counts.
+- Changed files:
+  - `governance/hid_work_queue.yaml`
+- Validation:
+  - PASS `python -X utf8 scripts/validate_source_authority.py`
+  - PASS `python -X utf8 scripts/validate_hid_class_request_matrix.py`
+  - PASS `python -X utf8 scripts/validate_verification_status.py`
+  - PASS `python -m unittest discover -s tests`
+- Stats before/after:
+  - reviewed: unchanged
+  - verified: unchanged
+  - scaffold: unchanged
+- Gate mode: batch (batch_size: 1, approved_batch: true, approved_through: HID-REQ-1)
+- Review level: 2 (quick human checkpoint prep)
+- Can claim:
+  - `HID-REQ-3` queue gate status is now `waiting_level3_approval`; setup-field checkpoint pointer remains `f114274`.
+  - `HID-REQ-4` queue gate status is now `waiting_level3_approval`; setup-field checkpoint pointer remains `2425f09`.
+  - `HID-REQ-5` queue gate status is now `waiting_level3_approval`; setup-field checkpoint pointer remains `c3939e8`.
+- Cannot claim:
+  - cannot claim reviewed/verified status uplift.
+  - cannot claim firmware behavior correctness.
+  - cannot claim OS/input stack behavior.
+  - cannot claim report parser/descriptor semantics.
+- Residual risk:
+  - These are checkpoint-gate transitions only; no behavior or validation-meaningful content was added.
+- Requested approval:
+  - Human checkpoint review required before any reviewed/verified promotion.
+- Next recommended slice:
+  - Await human checkpoint approval for `HID-REQ-3`, then `HID-REQ-4`, then `HID-REQ-5`.
+
 ## Batch: HID-LRA-25 (HID-REQ-2 closure)
 
 - Commit: this checkpoint
