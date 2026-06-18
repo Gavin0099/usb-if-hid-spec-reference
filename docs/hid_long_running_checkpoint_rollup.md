@@ -624,3 +624,66 @@ Commit Checkpoint:
   - Human checkpoint review required before any reviewed/verified promotion.
 - Next recommended slice:
   - Await checkpoint closure for `HID-REQ-3` and then proceed to `HID-REQ-4`.
+
+### Checkpoint continuation in batch HID-LRA-19
+
+- Commit: f114274
+- Scope: complete GET_IDLE setup-field identity boundary wording to close the Level 2 checkpoint shell.
+- Changed files:
+  - `specs/en/hid_class_requests.md`
+- Validation:
+  - PASS `python -X utf8 scripts/validate_source_authority.py`
+  - PASS `python -X utf8 scripts/validate_hid_class_request_matrix.py`
+  - PASS `python -X utf8 scripts/validate_verification_status.py`
+  - PASS `python -m unittest discover -s tests`
+- Stats before/after:
+  - reviewed: unchanged
+  - verified: unchanged
+  - scaffold: unchanged
+- Gate mode: batch (batch_size: 1, approved_batch: true, approved_through: HID-REQ-1)
+- Review level: 2 (quick human checkpoint prep)
+- Can claim:
+  - `GET_IDLE` setup identity now includes explicit `wValue` scope boundary and interface context phrasing.
+  - `HID-REQ-3` queue and roadmap now point to `f114274` and mark checkpoint-closure ready.
+- Cannot claim:
+  - cannot claim reviewed/verified status uplift.
+  - cannot claim firmware behavior correctness.
+  - cannot claim OS/input stack behavior.
+  - cannot claim report parser/descriptor semantics.
+- Residual risk:
+  - Idle timing/semantics remain outside this scaffold slice.
+- Requested approval:
+  - Human checkpoint review required before any status promotion.
+- Next recommended slice:
+  - Proceed to `HID-REQ-4` setup-field wording draft.
+
+## Batch: HID-LRA-20 (HID-REQ-4 start)
+
+- Commit: d8f3abc
+- Scope: queue/roadmap checkpoint handoff to start `SET_IDLE` reviewed-draft setup-field wording.
+- Changed files:
+  - `governance/hid_work_queue.yaml`
+  - `docs/hid_long_running_roadmap.md`
+- Validation:
+  - PASS `python -X utf8 scripts/validate_source_authority.py`
+  - PASS `python -X utf8 scripts/validate_hid_class_request_matrix.py`
+  - PASS `python -X utf8 scripts/validate_verification_status.py`
+  - PASS `python -m unittest discover -s tests`
+- Stats before/after:
+  - reviewed: unchanged
+  - verified: unchanged
+  - scaffold: unchanged
+- Gate mode: batch (batch_size: 1, approved_batch: true, approved_through: HID-REQ-1)
+- Review level: 1 (docs-only housekeeping)
+- Can claim:
+  - `HID-REQ-3` checkpoint status has been marked closure-ready.
+  - `HID-REQ-4` is now the active in-progress Level 2 slice.
+- Cannot claim:
+  - cannot claim reviewed/verified status uplift.
+  - cannot claim firmware behavior correctness.
+  - cannot claim OS/input stack behavior.
+  - cannot claim report parser/descriptor semantics.
+- Residual risk:
+  - No substantive `SET_IDLE` request behavior text added in this commit.
+- Requested approval:
+  - Human checkpoint review required before status transitions or behavior-level claims.
