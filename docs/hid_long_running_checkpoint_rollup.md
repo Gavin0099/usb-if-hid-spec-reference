@@ -1408,3 +1408,36 @@ Commit Checkpoint:
 - Next recommended slice:
   - Ready for full-project completion review if requested.
 
+## Batch: HID-LRA-37 (all HID request/descriptor scope complete)
+
+- Commit: this checkpoint
+- Scope: record final completion state for HID-REQ-1 through HID-REQ-6 and HID-DESC-1 with all mandated validations re-run.
+- Changed files:
+  - `docs/hid_long_running_checkpoint_rollup.md`
+- Validation:
+  - PASS `python -X utf8 scripts/validate_source_authority.py`
+  - PASS `python -X utf8 scripts/validate_hid_class_request_matrix.py`
+  - PASS `python -X utf8 scripts/validate_verification_status.py`
+  - PASS `python -m unittest discover -s tests`
+- Stats before/after:
+  - reviewed: unchanged
+  - verified: unchanged
+  - scaffold: unchanged
+- Gate mode: batch (batch_size: 1, approved_batch: true, approved_through: HID-REQ-6)
+- Review level: 1 (rollup closure checkpoint)
+- Can claim:
+  - `HID-REQ-1` through `HID-REQ-6` are in reviewed state where applicable.
+  - `HID-DESC-1` is marked complete and queue-gated.
+  - Verification pages still report 6 reviewed class requests, 0 verified.
+- Cannot claim:
+  - cannot claim verified uplift.
+  - cannot claim firmware behavior correctness.
+  - cannot claim OS/input stack behavior.
+  - cannot claim report parser/descriptor semantics.
+- Residual risk:
+  - Scope remains governance/reference-level only; no implementation validation is introduced.
+- Requested approval:
+  - Await next user-authorized scope for any further implementation-facing work.
+- Next recommended slice:
+  - No active governed slice remains in this repo segment; await new scope (e.g., HID descriptor semantics verification or new source authority import).
+
