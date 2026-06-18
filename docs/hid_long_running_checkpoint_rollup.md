@@ -1441,3 +1441,35 @@ Commit Checkpoint:
 - Next recommended slice:
   - No active governed slice remains in this repo segment; await new scope (e.g., HID descriptor semantics verification or new source authority import).
 
+## Batch: HID-LRA-38 (start HID source-authority extension preflight)
+
+- Commit: this checkpoint
+- Scope: start `HID-LRA-11` to define and validate preflight criteria for source authority extension work.
+- Changed files:
+  - `docs/hid_long_running_roadmap.md`
+  - `governance/hid_work_queue.yaml`
+- Validation:
+  - PASS `python -X utf8 scripts/validate_source_authority.py`
+  - PASS `python -X utf8 scripts/validate_hid_class_request_matrix.py`
+  - PASS `python -X utf8 scripts/validate_verification_status.py`
+  - PASS `python -m unittest discover -s tests`
+- Stats before/after:
+  - reviewed: unchanged
+  - verified: unchanged
+  - scaffold: unchanged
+- Gate mode: batch (batch_size: 1, approved_batch: true, approved_through: HID-REQ-6)
+- Review level: 1 (rollup startup checkpoint)
+- Can claim:
+  - `HID-EXT-1` is now open in queue as scaffold for source-authority extension preflight.
+  - `HID-LRA-11` is now active in roadmap with no count-impacting changes.
+- Cannot claim:
+  - cannot claim reviewed/verified uplift.
+  - cannot claim any behavior semantics.
+  - cannot claim imported source authority completion.
+- Residual risk:
+  - This is governance-bookkeeping level work; no semantic scope has been imported.
+- Requested approval:
+  - Await preflight completion before any actual source authority import.
+- Next recommended slice:
+  - Complete `HID-EXT-1` preflight definition and gate in a user-approved authority import decision.
+
