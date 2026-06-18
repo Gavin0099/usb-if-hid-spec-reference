@@ -369,3 +369,32 @@
   - This still does not assert concrete host stack or device implementation behavior.
 - Requested approval:
   - Await human checkpoint approval for HID-REQ-1 before any status change or HID-REQ-2 start.
+
+### Checkpoint update in batch HID-LRA-14
+
+- Commit: 939a61b
+- Scope: Expand GET_REPORT setup packet sequence wording and strengthen identity-level boundary on request framing.
+- Changed files:
+  - `specs/en/hid_class_requests.md`
+- Validation:
+  - PASS `python -X utf8 scripts/validate_source_authority.py`
+  - PASS `python -X utf8 scripts/validate_hid_class_request_matrix.py`
+  - PASS `python -X utf8 scripts/validate_verification_status.py`
+  - PASS `python -m unittest discover -s tests`
+- Stats before/after:
+  - reviewed: unchanged
+  - verified: unchanged
+  - scaffold: unchanged
+- Gate mode: batch (batch_size: 3, approved_batch: true, approved_through: HID-REQ-6)
+- Review level: 2 (quick checkpoint prep)
+- Can claim:
+  - GET_REPORT setup-field scope now explicitly includes setup packet byte order and identity-level framing for `bmRequestType`, `bRequest`, `wValue`, `wIndex`, and `wLength`.
+- Cannot claim:
+  - cannot claim reviewed/verified status uplift.
+  - cannot claim firmware behavior correctness.
+  - cannot claim OS/input stack behavior.
+  - cannot claim report parser/descriptor semantics.
+- Residual risk:
+  - Wording remains scaffold-level field identity and does not validate runtime behavior.
+- Requested approval:
+  - Continue to await human checkpoint approval for HID-REQ-1 before any status transition or HID-REQ-2 start.
