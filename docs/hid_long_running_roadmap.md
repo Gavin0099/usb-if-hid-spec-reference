@@ -13,7 +13,7 @@
 
 ### HID-LRA-2: Work Queue Expansion
 
-- status: Planned
+- status: Completed
 - objective: define governance-ready queue and per-task boundaries for initial
   HID class request drafts.
 - output: `governance/hid_work_queue.yaml`.
@@ -26,24 +26,30 @@
 
 ### HID-LRA-4: HID-REQ-2 Slice
 
-- status: In Progress
+- status: Waiting for level 2/3 review gate
 - objective: SET_REPORT reviewed draft under Section 7.2 with quick human checkpoint.
 - gate: reviewed-draft preparation only.
 
 ### HID-LRA-5: HID-REQ-3 Slice
 
-- status: In Progress
+- status: Waiting for level 2/3 review gate
 - objective: GET_IDLE reviewed draft under Section 7.2 with quick human checkpoint.
 - gate: reviewed-draft preparation only.
 
 ### HID-LRA-6: HID-REQ-4 Slice
 
-- status: Planned
+- status: Waiting for level 2/3 review gate
 - objective: SET_IDLE reviewed draft under Section 7.2 with quick human checkpoint.
 - gate: reviewed-draft preparation only.
 
-### HID-LRA-7: Structural Receipt and Validation Loop
+### HID-LRA-7: HID-REQ-5 Slice
+
+- status: In Progress
+- objective: GET_PROTOCOL reviewed draft under Section 7.2 with quick human checkpoint.
+- gate: reviewed-draft preparation only.
+
+### HID-LRA-8: HID-REQ-6 Slice
 
 - status: Planned
-- objective: keep consumer-visible checkpoint and validator outputs synchronized.
-- note: no verified/reviewed uplift is performed in this phase unless explicitly approved.
+- objective: SET_PROTOCOL reviewed draft under Section 7.2 with quick human checkpoint.
+- gate: reviewed-draft preparation only.

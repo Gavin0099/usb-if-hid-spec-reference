@@ -153,6 +153,57 @@ imported source. It does not advance this repo’s verification state.
 This repo does not currently claim keyboard/mouse boot behavior is verified, and
 it does not claim product-specific protocol policy.
 
+### GET_PROTOCOL reviewed draft
+
+#### Setup fields (identity-level only)
+
+- Request: `GET_PROTOCOL` (`hid_get_protocol`)
+- `bmRequestType`: `0xA1`
+  - Direction: device-to-host
+  - Type: class
+  - Recipient: interface
+- `bRequest`: `0x03`
+- `wValue`
+  - Reserved/zero in this request identity context
+- `wIndex`
+  - Interface context for the request target
+- `wLength`
+  - Bytes expected in the response payload
+
+Source anchor:
+
+- HID Specification 1.11, section 7.2
+- `https://www.usb.org/sites/default/files/documents/hid1_11.pdf`
+
+This reviewed draft is limited to field identity and scaffold-level meaning from the
+imported source. It does not advance this repo’s verification state.
+
+### SET_PROTOCOL reviewed draft
+
+#### Setup fields (identity-level only)
+
+- Request: `SET_PROTOCOL` (`hid_set_protocol`)
+- `bmRequestType`: `0x21`
+  - Direction: host-to-device
+  - Type: class
+  - Recipient: interface
+- `bRequest`: `0x0B`
+- `wValue`
+  - Low byte: selected protocol value (identity signal)
+  - High byte: reserved in this request identity context
+- `wIndex`
+  - Interface context for the request target
+- `wLength`
+  - Usually zero for this request payload
+
+Source anchor:
+
+- HID Specification 1.11, section 7.2
+- `https://www.usb.org/sites/default/files/documents/hid1_11.pdf`
+
+This reviewed draft is limited to field identity and scaffold-level meaning from the
+imported source. It does not advance this repo’s verification state.
+
 ## Source Boundary
 
 Source reference:

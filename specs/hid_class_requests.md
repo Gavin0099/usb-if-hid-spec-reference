@@ -135,6 +135,53 @@ verified/reviewed 狀態。
 
 目前不描述 keyboard/mouse boot 行為是否驗證，亦不宣告產品專屬 protocol 政策。
 
+### GET_PROTOCOL reviewed 草稿
+
+- 請求：`GET_PROTOCOL`（`hid_get_protocol`）
+- `bmRequestType`: `0xA1`
+  - 方向：Device-to-host
+  - Type：class
+  - Recipient：interface
+- `bRequest`: `0x03`
+- `wValue`
+  - 此請求下保留或為 0 的欄位意涵
+- `wIndex`
+  - 對應目前介面的 request context
+- `wLength`
+  - 回傳 protocol value payload 的位元組數
+
+來源：
+
+- HID Specification 1.11, section 7.2
+- `https://www.usb.org/sites/default/files/documents/hid1_11.pdf`
+
+此 reviewed 草稿僅記錄欄位身份與 scaffold 級意涵，未提升本 repo 的
+verified/reviewed 狀態。
+
+### SET_PROTOCOL reviewed 草稿
+
+- 請求：`SET_PROTOCOL`（`hid_set_protocol`）
+- `bmRequestType`: `0x21`
+  - 方向：Host-to-device
+  - Type：class
+  - Recipient：interface
+- `bRequest`: `0x0B`
+- `wValue`
+  - 低位元組：protocol select 訊號（身份層意涵）
+  - 高位元組：保留
+- `wIndex`
+  - 對應目前介面的 request context
+- `wLength`
+  - 通常為 0
+
+來源：
+
+- HID Specification 1.11, section 7.2
+- `https://www.usb.org/sites/default/files/documents/hid1_11.pdf`
+
+此 reviewed 草稿僅記錄欄位身份與 scaffold 級意涵，未提升本 repo 的
+verified/reviewed 狀態。
+
 ## Source Boundary
 
 來源參考：
@@ -151,4 +198,3 @@ verified/reviewed 狀態。
 - 本頁不宣告 OS HID driver 行為。
 - 本頁不宣告 report payload semantics。
 - 本頁不宣告任何 entry 已完成 evidence-backed verified promotion。
-
