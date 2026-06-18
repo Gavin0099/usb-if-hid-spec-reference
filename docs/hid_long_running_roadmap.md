@@ -50,6 +50,6 @@
 
 ### HID-LRA-8: HID-REQ-6 Slice
 
-- status: In Progress
+- status: Waiting for level 2/3 review gate
 - objective: SET_PROTOCOL reviewed draft under Section 7.2 with quick human checkpoint.
 - gate: reviewed-draft preparation only.
