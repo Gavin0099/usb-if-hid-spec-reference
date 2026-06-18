@@ -165,8 +165,20 @@ imported source. It does not advance this repo’s verification state.
 
 #### Setup fields (identity-level only)
 
+- USB request packet setup sequence (identity-level): `bmRequestType`, `bRequest`, `wValue`, `wIndex`, `wLength`.
 - Request: `SET_IDLE` (`hid_set_idle`)
+- Setup-byte intent (identity-level):
+  - `bmRequestType` setup packet byte 0
+  - `bRequest` setup packet byte 1
+  - `wValue` setup packet bytes 2-3
+    - High byte: `ReportID` selector in request setup identity context
+    - Low byte: duration selector in request setup identity context
+  - `wIndex` setup packet bytes 4-5
+  - `wLength` setup packet bytes 6-7
 - `bmRequestType`: `0x21`
+  - Bitfield interpretation (identity-level): `bmRequestType[7:5]=0` (dir=Host→Device),
+    `bmRequestType[4:2]=001` (Class), `bmRequestType[1:0]=01` (Interface)
+  - Binary value: `0010 0001`
   - Direction: host-to-device
   - Type: class
   - Recipient: interface
@@ -174,10 +186,13 @@ imported source. It does not advance this repo’s verification state.
 - `wValue`
   - High byte (`ReportID`): report selector
   - Low byte (`Duration`): duration selector
+- Validation boundary:
+  - `wValue` is interpreted here only as field-identity scope in the request setup.
 - `wIndex`
   - Interface context for the request target
 - `wLength`
-  - Usually zero for this request payload (`0` in this request identity context)
+  - 16-bit little-endian length field in setup packet (identity-level scope only).
+  - Usually zero for this request payload in this request identity context.
 
 Source anchor:
 
