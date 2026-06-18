@@ -850,7 +850,7 @@ Commit Checkpoint:
 ## Batch: HID-LRA-24 (HID-DESC-1 scope alignment start)
 
 - Commit Checkpoint:
-- Commit: 2f652a6
+- Commit: this checkpoint
 - Scope: finalize `HID-DESC-1` descriptor-field wording alignment handoff and record request/roadmap state transition after `HID-REQ-6` user approval.
 - Changed files:
   - `specs/hid_descriptor_fields.md`
