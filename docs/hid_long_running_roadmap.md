@@ -79,4 +79,10 @@
 - objective: Add repo-local evidence/consumer-integration contract + validator plumbing for the governed HID reference surface.
 - verification: no review-count uplift; contract and fixture surface stabilized.
 
+### HID-LRA-11: Source Authority Extension Preflight
+
+- status: Active
+- objective: define next source-authority expansion scope and preflight constraints before importing additional HID governance surface.
+- gate: source authority registration and LRA kickoff bookkeeping only (no count movement).
+
 

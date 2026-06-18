@@ -151,4 +151,24 @@ queue:
       user approved: human checkpoint review complete.
       status transition: scope-alignment checklist complete.
 
+  - id: HID-EXT-1
+    title: Source authority extension preflight
+    authority: HID source authority boundary extension
+    status: scaffold
+    allowed_status_change: scaffold_to_reviewed
+    requires_human_approval: true
+    review_level: 2
+    gate: checkpoint_required
+    future_authorized: true
+    forbidden_claims:
+      - firmware behavior correctness
+      - report parser semantics
+      - usage table parser behavior
+      - verified status uplift without evidence
+    notes: >
+      Prepare governance-safe preflight for additional source authority import, scope
+      expansion candidate mapping, and future LRA handoff.
+      Active slice: HID-LRA-11 source-authority preflight.
+      checkpoint commit: this scope preflight (planned).
+
 
