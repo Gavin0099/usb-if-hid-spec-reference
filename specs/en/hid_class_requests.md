@@ -125,19 +125,31 @@ or host stack behavior.
 
 #### Setup fields (identity-level only)
 
+- USB request packet setup sequence (identity-level): `bmRequestType`, `bRequest`, `wValue`, `wIndex`, `wLength`.
 - Request: `GET_IDLE` (`hid_get_idle`)
+- Setup-byte intent (identity-level):
+  - `bmRequestType` setup packet byte 0
+  - `bRequest` setup packet byte 1
+  - `wValue` setup packet bytes 2-3
+    - High byte: `ReportID` selector in request setup identity context
+    - Low byte: reserved in request identity context (`0`)
+  - `wIndex` setup packet bytes 4-5
+  - `wLength` setup packet bytes 6-7
 - `bmRequestType`: `0xA1`
+  - Bitfield interpretation (identity-level): `bmRequestType[7:5]=1` (dir=Device→Host),
+    `bmRequestType[4:2]=001` (Class), `bmRequestType[1:0]=01` (Interface)
+  - Binary value: `1000 0001`
   - Direction: device-to-host
   - Type: class
   - Recipient: interface
 - `bRequest`: `0x02`
 - `wValue`
-  - High byte (`ReportID`): report selector
+  - High byte (`ReportID`): report selector in identity context
   - Low byte (`0`): reserved in this request identity context
 - `wIndex`
   - Interface context for the request target
 - `wLength`
-  - Payload bytes expected in the returned idle value (`1` in this request identity context)
+  - Payload bytes expected in the returned idle value (`1` in this request identity context; identity-level framing only).
 
 Source anchor:
 
