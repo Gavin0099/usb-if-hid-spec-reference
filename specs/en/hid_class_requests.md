@@ -39,7 +39,8 @@ or firmware handler correctness.
 
 - Request: `GET_REPORT` (`hid_get_report`)
 - `bmRequestType`: `0xA1`
-  - Bitfield interpretation (identity-level): `1 01 00001` (Dir=1, Type=01, Recipient=00001)
+  - Bitfield interpretation (identity-level): `bmRequestType[7:5]=1` (dir=Device→Host),
+    `bmRequestType[4:2]=001` (Class), `bmRequestType[1:0]=01` (Interface)
   - Binary value: `1000 0001`
   - Direction: device-to-host
   - Type: class
@@ -51,7 +52,8 @@ or firmware handler correctness.
 - `wIndex`
   - Interface number that identifies the addressed interface
 - `wLength`
-  - Number of bytes carried in the report payload response (identity-level scope only)
+  - 16-bit little-endian length field in setup packet (identity-level scope only).
+  - Number of bytes carried in the report payload response
 
 Source anchor:
 
