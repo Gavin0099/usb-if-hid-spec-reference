@@ -16,7 +16,15 @@ class SourceAuthorityTests(unittest.TestCase):
         }
         future_usage = hid_1_11["future_authorized_usage"]
         self.assertIn("6.2.1", current_sections)
-        self.assertEqual(len(future_usage), 0)
+        self.assertGreaterEqual(len(future_usage), 1)
+        future_sections = {entry["section"] for entry in future_usage}
+        self.assertIn("6.2.2", future_sections)
+        self.assertTrue(
+            any(
+                entry.get("status") == "scaffolded_preflight"
+                for entry in future_usage
+            )
+        )
 
 
 if __name__ == "__main__":

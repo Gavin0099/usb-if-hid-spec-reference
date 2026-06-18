@@ -25,7 +25,10 @@ primary_sources:
           - data/hid_descriptor_fields_matrix.yaml
           - specs/hid_descriptor_fields.md
           - specs/en/hid_descriptor_fields.md
-    future_authorized_usage: []
+    future_authorized_usage:
+      - section: "6.2.2"
+        topic: "Report Descriptor item types"
+        status: scaffolded_preflight
     not_yet_imported:
       - section: "6.2.2"
         topic: "Report Descriptor"

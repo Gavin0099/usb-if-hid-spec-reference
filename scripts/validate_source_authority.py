@@ -101,8 +101,25 @@ def validate(path: Path = DEFAULT_AUTHORITY) -> list[str]:
             errors.append("future_authorized_usage must exist")
         elif not isinstance(future_usage, list):
             errors.append("future_authorized_usage must be a list")
-        elif future_usage:
-            errors.append("future_authorized_usage must be empty during Phase 2A scaffold")
+        else:
+            seen_sections: set[str] = set()
+            for index, entry in enumerate(future_usage):
+                if not isinstance(entry, dict):
+                    errors.append(f"future_authorized_usage[{index}] must be a mapping")
+                    continue
+                section = entry.get("section")
+                topic = entry.get("topic")
+                status = entry.get("status")
+                if not isinstance(section, str) or not section.strip():
+                    errors.append(f"future_authorized_usage[{index}].section must be a non-empty string")
+                if not isinstance(topic, str) or not topic.strip():
+                    errors.append(f"future_authorized_usage[{index}].topic must be a non-empty string")
+                if not isinstance(status, str) or not status.strip():
+                    errors.append(f"future_authorized_usage[{index}].status must be a non-empty string")
+                if isinstance(section, str) and section in seen_sections:
+                    errors.append(f"future_authorized_usage contains duplicate section {section}")
+                if isinstance(section, str):
+                    seen_sections.add(section)
 
     secondary_sources = data.get("secondary_sources")
     if not isinstance(secondary_sources, list):
