@@ -11,7 +11,7 @@ Machine-readable source:
 
 | Source | Version | Publisher | Current usage |
 |---|---|---|---|
-| Device Class Definition for Human Interface Devices (HID) | 1.11 | USB Implementers Forum | Section 7.2 Class-Specific Requests scaffold only |
+| Device Class Definition for Human Interface Devices (HID) | 1.11 | USB Implementers Forum | Section 7.2 Class-Specific Requests and Section 6.2.1 HID Descriptor are scaffolded |
 
 Primary source URL:
 
@@ -22,12 +22,11 @@ Primary source URL:
 | Section | Topic | Status | Surface |
 |---|---|---|---|
 | 7.2 | Class-Specific Requests | scaffolded | `data/hid_class_request_matrix.yaml` |
+| 6.2.1 | HID Descriptor | scaffolded | `data/hid_descriptor_fields_matrix.yaml` |
 
 ## Future Authorized Usage
 
-| Section | Topic | Status | Boundary |
-|---|---|---|---|
-| 6.2.1 | HID Descriptor | authorized_not_imported | Descriptor field scaffold may be introduced in a later phase, but no descriptor entry is tracked yet |
+No additional future authorized usage is registered yet.
 
 ## Not Yet Imported
 
@@ -66,6 +65,6 @@ Registering a source does not promote any HID entry to `verified`.
 
 - This repo does not claim full HID spec coverage.
 - This repo does not claim HID Usage Tables coverage.
-- This repo does not claim HID descriptor fields are imported.
+- This repo does not claim HID descriptor fields are verified.
 - This repo does not claim HID request behavior is verified.
 - This repo does not claim firmware implementation correctness.

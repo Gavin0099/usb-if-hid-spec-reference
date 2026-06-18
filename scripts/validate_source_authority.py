@@ -47,6 +47,8 @@ def validate(path: Path = DEFAULT_AUTHORITY) -> list[str]:
         (source for source in primary_sources if isinstance(source, dict) and source.get("id") == "hid_1_11"),
         None,
     )
+    usage = []
+
     if hid_1_11 is None:
         errors.append("primary_sources must include hid_1_11")
     else:
@@ -54,50 +56,58 @@ def validate(path: Path = DEFAULT_AUTHORITY) -> list[str]:
             errors.append("hid_1_11.version must be 1.11")
         if hid_1_11.get("role") != "primary":
             errors.append("hid_1_11.role must be primary")
-        usage = hid_1_11.get("current_imported_usage")
-        if not isinstance(usage, list) or len(usage) != 1:
-            errors.append("hid_1_11.current_imported_usage must contain exactly one entry")
-        else:
-            usage_entry = usage[0]
-            if not isinstance(usage_entry, dict):
-                errors.append("hid_1_11.current_imported_usage[0] must be a mapping")
-            else:
-                if usage_entry.get("section") != "7.2":
-                    errors.append("hid_1_11 imported section must be 7.2")
-                if usage_entry.get("topic") != "Class-Specific Requests":
-                    errors.append("hid_1_11 imported topic must be Class-Specific Requests")
-                if usage_entry.get("status") != "scaffolded":
-                    errors.append("hid_1_11 imported usage status must be scaffolded")
-        future_usage = hid_1_11.get("future_authorized_usage")
-        if not isinstance(future_usage, list) or len(future_usage) != 1:
-            errors.append("hid_1_11.future_authorized_usage must contain exactly one entry")
-        else:
-            future_entry = future_usage[0]
-            if not isinstance(future_entry, dict):
-                errors.append("hid_1_11.future_authorized_usage[0] must be a mapping")
-            else:
-                if future_entry.get("section") != "6.2.1":
-                    errors.append("future authorized HID descriptor section must be 6.2.1")
-                if future_entry.get("topic") != "HID Descriptor":
-                    errors.append("future authorized HID descriptor topic must be HID Descriptor")
-                if future_entry.get("status") != "authorized_not_imported":
-                    errors.append("HID Descriptor must remain authorized_not_imported")
-                if future_entry.get("status") in {"imported", "scaffolded", "verified"}:
-                    errors.append("HID Descriptor must not be imported, scaffolded, or verified in Phase 1.8")
 
-        sections = [
-            entry.get("section")
-            for entry in usage
-            if isinstance(usage, list) and isinstance(entry, dict)
-        ]
-        if "6.2.1" in sections:
-            errors.append("HID Descriptor section 6.2.1 must not appear in current_imported_usage")
+        usage = hid_1_11.get("current_imported_usage", [])
+        if not isinstance(usage, list):
+            errors.append("hid_1_11.current_imported_usage must be a list")
+            usage = []
+        elif len(usage) != 2:
+            errors.append("hid_1_11.current_imported_usage must contain exactly two entries")
+        else:
+            used_sections = {
+                entry.get("section")
+                for entry in usage
+                if isinstance(entry, dict)
+            }
+            usage_by_section = {
+                entry.get("section"): entry
+                for entry in usage
+                if isinstance(entry, dict)
+            }
+
+            class_request_entry = usage_by_section.get("7.2")
+            if class_request_entry is None:
+                errors.append("hid_1_11.current_imported_usage must include section 7.2")
+            else:
+                if class_request_entry.get("topic") != "Class-Specific Requests":
+                    errors.append("section 7.2 topic must be Class-Specific Requests")
+                if class_request_entry.get("status") != "scaffolded":
+                    errors.append("section 7.2 status must be scaffolded")
+
+            descriptor_entry = usage_by_section.get("6.2.1")
+            if descriptor_entry is None:
+                errors.append("hid_1_11.current_imported_usage must include section 6.2.1")
+            else:
+                if descriptor_entry.get("topic") != "HID Descriptor":
+                    errors.append("section 6.2.1 topic must be HID Descriptor")
+                if descriptor_entry.get("status") != "scaffolded":
+                    errors.append("section 6.2.1 status must be scaffolded")
+
+            if used_sections != {"7.2", "6.2.1"}:
+                errors.append("hid_1_11.current_imported_usage sections must be 7.2 and 6.2.1 only")
+
+        future_usage = hid_1_11.get("future_authorized_usage")
+        if future_usage is None:
+            errors.append("future_authorized_usage must exist")
+        elif not isinstance(future_usage, list):
+            errors.append("future_authorized_usage must be a list")
+        elif future_usage:
+            errors.append("future_authorized_usage must be empty during Phase 2A scaffold")
 
     secondary_sources = data.get("secondary_sources")
     if not isinstance(secondary_sources, list):
         errors.append("secondary_sources must be a list")
         secondary_sources = []
-
     usage_tables = next(
         (source for source in secondary_sources if isinstance(source, dict) and source.get("id") == "hid_usage_tables"),
         None,

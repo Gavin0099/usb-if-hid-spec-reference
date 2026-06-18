@@ -33,6 +33,58 @@ Machine-readable source:
 This repo does not currently describe report payload format, report ID routing,
 or firmware handler correctness.
 
+### GET_REPORT reviewed draft
+
+#### Setup fields (identity-level only)
+
+- Request: `GET_REPORT` (`hid_get_report`)
+- `bmRequestType`: `0xA1`
+  - Direction: device-to-host
+  - Type: class
+  - Recipient: interface
+- `bRequest`: `0x01`
+- `wValue`
+  - High byte (`ReportType`): input/output/feature request scope selector
+  - Low byte (`ReportID`): report identifier selector
+- `wIndex`
+  - Interface number context for the request
+- `wLength`
+  - Expected bytes for the response payload
+
+Source anchor:
+
+- HID Specification 1.11, section 7.2
+- `https://www.usb.org/sites/default/files/documents/hid1_11.pdf`
+
+This reviewed draft is limited to field identity and scaffold-level meaning from the
+imported source. It does not advance this repo’s verification state.
+
+### SET_REPORT reviewed draft
+
+#### Setup fields (identity-level only)
+
+- Request: `SET_REPORT` (`hid_set_report`)
+- `bmRequestType`: `0x21`
+  - Direction: host-to-device
+  - Type: class
+  - Recipient: interface
+- `bRequest`: `0x09`
+- `wValue`
+  - High byte (`ReportType`): indicates input/output/feature report type selector
+  - Low byte (`ReportID`): report identifier selector
+- `wIndex`
+  - Interface context for the request target
+- `wLength`
+  - Expected bytes carried by the outgoing report payload
+
+Source anchor:
+
+- HID Specification 1.11, section 7.2
+- `https://www.usb.org/sites/default/files/documents/hid1_11.pdf`
+
+This reviewed draft is limited to field identity and scaffold-level meaning from the
+imported source. It does not advance this repo’s verification state.
+
 ### Idle requests
 
 - `GET_IDLE`: reads the current idle rate.
@@ -41,6 +93,58 @@ or firmware handler correctness.
 This repo does not currently claim idle timing behavior, interrupt IN scheduling,
 or host stack behavior.
 
+### GET_IDLE reviewed draft
+
+#### Setup fields (identity-level only)
+
+- Request: `GET_IDLE` (`hid_get_idle`)
+- `bmRequestType`: `0xA1`
+  - Direction: device-to-host
+  - Type: class
+  - Recipient: interface
+- `bRequest`: `0x02`
+- `wValue`
+  - High byte (`ReportID`): report selector
+  - Low byte (`0`): reserved in this request identity context
+- `wIndex`
+  - Interface context for the request target
+- `wLength`
+  - Number of bytes expected in the returned idle value payload
+
+Source anchor:
+
+- HID Specification 1.11, section 7.2
+- `https://www.usb.org/sites/default/files/documents/hid1_11.pdf`
+
+This reviewed draft is limited to field identity and scaffold-level meaning from the
+imported source. It does not advance this repo’s verification state.
+
+### SET_IDLE reviewed draft
+
+#### Setup fields (identity-level only)
+
+- Request: `SET_IDLE` (`hid_set_idle`)
+- `bmRequestType`: `0x21`
+  - Direction: host-to-device
+  - Type: class
+  - Recipient: interface
+- `bRequest`: `0x0A`
+- `wValue`
+  - High byte (`ReportID`): report selector
+  - Low byte (`Duration`): duration selector
+- `wIndex`
+  - Interface context for the request target
+- `wLength`
+  - Usually zero for this request payload
+
+Source anchor:
+
+- HID Specification 1.11, section 7.2
+- `https://www.usb.org/sites/default/files/documents/hid1_11.pdf`
+
+This reviewed draft is limited to field identity and scaffold-level meaning from the
+imported source. It does not advance this repo’s verification state.
+
 ### Protocol requests
 
 - `GET_PROTOCOL`: reads the active protocol selection.
@@ -48,6 +152,57 @@ or host stack behavior.
 
 This repo does not currently claim keyboard/mouse boot behavior is verified, and
 it does not claim product-specific protocol policy.
+
+### GET_PROTOCOL reviewed draft
+
+#### Setup fields (identity-level only)
+
+- Request: `GET_PROTOCOL` (`hid_get_protocol`)
+- `bmRequestType`: `0xA1`
+  - Direction: device-to-host
+  - Type: class
+  - Recipient: interface
+- `bRequest`: `0x03`
+- `wValue`
+  - Reserved/zero in this request identity context
+- `wIndex`
+  - Interface context for the request target
+- `wLength`
+  - Bytes expected in the response payload
+
+Source anchor:
+
+- HID Specification 1.11, section 7.2
+- `https://www.usb.org/sites/default/files/documents/hid1_11.pdf`
+
+This reviewed draft is limited to field identity and scaffold-level meaning from the
+imported source. It does not advance this repo’s verification state.
+
+### SET_PROTOCOL reviewed draft
+
+#### Setup fields (identity-level only)
+
+- Request: `SET_PROTOCOL` (`hid_set_protocol`)
+- `bmRequestType`: `0x21`
+  - Direction: host-to-device
+  - Type: class
+  - Recipient: interface
+- `bRequest`: `0x0B`
+- `wValue`
+  - Low byte: selected protocol value (identity signal)
+  - High byte: reserved in this request identity context
+- `wIndex`
+  - Interface context for the request target
+- `wLength`
+  - Usually zero for this request payload
+
+Source anchor:
+
+- HID Specification 1.11, section 7.2
+- `https://www.usb.org/sites/default/files/documents/hid1_11.pdf`
+
+This reviewed draft is limited to field identity and scaffold-level meaning from the
+imported source. It does not advance this repo’s verification state.
 
 ## Source Boundary
 

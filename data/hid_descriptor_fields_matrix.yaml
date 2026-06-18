@@ -1,0 +1,81 @@
+matrix_id: hid_descriptor_fields_matrix
+matrix_version: 0.1.0
+status: scaffold
+source_refs:
+  - source_id: hid_spec_1_11
+    title: "Device Class Definition for Human Interface Devices (HID), Version 1.11"
+    url: "https://www.usb.org/sites/default/files/documents/hid1_11.pdf"
+    section: "6.2.1"
+    scope_note: "HID descriptor field identities only."
+claim_boundary:
+  claim_level_default: scaffold
+  evidence_status_default: not_verified
+  verified_entries: 0
+  non_claims:
+    - parser_behavior
+    - report_descriptor_payload
+    - firmware_descriptor_parsing
+entries:
+  - field_id: hid_bLength
+    field_name: bLength
+    summary: "Descriptor total length in bytes."
+    claim_level: scaffold
+    evidence_status: not_verified
+    source_anchor:
+      source_id: hid_spec_1_11
+      section: "6.2.1"
+      topic: "HID Descriptor"
+  - field_id: hid_bDescriptorType
+    field_name: bDescriptorType
+    summary: "HID descriptor type code."
+    claim_level: scaffold
+    evidence_status: not_verified
+    source_anchor:
+      source_id: hid_spec_1_11
+      section: "6.2.1"
+      topic: "HID Descriptor"
+  - field_id: hid_bcdHID
+    field_name: bcdHID
+    summary: "HID class specification release number."
+    claim_level: scaffold
+    evidence_status: not_verified
+    source_anchor:
+      source_id: hid_spec_1_11
+      section: "6.2.1"
+      topic: "HID Descriptor"
+  - field_id: hid_bCountryCode
+    field_name: bCountryCode
+    summary: "Country code for hardware locale assumptions."
+    claim_level: scaffold
+    evidence_status: not_verified
+    source_anchor:
+      source_id: hid_spec_1_11
+      section: "6.2.1"
+      topic: "HID Descriptor"
+  - field_id: hid_bNumDescriptors
+    field_name: bNumDescriptors
+    summary: "Number of subordinate descriptor entries."
+    claim_level: scaffold
+    evidence_status: not_verified
+    source_anchor:
+      source_id: hid_spec_1_11
+      section: "6.2.1"
+      topic: "HID Descriptor"
+  - field_id: hid_bDescriptorType_subordinate
+    field_name: bDescriptorType_subordinate
+    summary: "Descriptor type for each subordinate descriptor entry."
+    claim_level: scaffold
+    evidence_status: not_verified
+    source_anchor:
+      source_id: hid_spec_1_11
+      section: "6.2.1"
+      topic: "HID Descriptor"
+  - field_id: hid_wDescriptorLength
+    field_name: wDescriptorLength
+    summary: "Length value for each subordinate descriptor entry."
+    claim_level: scaffold
+    evidence_status: not_verified
+    source_anchor:
+      source_id: hid_spec_1_11
+      section: "6.2.1"
+      topic: "HID Descriptor"
