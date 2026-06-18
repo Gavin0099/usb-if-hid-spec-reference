@@ -37,6 +37,7 @@ or firmware handler correctness.
 
 #### Setup fields (identity-level only)
 
+- USB request packet setup sequence (identity-level): `bmRequestType`, `bRequest`, `wValue`, `wIndex`, `wLength`.
 - Request: `GET_REPORT` (`hid_get_report`)
 - `bmRequestType`: `0xA1`
   - Bitfield interpretation (identity-level): `bmRequestType[7:5]=1` (dir=Device→Host),
@@ -53,7 +54,7 @@ or firmware handler correctness.
   - Interface number that identifies the addressed interface
 - `wLength`
   - 16-bit little-endian length field in setup packet (identity-level scope only).
-  - Number of bytes carried in the report payload response
+  - Number of bytes carried in the report payload response (identity-level, no behavior semantics).
 
 Source anchor:
 
