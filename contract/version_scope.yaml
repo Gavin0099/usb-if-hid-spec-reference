@@ -1,0 +1,38 @@
+schema_version: 1
+title: HID Version Scope Contract
+last_updated: 2026-06-18
+
+versions:
+  hid11:
+    role: primary_hid_reference
+    normative_source_required: true
+    imported_sections:
+      - "7.2"
+      - "6.2.1"
+    current_surfaces:
+      - hid_class_requests
+      - hid_descriptor_fields
+    claim_ceiling: scaffold_identity_reference_only
+
+  hid_usage_tables:
+    role: secondary_usage_reference
+    normative_source_required: true
+    imported: false
+    claim_usage: not_authorized_until_registered_and_reviewed
+
+excluded_scopes:
+  hid_over_i2c:
+    imported: false
+    reason: Not USB HID core reference scope.
+  os_input_stack_behavior:
+    imported: false
+    reason: Host OS behavior is outside this repo.
+  firmware_handler_correctness:
+    imported: false
+    reason: Implementation behavior belongs to consuming firmware repos.
+  hub_class_behavior:
+    imported: false
+    reason: Hub class behavior belongs to usb-if-hub-spec-reference.
+  report_payload_semantics_beyond_identity_scaffold:
+    imported: false
+    reason: Report payload semantics require a separate governed surface and evidence boundary.

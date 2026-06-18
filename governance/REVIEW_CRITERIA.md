@@ -11,7 +11,9 @@ default_load: never
 Code review and audit protocol for this HID spec reference repo.
 
 Source baseline: `ai-governance-framework` `governance/REVIEW_CRITERIA.md` at
-commit `3221da66f30dc13c2a310d1e96084cd5e8741540`.
+observed upstream `main` short commit `65b3388`.
+
+Baseline version: v1.2.
 
 Repo-local adaptation: this document is review guidance only. It does not add
 runtime enforcement, CI gates, or verified HID claims.
@@ -79,7 +81,31 @@ Review output should include:
 If there are no findings, state that explicitly and list remaining validation
 gaps.
 
-## 5. Non-claims
+## 5. Knowledge Base Cross-Check
+
+If repo-local knowledge files exist under `memory/`, check only records that are
+inside this repo and relevant to the review scope.
+
+Private or external memory must not be treated as canonical authority.
+
+If no relevant repo-local knowledge file exists, report:
+
+```text
+Knowledge Base Alignment: N/A - no repo-local knowledge base present
+```
+
+## 6. Post-Review Memory Boundary
+
+Upstream review guidance includes post-review memory actions. This HID reference
+repo does not adopt automatic post-review memory writes.
+
+Memory updates are allowed only when the review task explicitly includes that
+scope, and records must stay under `memory/`.
+
+Review output may recommend a memory update, but the review verdict must not
+depend on private memory or unanchored memory notes.
+
+## 7. Non-claims
 
 This document does not claim:
 

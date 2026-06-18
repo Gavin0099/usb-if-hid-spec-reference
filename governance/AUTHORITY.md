@@ -40,16 +40,29 @@
 | `specs/en/hid_scope.md` | agent-on-demand | reference | false | AGENTS.md | on-demand |
 | `specs/hid_class_requests.md` | agent-on-demand | reference | false | AGENTS.md | on-demand |
 | `specs/en/hid_class_requests.md` | agent-on-demand | reference | false | AGENTS.md | on-demand |
+| `specs/hid_descriptor_fields.md` | agent-on-demand | reference | false | AGENTS.md | on-demand |
+| `specs/en/hid_descriptor_fields.md` | agent-on-demand | reference | false | AGENTS.md | on-demand |
 | `specs/verification_status.md` | agent-on-demand | reference | false | AGENTS.md | on-demand |
 | `specs/en/verification_status.md` | agent-on-demand | reference | false | AGENTS.md | on-demand |
 | `data/hid_class_request_matrix.yaml` | agent-on-demand | reference | false | AGENTS.md | on-demand |
+| `data/hid_descriptor_fields_matrix.yaml` | agent-on-demand | reference | false | AGENTS.md | on-demand |
 | `data/source_authority.yaml` | agent-on-demand | canonical | false | AGENTS.md | on-demand |
+| `contract/*.yaml` | agent-on-demand | reference | false | data/source_authority.yaml | on-demand |
+| `exports/hid_governed_surface_manifest.yaml` | agent-on-demand | reference | false | data/source_authority.yaml | on-demand |
+| `evidence/source_registry.yaml` | agent-on-demand | reference | false | data/source_authority.yaml | on-demand |
+| `evidence/table_fingerprint_baseline.jsonl` | agent-on-demand | derived | false | exports/hid_governed_surface_manifest.yaml | on-demand |
 | `docs/claim_boundary.md` | agent-on-demand | reference | false | AGENTS.md | on-demand |
 | `docs/source_authority.md` | agent-on-demand | reference | false | data/source_authority.yaml | on-demand |
+| `docs/CONSUMER_INTEGRATION_CONTRACT.md` | agent-on-demand | reference | false | AGENTS.md | on-demand |
+| `docs/agent_execution_model.md` | agent-on-demand | reference | false | AGENTS.md | on-demand |
+| `docs/hid_long_running_roadmap.md` | agent-on-demand | reference | false | AGENTS.md | on-demand |
 | `governance/AUTHORITY.md` | agent-on-demand | canonical | false | AGENTS.md | on-demand |
 | `governance/REVIEW_CRITERIA.md` | human-only | reference | false | AGENTS.md | never |
+| `governance/hid_long_running_agent_contract.md` | human-only | canonical | false | AGENTS.md | never |
+| `governance/hid_work_queue.yaml` | agent-on-demand | reference | false | AGENTS.md | on-demand |
 | `governance/RESPONSE_ENVELOPE_CONTRACT.md` | agent-on-demand | reference | false | AGENTS.md | on-demand |
 | `governance/MEMORY_AUTHORITY_CONTRACT.md` | agent-on-demand | reference | false | AGENTS.md | on-demand |
+| `governance/AGENT_RUNTIME_PROFILE_BOUNDARY.md` | agent-on-demand | reference | false | AGENTS.md | on-demand |
 | `governance/framework.lock.json` | agent-on-demand | derived | false | AUTHORITY.md | on-demand |
 | `memory/YYYY-MM-DD.md` | agent-on-demand | derived | false | AGENTS.md | incremental |
 
@@ -89,6 +102,10 @@ Not imported:
 - runtime gate policy
 - governance drift workflows
 - framework producer tooling
+- runtime profile validator
+- agent runtime profile schema
+- trust boundary taxonomy as enforcement
+- CodeBurn observation as gate input
 
 These surfaces may exist in the framework producer repo, but their presence
 there does not make them authority in this HID reference repo.

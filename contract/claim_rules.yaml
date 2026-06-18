@@ -1,0 +1,41 @@
+schema_version: 1
+title: HID Claim Rules
+last_updated: 2026-06-18
+
+allowed_claims:
+  - id: hid11_scaffold_identity_reference
+    requires:
+      authority_level: normative_official
+      source_scope: hid11
+      source_registered: true
+      section_reference: required
+      claim_level: scaffold
+    examples:
+      - HID 1.11 Section 7.2 is scaffolded for class request identity only.
+      - HID 1.11 Section 6.2.1 is scaffolded for descriptor field identity only.
+
+  - id: hid11_verified_semantic_claim
+    requires:
+      authority_level: normative_official
+      source_scope: hid11
+      source_registered: true
+      section_reference: required
+      evidence_packet: required
+      claim_level: verified
+    status: not_currently_used
+
+forbidden_claims:
+  - id: scaffold_as_verified
+    reason: Scaffold entries do not prove semantics or implementation behavior.
+
+  - id: usage_tables_before_import
+    reason: HID Usage Tables are registered as secondary and not imported.
+
+  - id: os_stack_behavior_from_hid_spec
+    reason: Host operating-system input behavior is outside this repo unless separately sourced.
+
+  - id: firmware_correctness_from_reference
+    reason: Firmware implementation behavior belongs to consuming repositories.
+
+  - id: hub_class_behavior
+    reason: Hub class behavior belongs to usb-if-hub-spec-reference.

@@ -29,5 +29,20 @@ jobs:
       - name: Validate verification status
         run: python scripts/validate_verification_status.py
 
+      - name: Validate source registry
+        run: python scripts/validate_source_registry.py --receipt-out evidence/validation_receipt_source_registry.json
+
+      - name: Validate contract files
+        run: python scripts/validate_contract_files.py --receipt-out evidence/validation_receipt_contract_files.json
+
+      - name: Validate HID governed surface manifest
+        run: python scripts/validate_hid_governed_surface_manifest.py
+
+      - name: Check HID table fingerprints
+        run: python scripts/probe_table_fingerprint.py --mode check --manifest exports/hid_governed_surface_manifest.yaml --baseline-in evidence/table_fingerprint_baseline.jsonl
+
+      - name: Consumer integration smoke
+        run: python scripts/smoke_consumer_integration_fixtures.py
+
       - name: Run unit tests
         run: python -m unittest discover -s tests

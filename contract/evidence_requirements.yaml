@@ -1,0 +1,42 @@
+schema_version: 1
+title: HID Evidence Requirements
+last_updated: 2026-06-18
+
+required_fields_for_each_governed_entry:
+  - source_id
+  - source_section
+  - source_topic
+  - governed_surface
+  - claim_level
+  - evidence_status
+  - claim_ceiling
+
+rules:
+  - id: verified_requires_evidence_packet
+    condition: claim_level == verified
+    requirement: evidence_packet != missing
+
+  - id: verified_requires_section_reference
+    condition: claim_level == verified
+    requirement: source_section != section_unknown
+
+  - id: scaffold_must_not_claim_semantics
+    condition: claim_level == scaffold
+    requirement: claim_ceiling in [scaffold_identity_reference_only]
+
+  - id: secondary_source_requires_import
+    condition: source_id == hid_usage_tables
+    requirement: source_status == imported
+
+extraction_status_values:
+  - scaffold
+  - reviewed
+  - verified
+  - blocked
+
+claim_level_values:
+  - scaffold
+  - reviewed
+  - verified
+  - inferred
+  - missing

@@ -1,7 +1,9 @@
 {
   "framework_repo": "https://github.com/Gavin0099/ai-governance-framework.git",
   "adopted_release": "1.2.0",
-  "adopted_commit": "3221da66f30dc13c2a310d1e96084cd5e8741540",
+  "adopted_upstream_ref": "main",
+  "adopted_commit": "65b3388",
+  "adopted_snapshot_date": "2026-06-04",
   "framework_interface_version": "1",
   "framework_compatible": ">=1.0.0,<2.0.0",
   "adopted_surfaces": [
@@ -9,7 +11,13 @@
     "repo_local_authority_table",
     "review_criteria",
     "memory_authority_contract",
-    "response_envelope_contract"
+    "response_envelope_contract",
+    "agent_runtime_profile_boundary_record",
+    "consumer_manifest_contract",
+    "table_fingerprint_drift_probe",
+    "source_registry_contract",
+    "repo_local_contract_yaml",
+    "contract_consistency_validator"
   ],
   "import_scope": "repo-local HID spec-reference governance boundary only",
   "not_adopted_surfaces": [
@@ -17,7 +25,16 @@
     "external_repo_onboarding",
     "runtime_gate_policy",
     "governance_drift_workflow",
-    "framework_producer_tooling"
+    "framework_producer_tooling",
+    "runtime_profile_validator",
+    "agent_runtime_profile_schema",
+    "trust_boundary_taxonomy_as_enforcement",
+    "codeburn_observation_as_gate_input"
   ],
-  "updated_at": "2026-06-15T00:00:00+08:00"
+  "upstream_evidence": [
+    "GitHub commits page for Gavin0099/ai-governance-framework main shows latest observed short commit 65b3388 on 2026-06-04",
+    "Upstream CHANGELOG latest formal release remains v1.2.0",
+    "Upstream main README adds Agent Runtime Governance Profile as reviewer-facing structural artifacts"
+  ],
+  "updated_at": "2026-06-18T00:00:00+08:00"
 }
