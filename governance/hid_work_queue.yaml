@@ -33,7 +33,7 @@ queue:
   - id: HID-REQ-2
     title: SET_REPORT reviewed draft
     authority: HID 1.11 Section 7.2
-    status: waiting_level2_review
+    status: waiting_level3_approval
     allowed_status_change: scaffold_to_reviewed
     requires_human_approval: true
     review_level: 2
@@ -47,6 +47,7 @@ queue:
       active slice: SET_REPORT reviewed-draft checkpoint closure completed.
       checkpoint commit: 3d158d1 (Level 2 reviewed-draft setup-field wording)
       Do not change reviewed/verified counts in this slice.
+      user approved: human checkpoint review complete.
 
   - id: HID-REQ-3
     title: GET_IDLE reviewed draft

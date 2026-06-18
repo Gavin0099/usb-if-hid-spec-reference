@@ -983,3 +983,36 @@ Commit Checkpoint:
 - Next recommended slice:
   - Start next user-authorized slice (requested by `future_authorized` queue items or manual user instruction).
 
+## Batch: HID-LRA-25 (HID-REQ-2 closure)
+
+- Commit: this checkpoint
+- Scope: close `HID-REQ-2` checkpoint gate after review-draft shell preparation.
+- Changed files:
+  - `governance/hid_work_queue.yaml`
+  - `docs/hid_long_running_roadmap.md`
+- Validation:
+  - PASS `python -X utf8 scripts/validate_source_authority.py`
+  - PASS `python -X utf8 scripts/validate_hid_class_request_matrix.py`
+  - PASS `python -X utf8 scripts/validate_verification_status.py`
+  - PASS `python -m unittest discover -s tests`
+- Stats before/after:
+  - reviewed: unchanged
+  - verified: unchanged
+  - scaffold: unchanged
+- Gate mode: batch (batch_size: 1, approved_batch: true, approved_through: HID-REQ-1)
+- Review level: 2 (quick human checkpoint prep)
+- Can claim:
+  - `HID-REQ-2` is now marked user checkpoint review complete.
+  - `HID-LRA-4` latest checkpoint status is approved with no count changes.
+- Cannot claim:
+  - cannot claim reviewed/verified status uplift.
+  - cannot claim firmware behavior correctness.
+  - cannot claim OS/input stack behavior.
+  - cannot claim report parser/descriptor semantics.
+- Residual risk:
+  - This is a checkpoint status transition only; no behavioral content was added.
+- Requested approval:
+  - Ready for next user-authorized slice.
+- Next recommended slice:
+  - `HID-REQ-3` pending checkpoint closure (same scope boundary).
+
