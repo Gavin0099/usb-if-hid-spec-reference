@@ -751,3 +751,66 @@ Commit Checkpoint:
   - `HID-REQ-5` request content is still pending and uses identity-level framing only.
 - Requested approval:
   - Human checkpoint review required before any status promotion.
+
+### Checkpoint continuation in batch HID-LRA-21
+
+- Commit: c3939e8
+- Scope: complete GET_PROTOCOL setup-field identity wording and clean map phrasing.
+- Changed files:
+  - `specs/en/hid_class_requests.md`
+- Validation:
+  - PASS `python -X utf8 scripts/validate_source_authority.py`
+  - PASS `python -X utf8 scripts/validate_hid_class_request_matrix.py`
+  - PASS `python -X utf8 scripts/validate_verification_status.py`
+  - PASS `python -m unittest discover -s tests`
+- Stats before/after:
+  - reviewed: unchanged
+  - verified: unchanged
+  - scaffold: unchanged
+- Gate mode: batch (batch_size: 1, approved_batch: true, approved_through: HID-REQ-1)
+- Review level: 2 (quick human checkpoint prep)
+- Can claim:
+  - `GET_PROTOCOL` setup-field identity now includes setup-sequence framing and wIndex/wLength scope boundaries.
+  - `HID-REQ-5` queue/roadmap checkpoints now point to `c3939e8`.
+- Cannot claim:
+  - cannot claim reviewed/verified status uplift.
+  - cannot claim firmware behavior correctness.
+  - cannot claim OS/input stack behavior.
+  - cannot claim report parser/descriptor semantics.
+- Residual risk:
+  - Protocol request payload semantics still outside this scaffold-only slice.
+- Requested approval:
+  - Human checkpoint review required before any status promotion.
+- Next recommended slice:
+  - Await checkpoint closure for `HID-REQ-5` and then proceed to `HID-REQ-6`.
+
+## Batch: HID-LRA-22 (HID-REQ-6 start)
+
+- Commit: TBD
+- Scope: close HID-REQ-5 closure bookkeeping and start `SET_PROTOCOL` reviewed-draft setup-field drafting.
+- Changed files:
+  - `governance/hid_work_queue.yaml`
+  - `docs/hid_long_running_roadmap.md`
+- Validation:
+  - PASS `python -X utf8 scripts/validate_source_authority.py`
+  - PASS `python -X utf8 scripts/validate_hid_class_request_matrix.py`
+  - PASS `python -X utf8 scripts/validate_verification_status.py`
+  - PASS `python -m unittest discover -s tests`
+- Stats before/after:
+  - reviewed: unchanged
+  - verified: unchanged
+  - scaffold: unchanged
+- Gate mode: batch (batch_size: 1, approved_batch: true, approved_through: HID-REQ-1)
+- Review level: 1 (docs-only housekeeping)
+- Can claim:
+  - `HID-REQ-5` is marked closure-ready in queue/roadmap.
+  - `HID-REQ-6` is now the active in-progress Level 2 slice.
+- Cannot claim:
+  - cannot claim reviewed/verified status uplift.
+  - cannot claim firmware behavior correctness.
+  - cannot claim OS/input stack behavior.
+  - cannot claim report parser/descriptor semantics.
+- Residual risk:
+  - No `SET_PROTOCOL` request wording added yet in this commit.
+- Requested approval:
+  - Human checkpoint review required before status transitions or behavior-level claims.
