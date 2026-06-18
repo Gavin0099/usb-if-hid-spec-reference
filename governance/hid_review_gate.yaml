@@ -4,7 +4,7 @@ gate_mode: batch
 # PR mode is explicit only and not the default.
 mode_settings:
   batch_size: 1
-  approved_batch: false
-  approved_through: HID-REQ-6
+  approved_batch: true
+  approved_through: HID-REQ-1
   auto_advance_level2: false
-  remarks: "Hold at checkpoint after each Level 2/3 slice until explicit human approval is recorded."
+  remarks: "HID-REQ-1 checkpoint approved; proceed to HID-REQ-2 with human checkpoint before each subsequent reviewed-draft boundary."
