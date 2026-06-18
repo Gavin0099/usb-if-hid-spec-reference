@@ -530,7 +530,7 @@ Commit Checkpoint:
 
 ### Checkpoint update in batch HID-LRA-17
 
-- Commit:  (pending)
+- Commit: e2cf3d3
 - Scope: record HID-REQ-2 checkpoint pointer updates in queue/roadmap.
 - Changed files:
   - `governance/hid_work_queue.yaml`
