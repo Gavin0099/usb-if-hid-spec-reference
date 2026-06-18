@@ -82,6 +82,8 @@ imported source. It does not advance this repo’s verification state.
   - `bmRequestType` setup packet byte 0
   - `bRequest` setup packet byte 1
   - `wValue` setup packet bytes 2-3
+    - High byte: report-type selector in request setup identity context
+    - Low byte: report identifier selector in request setup identity context
   - `wIndex` setup packet bytes 4-5
   - `wLength` setup packet bytes 6-7
 - `bmRequestType`: `0x21`
@@ -93,15 +95,15 @@ imported source. It does not advance this repo’s verification state.
   - Recipient: interface
 - `bRequest`: `0x09`
 - `wValue`
-  - High byte (`ReportType`): report type selector field in identity context
-  - Low byte (`ReportID`): report identifier selector
+  - High byte (`ReportType`): report-type selector field in identity context
+  - Low byte (`ReportID`): report identifier selector in identity context
   - Validation boundary:
-    - `wValue` is interpreted here only as field-identity identity-level identity in the request setup.
+    - `wValue` is interpreted here only as field-identity scope in the request setup.
 - `wIndex`
-  - Interface number that identifies the addressed interface
+  - Interface number that identifies the addressed interface.
 - `wLength`
   - 16-bit little-endian length field in setup packet (identity-level scope only).
-  - Number of bytes in the outgoing report payload (identity-level scope only).
+  - Number of bytes expected in the data phase if present (identity-level request framing only).
 
 Source anchor:
 
