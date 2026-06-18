@@ -340,3 +340,32 @@
   - This is still identity-level wording; implementation timing/runtime semantics remain unsourced.
 - Requested approval:
   - Remain blocked for HID-REQ-2 until HID-REQ-1 review checkpoint is approved.
+
+## Batch: HID-LRA-14
+
+- Commit: 123d97f
+- Scope: Clarify GET_REPORT setup packet field order and strengthen scope boundaries on `wLength`.
+- Changed files:
+  - `specs/en/hid_class_requests.md`
+- Validation:
+  - PASS `python -X utf8 scripts/validate_source_authority.py`
+  - PASS `python -X utf8 scripts/validate_hid_class_request_matrix.py`
+  - PASS `python -X utf8 scripts/validate_verification_status.py`
+  - PASS `python -m unittest discover -s tests`
+- Stats before/after:
+  - reviewed: unchanged
+  - verified: unchanged
+  - scaffold: unchanged
+- Gate mode: batch (batch_size: 3, approved_batch: true, approved_through: HID-REQ-6)
+- Review level: 2 (quick human checkpoint prep)
+- Can claim:
+  - GET_REPORT now explicitly documents USB setup packet field order and confirms `wLength` remains identity-level scope-only phrasing.
+- Cannot claim:
+  - cannot claim reviewed/verified status uplift.
+  - cannot claim firmware behavior correctness.
+  - cannot claim OS/input stack behavior.
+  - cannot claim report parser/descriptor semantics.
+- Residual risk:
+  - This still does not assert concrete host stack or device implementation behavior.
+- Requested approval:
+  - Await human checkpoint approval for HID-REQ-1 before any status change or HID-REQ-2 start.
