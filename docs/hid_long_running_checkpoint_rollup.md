@@ -129,3 +129,63 @@
   - Descriptor wording alignment is still identity-level and may hide translation/wording inconsistencies until a follow-up language normalization pass.
 - Requested approval:
   - Continue batch mode execution for next Level 2/LRA checkpoints until next user review gate or Level 3 trigger.
+
+## Batch: HID-LRA-10
+
+- Commit: c77ac51
+- Scope: Add repo-local consumer integration surface and governance-validation plumbing for HID scaffold surface.
+- Changed files:
+  - `contract/authority_levels.yaml`
+  - `contract/claim_rules.yaml`
+  - `contract/evidence_requirements.yaml`
+  - `contract/version_scope.yaml`
+  - `exports/hid_governed_surface_manifest.yaml`
+  - `evidence/source_registry.yaml`
+  - `evidence/table_fingerprint_baseline.jsonl`
+  - `scripts/validate_source_registry.py`
+  - `scripts/validate_contract_files.py`
+  - `scripts/validate_hid_governed_surface_manifest.py`
+  - `scripts/probe_table_fingerprint.py`
+  - `scripts/smoke_consumer_integration_fixtures.py`
+  - `tests/test_source_registry.py`
+  - `tests/test_contract_files.py`
+  - `tests/test_hid_governed_surface_manifest.py`
+  - `tests/test_probe_table_fingerprint.py`
+  - `governance/AGENT_RUNTIME_PROFILE_BOUNDARY.md`
+  - `docs/CONSUMER_INTEGRATION_CONTRACT.md`
+  - `.github/workflows/validate.yml`
+  - `AGENTS.md`
+  - `README.md`
+  - `governance/AUTHORITY.md`
+  - `governance/MEMORY_AUTHORITY_CONTRACT.md`
+  - `governance/RESPONSE_ENVELOPE_CONTRACT.md`
+  - `governance/REVIEW_CRITERIA.md`
+  - `governance/framework.lock.json`
+  - `memory/2026-06-18.md`
+- Validation:
+  - PASS `python -X utf8 scripts/validate_source_authority.py`
+  - PASS `python -X utf8 scripts/validate_hid_class_request_matrix.py`
+  - PASS `python -X utf8 scripts/validate_verification_status.py`
+  - PASS `python -X utf8 scripts/validate_source_registry.py`
+  - PASS `python -X utf8 scripts/validate_contract_files.py`
+  - PASS `python scripts/validate_hid_governed_surface_manifest.py`
+  - PASS `python scripts/probe_table_fingerprint.py --mode check --manifest exports/hid_governed_surface_manifest.yaml --baseline-in evidence/table_fingerprint_baseline.jsonl`
+  - PASS `python scripts/smoke_consumer_integration_fixtures.py`
+  - PASS `python -m unittest discover -s tests`
+- Stats before/after:
+  - reviewed: unchanged
+  - verified: unchanged
+  - scaffold: unchanged
+- Gate mode: batch (batch_size: 3, approved_batch: true, approved_through: HID-REQ-6)
+- Review level: 1 (auto pass with reviewer checkpoint artifact)
+- Can claim:
+  - Consumer contract + manifest plumbing is present and can be used as the canonical integration surface.
+  - New validators detect source registry / contract consistency / manifest drift before CI proceeds.
+  - Smoke harness validates both no-drift and drift-detected integration cases.
+- Cannot claim:
+  - cannot claim behavior-level correctness for HID parser/report semantics.
+  - cannot claim firmware or OS stack correctness.
+- Residual risk:
+  - Receipt artifacts (`evidence/validation_receipt_*.json`, `evidence/validation_receipts/`) are not committed and may be re-generated per run.
+- Requested approval:
+  - Continue batch mode execution for the next level 2/LRA slice when authorized.
