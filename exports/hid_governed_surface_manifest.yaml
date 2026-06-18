@@ -1,0 +1,73 @@
+manifest_id: hid_governed_surface_manifest
+manifest_version: "0.1"
+export_type: governed_surface_reference
+generated_at: "2026-06-18"
+description: >
+  Machine-readable manifest for the USB HID reference scaffold surface.
+  Covers the current HID 1.11 class request and HID descriptor field matrices.
+  Authority ceiling: scaffold_identity_reference_only for all surfaces.
+
+authority_surface:
+  hid11:
+    state: scaffold
+    summary: >
+      HID 1.11 reference surface is scaffold-only. It records identity-level
+      class request and HID descriptor field entries. No entry-level verified
+      semantics or firmware behavior claims are made.
+    tracked: 13
+    scaffold: 13
+    verified: 0
+    reviewed: 0
+    evidence_packets: 0
+    reviewed_meaning: not_introduced
+    pending_semantic_promotion: 13
+
+claim_ceiling:
+  default: scaffold_identity_reference_only
+  cannot_establish:
+    - firmware_handler_correctness
+    - project_specific_truth
+    - observed_device_behavior
+    - host_os_input_stack_behavior
+    - report_payload_semantics
+    - report_descriptor_semantics
+    - boot_protocol_runtime_behavior
+    - idle_rate_runtime_behavior
+    - USB_IF_certification_completeness
+
+consumer_usage:
+  intended_for:
+    - lookup_usb_hid_spec_reference_scaffold
+    - drift_detection_in_CI
+    - consuming_repo_traceability
+  must_not:
+    - treat_spec_reference_as_project_fact
+    - override_project_evidence
+    - infer_firmware_support_from_spec_presence
+    - treat_scaffold_entries_as_verified_semantics
+    - infer_os_input_stack_behavior
+
+governed_tables:
+  - id: hid_class_request_matrix
+    spec_family: hid11
+    path: data/hid_class_request_matrix.yaml
+    validator: scripts/validate_hid_class_request_matrix.py
+    state: scaffold
+    tracked: 6
+    scaffold: 6
+    verified: 0
+    reviewed: 0
+    verified_scope: none
+    scaffold_scope: request_identity_direction_recipient_only
+
+  - id: hid_descriptor_fields_matrix
+    spec_family: hid11
+    path: data/hid_descriptor_fields_matrix.yaml
+    validator: scripts/validate_hid_descriptor_fields_matrix.py
+    state: scaffold
+    tracked: 7
+    scaffold: 7
+    verified: 0
+    reviewed: 0
+    verified_scope: none
+    scaffold_scope: descriptor_field_identity_only

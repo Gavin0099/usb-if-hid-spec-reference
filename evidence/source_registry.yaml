@@ -1,0 +1,101 @@
+schema_version: 1
+last_updated: 2026-06-18
+
+sources:
+  - source_id: hid_1_11
+    title: Device Class Definition for Human Interface Devices (HID), Version 1.11
+    authority_level: normative_official
+    source_scope:
+      - hid11
+    topics:
+      - class_specific_requests
+      - hid_descriptor_fields
+    sections:
+      - "7.2"
+      - "6.2.1"
+    url: https://www.usb.org/sites/default/files/documents/hid1_11.pdf
+    url_type: official_pdf
+    monitor_status: planned
+    claim_usage: scaffold_identity_reference_only
+
+  - source_id: hid_usage_tables
+    title: HID Usage Tables
+    authority_level: official_secondary
+    source_scope:
+      - hid_usage_tables
+    topics:
+      - usage_page_and_usage_identity
+    sections: []
+    url: https://www.usb.org/hid
+    url_type: official_document_page
+    monitor_status: planned
+    claim_usage: not_imported
+
+  - source_id: hid_over_i2c
+    title: HID over I2C
+    authority_level: excluded
+    source_scope:
+      - hid_over_i2c
+    topics:
+      - excluded_transport_binding
+    sections: []
+    url: out_of_scope
+    url_type: out_of_scope
+    monitor_status: not_required
+    claim_usage: excluded
+
+  - source_id: os_input_stack_behavior
+    title: Host operating-system input stack behavior
+    authority_level: excluded
+    source_scope:
+      - os_input_stack_behavior
+    topics:
+      - excluded_host_behavior
+    sections: []
+    url: out_of_scope
+    url_type: out_of_scope
+    monitor_status: not_required
+    claim_usage: excluded
+
+  - source_id: firmware_handler_correctness
+    title: Firmware handler correctness
+    authority_level: excluded
+    source_scope:
+      - firmware_handler_correctness
+    topics:
+      - excluded_implementation_truth
+    sections: []
+    url: out_of_scope
+    url_type: out_of_scope
+    monitor_status: not_required
+    claim_usage: excluded
+
+  - source_id: hub_class_behavior
+    title: USB hub class behavior
+    authority_level: excluded
+    source_scope:
+      - hub_class_behavior
+    topics:
+      - excluded_hub_class_behavior
+    sections: []
+    url: out_of_scope
+    url_type: out_of_scope
+    monitor_status: not_required
+    claim_usage: excluded
+
+  - source_id: report_payload_semantics_beyond_identity_scaffold
+    title: Report payload semantics beyond identity scaffold
+    authority_level: excluded
+    source_scope:
+      - report_payload_semantics_beyond_identity_scaffold
+    topics:
+      - excluded_report_payload_semantics
+    sections: []
+    url: out_of_scope
+    url_type: out_of_scope
+    monitor_status: not_required
+    claim_usage: excluded
+
+notes:
+  - This registry mirrors data/source_authority.yaml into an evidence-facing contract surface.
+  - It does not authorize new HID sources or upgrade scaffold entries.

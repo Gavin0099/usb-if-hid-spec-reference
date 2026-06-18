@@ -42,7 +42,7 @@ Current primary source authority:
 - Device Class Definition for Human Interface Devices (HID), Version 1.11
 - USB Implementers Forum
 - `https://www.usb.org/sites/default/files/documents/hid1_11.pdf`
-- Current imported usage: Section 7.2 Class-Specific Requests scaffold only
+- Current imported usage: Section 7.2 Class-Specific Requests and Section 6.2.1 HID Descriptor scaffold only
 
 Explicitly excluded unless separately scoped:
 
@@ -88,14 +88,25 @@ Forbidden in this repo:
 - `specs/en/hid_scope.md` - English scope counterpart
 - `specs/hid_class_requests.md` - HID class request scaffold summary
 - `specs/en/hid_class_requests.md` - English HID class request counterpart
+- `specs/hid_descriptor_fields.md` - HID descriptor field scaffold summary
+- `specs/en/hid_descriptor_fields.md` - English HID descriptor field counterpart
 - `specs/verification_status.md` - zh-TW verification status
 - `specs/en/verification_status.md` - English verification status
 - `data/hid_class_request_matrix.yaml` - HID class request machine-readable scaffold
+- `data/hid_descriptor_fields_matrix.yaml` - HID descriptor field machine-readable scaffold
+- `contract/` - repo-local authority, claim, evidence, and version-scope rules
+- `exports/hid_governed_surface_manifest.yaml` - consumer-facing HID scaffold manifest
+- `evidence/source_registry.yaml` - evidence-facing source registry
+- `evidence/table_fingerprint_baseline.jsonl` - governed matrix fingerprint baseline
 - `data/source_authority.yaml` - HID source authority registry
 - `docs/claim_boundary.md` - current claim ceiling and claim level definitions
 - `docs/source_authority.md` - human-readable source authority boundary
+- `docs/CONSUMER_INTEGRATION_CONTRACT.md` - consumer integration contract
 - `governance/AUTHORITY.md` - repo-local governance authority registry
 - `governance/REVIEW_CRITERIA.md` - review/audit guidance
+- `governance/RESPONSE_ENVELOPE_CONTRACT.md` - structured closeout/reporting convention
+- `governance/MEMORY_AUTHORITY_CONTRACT.md` - repo-local memory authority boundary
+- `governance/AGENT_RUNTIME_PROFILE_BOUNDARY.md` - latest upstream runtime-profile boundary record
 - `governance/framework.lock.json` - imported governance framework baseline
 
 ## Review Tasks
