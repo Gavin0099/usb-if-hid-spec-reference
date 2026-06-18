@@ -60,16 +60,18 @@
 
 ### HID-LRA-8: HID-REQ-6 Slice
 
-- status: Waiting for human checkpoint review (reviewed-draft closure prepared)
+- status: Human checkpoint review complete (reviewed-draft shell complete)
 - objective: SET_PROTOCOL reviewed draft under Section 7.2 with quick human checkpoint.
 - gate: reviewed-draft preparation only.
 - latest checkpoint commit: 0b9eec2
-- latest checkpoint status: human closure review pending; keep counts unchanged.
+- latest checkpoint status: approved by user; keep counts unchanged.
 ### HID-LRA-9: HID-DESC-1 Slice
 
-- status: In Progress
+- status: In Progress (scope-alignment kickoff)
 - objective: HID Descriptor field wording alignment pass under Section 6.2.1 with scaffold identity constraints.
 - gate: reviewed-draft preparation only.
+- latest checkpoint commit: 2a48f1f
+- latest checkpoint status: reviewed-draft closure pending; keep counts unchanged.
 
 ### HID-LRA-10: Consumer Integration & Validation Surface
 
