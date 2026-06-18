@@ -116,7 +116,7 @@ queue:
     notes: >
       Prepare SET_PROTOCOL reviewed wording and setup-field identity explanation.
       active slice: SET_PROTOCOL reviewed-draft preparation completed.
-      checkpoint commit: 0b9eec2 (Level 2 reviewed-draft setup-field wording).
+      checkpoint commit: 0b9eec2 (Level 2 reviewed-draft setup-field wording)
       user approved: human checkpoint review complete.
       Do not change reviewed/verified counts in this slice.
 
@@ -137,5 +137,6 @@ queue:
       Documentation and claim-boundary cleanup only. Any reviewed wording change
       must be approved before claim promotion. Active slice: HID Descriptor
       scaffold wording alignment (EN/zh pair and queue/roadmap bookkeeping).
-      checkpoint commit: 2a48f1f (Level 2 reviewed-draft scope-alignment scaffold)
+      checkpoint commit: pending (Level 2 reviewed-draft scope-alignment scaffold)
+
 

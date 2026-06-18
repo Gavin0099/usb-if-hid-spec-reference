@@ -847,11 +847,11 @@ Commit Checkpoint:
 - Next recommended slice:
   - `HID-DESC-1` or next governance gate item can be started after human closure of `HID-REQ-6`.
 
-## Batch: HID-LRA-24 (HID-DESC-1 scope alignment start)
+## Batch: HID-LRA-24 (HID-DESC-1 scope alignment iteration)
 
 - Commit Checkpoint:
-- Commit: this checkpoint
-- Scope: finalize `HID-DESC-1` descriptor-field wording alignment handoff and record request/roadmap state transition after `HID-REQ-6` user approval.
+- Commit: 543e911
+- Scope: continue `HID-DESC-1` scope-alignment iteration and language-boundary harmonization after `HID-REQ-6` user approval.
 - Changed files:
   - `specs/hid_descriptor_fields.md`
   - `governance/hid_work_queue.yaml`
@@ -880,4 +880,5 @@ Commit Checkpoint:
 - Requested approval:
   - Human checkpoint review required before any reviewed/verified promotion or usage-semantic claims.
 - Next recommended slice:
-  - Proceed to `HID-DESC-1` closure checkpoint once this slice is validated.
+   - Await user checkpoint review for `HID-DESC-1` closure.
+
