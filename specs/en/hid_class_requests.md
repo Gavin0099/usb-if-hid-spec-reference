@@ -229,11 +229,9 @@ it does not claim product-specific protocol policy.
   - Low byte: reserved in request setup identity context
   - Validation boundary:
     - `wValue` is interpreted here only as field-identity scope in the request setup.
-- `wValue` setup packet byte sequence:
-  - setup packet bytes 2-3
 - `wIndex`
+  - setup packet bytes 4-5
   - Interface context for the request target.
-- `wIndex` setup packet bytes 4-5
 - `wLength`
   - 16-bit little-endian length field in setup packet (identity-level scope only).
   - Payload bytes expected in the response (`1` in this request identity context; identity-level framing only).
