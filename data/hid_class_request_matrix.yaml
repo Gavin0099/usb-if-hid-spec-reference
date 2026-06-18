@@ -25,7 +25,7 @@ entries:
     recipient: interface
     purpose: "Return a HID report from the device to the host."
     setup_scope: "Request identity, direction, and interface recipient only."
-    claim_level: scaffold
+    claim_level: reviewed
     evidence_status: not_introduced
   - request_id: hid_set_report
     name: SET_REPORT

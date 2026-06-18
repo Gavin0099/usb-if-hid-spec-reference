@@ -20,11 +20,11 @@
 
 ### HID-LRA-3: HID-REQ-1 Slice
 
-- status: Completed (reviewed-draft shell complete, no count change)
+- status: Completed (reviewed)
 - objective: GET_REPORT reviewed draft under Section 7.2 with human approval.
 - gate: no scaffold status promotion without approval.
 - latest checkpoint commit: 939a61b
-- latest checkpoint status: approved by user; transition held at reviewed-draft shell level.
+- latest checkpoint status: approved by user; scaffold->reviewed transition completed.
 
 ### HID-LRA-4: HID-REQ-2 Slice
 

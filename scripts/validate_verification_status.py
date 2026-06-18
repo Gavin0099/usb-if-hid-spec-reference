@@ -38,16 +38,14 @@ def load_yaml(path: Path) -> dict[str, Any]:
     return data
 
 
-def expected_counts(matrix_paths: list[Path] | None = None) -> dict[str, int]:
+def expected_counts(matrix_paths: list[Path] | None = None) -> dict[str, int | dict[str, dict[str, int]]]:
     matrix_paths = matrix_paths or DEFAULT_MATRICES
-    area_tracked: dict[str, int] = {
-        "HID descriptors": 0,
-        "HID report descriptors": 0,
-        "HID class requests": 0,
-        "Report / boot / idle semantics": 0,
+    area_expected: dict[str, dict[str, int]] = {
+        "HID descriptors": {"tracked": 0, "verified": 0, "reviewed": 0, "inferred": 0, "missing": 0},
+        "HID report descriptors": {"tracked": 0, "verified": 0, "reviewed": 0, "inferred": 0, "missing": 0},
+        "HID class requests": {"tracked": 0, "verified": 0, "reviewed": 0, "inferred": 0, "missing": 0},
+        "Report / boot / idle semantics": {"tracked": 0, "verified": 0, "reviewed": 0, "inferred": 0, "missing": 0},
     }
-
-    verified = reviewed = inferred = missing = 0
 
     for matrix_path in matrix_paths:
         data = load_yaml(matrix_path)
@@ -56,27 +54,32 @@ def expected_counts(matrix_paths: list[Path] | None = None) -> dict[str, int]:
             raise ValueError(f"{matrix_path} entries must be a list")
 
         matrix_id = data.get("matrix_id")
+        area = None
         if matrix_id == "hid_class_request_matrix":
-            area_tracked["HID class requests"] = len(entries)
+            area = "HID class requests"
         elif matrix_id == "hid_descriptor_fields_matrix":
-            area_tracked["HID descriptors"] = len(entries)
+            area = "HID descriptors"
         else:
             raise ValueError(f"{matrix_path} matrix_id is not recognized")
 
-        verified += sum(1 for entry in entries if isinstance(entry, dict) and entry.get("claim_level") == "verified")
-        reviewed += sum(1 for entry in entries if isinstance(entry, dict) and entry.get("claim_level") == "reviewed")
-        inferred += sum(1 for entry in entries if isinstance(entry, dict) and entry.get("claim_level") == "inferred")
-        missing += sum(1 for entry in entries if isinstance(entry, dict) and entry.get("claim_level") == "missing")
+        if area is None:
+            raise ValueError(f"{matrix_path} has unrecognized matrix_id {matrix_id}")
 
-    tracked = sum(area_tracked.values())
+        area_expected[area]["tracked"] = len(entries)
+        area_expected[area]["verified"] = sum(1 for entry in entries if isinstance(entry, dict) and entry.get("claim_level") == "verified")
+        area_expected[area]["reviewed"] = sum(1 for entry in entries if isinstance(entry, dict) and entry.get("claim_level") == "reviewed")
+        area_expected[area]["inferred"] = sum(1 for entry in entries if isinstance(entry, dict) and entry.get("claim_level") == "inferred")
+        area_expected[area]["missing"] = sum(1 for entry in entries if isinstance(entry, dict) and entry.get("claim_level") == "missing")
+
+    tracked = sum(row["tracked"] for row in area_expected.values())
     return {
         "tracked": tracked,
-        "verified": verified,
-        "reviewed": reviewed,
-        "inferred": inferred,
-        "missing": missing,
+        "verified": sum(row["verified"] for row in area_expected.values()),
+        "reviewed": sum(row["reviewed"] for row in area_expected.values()),
+        "inferred": sum(row["inferred"] for row in area_expected.values()),
+        "missing": sum(row["missing"] for row in area_expected.values()),
         "evidence_packets": 0,
-        "area_tracked": area_tracked,
+        "area_expected": area_expected,
     }
 
 
@@ -109,18 +112,14 @@ def validate(matrix_paths: list[Path] | None = None, status_pages: list[Path] | 
     for page in status_pages:
         rows = parse_rows(page)
 
-        for area, expected_tracked in expected["area_tracked"].items():
+        for area, area_expected_counts in expected["area_expected"].items():
             row = rows.get(area)
             if not isinstance(row, dict):
                 errors.append(f"{page}: missing {area} summary row")
                 continue
             for key in ("tracked", "verified", "reviewed", "inferred", "missing"):
-                if key == "tracked":
-                    if row.get(key) != expected_tracked:
-                        errors.append(f"{page}: {area} {key} must be {expected_tracked}")
-                else:
-                    if row.get(key) != expected[key]:
-                        errors.append(f"{page}: {area} {key} must be {expected[key]}")
+                if row.get(key) != area_expected_counts[key]:
+                    errors.append(f"{page}: {area} {key} must be {area_expected_counts[key]}")
 
         total = rows.get("Total")
         if not isinstance(total, dict):
