@@ -39,6 +39,12 @@ or firmware handler correctness.
 
 - USB request packet setup sequence (identity-level): `bmRequestType`, `bRequest`, `wValue`, `wIndex`, `wLength`.
 - Request: `GET_REPORT` (`hid_get_report`)
+- Setup-byte intent (identity-level):
+  - `bmRequestType` → setup packet byte 0
+  - `bRequest` → setup packet byte 1
+  - `wValue` → setup packet bytes 2-3
+  - `wIndex` → setup packet bytes 4-5
+  - `wLength` → setup packet bytes 6-7
 - `bmRequestType`: `0xA1`
   - Bitfield interpretation (identity-level): `bmRequestType[7:5]=1` (dir=Device→Host),
     `bmRequestType[4:2]=001` (Class), `bmRequestType[1:0]=01` (Interface)
@@ -50,6 +56,8 @@ or firmware handler correctness.
 - `wValue`
   - High byte (`ReportType`): request scope selector byte in HID identity context (input/output/feature selector)
   - Low byte (`ReportID`): report identifier selector (0 is host-selected if no ReportID)
+- Validation boundary:
+  - `wValue` is interpreted here only as field-identity identity-level identity in the request setup.
 - `wIndex`
   - Interface number that identifies the addressed interface
 - `wLength`
