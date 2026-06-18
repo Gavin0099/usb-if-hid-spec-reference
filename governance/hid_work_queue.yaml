@@ -123,7 +123,7 @@ queue:
   - id: HID-DESC-1
     title: HID Descriptor field wording alignment pass
     authority: HID 1.11 Section 6.2.1
-    status: waiting_level2_review
+    status: waiting_level3_approval
     allowed_status_change: scaffold_to_reviewed
     requires_human_approval: true
     review_level: 2
@@ -138,5 +138,6 @@ queue:
       must be approved before claim promotion. Active slice: HID Descriptor
       scaffold wording alignment (EN/zh pair and queue/roadmap bookkeeping).
       checkpoint commit: this checkpoint (Level 2 reviewed-draft scope-alignment scaffold)
+      user approved: human checkpoint review complete.
 
 
