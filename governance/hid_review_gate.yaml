@@ -1,9 +1,10 @@
 gate_mode: batch
-# pr: default (PR per Level 2/3 checkpoint)
-# batch: collect up to batch_size checkpoints and approve once
+# batch mode: one Level 2/3 checkpoint produced, then pause for approval unless
+#   the operator explicitly changes approved_batch to true.
+# PR mode is explicit only and not the default.
 mode_settings:
-  batch_size: 3
-  approved_batch: true
+  batch_size: 1
+  approved_batch: false
   approved_through: HID-REQ-6
-  auto_advance_level2: true
-  remarks: "Batch mode approved through HID-REQ-6, continue with next Level 2/LRA checkpoint batch."
+  auto_advance_level2: false
+  remarks: "Hold at checkpoint after each Level 2/3 slice until explicit human approval is recorded."

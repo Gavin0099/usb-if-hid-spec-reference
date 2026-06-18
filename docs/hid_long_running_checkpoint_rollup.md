@@ -460,3 +460,36 @@ Commit Checkpoint:
   - Pending human checkpoint approval blocks any review-status promotion or HID-REQ-2 start.
 - Next recommended slice:
   - Remain on `HID-REQ-1` checkpoint hold; await human checkpoint approval before any new request draft starts.
+
+## Batch: HID-LRA-16 (governance gate tightening)
+
+- Commit Checkpoint:
+- Commit: N/A (pending)
+- Scope: tighten checkpoint gate behavior for Level 2/3 and lock HID-REQ-2 start behind HID-REQ-1 approval.
+- Changed files:
+  - `governance/hid_review_gate.yaml`
+  - `governance/hid_work_queue.yaml`
+  - `docs/agent_execution_model.md`
+- Validation:
+  - PASS `python -X utf8 scripts/validate_source_authority.py`
+  - PASS `python -X utf8 scripts/validate_hid_class_request_matrix.py`
+  - PASS `python -X utf8 scripts/validate_verification_status.py`
+  - PASS `python -m unittest discover -s tests`
+- Stats before/after:
+  - reviewed: unchanged
+  - verified: unchanged
+  - scaffold: unchanged
+- Gate mode: batch (batch_size: 1, approved_batch: false, approved_through: HID-REQ-6)
+- Review level: 1 (docs-only housekeeping)
+- Can claim:
+  - `HID-REQ-2` execution is explicitly blocked behind HID-REQ-1 checkpoint approval in queue notes.
+  - Level 2/3 gates now indicate hold behavior instead of auto-advance.
+- Cannot claim:
+  - cannot claim reviewed/verified status uplift.
+  - cannot claim firmware behavior correctness.
+  - cannot claim OS/input stack behavior.
+  - cannot claim report parser/descriptor semantics.
+- Residual risk:
+  - Workflow behavior depends on manual `approved_batch` flips in `governance/hid_review_gate.yaml`.
+- Requested approval:
+  - Continue human checkpoint hold on `HID-REQ-1` until signoff is recorded.
