@@ -189,3 +189,34 @@
   - Receipt artifacts (`evidence/validation_receipt_*.json`, `evidence/validation_receipts/`) are not committed and may be re-generated per run.
 - Requested approval:
   - Continue batch mode execution for the next level 2/LRA slice when authorized.
+
+## Batch: HID-LRA-11
+
+- Commit: 3be0379
+- Scope: Align long-running execution model docs with batch-first policy and record HID-LRA-10 roadmap completion.
+- Changed files:
+  - `docs/agent_execution_model.md`
+  - `docs/hid_long_running_roadmap.md`
+- Validation:
+  - PASS `python -X utf8 scripts/validate_source_authority.py`
+  - PASS `python -X utf8 scripts/validate_hid_class_request_matrix.py`
+  - PASS `python -X utf8 scripts/validate_verification_status.py`
+  - PASS `python -m unittest discover -s tests`
+- Stats before/after:
+  - reviewed: unchanged
+  - verified: unchanged
+  - scaffold: unchanged
+- Gate mode: batch (batch_size: 3, approved_batch: true, approved_through: HID-REQ-6)
+- Review level: 1 (auto pass docs-only)
+- Can claim:
+  - execution model now treats batch mode as default with PR as an optional exception.
+  - roadmap now records HID-LRA-10 completion in one canonical place.
+- Cannot claim:
+  - cannot claim reviewed/verified status uplift.
+  - cannot claim firmware behavior correctness.
+  - cannot claim OS/input stack behavior.
+  - cannot claim report parser/descriptor semantics.
+- Residual risk:
+  - queue progression still depends on external task sequencing and manual `governance/hid_work_queue.yaml` updates.
+- Requested approval:
+  - Continue batch mode for next governed checkpoints until a user-level review stop is required.
