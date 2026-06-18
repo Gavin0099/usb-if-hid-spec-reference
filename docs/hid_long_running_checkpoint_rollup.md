@@ -281,3 +281,33 @@
   - This is operational bookkeeping only; it does not add substantive GET_REPORT field semantics evidence.
 - Requested approval:
   - Await HID-REQ-1 human review before moving to HID-REQ-2.
+
+## Batch: HID-LRA-13
+
+- Commit: da201f4
+- Scope: Further clarify GET_REPORT setup-field identity wording (bmRequestType bitfield + wValue/wIndex phrasing).
+- Changed files:
+  - `specs/en/hid_class_requests.md`
+- Validation:
+  - PASS `python -X utf8 scripts/validate_source_authority.py`
+  - PASS `python -X utf8 scripts/validate_hid_class_request_matrix.py`
+  - PASS `python -X utf8 scripts/validate_verification_status.py`
+  - PASS `python -m unittest discover -s tests`
+- Stats before/after:
+  - reviewed: unchanged
+  - verified: unchanged
+  - scaffold: unchanged
+- Gate mode: batch (batch_size: 3, approved_batch: true, approved_through: HID-REQ-6)
+- Review level: 2 (quick human checkpoint prep)
+- Can claim:
+  - GET_REPORT reviewed-draft setup field prose now explicitly records bmRequestType bitfield decomposition.
+  - Scope and claim boundary remain identity-level only.
+- Cannot claim:
+  - cannot claim reviewed/verified status uplift.
+  - cannot claim firmware behavior correctness.
+  - cannot claim OS/input stack behavior.
+  - cannot claim report parser/descriptor semantics.
+- Residual risk:
+  - Bit-level wording still remains scaffold-level and not behavior-level verification.
+- Requested approval:
+  - Await human checkpoint review before any status promotion or HID-REQ-2 start.
