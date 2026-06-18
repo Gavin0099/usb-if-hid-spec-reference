@@ -30,9 +30,20 @@
 - objective: SET_REPORT reviewed draft under Section 7.2 with quick human checkpoint.
 - gate: reviewed-draft preparation only.
 
-### HID-LRA-4: Structural Receipt and Validation Loop
+### HID-LRA-5: HID-REQ-3 Slice
+
+- status: In Progress
+- objective: GET_IDLE reviewed draft under Section 7.2 with quick human checkpoint.
+- gate: reviewed-draft preparation only.
+
+### HID-LRA-6: HID-REQ-4 Slice
+
+- status: Planned
+- objective: SET_IDLE reviewed draft under Section 7.2 with quick human checkpoint.
+- gate: reviewed-draft preparation only.
+
+### HID-LRA-7: Structural Receipt and Validation Loop
 
 - status: Planned
 - objective: keep consumer-visible checkpoint and validator outputs synchronized.
-- note: no verified/reviewed uplift is performed in this phase unless explicitly
-  approved.
+- note: no verified/reviewed uplift is performed in this phase unless explicitly approved.

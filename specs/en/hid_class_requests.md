@@ -93,6 +93,58 @@ imported source. It does not advance this repo’s verification state.
 This repo does not currently claim idle timing behavior, interrupt IN scheduling,
 or host stack behavior.
 
+### GET_IDLE reviewed draft
+
+#### Setup fields (identity-level only)
+
+- Request: `GET_IDLE` (`hid_get_idle`)
+- `bmRequestType`: `0xA1`
+  - Direction: device-to-host
+  - Type: class
+  - Recipient: interface
+- `bRequest`: `0x02`
+- `wValue`
+  - High byte (`ReportID`): report selector
+  - Low byte (`0`): reserved in this request identity context
+- `wIndex`
+  - Interface context for the request target
+- `wLength`
+  - Number of bytes expected in the returned idle value payload
+
+Source anchor:
+
+- HID Specification 1.11, section 7.2
+- `https://www.usb.org/sites/default/files/documents/hid1_11.pdf`
+
+This reviewed draft is limited to field identity and scaffold-level meaning from the
+imported source. It does not advance this repo’s verification state.
+
+### SET_IDLE reviewed draft
+
+#### Setup fields (identity-level only)
+
+- Request: `SET_IDLE` (`hid_set_idle`)
+- `bmRequestType`: `0x21`
+  - Direction: host-to-device
+  - Type: class
+  - Recipient: interface
+- `bRequest`: `0x0A`
+- `wValue`
+  - High byte (`ReportID`): report selector
+  - Low byte (`Duration`): duration selector
+- `wIndex`
+  - Interface context for the request target
+- `wLength`
+  - Usually zero for this request payload
+
+Source anchor:
+
+- HID Specification 1.11, section 7.2
+- `https://www.usb.org/sites/default/files/documents/hid1_11.pdf`
+
+This reviewed draft is limited to field identity and scaffold-level meaning from the
+imported source. It does not advance this repo’s verification state.
+
 ### Protocol requests
 
 - `GET_PROTOCOL`: reads the active protocol selection.

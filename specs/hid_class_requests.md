@@ -80,12 +80,53 @@ verified/reviewed 狀態。
 此 reviewed 草稿僅記錄欄位身份與 scaffold 級意涵，未提升本 repo 的
 verified/reviewed 狀態。
 
-### Idle requests
+### GET_IDLE reviewed 草稿
 
-- `GET_IDLE`：讀取目前 idle rate。
-- `SET_IDLE`：設定 idle rate。
+- 請求：`GET_IDLE`（`hid_get_idle`）
+- `bmRequestType`: `0xA1`
+  - 方向：Device-to-host
+  - Type：class
+  - Recipient：interface
+- `bRequest`: `0x02`
+- `wValue`
+  - 高位元組（`ReportID`）：report selector
+  - 低位元組（`0`）：本請求中作為保留欄位
+- `wIndex`
+  - 對應目前介面的 request context
+- `wLength`
+  - 回傳 idle value payload 的位元組數
 
-目前不描述 idle timing 行為、interrupt IN 排程或 host stack 行為。
+來源：
+
+- HID Specification 1.11, section 7.2
+- `https://www.usb.org/sites/default/files/documents/hid1_11.pdf`
+
+此 reviewed 草稿僅記錄欄位身份與 scaffold 級意涵，未提升本 repo 的
+verified/reviewed 狀態。
+
+### SET_IDLE reviewed 草稿
+
+- 請求：`SET_IDLE`（`hid_set_idle`）
+- `bmRequestType`: `0x21`
+  - 方向：Host-to-device
+  - Type：class
+  - Recipient：interface
+- `bRequest`: `0x0A`
+- `wValue`
+  - 高位元組（`ReportID`）：report selector
+  - 低位元組（`Duration`）：duration selector
+- `wIndex`
+  - 對應目前介面的 request context
+- `wLength`
+  - 常見情況為 0
+
+來源：
+
+- HID Specification 1.11, section 7.2
+- `https://www.usb.org/sites/default/files/documents/hid1_11.pdf`
+
+此 reviewed 草稿僅記錄欄位身份與 scaffold 級意涵，未提升本 repo 的
+verified/reviewed 狀態。
 
 ### Protocol requests
 
