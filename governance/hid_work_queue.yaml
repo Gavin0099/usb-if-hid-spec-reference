@@ -80,14 +80,14 @@ queue:
       - report parser semantics
     notes: >
       Prepare SET_IDLE reviewed wording and setup-field identity explanation.
-      active slice: SET_IDLE reviewed-draft preparation starts now.
-      checkpoint commit: TBD (Level 2 reviewed-draft setup-field identity draft)
+      active slice: SET_IDLE reviewed-draft preparation completed.
+      checkpoint commit: 2425f09 (Level 2 reviewed-draft setup-field wording)
       Do not change reviewed/verified counts in this slice.
 
   - id: HID-REQ-5
     title: GET_PROTOCOL reviewed draft
     authority: HID 1.11 Section 7.2
-    status: waiting_level3_approval
+    status: waiting_level2_review
     allowed_status_change: scaffold_to_reviewed
     requires_human_approval: true
     review_level: 2
@@ -98,6 +98,9 @@ queue:
       - report parser semantics
     notes: >
       Prepare GET_PROTOCOL reviewed wording and setup-field identity explanation.
+      active slice: GET_PROTOCOL reviewed-draft preparation starts now.
+      checkpoint commit: pending
+      Do not change reviewed/verified counts in this slice.
 
   - id: HID-REQ-6
     title: SET_PROTOCOL reviewed draft

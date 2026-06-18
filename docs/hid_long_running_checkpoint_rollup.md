@@ -659,7 +659,7 @@ Commit Checkpoint:
 
 ## Batch: HID-LRA-20 (HID-REQ-4 start)
 
-- Commit: d8f3abc
+- Commit: 02fda6c
 - Scope: queue/roadmap checkpoint handoff to start `SET_IDLE` reviewed-draft setup-field wording.
 - Changed files:
   - `governance/hid_work_queue.yaml`
@@ -687,3 +687,35 @@ Commit Checkpoint:
   - No substantive `SET_IDLE` request behavior text added in this commit.
 - Requested approval:
   - Human checkpoint review required before status transitions or behavior-level claims.
+
+### Checkpoint continuation in batch HID-LRA-20
+
+- Commit: 2425f09
+- Scope: complete `SET_IDLE` reviewed-draft setup-field identity wording.
+- Changed files:
+  - `specs/en/hid_class_requests.md`
+- Validation:
+  - PASS `python -X utf8 scripts/validate_source_authority.py`
+  - PASS `python -X utf8 scripts/validate_hid_class_request_matrix.py`
+  - PASS `python -X utf8 scripts/validate_verification_status.py`
+  - PASS `python -m unittest discover -s tests`
+- Stats before/after:
+  - reviewed: unchanged
+  - verified: unchanged
+  - scaffold: unchanged
+- Gate mode: batch (batch_size: 1, approved_batch: true, approved_through: HID-REQ-1)
+- Review level: 2 (quick human checkpoint prep)
+- Can claim:
+  - `SET_IDLE` setup-field identity now documents setup packet byte order and request field scope.
+  - `HID-REQ-4` queue/roadmap checkpoint pointer now points to `2425f09`.
+- Cannot claim:
+  - cannot claim reviewed/verified status uplift.
+  - cannot claim firmware behavior correctness.
+  - cannot claim OS/input stack behavior.
+  - cannot claim report parser/descriptor semantics.
+- Residual risk:
+  - `SET_IDLE` duration semantics remain identity-level only.
+- Requested approval:
+  - Human checkpoint review required before any status promotion.
+- Next recommended slice:
+  - Await checkpoint closure for `HID-REQ-4` and then proceed to `HID-REQ-5`.
