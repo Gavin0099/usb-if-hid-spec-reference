@@ -44,7 +44,7 @@ or firmware handler correctness.
   - Recipient: interface
 - `bRequest`: `0x01`
 - `wValue`
-  - High byte (`ReportType`): input/output/feature request scope selector
+  - High byte (`ReportType`): scope selector byte (input/output/feature request class in HID identity context)
   - Low byte (`ReportID`): report identifier selector
 - `wIndex`
   - Interface number context for the request
