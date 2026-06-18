@@ -93,3 +93,39 @@
   - `SET_PROTOCOL` protocol-value mapping remains scaffold-level identity and is not implementation behavior.
 - Requested approval:
   - Batch quota reached (3). Pause until you set `approved_batch: true` and `approved_through` in `governance/hid_review_gate.yaml`.
+
+## Batch: HID-LRA-9
+
+- Commit: 2a7eec4
+- Scope: HID Descriptor field wording alignment pass prep (scaffold identity) and long-running batch checkpoint policy default update.
+- Changed files:
+  - `specs/hid_descriptor_fields.md`
+  - `specs/en/hid_descriptor_fields.md`
+  - `docs/hid_long_running_roadmap.md`
+  - `governance/hid_work_queue.yaml`
+  - `governance/hid_review_gate.yaml`
+  - `governance/hid_long_running_agent_contract.md`
+- Validation:
+  - PASS `python -X utf8 scripts/validate_source_authority.py`
+  - PASS `python -X utf8 scripts/validate_hid_class_request_matrix.py`
+  - PASS `python -X utf8 scripts/validate_verification_status.py`
+  - PASS `python -m unittest discover -s tests`
+- Stats before/after:
+  - reviewed: unchanged
+  - verified: unchanged
+  - scaffold: unchanged
+- Gate mode: batch (batch_size: 3, approved_batch: true, approved_through: HID-REQ-6)
+- Review level: 2 (quick human checkpoint prep)
+- Can claim:
+  - HID-DESC-1 descriptor-field scaffold wording is aligned in EN/zh pages with explicit scope/boundary notes and no parser/behavior overclaiming.
+  - Queue/roadmap now record the HID-DESC-1 Level 2 slice as checkpoint-required work.
+  - Batch execution contract now explicitly documents batch-by-default (PR only if explicitly requested), matching user preference.
+- Cannot claim:
+  - cannot claim reviewed/verified status uplift.
+  - cannot claim firmware behavior correctness.
+  - cannot claim OS/input stack behavior.
+  - cannot claim report parser/descriptor semantics.
+- Residual risk:
+  - Descriptor wording alignment is still identity-level and may hide translation/wording inconsistencies until a follow-up language normalization pass.
+- Requested approval:
+  - Continue batch mode execution for next Level 2/LRA checkpoints until next user review gate or Level 3 trigger.
