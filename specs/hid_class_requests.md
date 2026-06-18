@@ -3,12 +3,11 @@
 ## Page Purpose
 
 本頁提供 USB HID class-specific requests 的初始 reference scaffold。
-目前只整理 request name、`bRequest` value、direction 與 interface recipient
-邊界，方便 firmware repo 查找 request identity。
+目前涵蓋 request name、`bRequest`、方向與介面 recipient 邊界。
 
 ## Governed Matrix
 
-Machine-readable source:
+機制來源：
 
 - `data/hid_class_request_matrix.yaml`
 
@@ -27,42 +26,64 @@ Machine-readable source:
 
 ### Report requests
 
-- `GET_REPORT`：host 從 device 讀取 HID report。
-- `SET_REPORT`：host 將 HID report 傳送給 device。
+- `GET_REPORT`：host 向 device 讀取 HID report。
+- `SET_REPORT`：host 向 device 傳送 HID report。
 
-本 repo 目前不解釋 report payload 格式、report ID routing、或 firmware
-handler correctness。
+此頁目前不描述 report payload 格式、Report ID 路由、或 firmware handler
+correctness。
+
+### GET_REPORT reviewed 草稿
+
+- 請求：`GET_REPORT`（`hid_get_report`）
+- `bmRequestType`: `0xA1`
+  - 方向：Device-to-host
+  - Type：class
+  - Recipient：interface
+- `bRequest`: `0x01`
+- `wValue`
+  - 高位元組（`ReportType`）：選擇 input/output/feature 型別
+  - 低位元組（`ReportID`）：指定 report ID
+- `wIndex`
+  - 對應目前介面的 request context
+- `wLength`
+  - 回應 payload 預期位元組長度
+
+來源：
+
+- HID Specification 1.11, section 7.2
+- `https://www.usb.org/sites/default/files/documents/hid1_11.pdf`
+
+此 reviewed 草稿僅記錄欄位身份與 scaffold 級意涵，未提升本 repo 的
+verified/reviewed 狀態。
 
 ### Idle requests
 
 - `GET_IDLE`：讀取目前 idle rate。
 - `SET_IDLE`：設定 idle rate。
 
-本 repo 目前不宣告 idle timing behavior、interrupt IN scheduling、或 host stack
-行為。
+目前不描述 idle timing 行為、interrupt IN 排程或 host stack 行為。
 
 ### Protocol requests
 
-- `GET_PROTOCOL`：讀取目前 protocol selection。
-- `SET_PROTOCOL`：切換 boot protocol 或 report protocol。
+- `GET_PROTOCOL`：讀取目前 protocol 選擇。
+- `SET_PROTOCOL`：設定 boot protocol 或 report protocol。
 
-本 repo 目前不宣告 keyboard/mouse boot behavior 已驗證，也不宣告 product-specific
-protocol policy。
+目前不描述 keyboard/mouse boot 行為是否驗證，亦不宣告產品專屬 protocol 政策。
 
 ## Source Boundary
 
-Source reference:
+來源參考：
 
 - HID Specification 1.11, section 7.2
 - `https://www.usb.org/sites/default/files/documents/hid1_11.pdf`
 
-目前這只是 source anchor 與 scaffold，不是 evidence packet，也不是 verified
-promotion。
+此頁是 source anchor 與 scaffold，非 evidence packet，也不是 verified promotion。
 
 ## Non-claims
 
-- 本頁不宣告 HID request behavior fully verified。
+- 本頁不宣告 HID request 行為 fully verified。
 - 本頁不宣告 firmware request handler correctness。
-- 本頁不宣告 OS HID driver behavior。
+- 本頁不宣告 OS HID driver 行為。
 - 本頁不宣告 report payload semantics。
 - 本頁不宣告任何 entry 已完成 evidence-backed verified promotion。
+

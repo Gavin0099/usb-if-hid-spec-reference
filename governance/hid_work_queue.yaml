@@ -1,0 +1,57 @@
+# HID Long-Running Agent Work Queue
+
+queue_owner: usb-if-hid-spec-reference
+updated: 2026-06-18
+status_model:
+  - scaffold
+  - reviewed
+  - verified
+  - waiting_level2_review
+  - waiting_level3_approval
+  - blocked
+
+queue:
+  - id: HID-REQ-1
+    title: GET_REPORT reviewed draft
+    authority: HID 1.11 Section 7.2
+    status: waiting_level2_review
+    allowed_status_change: scaffold_to_reviewed
+    requires_human_approval: true
+    review_level: 2
+    gate: checkpoint_required
+    forbidden_claims:
+      - firmware behavior correctness
+      - host stack behavior
+      - report parser semantics
+    notes: >
+      Prepare reviewed wording draft for GET_REPORT while keeping verified count at 0.
+      No source extension and no section imports are allowed in this slice.
+
+  - id: HID-REQ-2
+    title: SET_REPORT reviewed draft
+    authority: HID 1.11 Section 7.2
+    status: pending
+    allowed_status_change: scaffold_to_reviewed
+    requires_human_approval: true
+    forbidden_claims:
+      - firmware behavior correctness
+      - host stack behavior
+      - report parser semantics
+    notes: >
+      Same boundary as HID-REQ-1. Queue ready but not started until HID-REQ-1 is
+      approved.
+
+  - id: HID-DESC-1
+    title: HID Descriptor field wording alignment pass
+    authority: HID 1.11 Section 6.2.1
+    status: pending
+    allowed_status_change: scaffold_to_reviewed
+    requires_human_approval: true
+    future_authorized: true
+    forbidden_claims:
+      - firmware behavior correctness
+      - report descriptor parser behavior
+      - usage table semantics
+    notes: >
+      Documentation and claim-boundary cleanup only. Any reviewed wording change
+      must be approved before claim promotion.

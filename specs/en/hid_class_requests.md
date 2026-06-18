@@ -33,6 +33,32 @@ Machine-readable source:
 This repo does not currently describe report payload format, report ID routing,
 or firmware handler correctness.
 
+### GET_REPORT reviewed draft
+
+#### Setup fields (identity-level only)
+
+- Request: `GET_REPORT` (`hid_get_report`)
+- `bmRequestType`: `0xA1`
+  - Direction: device-to-host
+  - Type: class
+  - Recipient: interface
+- `bRequest`: `0x01`
+- `wValue`
+  - High byte (`ReportType`): input/output/feature request scope selector
+  - Low byte (`ReportID`): report identifier selector
+- `wIndex`
+  - Interface number context for the request
+- `wLength`
+  - Expected bytes for the response payload
+
+Source anchor:
+
+- HID Specification 1.11, section 7.2
+- `https://www.usb.org/sites/default/files/documents/hid1_11.pdf`
+
+This reviewed draft is limited to field identity and scaffold-level meaning from the
+imported source. It does not advance this repo’s verification state.
+
 ### Idle requests
 
 - `GET_IDLE`: reads the current idle rate.
