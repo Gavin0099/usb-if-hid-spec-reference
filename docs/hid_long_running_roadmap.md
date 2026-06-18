@@ -20,9 +20,15 @@
 
 ### HID-LRA-3: HID-REQ-1 Slice
 
-- status: In Progress
+- status: Waiting for level 2/3 review gate
 - objective: GET_REPORT reviewed draft under Section 7.2 with human approval.
 - gate: no scaffold status promotion without approval.
+
+### HID-LRA-4: HID-REQ-2 Slice
+
+- status: In Progress
+- objective: SET_REPORT reviewed draft under Section 7.2 with quick human checkpoint.
+- gate: reviewed-draft preparation only.
 
 ### HID-LRA-4: Structural Receipt and Validation Loop
 

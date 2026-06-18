@@ -29,7 +29,7 @@
 - `GET_REPORT`：host 向 device 讀取 HID report。
 - `SET_REPORT`：host 向 device 傳送 HID report。
 
-此頁目前不描述 report payload 格式、Report ID 路由、或 firmware handler
+此 repo 目前不描述 report payload 格式、report ID 路由、或 firmware handler
 correctness。
 
 ### GET_REPORT reviewed 草稿
@@ -47,6 +47,30 @@ correctness。
   - 對應目前介面的 request context
 - `wLength`
   - 回應 payload 預期位元組長度
+
+來源：
+
+- HID Specification 1.11, section 7.2
+- `https://www.usb.org/sites/default/files/documents/hid1_11.pdf`
+
+此 reviewed 草稿僅記錄欄位身份與 scaffold 級意涵，未提升本 repo 的
+verified/reviewed 狀態。
+
+### SET_REPORT reviewed 草稿
+
+- 請求：`SET_REPORT`（`hid_set_report`）
+- `bmRequestType`: `0x21`
+  - 方向：Host-to-device
+  - Type：class
+  - Recipient：interface
+- `bRequest`: `0x09`
+- `wValue`
+  - 高位元組（`ReportType`）：指定 input/output/feature report type
+  - 低位元組（`ReportID`）：指定 report ID
+- `wIndex`
+  - 對應目前介面的 request context
+- `wLength`
+  - 指定要傳送的 report payload 預期位元組長度
 
 來源：
 

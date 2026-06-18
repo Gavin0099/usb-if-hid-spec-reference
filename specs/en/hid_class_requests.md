@@ -59,6 +59,32 @@ Source anchor:
 This reviewed draft is limited to field identity and scaffold-level meaning from the
 imported source. It does not advance this repo’s verification state.
 
+### SET_REPORT reviewed draft
+
+#### Setup fields (identity-level only)
+
+- Request: `SET_REPORT` (`hid_set_report`)
+- `bmRequestType`: `0x21`
+  - Direction: host-to-device
+  - Type: class
+  - Recipient: interface
+- `bRequest`: `0x09`
+- `wValue`
+  - High byte (`ReportType`): indicates input/output/feature report type selector
+  - Low byte (`ReportID`): report identifier selector
+- `wIndex`
+  - Interface context for the request target
+- `wLength`
+  - Expected bytes carried by the outgoing report payload
+
+Source anchor:
+
+- HID Specification 1.11, section 7.2
+- `https://www.usb.org/sites/default/files/documents/hid1_11.pdf`
+
+This reviewed draft is limited to field identity and scaffold-level meaning from the
+imported source. It does not advance this repo’s verification state.
+
 ### Idle requests
 
 - `GET_IDLE`: reads the current idle rate.
