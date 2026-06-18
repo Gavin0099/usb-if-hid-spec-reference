@@ -60,11 +60,11 @@
 
 ### HID-LRA-8: HID-REQ-6 Slice
 
-- status: Completed (reviewed-draft shell complete, no count change)
+- status: Completed (reviewed)
 - objective: SET_PROTOCOL reviewed draft under Section 7.2 with quick human checkpoint.
 - gate: reviewed-draft preparation only.
 - latest checkpoint commit: 0b9eec2
-- latest checkpoint status: approved by user; keep counts unchanged.
+- latest checkpoint status: approved by user; scaffold->reviewed transition completed.
 ### HID-LRA-9: HID-DESC-1 Slice
 
 - status: Completed
