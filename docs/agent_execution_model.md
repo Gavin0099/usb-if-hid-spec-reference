@@ -29,9 +29,12 @@ respecting the repo claim ceiling and forbidden domains.
 - Level 3 tasks: reviewed/verified uplift, source import, new matrix, descriptor
   semantic imports -> must stop and await explicit human approval.
 
-## PR-based checkpoint (Level 2/3)
+## Checkpoint modes (Level 2/3)
 
-For Level 2 and Level 3 work:
+For Level 2 and Level 3 work, checkpoint mode is controlled by
+`governance/hid_review_gate.yaml`.
+
+### PR mode
 
 - Create a branch in the form `agent/<item-id>-<short-kebab>` before changes.
 - Open one PR with body required by
@@ -40,6 +43,15 @@ For Level 2 and Level 3 work:
 - PR title should follow:
   `HID-REQ-<N>: <request> reviewed draft preparation` (or equivalent title for
   reviewed/verified uplifts).
+
+### Batch mode
+
+- Use branch `agent/hid-lra-rollup`.
+- Record each checkpoint in `docs/hid_long_running_checkpoint_rollup.md`.
+- Respect `gate_mode` and `batch_size` in `governance/hid_review_gate.yaml`.
+- Pause when the batch quota is full or a Level 3 item appears.
+- Continue only after user marks approval in `governance/hid_review_gate.yaml`
+  (`approved_batch: true` and `approved_through` set).
 
 ## Required Slice Gate
 
@@ -56,7 +68,8 @@ A slice is not complete unless all of the following exist:
 
 ## Human-Approval Gating
 
-- Level 2 and Level 3 tasks require PR-based checkpoint and human approval.
+- Level 2 and Level 3 tasks require gate-mode-specific checkpoint and human
+  approval.
 - Any requested status promotion or claim that may alter scope requires human sign-off
   before execution continues.
 - If approval is not present, Codex records a stop checkpoint and pauses on the

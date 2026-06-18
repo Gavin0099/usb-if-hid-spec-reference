@@ -69,9 +69,11 @@ While operating under this contract, Codex must not assert:
 - `"verified"` status for any entry unless evidence packets and review gates are
   explicitly satisfied.
 
-## PR-based Checkpoint Gate (Level 2/3)
+## Review Gate Modes (Level 2/3)
 
-For Level 2 and Level 3 slices, Codex must follow branch + PR checkpoint flow:
+Active mode follows `governance/hid_review_gate.yaml`; if `gate_mode: batch`, use rollup mode.
+
+PR mode flow:
 
 1. Create branch: `agent/<item-id>-<short-description>`
    - Example: `agent/hid-req-5-get-protocol`
@@ -92,16 +94,41 @@ For Level 2 and Level 3 slices, Codex must follow branch + PR checkpoint flow:
    - Residual risk
    - Requested approval
 
+Alternative review mode: batch gate (via `governance/hid_review_gate.yaml`)
+
+When `gate_mode: batch` is configured:
+
+1. Use one rolling branch `agent/hid-lra-rollup`.
+2. Execute Level 2/3 slices sequentially and record each checkpoint in
+   `docs/hid_long_running_checkpoint_rollup.md`.
+3. Do not exceed `batch_size` checkpoints in one batch.
+4. Pause only when checkpoint batch is full or a Level 3 item appears.
+5. User approves the batch in `governance/hid_review_gate.yaml` by setting:
+   - `approved_batch: true`
+   - `approved_through: HID-REQ-<N>`
+
+The `gate_mode` value controls the active mode. Batch mode is recommended when you want
+to avoid PR churn; keep PR mode for strict PR-per-slice review.
+
 ## Checkpoint Gate
 
 Every slice must satisfy this gate before the next slice starts:
 
 1. Commit created.
 2. Required validation ran and passed.
-3. For Level 2/3, PR checkpoint exists and references the required fields.
+3. For Level 2/3, checkpoint artifacts exist and reference required fields.
+   - PR mode: PR body includes required fields.
+   - Batch mode: `docs/hid_long_running_checkpoint_rollup.md` includes required fields.
 4. Checkpoint block recorded in exact required format.
 5. Review level classification appended.
 6. Reviewed/verified count changes are explicitly approved by level.
+
+Batch mode exception:
+
+- In `gate_mode: batch`, one checkpoint rollup commit can be prepared only after
+  the batch quota is reached.
+- Batch mode still requires explicit user approval before any status change for
+  reviewed/verified counts or Level 3 transitions.
 
 If any point is missing, codex must stop and wait.
 
@@ -162,7 +189,7 @@ slice; a PASS must be explicitly recorded.
 
 - Use short, intentful commit titles with `HID-LRA-<N>` tags.
 - Level 1: commit directly.
-- Level 2/3: commit on branch `agent/<item-id>-<short-description>`, then PR.
+- Level 2/3: in PR mode, commit on branch `agent/<item-id>-<short-description>` then PR; in batch mode, commit to `agent/hid-lra-rollup` and append to `docs/hid_long_running_checkpoint_rollup.md`.
 - A commit may include docs-only files plus linked checkpoint artifacts.
 - Do not commit if any required validator fails.
 
