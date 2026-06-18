@@ -65,7 +65,7 @@
 
 ### Checkpoint 3 in batch HID-LRA-7/8
 
-- Commit: 2859fcd
+- Commit: f094b12
 - Scope: zh/zh-TW reviewed draft field identity synchronization for HID protocol and request setup sections
 - Changed files:
   - `specs/hid_class_requests.md`
