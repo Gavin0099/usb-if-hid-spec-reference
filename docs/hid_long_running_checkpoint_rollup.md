@@ -1050,6 +1050,39 @@ Commit Checkpoint:
 - Next recommended slice:
   - No pending `HID-REQ-*` slices remain at Level 2/3 checkpoint state.
 
+## Batch: HID-LRA-28 (checkpoint governance alignment)
+
+- Commit: this checkpoint
+- Scope: finalize top-level checkpoint governance alignment after all HID request checkpoint closures.
+- Changed files:
+  - `governance/hid_review_gate.yaml`
+  - `docs/hid_long_running_roadmap.md`
+- Validation:
+  - PASS `python -X utf8 scripts/validate_source_authority.py`
+  - PASS `python -X utf8 scripts/validate_hid_class_request_matrix.py`
+  - PASS `python -X utf8 scripts/validate_verification_status.py`
+  - PASS `python -m unittest discover -s tests`
+- Stats before/after:
+  - reviewed: unchanged
+  - verified: unchanged
+  - scaffold: unchanged
+- Gate mode: batch (batch_size: 1, approved_batch: true, approved_through: HID-REQ-6)
+- Review level: 2 (quick human checkpoint prep)
+- Can claim:
+  - `HID-REQ-1` through `HID-REQ-6` reviewed-draft checkpoint gates are now consistently recorded as user-approved.
+  - `governance/hid_review_gate.yaml` now reflects `approved_through: HID-REQ-6`.
+- Cannot claim:
+  - cannot claim reviewed/verified status uplift.
+  - cannot claim firmware behavior correctness.
+  - cannot claim OS/input stack behavior.
+  - cannot claim report parser/descriptor semantics.
+- Residual risk:
+  - No review-status promotion was performed in this entry.
+- Requested approval:
+  - Await explicit approved instruction before any scaffold→reviewed transition.
+- Next recommended slice:
+  - If you are ready, perform the next Level 3 status-promotion slice.
+
 ## Batch: HID-LRA-25 (HID-REQ-2 closure)
 
 - Commit: this checkpoint
