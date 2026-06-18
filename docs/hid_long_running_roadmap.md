@@ -67,7 +67,7 @@
 - latest checkpoint status: approved by user; keep counts unchanged.
 ### HID-LRA-9: HID-DESC-1 Slice
 
-- status: Human checkpoint review complete (scope-alignment closure prepared)
+- status: Completed
 - objective: HID Descriptor field wording alignment pass under Section 6.2.1 with scaffold identity constraints.
 - gate: reviewed-draft preparation only.
 - latest checkpoint commit: this checkpoint

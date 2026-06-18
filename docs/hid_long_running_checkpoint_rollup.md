@@ -951,3 +951,35 @@ Commit Checkpoint:
 - Next recommended slice:
   - Await new `future_authorized` queue item or explicit user direction for next docs-only housekeeping task.
 
+### Checkpoint completion in batch HID-LRA-24
+
+- Commit: this checkpoint
+- Scope: mark `HID-DESC-1` as completed in the long-running roadmap while preserving count stability.
+- Changed files:
+  - `docs/hid_long_running_roadmap.md`
+- Validation:
+  - PASS `python -X utf8 scripts/validate_source_authority.py`
+  - PASS `python -X utf8 scripts/validate_hid_class_request_matrix.py`
+  - PASS `python -X utf8 scripts/validate_verification_status.py`
+  - PASS `python -m unittest discover -s tests`
+- Stats before/after:
+  - reviewed: unchanged
+  - verified: unchanged
+  - scaffold: unchanged
+- Gate mode: batch (batch_size: 1, approved_batch: true, approved_through: HID-REQ-1)
+- Review level: 1 (auto-pass docs-only housekeeping)
+- Can claim:
+  - `HID-LRA-9` is marked completed and checkpoint pointer remains `this checkpoint`.
+  - `HID-DESC-1` scope-alignment content is stable with no count changes.
+- Cannot claim:
+  - cannot claim reviewed/verified status uplift.
+  - cannot claim firmware behavior correctness.
+  - cannot claim OS/input stack behavior.
+  - cannot claim report parser/descriptor semantics.
+- Residual risk:
+  - No further content-level descriptor semantic expansion has been made in this commit.
+- Requested approval:
+  - Ready for next authorized slice.
+- Next recommended slice:
+  - Start next user-authorized slice (requested by `future_authorized` queue items or manual user instruction).
+
