@@ -249,18 +249,34 @@ imported source. It does not advance this repo’s verification state.
 #### Setup fields (identity-level only)
 
 - Request: `SET_PROTOCOL` (`hid_set_protocol`)
+- USB request packet setup sequence (identity-level): `bmRequestType`, `bRequest`, `wValue`, `wIndex`, `wLength`.
+- Setup-byte intent (identity-level):
+  - `bmRequestType` setup packet byte 0
+  - `bRequest` setup packet byte 1
+  - `wValue` setup packet bytes 2-3
+    - High byte: reserved in request setup identity context
+    - Low byte: protocol selector in request setup identity context
+  - `wIndex` setup packet bytes 4-5
+  - `wLength` setup packet bytes 6-7
 - `bmRequestType`: `0x21`
+  - Bitfield interpretation (identity-level): `bmRequestType[7:5]=0` (dir=Host→Device),
+    `bmRequestType[4:2]=001` (Class), `bmRequestType[1:0]=01` (Interface)
+  - Binary value: `0010 0001`
   - Direction: host-to-device
   - Type: class
   - Recipient: interface
 - `bRequest`: `0x0B`
 - `wValue`
-  - High byte: reserved in this request identity context
+  - High byte: reserved in request setup identity context
   - Low byte: selected protocol value (`0` = Boot Protocol, `1` = Report Protocol)
+  - Validation boundary:
+    - `wValue` is interpreted here only as field-identity scope in the request setup.
 - `wIndex`
-  - Interface context for the request target
+  - Interface context for the request target.
+  - setup packet bytes 4-5
 - `wLength`
-  - Usually zero for this request payload
+  - 16-bit little-endian length field in setup packet (identity-level scope only).
+  - Usually zero for this request payload in this request identity context.
 
 Source anchor:
 
