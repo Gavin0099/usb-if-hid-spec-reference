@@ -464,7 +464,7 @@ Commit Checkpoint:
 ## Batch: HID-LRA-16 (governance gate tightening)
 
 - Commit Checkpoint:
-- Commit: N/A (pending)
+- Commit: 12a55f9
 - Scope: tighten checkpoint gate behavior for Level 2/3 and lock HID-REQ-2 start behind HID-REQ-1 approval.
 - Changed files:
   - `governance/hid_review_gate.yaml`
