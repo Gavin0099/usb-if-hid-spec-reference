@@ -1987,7 +1987,7 @@ Commit Checkpoint:
 
 ## Batch: HID-LRA-47 (verified evidence packet preflight gate)
 
-- Commit: this checkpoint
+- Commit: 0937dc7
 - Scope: define the future evidence packet schema and verified promotion gate
   without promoting any HID entry to `verified`.
 - Changed files:
@@ -2028,4 +2028,32 @@ Commit Checkpoint:
 - Residual risk:
   - Future verified packets still require per-entry evidence content and explicit
     Level 3 approval.
+
+### Checkpoint memory entry for HID-LRA-47
+
+- Commit: this checkpoint
+- Scope: record the `HID-LRA-47` verified preflight checkpoint in repo-local
+  daily memory using `scripts/emit_checkpoint_memory_entry.py`.
+- Changed files:
+  - `memory/2026-06-22.md`
+  - `governance/hid_work_queue.yaml`
+  - `docs/hid_long_running_roadmap.md`
+  - `docs/hid_long_running_checkpoint_rollup.md`
+- Validation:
+  - PASS `python -X utf8 scripts/validate_memory_records.py`
+  - PASS `python -m unittest discover -s tests`
+- Stats before/after:
+  - tracked: unchanged at 19
+  - scaffold: unchanged at 0
+  - reviewed: unchanged at 19
+  - verified: unchanged at 0
+- Can claim:
+  - `memory/2026-06-22.md` contains a bound entry for commit `0937dc7`.
+  - Queue and roadmap now point `HID-GOV-2` / `HID-LRA-18` at commit `0937dc7`.
+- Cannot claim:
+  - cannot claim any HID entry is verified.
+  - cannot claim any evidence packet has been accepted.
+  - cannot claim firmware, OS, parser/runtime, or product-specific HID behavior.
+- Residual risk:
+  - First real verified packet remains a separate Level 3 task.
 
