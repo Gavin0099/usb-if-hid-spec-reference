@@ -4,7 +4,7 @@ from scripts.validate_hid_report_descriptor_items_matrix import EXPECTED_ITEMS, 
 
 
 class HidReportDescriptorItemsMatrixTests(unittest.TestCase):
-    def test_report_descriptor_items_matrix_is_import_prep_only(self) -> None:
+    def test_report_descriptor_items_matrix_is_scaffold_only(self) -> None:
         self.assertEqual(validate(), [])
         self.assertEqual(EXPECTED_ITEMS, {
             "short_item_prefix",

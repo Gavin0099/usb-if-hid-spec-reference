@@ -13,8 +13,8 @@ class sub-surface.
 - Initial focus: HID class request and HID descriptor field scaffold
 - AI governance baseline: upstream formal release v1.2.0 plus latest observed
   `main` boundary snapshot (`65b3388`, 2026-06-04)
-- Tracked entries: 13
-- Scaffold entries: 7
+- Tracked entries: 19
+- Scaffold entries: 13
 - Verified entries: 0
 - Reviewed entries: 6
 - Inferred entries: 0
@@ -34,7 +34,7 @@ Current covered surface:
 
 - HID class requests reviewed identity surface (6 entries)
 - HID descriptor field scaffold (7 entries)
-- HID report descriptor item import-prep shell (6 entries, not current imported usage)
+- HID report descriptor item scaffold (6 entries)
 - No verified or fully interpreted behavior claims
 
 ## Source Authority
@@ -44,7 +44,7 @@ Current primary source:
 - Device Class Definition for Human Interface Devices (HID), Version 1.11
 - Publisher: USB Implementers Forum
 - URL: `https://www.usb.org/sites/default/files/documents/hid1_11.pdf`
-- Current imported usage: Section 7.2 Class-Specific Requests and Section 6.2.1 HID Descriptor are scaffolded
+- Current imported usage: Section 7.2 Class-Specific Requests, Section 6.2.1 HID Descriptor, and Section 6.2.2 Report Descriptor item types are scaffolded
 
 Source authority is registered in:
 
@@ -60,9 +60,8 @@ This repo does not cover:
 
 ## Claim Boundary
 
-Until evidence packets and reviewed/verified governed tables are introduced,
-all content in this repo is scaffold or orientation-level reference material
-only.
+Until evidence packets and verified governed tables are introduced, content in
+this repo remains reviewed or scaffold identity-level reference material only.
 
 No verified HID entries are claimed yet.
 
@@ -92,8 +91,8 @@ validator, or CodeBurn observation as enforcement.
 
 ## Machine-Readable Surfaces
 
-- `data/`: governed scaffold matrices for HID class requests and HID descriptor
-  fields, plus import-prep shell matrices that are not current imported usage.
+- `data/`: governed scaffold matrices for HID class requests, HID descriptor
+  fields, and HID report descriptor item identities.
 - `contract/`: repo-local authority, claim, evidence, and version-scope rules.
 - `exports/hid_governed_surface_manifest.yaml`: consumer-facing manifest for
   the current HID scaffold surface.

@@ -1,5 +1,5 @@
 schema_version: 1
-last_updated: 2026-06-18
+last_updated: 2026-06-22
 
 sources:
   - source_id: hid_1_11
@@ -10,9 +10,11 @@ sources:
     topics:
       - class_specific_requests
       - hid_descriptor_fields
+      - hid_report_descriptor_items
     sections:
       - "7.2"
       - "6.2.1"
+      - "6.2.2"
     url: https://www.usb.org/sites/default/files/documents/hid1_11.pdf
     url_type: official_pdf
     monitor_status: planned

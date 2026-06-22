@@ -5,6 +5,9 @@
 This artifact defines the minimum criteria to move `6.2.2` (HID Descriptor Report
 Descriptor item types) from `future_authorized_usage` to `current_imported_usage`.
 
+Status: completed. `6.2.2` is now registered in `current_imported_usage` as
+identity-level scaffold only.
+
 ## Scope
 
 `6.2.2` is scoped to report descriptor identity-level item-type scaffolding only:

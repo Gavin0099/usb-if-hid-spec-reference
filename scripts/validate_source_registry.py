@@ -147,8 +147,8 @@ def validate(
         sections = source.get("sections", [])
         if not isinstance(sections, list):
             add_error("SECTIONS_NOT_LIST", f"{source_id}: sections must be a list")
-        if source_id == "hid_1_11" and set(sections) != {"7.2", "6.2.1"}:
-            add_error("HID11_SECTIONS_MISMATCH", "hid_1_11 sections must be exactly 7.2 and 6.2.1")
+        if source_id == "hid_1_11" and set(sections) != {"7.2", "6.2.1", "6.2.2"}:
+            add_error("HID11_SECTIONS_MISMATCH", "hid_1_11 sections must be exactly 7.2, 6.2.1, and 6.2.2")
         if source_id != "hid_1_11" and sections:
             add_error("NON_IMPORTED_SOURCE_HAS_SECTIONS", f"{source_id}: non-imported source must not list sections")
 

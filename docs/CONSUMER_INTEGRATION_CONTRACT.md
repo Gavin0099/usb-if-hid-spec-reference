@@ -17,7 +17,10 @@ reference scaffold. It covers:
 
 - HID 1.11 class request scaffold entries: 6
 - HID 1.11 descriptor field scaffold entries: 7
-- Total tracked scaffold entries: 13
+- HID 1.11 report descriptor item scaffold entries: 6
+- Total tracked entries: 19
+- Total scaffold entries: 13
+- Reviewed entries: 6
 - Verified entries: 0
 - Evidence packets: 0
 
@@ -41,8 +44,8 @@ Expected output:
 ```text
 PASS: hid_governed_surface_manifest validation
   manifest_id: hid_governed_surface_manifest
-  governed_tables: 2 (hid11=2)
-  hid11: state=scaffold tracked=13 scaffold=13 verified=0 reviewed=0
+  governed_tables: 3 (hid11=3)
+  hid11: state=scaffold tracked=19 scaffold=13 verified=0 reviewed=6
 ```
 
 ### Step 2 - Table Content Drift Detection
@@ -56,7 +59,7 @@ python scripts\probe_table_fingerprint.py --mode check `
 Expected output:
 
 ```text
-Table fingerprint check PASSED: 2 table(s), 0 drift
+Table fingerprint check PASSED: 3 table(s), 0 drift
 ```
 
 Both checks must pass before treating the scaffold surface as stable.
@@ -68,6 +71,7 @@ Both checks must pass before treating the scaffold surface as stable.
 | Table drift detection | Detect whether governed HID YAML matrices changed since the last known-good baseline |
 | Request identity scaffold lookup | Look up HID class request name, bRequest, direction, request type, and recipient |
 | Descriptor field identity scaffold lookup | Look up HID descriptor field names listed in the scaffold matrix |
+| Report descriptor item identity scaffold lookup | Look up Section 6.2.2 report descriptor item shells listed in the scaffold matrix |
 | Claim boundary lookup | Read `scaffold_scope`, `verified_scope`, and manifest `claim_ceiling` before using an entry |
 
 ## Forbidden Usage

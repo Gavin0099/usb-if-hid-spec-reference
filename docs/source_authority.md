@@ -11,7 +11,7 @@ Machine-readable source:
 
 | Source | Version | Publisher | Current usage |
 |---|---|---|---|
-| Device Class Definition for Human Interface Devices (HID) | 1.11 | USB Implementers Forum | Section 7.2 Class-Specific Requests and Section 6.2.1 HID Descriptor are scaffolded; Section 6.2.2 is registered as preflight. |
+| Device Class Definition for Human Interface Devices (HID) | 1.11 | USB Implementers Forum | Section 7.2 Class-Specific Requests, Section 6.2.1 HID Descriptor, and Section 6.2.2 Report Descriptor item types are scaffolded. |
 
 Primary source URL:
 
@@ -23,18 +23,17 @@ Primary source URL:
 |---|---|---|---|
 | 7.2 | Class-Specific Requests | scaffolded | `data/hid_class_request_matrix.yaml` |
 | 6.2.1 | HID Descriptor | scaffolded | `data/hid_descriptor_fields_matrix.yaml` |
+| 6.2.2 | Report Descriptor item types | scaffolded | `data/hid_report_descriptor_items_matrix.yaml` |
 
 ## Future Authorized Usage
 
-| Source area | Status |
-|---|---|
-| Report Descriptor item types (`6.2.2`) | scaffolded_preflight with import-prep shell |
+No additional future authorized usage is registered yet.
 
 ## Not Yet Imported
 
 | Source area | Status |
 |---|---|
-| Report Descriptor item types | not imported |
+| Report descriptor Main / Global / Local item semantics | not imported |
 | HID Usage Tables | not imported |
 
 ## Secondary Sources

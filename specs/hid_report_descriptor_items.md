@@ -3,13 +3,9 @@
 ## 頁面目的
 
 本頁為 USB HID 1.11 Section 6.2.2 report descriptor item structure 建立
-import-prep identity shell。
+identity-level scaffold。
 
-本頁不是 current imported source surface。它的目的，是在 `6.2.2` 移入
-`current_imported_usage` 之前，先提供可 review 的 source-authority import
-checkpoint。
-
-## Import-Prep Matrix
+## Governed Matrix
 
 機器可讀來源：
 
@@ -19,12 +15,12 @@ checkpoint。
 
 | Item shell | Role | Claim level | Evidence status |
 |---|---|---:|---|
-| `short_item_prefix` | Short item prefix identity shell. | scaffold | not_imported |
-| `long_item_prefix` | Long item prefix identity shell. | scaffold | not_imported |
-| `main_item_type` | Main item type identity shell. | scaffold | not_imported |
-| `global_item_type` | Global item type identity shell. | scaffold | not_imported |
-| `local_item_type` | Local item type identity shell. | scaffold | not_imported |
-| `reserved_item_type` | Reserved item type identity shell. | scaffold | not_imported |
+| `short_item_prefix` | Short item prefix identity shell. | scaffold | not_verified |
+| `long_item_prefix` | Long item prefix identity shell. | scaffold | not_verified |
+| `main_item_type` | Main item type identity shell. | scaffold | not_verified |
+| `global_item_type` | Global item type identity shell. | scaffold | not_verified |
+| `local_item_type` | Local item type identity shell. | scaffold | not_verified |
+| `reserved_item_type` | Reserved item type identity shell. | scaffold | not_verified |
 
 ## Scope and Boundary
 
@@ -34,7 +30,7 @@ checkpoint。
 - 不宣告 report payload semantics。
 - 不宣告 firmware report descriptor parsing behavior。
 - 不宣告 host stack behavior。
-- 不將 `6.2.2` 移入 current imported usage。
+- 不宣告超出 identity shell 的 Main / Global / Local item semantics。
 
 ## Source Reference
 

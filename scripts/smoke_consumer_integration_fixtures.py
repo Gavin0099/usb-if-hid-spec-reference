@@ -95,13 +95,13 @@ def case_fingerprint_no_drift() -> dict:
     tables_checked = probe_receipt.get("tables_checked", -1)
     drift_count = probe_receipt.get("drift_count", -1)
     error_count = probe_receipt.get("error_count", -1)
-    passed = exit_code == 0 and tables_checked == 2 and drift_count == 0 and error_count == 0
+    passed = exit_code == 0 and tables_checked == 3 and drift_count == 0 and error_count == 0
     result = {
         "name": name,
-        "note": "fingerprint check on real manifest and baseline; expect 2 tables, 0 drift",
+        "note": "fingerprint check on real manifest and baseline; expect 3 tables, 0 drift",
         "expected_exit": 0,
         "actual_exit": exit_code,
-        "expected_tables_checked": 2,
+        "expected_tables_checked": 3,
         "actual_tables_checked": tables_checked,
         "expected_drift_count": 0,
         "actual_drift_count": drift_count,

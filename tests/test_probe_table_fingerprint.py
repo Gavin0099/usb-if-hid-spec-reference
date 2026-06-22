@@ -23,7 +23,7 @@ class ProbeTableFingerprintTests(unittest.TestCase):
             self.assertEqual(exit_code, 0)
             data = json.loads(receipt.read_text(encoding="utf-8"))
             self.assertEqual(data["result"], "PASS")
-            self.assertEqual(data["tables_checked"], 2)
+            self.assertEqual(data["tables_checked"], 3)
 
 
 if __name__ == "__main__":
