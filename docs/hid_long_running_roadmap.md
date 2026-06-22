@@ -83,7 +83,7 @@
 
 - status: Completed
 - objective: define next source-authority expansion scope and preflight constraints before importing additional HID governance surface.
-- latest checkpoint: this checkpoint
+- latest checkpoint: e0d42f1
 - gate: source authority registration and LRA kickoff bookkeeping only (no count movement).
 
 ### HID-LRA-12: Source Authority Extension Import Eligibility
@@ -91,7 +91,7 @@
 - status: Completed
 - objective: define the explicit criteria to move `6.2.2` to current imported usage and launch governed import implementation work.
 - dependencies: user-approved `HID-EXT-1` preflight and follow-up claim-ceiling update.
-- latest checkpoint: this checkpoint
+- latest checkpoint: 0c175d9
 - gate: no scope-semantic imports until explicit scope and review checkpoint are set.
 - artifact: `docs/hid_6_2_2_import_eligibility.md`
 
@@ -107,6 +107,7 @@
 - status: Completed
 - objective: add report descriptor item import-prep matrix, validator, tests, and
   zh/en spec pages without moving `6.2.2` to current imported usage.
+- latest checkpoint: 0c175d9
 - gate: import-prep only; no parser/report descriptor semantic claim.
 
 
