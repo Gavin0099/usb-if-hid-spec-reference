@@ -318,3 +318,26 @@ queue:
       does not mark the packet accepted and does not promote hid_get_report to
       verified.
       checkpoint commit: ad0badb.
+
+  - id: HID-VER-2
+    title: Remaining HID request verified candidate packet skeletons
+    authority: HID 1.11 Section 7.2
+    status: reviewed
+    allowed_status_change: candidate_packet_only
+    requires_human_approval: false
+    review_level: 1
+    gate: validation_required
+    forbidden_claims:
+      - accepted evidence packet
+      - verified status uplift
+      - firmware behavior correctness
+      - OS input stack behavior
+      - parser runtime behavior
+      - report payload semantics
+      - idle-rate runtime behavior
+      - boot/report protocol runtime behavior
+    notes: >
+      Add machine-checkable candidate packet skeletons for SET_REPORT, GET_IDLE,
+      SET_IDLE, GET_PROTOCOL, and SET_PROTOCOL. These prepare Level 3 review
+      input only; all candidate packets remain pending and no governed entry is
+      promoted to verified.

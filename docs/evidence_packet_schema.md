@@ -65,6 +65,15 @@ Candidate packets are complete enough for Level 3 review preparation, but they
 still do not satisfy the verified gate because their approval record remains
 pending and their status is not `accepted`.
 
+Current candidate packets:
+
+- `docs/evidence/candidates/hid_get_report_candidate.yaml`
+- `docs/evidence/candidates/hid_set_report_candidate.yaml`
+- `docs/evidence/candidates/hid_get_idle_candidate.yaml`
+- `docs/evidence/candidates/hid_set_idle_candidate.yaml`
+- `docs/evidence/candidates/hid_get_protocol_candidate.yaml`
+- `docs/evidence/candidates/hid_set_protocol_candidate.yaml`
+
 ## Non-Claims
 
 This schema does not claim:

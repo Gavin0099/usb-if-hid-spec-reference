@@ -2121,3 +2121,44 @@ Commit Checkpoint:
 - Residual risk:
   - GET_REPORT packet acceptance remains a separate Level 3 task.
 
+## Batch: HID-LRA-49 (remaining HID request candidate packet skeletons)
+
+- Commit: this checkpoint
+- Scope: add machine-checkable candidate packet skeletons for the remaining five
+  HID class requests under Section 7.2.
+- Changed files:
+  - `docs/evidence/candidates/hid_set_report_candidate.yaml`
+  - `docs/evidence/candidates/hid_get_idle_candidate.yaml`
+  - `docs/evidence/candidates/hid_set_idle_candidate.yaml`
+  - `docs/evidence/candidates/hid_get_protocol_candidate.yaml`
+  - `docs/evidence/candidates/hid_set_protocol_candidate.yaml`
+  - `docs/evidence_packet_schema.md`
+  - `tests/test_evidence_packet_schema.py`
+  - `governance/hid_work_queue.yaml`
+  - `docs/hid_long_running_roadmap.md`
+  - `docs/hid_long_running_checkpoint_rollup.md`
+- Validation:
+  - PASS `python -X utf8 scripts/validate_evidence_packet_schema.py`
+  - PASS `python -m unittest tests.test_evidence_packet_schema`
+- Stats before/after:
+  - tracked: unchanged at 19
+  - scaffold: unchanged at 0
+  - reviewed: unchanged at 19
+  - verified: unchanged at 0
+- Review level:
+  - Level 1 candidate-packet skeletons; no accepted packet and no status/count
+    movement.
+- Can claim:
+  - All six HID class requests now have machine-checkable candidate packet
+    skeletons.
+  - Each candidate binds to one `hid_class_request_matrix` entry.
+  - All candidates remain pending and cannot produce verified promotion.
+- Cannot claim:
+  - cannot claim accepted evidence packets.
+  - cannot claim any HID entry is verified.
+  - cannot claim firmware correctness, OS input stack behavior, parser/runtime
+    behavior, report payload semantics, idle-rate runtime behavior, or protocol
+    runtime behavior.
+- Residual risk:
+  - Candidate packet acceptance remains separate Level 3 work.
+
