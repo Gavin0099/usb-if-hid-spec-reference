@@ -1747,7 +1747,7 @@ Commit Checkpoint:
 
 ## Batch: HID-LRA-44 (6.2.2 current scaffold import)
 
-- Commit: this checkpoint
+- Commit: 92c3296
 - Scope: move HID 1.11 Section 6.2.2 report descriptor item identity shells from future-authorized preflight into current imported scaffold surface.
 - Changed files:
   - `data/source_authority.yaml`
@@ -1807,4 +1807,30 @@ Commit Checkpoint:
   - cannot claim verified uplift.
 - Residual risk:
   - The imported surface is still identity-level scaffold and requires future reviewed/verified work for semantic claims.
+
+### Checkpoint memory entry for HID-LRA-44
+
+- Commit: this checkpoint
+- Scope: record the `HID-LRA-44` Level 3 source-authority transition in repo-local daily memory using `scripts/emit_checkpoint_memory_entry.py`.
+- Changed files:
+  - `memory/2026-06-22.md`
+  - `governance/hid_work_queue.yaml`
+  - `docs/hid_long_running_roadmap.md`
+  - `docs/hid_long_running_checkpoint_rollup.md`
+- Validation:
+  - PASS `python -X utf8 scripts/validate_memory_records.py`
+  - PASS `python -m unittest discover -s tests`
+- Stats before/after:
+  - tracked: unchanged after `92c3296`
+  - reviewed: unchanged
+  - verified: unchanged
+- Can claim:
+  - `memory/2026-06-22.md` contains a bound entry for commit `92c3296`.
+  - Queue and roadmap now point `HID-EXT-3` / `HID-LRA-15` at commit `92c3296`.
+- Cannot claim:
+  - cannot claim report descriptor parser semantics.
+  - cannot claim report payload semantics.
+  - cannot claim verified uplift.
+- Residual risk:
+  - Future reviewed/verified semantic work remains separate from this source-authority import checkpoint.
 

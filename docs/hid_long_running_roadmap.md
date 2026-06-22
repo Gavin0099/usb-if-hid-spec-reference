@@ -115,6 +115,7 @@
 - status: Completed
 - objective: move Section 6.2.2 report descriptor item identity shells from
   future-authorized preflight into current imported scaffold surface.
+- latest checkpoint: 92c3296
 - gate: Level 3 source-authority transition; no verified or parser semantic
   claim.
 
