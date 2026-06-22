@@ -132,6 +132,7 @@
 - status: Completed
 - objective: promote the seven Section 6.2.1 HID descriptor field identity
   entries from scaffold to reviewed wording.
+- latest checkpoint: 21a956f
 - gate: reviewed identity only; no verified, parser, or runtime descriptor
   handling claim.
 

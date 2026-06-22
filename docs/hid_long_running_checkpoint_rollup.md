@@ -1911,7 +1911,7 @@ Commit Checkpoint:
 
 ## Batch: HID-LRA-46 (6.2.1 HID descriptor fields reviewed wording)
 
-- Commit: this checkpoint
+- Commit: 21a956f
 - Scope: promote seven HID 1.11 Section 6.2.1 HID descriptor field identity entries from scaffold to reviewed wording.
 - Changed files:
   - `data/hid_descriptor_fields_matrix.yaml`
@@ -1957,4 +1957,31 @@ Commit Checkpoint:
   - cannot claim verified uplift.
 - Residual risk:
   - Descriptor semantics remain identity-level reviewed wording only.
+
+### Checkpoint memory entry for HID-LRA-46
+
+- Commit: this checkpoint
+- Scope: record the `HID-LRA-46` reviewed wording checkpoint in repo-local daily memory using `scripts/emit_checkpoint_memory_entry.py`.
+- Changed files:
+  - `memory/2026-06-22.md`
+  - `governance/hid_work_queue.yaml`
+  - `docs/hid_long_running_roadmap.md`
+  - `docs/hid_long_running_checkpoint_rollup.md`
+- Validation:
+  - PASS `python -X utf8 scripts/validate_memory_records.py`
+  - PASS `python -m unittest discover -s tests`
+- Stats before/after:
+  - tracked: unchanged at 19
+  - scaffold: unchanged after `21a956f`
+  - reviewed: unchanged after `21a956f`
+  - verified: unchanged at 0
+- Can claim:
+  - `memory/2026-06-22.md` contains a bound entry for commit `21a956f`.
+  - Queue and roadmap now point `HID-DESC-2` / `HID-LRA-17` at commit `21a956f`.
+- Cannot claim:
+  - cannot claim descriptor parser behavior.
+  - cannot claim runtime descriptor handling.
+  - cannot claim verified uplift.
+- Residual risk:
+  - Semantic verification remains future work.
 
