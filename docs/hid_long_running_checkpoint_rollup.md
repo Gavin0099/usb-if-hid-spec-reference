@@ -1617,3 +1617,27 @@ Commit Checkpoint:
 - Next recommended slice:
   - Add historical backfill entries for key HID-LRA commits, or keep `NO_COMMIT` as an explicit warning if preserving the original audit trail is preferred.
 
+### Historical memory backfill for HID-LRA-10
+
+- Commit: this checkpoint
+- Scope: backfill the original `memory/2026-06-18.md` governance/consumer-surface memory entry from `NO_COMMIT` to commit `c77ac51` while preserving the original unbound state as metadata.
+- Changed files:
+  - `memory/2026-06-18.md`
+  - `docs/hid_long_running_checkpoint_rollup.md`
+- Validation:
+  - PASS `python -X utf8 scripts/validate_memory_records.py`
+  - PASS `python -m unittest discover -s tests`
+- Stats before/after:
+  - reviewed: unchanged
+  - verified: unchanged
+  - scaffold: unchanged
+- Review level: 1 (historical memory binding cleanup)
+- Can claim:
+  - The previously unbound `AI governance and consumer surface update` memory entry is now bound to commit `c77ac51`.
+  - The original `NO_COMMIT` state is preserved under `backfilled_from`.
+- Cannot claim:
+  - cannot claim all historical HID-LRA commits are individually backfilled.
+  - cannot claim HID semantic or verification uplift.
+- Residual risk:
+  - Additional historical commits may still benefit from optional summary backfill, but the visible `NO_COMMIT` problem is now resolved.
+
