@@ -88,7 +88,7 @@
 
 ### HID-LRA-12: Source Authority Extension Import Eligibility
 
-- status: Active
+- status: Completed
 - objective: define the explicit criteria to move `6.2.2` to current imported usage and launch governed import implementation work.
 - dependencies: user-approved `HID-EXT-1` preflight and follow-up claim-ceiling update.
 - latest checkpoint: this checkpoint
@@ -101,5 +101,12 @@
 - objective: add repo-local warning-only tooling that detects unbound daily
   memory entries and emits checkpoint memory records.
 - gate: governance visibility only; no HID semantic or runtime-enforcement claim.
+
+### HID-LRA-14: 6.2.2 Import-Prep Shell
+
+- status: Completed
+- objective: add report descriptor item import-prep matrix, validator, tests, and
+  zh/en spec pages without moving `6.2.2` to current imported usage.
+- gate: import-prep only; no parser/report descriptor semantic claim.
 
 

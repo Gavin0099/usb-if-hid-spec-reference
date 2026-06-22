@@ -1,0 +1,81 @@
+matrix_id: hid_report_descriptor_items_matrix
+matrix_version: 0.1.0
+status: import_prep
+source_refs:
+  - source_id: hid_spec_1_11
+    title: "Device Class Definition for Human Interface Devices (HID), Version 1.11"
+    url: "https://www.usb.org/sites/default/files/documents/hid1_11.pdf"
+    section: "6.2.2"
+    scope_note: "Report descriptor item identity import-prep only; not current imported usage."
+claim_boundary:
+  current_imported_usage: false
+  claim_level_default: scaffold
+  evidence_status_default: not_imported
+  verified_entries: 0
+  reviewed_entries: 0
+  non_claims:
+    - parser_behavior
+    - report_descriptor_semantics
+    - firmware_report_descriptor_parsing
+    - host_os_input_stack_behavior
+entries:
+  - item_id: report_descriptor_short_item_prefix
+    item_name: short_item_prefix
+    item_kind: item_prefix
+    summary: "Short item prefix identity shell."
+    claim_level: scaffold
+    evidence_status: not_imported
+    source_anchor:
+      source_id: hid_spec_1_11
+      section: "6.2.2"
+      topic: "Report Descriptor item format"
+  - item_id: report_descriptor_long_item_prefix
+    item_name: long_item_prefix
+    item_kind: item_prefix
+    summary: "Long item prefix identity shell."
+    claim_level: scaffold
+    evidence_status: not_imported
+    source_anchor:
+      source_id: hid_spec_1_11
+      section: "6.2.2"
+      topic: "Report Descriptor item format"
+  - item_id: report_descriptor_main_item_type
+    item_name: main_item_type
+    item_kind: item_type
+    summary: "Main item type identity shell."
+    claim_level: scaffold
+    evidence_status: not_imported
+    source_anchor:
+      source_id: hid_spec_1_11
+      section: "6.2.2"
+      topic: "Report Descriptor item type"
+  - item_id: report_descriptor_global_item_type
+    item_name: global_item_type
+    item_kind: item_type
+    summary: "Global item type identity shell."
+    claim_level: scaffold
+    evidence_status: not_imported
+    source_anchor:
+      source_id: hid_spec_1_11
+      section: "6.2.2"
+      topic: "Report Descriptor item type"
+  - item_id: report_descriptor_local_item_type
+    item_name: local_item_type
+    item_kind: item_type
+    summary: "Local item type identity shell."
+    claim_level: scaffold
+    evidence_status: not_imported
+    source_anchor:
+      source_id: hid_spec_1_11
+      section: "6.2.2"
+      topic: "Report Descriptor item type"
+  - item_id: report_descriptor_reserved_item_type
+    item_name: reserved_item_type
+    item_kind: item_type
+    summary: "Reserved item type identity shell."
+    claim_level: scaffold
+    evidence_status: not_imported
+    source_anchor:
+      source_id: hid_spec_1_11
+      section: "6.2.2"
+      topic: "Report Descriptor item type"
