@@ -34,6 +34,7 @@ Current covered surface:
 
 - HID class requests reviewed identity surface (6 entries)
 - HID descriptor field scaffold (7 entries)
+- HID report descriptor item import-prep shell (6 entries, not current imported usage)
 - No verified or fully interpreted behavior claims
 
 ## Source Authority
@@ -78,6 +79,7 @@ validator, or CodeBurn observation as enforcement.
 - `specs/hid_scope.md`
 - `specs/hid_class_requests.md`
 - `specs/hid_descriptor_fields.md`
+- `specs/hid_report_descriptor_items.md`
 - `specs/verification_status.md`
 - `docs/claim_boundary.md`
 - `docs/source_authority.md`
@@ -91,7 +93,7 @@ validator, or CodeBurn observation as enforcement.
 ## Machine-Readable Surfaces
 
 - `data/`: governed scaffold matrices for HID class requests and HID descriptor
-  fields.
+  fields, plus import-prep shell matrices that are not current imported usage.
 - `contract/`: repo-local authority, claim, evidence, and version-scope rules.
 - `exports/hid_governed_surface_manifest.yaml`: consumer-facing manifest for
   the current HID scaffold surface.
@@ -123,6 +125,7 @@ Core repo-local checks:
 python scripts\validate_source_authority.py
 python scripts\validate_hid_class_request_matrix.py
 python scripts\validate_hid_descriptor_fields_matrix.py
+python scripts\validate_hid_report_descriptor_items_matrix.py
 python scripts\validate_verification_status.py
 python scripts\validate_source_registry.py `
   --receipt-out evidence\validation_receipt_source_registry.json

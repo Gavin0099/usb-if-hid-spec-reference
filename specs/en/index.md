@@ -15,6 +15,7 @@ consuming firmware repositories.
 - [HID Scope](hid_scope.md)
 - [HID Class Requests](hid_class_requests.md)
 - [HID Descriptor Fields](hid_descriptor_fields.md)
+- [HID Report Descriptor Items](hid_report_descriptor_items.md)
 - [Verification Status](verification_status.md)
 - [zh-TW Index](../index.md)
 

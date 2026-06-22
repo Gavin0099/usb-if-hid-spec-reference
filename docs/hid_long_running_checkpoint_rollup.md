@@ -1672,3 +1672,50 @@ Commit Checkpoint:
 - Residual risk:
   - Manifest remains an advisory consumer surface; count alignment does not upgrade semantic authority.
 
+## Batch: HID-LRA-43 (HID-LRA-14 / 6.2.2 import-prep shell)
+
+- Commit: this checkpoint
+- Scope: add `6.2.2` report descriptor item import-prep shell artifacts without moving the section into current imported usage.
+- Changed files:
+  - `data/hid_report_descriptor_items_matrix.yaml`
+  - `scripts/validate_hid_report_descriptor_items_matrix.py`
+  - `tests/test_hid_report_descriptor_items_matrix.py`
+  - `specs/hid_report_descriptor_items.md`
+  - `specs/en/hid_report_descriptor_items.md`
+  - `specs/index.md`
+  - `specs/en/index.md`
+  - `.github/workflows/validate.yml`
+  - `README.md`
+  - `AGENTS.md`
+  - `docs/claim_boundary.md`
+  - `docs/source_authority.md`
+  - `governance/hid_work_queue.yaml`
+  - `docs/hid_long_running_roadmap.md`
+- Validation:
+  - PASS `python -X utf8 scripts/validate_source_authority.py`
+  - PASS `python -X utf8 scripts/validate_hid_class_request_matrix.py`
+  - PASS `python -X utf8 scripts/validate_hid_descriptor_fields_matrix.py`
+  - PASS `python -X utf8 scripts/validate_hid_report_descriptor_items_matrix.py`
+  - PASS `python -X utf8 scripts/validate_verification_status.py`
+  - PASS `python -X utf8 scripts/validate_memory_records.py`
+  - PASS `python -m unittest discover -s tests`
+- Stats before/after:
+  - reviewed: unchanged
+  - verified: unchanged
+  - scaffold: unchanged for current imported governed surface
+- Review level: 2 (source-authority import-prep shell)
+- Can claim:
+  - `HID-EXT-2` is marked reviewed as import-prep gate content.
+  - `6.2.2` has import-prep matrix, validator, tests, and zh/en spec pages.
+  - The import-prep shell remains outside current imported usage and outside consumer manifest counts.
+- Cannot claim:
+  - cannot claim `6.2.2` current imported usage.
+  - cannot claim report descriptor parser behavior.
+  - cannot claim report payload semantics.
+  - cannot claim firmware or OS behavior correctness.
+  - cannot claim reviewed/verified count uplift.
+- Residual risk:
+  - Formal `6.2.2` import remains a Level 3 source-authority transition and still requires explicit approval.
+- Next recommended slice:
+  - If approved, perform the Level 3 transition that moves `6.2.2` from `future_authorized_usage` to `current_imported_usage` and updates governed manifest/count rules.
+

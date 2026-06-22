@@ -90,10 +90,13 @@ Forbidden in this repo:
 - `specs/en/hid_class_requests.md` - English HID class request counterpart
 - `specs/hid_descriptor_fields.md` - HID descriptor field scaffold summary
 - `specs/en/hid_descriptor_fields.md` - English HID descriptor field counterpart
+- `specs/hid_report_descriptor_items.md` - HID report descriptor item import-prep shell
+- `specs/en/hid_report_descriptor_items.md` - English report descriptor item import-prep counterpart
 - `specs/verification_status.md` - zh-TW verification status
 - `specs/en/verification_status.md` - English verification status
 - `data/hid_class_request_matrix.yaml` - HID class request machine-readable scaffold
 - `data/hid_descriptor_fields_matrix.yaml` - HID descriptor field machine-readable scaffold
+- `data/hid_report_descriptor_items_matrix.yaml` - HID report descriptor item import-prep matrix
 - `contract/` - repo-local authority, claim, evidence, and version-scope rules
 - `exports/hid_governed_surface_manifest.yaml` - consumer-facing HID scaffold manifest
 - `evidence/source_registry.yaml` - evidence-facing source registry

@@ -28,7 +28,7 @@ Primary source URL:
 
 | Source area | Status |
 |---|---|
-| Report Descriptor item types (`6.2.2`) | scaffolded_preflight |
+| Report Descriptor item types (`6.2.2`) | scaffolded_preflight with import-prep shell |
 
 ## Not Yet Imported
 

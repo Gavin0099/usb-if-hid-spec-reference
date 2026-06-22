@@ -26,6 +26,9 @@ jobs:
       - name: Validate HID descriptor fields matrix
         run: python scripts/validate_hid_descriptor_fields_matrix.py
 
+      - name: Validate HID report descriptor items matrix
+        run: python scripts/validate_hid_report_descriptor_items_matrix.py
+
       - name: Validate verification status
         run: python scripts/validate_verification_status.py
 
