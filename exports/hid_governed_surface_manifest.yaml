@@ -12,13 +12,13 @@ authority_surface:
   hid11:
     state: scaffold
     summary: >
-      HID 1.11 reference surface is identity-level only. HID class requests are
-      reviewed; HID descriptor fields remain scaffold. No entry-level verified
-      semantics or firmware behavior claims are made.
+      HID 1.11 reference surface is identity-level reviewed for class requests,
+      HID descriptor fields, and report descriptor item shells. No entry-level
+      verified semantics or firmware behavior claims are made.
     tracked: 19
-    scaffold: 7
+    scaffold: 0
     verified: 0
-    reviewed: 12
+    reviewed: 19
     evidence_packets: 0
     reviewed_meaning: repo_local_review_without_verified_semantics
     pending_semantic_promotion: 19
@@ -45,7 +45,7 @@ consumer_usage:
     - treat_spec_reference_as_project_fact
     - override_project_evidence
     - infer_firmware_support_from_spec_presence
-    - treat_scaffold_entries_as_verified_semantics
+    - treat_reviewed_entries_as_verified_semantics
     - infer_os_input_stack_behavior
 
 governed_tables:
@@ -68,11 +68,12 @@ governed_tables:
     validator: scripts/validate_hid_descriptor_fields_matrix.py
     state: scaffold
     tracked: 7
-    scaffold: 7
+    scaffold: 0
     verified: 0
-    reviewed: 0
+    reviewed: 7
     verified_scope: none
-    scaffold_scope: descriptor_field_identity_only
+    scaffold_scope: none_remaining
+    reviewed_scope: descriptor_field_identity_only
 
   - id: hid_report_descriptor_items_matrix
     spec_family: hid11

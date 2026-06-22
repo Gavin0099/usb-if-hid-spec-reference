@@ -8,9 +8,10 @@ source_refs:
     section: "6.2.1"
     scope_note: "HID descriptor field identities only."
 claim_boundary:
-  claim_level_default: scaffold
+  claim_level_default: reviewed
   evidence_status_default: not_verified
   verified_entries: 0
+  reviewed_entries: 7
   non_claims:
     - parser_behavior
     - report_descriptor_payload
@@ -18,8 +19,8 @@ claim_boundary:
 entries:
   - field_id: hid_bLength
     field_name: bLength
-    summary: "Descriptor total length in bytes."
-    claim_level: scaffold
+    summary: "HID descriptor bLength identity field for descriptor total length in bytes."
+    claim_level: reviewed
     evidence_status: not_verified
     source_anchor:
       source_id: hid_spec_1_11
@@ -27,8 +28,8 @@ entries:
       topic: "HID Descriptor"
   - field_id: hid_bDescriptorType
     field_name: bDescriptorType
-    summary: "HID descriptor type code."
-    claim_level: scaffold
+    summary: "HID descriptor bDescriptorType identity field for descriptor type code."
+    claim_level: reviewed
     evidence_status: not_verified
     source_anchor:
       source_id: hid_spec_1_11
@@ -36,8 +37,8 @@ entries:
       topic: "HID Descriptor"
   - field_id: hid_bcdHID
     field_name: bcdHID
-    summary: "HID class specification release number."
-    claim_level: scaffold
+    summary: "HID descriptor bcdHID identity field for HID class specification release number."
+    claim_level: reviewed
     evidence_status: not_verified
     source_anchor:
       source_id: hid_spec_1_11
@@ -45,8 +46,8 @@ entries:
       topic: "HID Descriptor"
   - field_id: hid_bCountryCode
     field_name: bCountryCode
-    summary: "Country code for hardware locale assumptions."
-    claim_level: scaffold
+    summary: "HID descriptor bCountryCode identity field for hardware country code."
+    claim_level: reviewed
     evidence_status: not_verified
     source_anchor:
       source_id: hid_spec_1_11
@@ -54,8 +55,8 @@ entries:
       topic: "HID Descriptor"
   - field_id: hid_bNumDescriptors
     field_name: bNumDescriptors
-    summary: "Number of subordinate descriptor entries."
-    claim_level: scaffold
+    summary: "HID descriptor bNumDescriptors identity field for subordinate descriptor entry count."
+    claim_level: reviewed
     evidence_status: not_verified
     source_anchor:
       source_id: hid_spec_1_11
@@ -63,8 +64,8 @@ entries:
       topic: "HID Descriptor"
   - field_id: hid_bDescriptorType_subordinate
     field_name: bDescriptorType_subordinate
-    summary: "Descriptor type for each subordinate descriptor entry."
-    claim_level: scaffold
+    summary: "Subordinate descriptor bDescriptorType identity field for each subordinate descriptor entry."
+    claim_level: reviewed
     evidence_status: not_verified
     source_anchor:
       source_id: hid_spec_1_11
@@ -72,8 +73,8 @@ entries:
       topic: "HID Descriptor"
   - field_id: hid_wDescriptorLength
     field_name: wDescriptorLength
-    summary: "Length value for each subordinate descriptor entry."
-    claim_level: scaffold
+    summary: "Subordinate descriptor wDescriptorLength identity field for each subordinate descriptor length value."
+    claim_level: reviewed
     evidence_status: not_verified
     source_anchor:
       source_id: hid_spec_1_11

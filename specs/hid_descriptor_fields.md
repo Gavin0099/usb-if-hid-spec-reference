@@ -1,56 +1,62 @@
 # HID Descriptor Fields
 
-## 頁面用途
+## 頁面目的
 
-本頁提供 USB HID 1.11 第 6.2.1 節的 descriptor 欄位身份層（identity）對照。
+本頁為 USB HID 1.11 Section 6.2.1 descriptor fields 提供 identity-level
+reviewed wording。
 
-## 欄位索引
+## Governed Matrix
 
-機械可讀對照表：
+機器可讀來源：
 
 - `data/hid_descriptor_fields_matrix.yaml`
 
-## 欄位摘要
+## Field Summary
 
-| 欄位 | 意義 | Claim level |
+| Field | Meaning | Claim level |
 |---|---|---:|
-| `bLength` | descriptor 的總長度。 | scaffold |
-| `bDescriptorType` | descriptor 類型識別值。 | scaffold |
-| `bcdHID` | HID 規格版本（BCD 編碼）。 | scaffold |
-| `bCountryCode` | 硬體國別碼欄位。 | scaffold |
-| `bNumDescriptors` | subordinate descriptor 的項目數。 | scaffold |
-| `bDescriptorType_subordinate` | 每個 subordinate descriptor 的類型欄位。 | scaffold |
-| `wDescriptorLength` | 每個 subordinate descriptor 的長度欄位。 | scaffold |
+| `bLength` | HID descriptor total-length identity field. | reviewed |
+| `bDescriptorType` | HID descriptor type-code identity field. | reviewed |
+| `bcdHID` | HID class specification release identity field. | reviewed |
+| `bCountryCode` | Hardware country-code identity field. | reviewed |
+| `bNumDescriptors` | Subordinate descriptor entry-count identity field. | reviewed |
+| `bDescriptorType_subordinate` | Descriptor type identity field for each subordinate descriptor entry. | reviewed |
+| `wDescriptorLength` | Descriptor length identity field for each subordinate descriptor entry. | reviewed |
 
 ## Scope and Boundary
 
-本頁僅保留身份層語意：
+本頁只記錄 HID descriptor field identity。
 
-- 不宣告 parser 行為。
-- 不宣告 firmware request parser/descriptor 行為。
-- 不宣告 host stack 行為。
+- 不宣告 parser behavior。
+- 不宣告 firmware descriptor parsing behavior。
+- 不宣告 host stack semantics。
 - 不宣告 report descriptor semantics。
+- 不宣告 runtime transport、framing 或 timing semantics。
 
-## 身份約定
+## Reviewed Identity Notes
 
-- 範圍限定在欄位名稱與型別意圖。
-- 數值語意僅保留 scaffold 級別描述，不推論執行流程。
-- 本頁與矩陣不代表行為規範文件。
+- `bLength`, `bDescriptorType`, `bcdHID`, `bCountryCode` 與
+  `bNumDescriptors` 只記錄 HID descriptor identity field。
+- `bDescriptorType_subordinate` 與 `wDescriptorLength` 只記錄 subordinate
+  descriptor entry 的 identity field。
+- reviewed 狀態只代表 repo-local wording review，不代表 parser behavior 或
+  runtime descriptor handling 已驗證。
 
-## 關聯備註
+## Relationship Notes
 
-- `bNumDescriptors` 是 subordinate descriptor 的項目數量。
-- 每一個 subordinate descriptor 由一組 `bDescriptorType_subordinate` + `wDescriptorLength` 一起描述。
-- `wDescriptorLength` 仍為身份層定義，不含 runtime 解析正確性。
+- `bNumDescriptors` 是 subordinate descriptor element 的 entry count identity。
+- 每一個 subordinate descriptor element 由 `bDescriptorType_subordinate` 與
+  `wDescriptorLength` 這組 identity fields 描述。
+- `wDescriptorLength` 保持 identity-level，不表示 runtime parsing behavior。
 
-## 來源
+## Source Reference
 
 - HID Specification 1.11, Section 6.2.1
 - `https://www.usb.org/sites/default/files/documents/hid1_11.pdf`
 
-## 非聲明項
+## Non-claims
 
-- 本頁不宣告 parser 正確性。
-- 本頁不宣告 firmware descriptor parsing 行為。
+- 本頁不宣告 parser correctness。
+- 本頁不宣告 firmware descriptor parsing behavior。
 - 本頁不宣告 report descriptor semantics。
-- 本頁不宣告 evidence-backed verified 提升。
+- 本頁不宣告任何 evidence-backed verified promotion。

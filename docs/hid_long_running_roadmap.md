@@ -127,4 +127,12 @@
 - latest checkpoint: cce6c21
 - gate: reviewed identity only; no verified or parser semantic claim.
 
+### HID-LRA-17: 6.2.1 HID Descriptor Field Reviewed Wording
+
+- status: Completed
+- objective: promote the seven Section 6.2.1 HID descriptor field identity
+  entries from scaffold to reviewed wording.
+- gate: reviewed identity only; no verified, parser, or runtime descriptor
+  handling claim.
+
 

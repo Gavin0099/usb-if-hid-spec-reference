@@ -6,15 +6,15 @@ Source authority status: locked.
 
 | Area | Tracked entries | Verified | Reviewed | Inferred | Missing |
 |---|---:|---:|---:|---:|---:|
-| HID descriptors | 7 | 0 | 0 | 0 | 0 |
+| HID descriptors | 7 | 0 | 7 | 0 | 0 |
 | HID report descriptors | 6 | 0 | 6 | 0 | 0 |
 | HID class requests | 6 | 0 | 6 | 0 | 0 |
 | Report / boot / idle semantics | 0 | 0 | 0 | 0 | 0 |
-| **Total** | **19** | **0** | **12** | **0** | **0** |
+| **Total** | **19** | **0** | **19** | **0** | **0** |
 
-## Scaffold Summary
+## Current Surface Summary
 
-| Area | Scaffold entries | Source |
+| Area | Tracked entries | Source |
 |---|---:|---|
 | HID descriptors | 7 | `data/hid_descriptor_fields_matrix.yaml` |
 | HID report descriptors | 6 | `data/hid_report_descriptor_items_matrix.yaml` |
