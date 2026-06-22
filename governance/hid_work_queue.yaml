@@ -317,3 +317,4 @@ queue:
       docs/evidence/candidates/. This prepares Level 3 review input only; it
       does not mark the packet accepted and does not promote hid_get_report to
       verified.
+      checkpoint commit: ad0badb.
