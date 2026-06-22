@@ -236,4 +236,23 @@ queue:
       shells and does not create verified entries.
       checkpoint commit: 92c3296.
 
+  - id: HID-RD-1
+    title: 6.2.2 report descriptor item reviewed wording pass
+    authority: HID 1.11 Section 6.2.2
+    status: reviewed
+    allowed_status_change: scaffold_to_reviewed
+    requires_human_approval: true
+    review_level: 2
+    gate: checkpoint_required
+    forbidden_claims:
+      - firmware behavior correctness
+      - report parser semantics
+      - report payload semantics
+      - Main Global Local item semantic completeness
+      - verified status uplift without evidence
+    notes: >
+      Promote the six report descriptor item identity shells from scaffold to
+      reviewed wording. This remains identity-level only and does not verify
+      parser/runtime behavior or Main / Global / Local item semantics.
+
 

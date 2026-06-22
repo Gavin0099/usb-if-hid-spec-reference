@@ -9,10 +9,10 @@ source_refs:
     scope_note: "Report descriptor item identity scaffold only."
 claim_boundary:
   current_imported_usage: true
-  claim_level_default: scaffold
+  claim_level_default: reviewed
   evidence_status_default: not_verified
   verified_entries: 0
-  reviewed_entries: 0
+  reviewed_entries: 6
   non_claims:
     - parser_behavior
     - report_descriptor_semantics
@@ -22,8 +22,8 @@ entries:
   - item_id: report_descriptor_short_item_prefix
     item_name: short_item_prefix
     item_kind: item_prefix
-    summary: "Short item prefix identity shell."
-    claim_level: scaffold
+    summary: "Short item prefix identity, including item-size/type/tag prefix role only."
+    claim_level: reviewed
     evidence_status: not_verified
     source_anchor:
       source_id: hid_spec_1_11
@@ -32,8 +32,8 @@ entries:
   - item_id: report_descriptor_long_item_prefix
     item_name: long_item_prefix
     item_kind: item_prefix
-    summary: "Long item prefix identity shell."
-    claim_level: scaffold
+    summary: "Long item prefix identity for extended item framing only."
+    claim_level: reviewed
     evidence_status: not_verified
     source_anchor:
       source_id: hid_spec_1_11
@@ -42,8 +42,8 @@ entries:
   - item_id: report_descriptor_main_item_type
     item_name: main_item_type
     item_kind: item_type
-    summary: "Main item type identity shell."
-    claim_level: scaffold
+    summary: "Main item type identity category only; no Main item semantic interpretation."
+    claim_level: reviewed
     evidence_status: not_verified
     source_anchor:
       source_id: hid_spec_1_11
@@ -52,8 +52,8 @@ entries:
   - item_id: report_descriptor_global_item_type
     item_name: global_item_type
     item_kind: item_type
-    summary: "Global item type identity shell."
-    claim_level: scaffold
+    summary: "Global item type identity category only; no Global item semantic interpretation."
+    claim_level: reviewed
     evidence_status: not_verified
     source_anchor:
       source_id: hid_spec_1_11
@@ -62,8 +62,8 @@ entries:
   - item_id: report_descriptor_local_item_type
     item_name: local_item_type
     item_kind: item_type
-    summary: "Local item type identity shell."
-    claim_level: scaffold
+    summary: "Local item type identity category only; no Local item semantic interpretation."
+    claim_level: reviewed
     evidence_status: not_verified
     source_anchor:
       source_id: hid_spec_1_11
@@ -72,8 +72,8 @@ entries:
   - item_id: report_descriptor_reserved_item_type
     item_name: reserved_item_type
     item_kind: item_type
-    summary: "Reserved item type identity shell."
-    claim_level: scaffold
+    summary: "Reserved item type identity category only; no behavior assigned."
+    claim_level: reviewed
     evidence_status: not_verified
     source_anchor:
       source_id: hid_spec_1_11

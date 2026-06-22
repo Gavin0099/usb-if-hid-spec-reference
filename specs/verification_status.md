@@ -7,10 +7,10 @@ Source authority status: locked.
 | Area | Tracked entries | Verified | Reviewed | Inferred | Missing |
 |---|---:|---:|---:|---:|---:|
 | HID descriptors | 7 | 0 | 0 | 0 | 0 |
-| HID report descriptors | 6 | 0 | 0 | 0 | 0 |
+| HID report descriptors | 6 | 0 | 6 | 0 | 0 |
 | HID class requests | 6 | 0 | 6 | 0 | 0 |
 | Report / boot / idle semantics | 0 | 0 | 0 | 0 | 0 |
-| **Total** | **19** | **0** | **6** | **0** | **0** |
+| **Total** | **19** | **0** | **12** | **0** | **0** |
 
 ## Scaffold Summary
 

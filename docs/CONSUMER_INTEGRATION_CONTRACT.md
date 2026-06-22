@@ -17,10 +17,10 @@ reference scaffold. It covers:
 
 - HID 1.11 class request scaffold entries: 6
 - HID 1.11 descriptor field scaffold entries: 7
-- HID 1.11 report descriptor item scaffold entries: 6
+- HID 1.11 report descriptor item reviewed identity entries: 6
 - Total tracked entries: 19
-- Total scaffold entries: 13
-- Reviewed entries: 6
+- Total scaffold entries: 7
+- Reviewed entries: 12
 - Verified entries: 0
 - Evidence packets: 0
 
@@ -45,7 +45,7 @@ Expected output:
 PASS: hid_governed_surface_manifest validation
   manifest_id: hid_governed_surface_manifest
   governed_tables: 3 (hid11=3)
-  hid11: state=scaffold tracked=19 scaffold=13 verified=0 reviewed=6
+  hid11: state=scaffold tracked=19 scaffold=7 verified=0 reviewed=12
 ```
 
 ### Step 2 - Table Content Drift Detection

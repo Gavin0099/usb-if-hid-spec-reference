@@ -119,4 +119,11 @@
 - gate: Level 3 source-authority transition; no verified or parser semantic
   claim.
 
+### HID-LRA-16: 6.2.2 Reviewed Identity Wording
+
+- status: Completed
+- objective: promote the six Section 6.2.2 report descriptor item identity
+  shells from scaffold to reviewed wording.
+- gate: reviewed identity only; no verified or parser semantic claim.
+
 

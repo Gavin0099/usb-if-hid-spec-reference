@@ -1834,3 +1834,51 @@ Commit Checkpoint:
 - Residual risk:
   - Future reviewed/verified semantic work remains separate from this source-authority import checkpoint.
 
+## Batch: HID-LRA-45 (6.2.2 reviewed identity wording)
+
+- Commit: this checkpoint
+- Scope: promote six HID 1.11 Section 6.2.2 report descriptor item identity shells from scaffold to reviewed wording.
+- Changed files:
+  - `data/hid_report_descriptor_items_matrix.yaml`
+  - `scripts/validate_hid_report_descriptor_items_matrix.py`
+  - `specs/hid_report_descriptor_items.md`
+  - `specs/en/hid_report_descriptor_items.md`
+  - `specs/verification_status.md`
+  - `specs/en/verification_status.md`
+  - `exports/hid_governed_surface_manifest.yaml`
+  - `evidence/table_fingerprint_baseline.jsonl`
+  - `docs/CONSUMER_INTEGRATION_CONTRACT.md`
+  - `docs/claim_boundary.md`
+  - `README.md`
+  - `tests/test_contract_files.py`
+  - `tests/test_verification_status_counts.py`
+  - `governance/hid_work_queue.yaml`
+  - `docs/hid_long_running_roadmap.md`
+- Validation:
+  - PASS `python -X utf8 scripts/validate_source_authority.py`
+  - PASS `python -X utf8 scripts/validate_source_registry.py`
+  - PASS `python -X utf8 scripts/validate_contract_files.py`
+  - PASS `python -X utf8 scripts/validate_hid_governed_surface_manifest.py`
+  - PASS `python -X utf8 scripts/validate_verification_status.py`
+  - PASS `python -X utf8 scripts/validate_hid_report_descriptor_items_matrix.py`
+  - PASS `python -X utf8 scripts/probe_table_fingerprint.py --mode check --manifest exports/hid_governed_surface_manifest.yaml --baseline-in evidence/table_fingerprint_baseline.jsonl`
+  - PASS `python -X utf8 scripts/smoke_consumer_integration_fixtures.py`
+  - PASS `python -m unittest discover -s tests`
+- Stats before/after:
+  - tracked: unchanged at 19
+  - scaffold: 13 -> 7
+  - reviewed: 6 -> 12
+  - verified: 0 -> 0
+- Review level: 2 (reviewed identity wording)
+- Can claim:
+  - Six report descriptor item identity shells are now reviewed.
+  - Verification and consumer manifest counts now report 12 reviewed entries and 0 verified entries.
+- Cannot claim:
+  - cannot claim report descriptor parser behavior.
+  - cannot claim report payload semantics.
+  - cannot claim Main / Global / Local item semantic completeness.
+  - cannot claim firmware or OS behavior correctness.
+  - cannot claim verified uplift.
+- Residual risk:
+  - Report descriptor item semantics remain identity-level reviewed wording only.
+
