@@ -10,8 +10,8 @@ class ContractFilesTests(unittest.TestCase):
         self.assertEqual(receipt["result"], "PASS")
         self.assertEqual(receipt["manifest_claim_ceiling"], "scaffold_identity_reference_only")
         self.assertEqual(receipt["manifest_claim_counts"]["tracked"], 19)
-        self.assertEqual(receipt["manifest_claim_counts"]["scaffold"], 13)
-        self.assertEqual(receipt["manifest_claim_counts"]["reviewed"], 6)
+        self.assertEqual(receipt["manifest_claim_counts"]["scaffold"], 7)
+        self.assertEqual(receipt["manifest_claim_counts"]["reviewed"], 12)
         self.assertEqual(receipt["manifest_claim_counts"]["verified"], 0)
 
 

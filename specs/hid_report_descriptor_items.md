@@ -15,12 +15,21 @@ identity-level scaffold。
 
 | Item shell | Role | Claim level | Evidence status |
 |---|---|---:|---|
-| `short_item_prefix` | Short item prefix identity shell. | scaffold | not_verified |
-| `long_item_prefix` | Long item prefix identity shell. | scaffold | not_verified |
-| `main_item_type` | Main item type identity shell. | scaffold | not_verified |
-| `global_item_type` | Global item type identity shell. | scaffold | not_verified |
-| `local_item_type` | Local item type identity shell. | scaffold | not_verified |
-| `reserved_item_type` | Reserved item type identity shell. | scaffold | not_verified |
+| `short_item_prefix` | Short item prefix identity, including item-size/type/tag prefix role only. | reviewed | not_verified |
+| `long_item_prefix` | Long item prefix identity for extended item framing only. | reviewed | not_verified |
+| `main_item_type` | Main item type identity category only. | reviewed | not_verified |
+| `global_item_type` | Global item type identity category only. | reviewed | not_verified |
+| `local_item_type` | Local item type identity category only. | reviewed | not_verified |
+| `reserved_item_type` | Reserved item type identity category only, with no behavior assigned. | reviewed | not_verified |
+
+## Reviewed Identity Notes
+
+- `short_item_prefix` 與 `long_item_prefix` 只記錄 framing identity，不宣告
+  parser behavior。
+- `main_item_type`、`global_item_type` 與 `local_item_type` 只記錄 item type
+  category。
+- `reserved_item_type` 只記錄 identity category；本 repo 不為 reserved item
+  type 指派 behavior。
 
 ## Scope and Boundary
 

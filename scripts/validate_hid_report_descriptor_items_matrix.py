@@ -61,14 +61,14 @@ def validate(path: Path = DEFAULT_MATRIX) -> list[str]:
         claim_boundary = {}
     if claim_boundary.get("current_imported_usage") is not True:
         errors.append("claim_boundary.current_imported_usage must be true")
-    if claim_boundary.get("claim_level_default") != "scaffold":
-        errors.append("claim_boundary.claim_level_default must be scaffold")
+    if claim_boundary.get("claim_level_default") != "reviewed":
+        errors.append("claim_boundary.claim_level_default must be reviewed")
     if claim_boundary.get("evidence_status_default") != "not_verified":
         errors.append("claim_boundary.evidence_status_default must be not_verified")
     if claim_boundary.get("verified_entries") != 0:
         errors.append("claim_boundary.verified_entries must remain 0")
-    if claim_boundary.get("reviewed_entries") != 0:
-        errors.append("claim_boundary.reviewed_entries must remain 0")
+    if claim_boundary.get("reviewed_entries") != len(EXPECTED_ITEMS):
+        errors.append(f"claim_boundary.reviewed_entries must be {len(EXPECTED_ITEMS)}")
 
     entries = data.get("entries")
     if not isinstance(entries, list):
@@ -93,8 +93,8 @@ def validate(path: Path = DEFAULT_MATRIX) -> list[str]:
             errors.append(f"{name} missing fields: {', '.join(missing_fields)}")
         if entry.get("item_kind") not in {"item_prefix", "item_type"}:
             errors.append(f"{name}.item_kind must be item_prefix or item_type")
-        if entry.get("claim_level") != "scaffold":
-            errors.append(f"{name}.claim_level must remain scaffold")
+        if entry.get("claim_level") != "reviewed":
+            errors.append(f"{name}.claim_level must be reviewed")
         if entry.get("evidence_status") != "not_verified":
             errors.append(f"{name}.evidence_status must remain not_verified")
 

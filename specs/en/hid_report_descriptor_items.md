@@ -15,12 +15,21 @@ Machine-readable source:
 
 | Item shell | Role | Claim level | Evidence status |
 |---|---|---:|---|
-| `short_item_prefix` | Short item prefix identity shell. | scaffold | not_verified |
-| `long_item_prefix` | Long item prefix identity shell. | scaffold | not_verified |
-| `main_item_type` | Main item type identity shell. | scaffold | not_verified |
-| `global_item_type` | Global item type identity shell. | scaffold | not_verified |
-| `local_item_type` | Local item type identity shell. | scaffold | not_verified |
-| `reserved_item_type` | Reserved item type identity shell. | scaffold | not_verified |
+| `short_item_prefix` | Short item prefix identity, including item-size/type/tag prefix role only. | reviewed | not_verified |
+| `long_item_prefix` | Long item prefix identity for extended item framing only. | reviewed | not_verified |
+| `main_item_type` | Main item type identity category only. | reviewed | not_verified |
+| `global_item_type` | Global item type identity category only. | reviewed | not_verified |
+| `local_item_type` | Local item type identity category only. | reviewed | not_verified |
+| `reserved_item_type` | Reserved item type identity category only, with no behavior assigned. | reviewed | not_verified |
+
+## Reviewed Identity Notes
+
+- `short_item_prefix` and `long_item_prefix` are recorded as framing identities,
+  not parser behavior.
+- `main_item_type`, `global_item_type`, and `local_item_type` are recorded as
+  item type categories only.
+- `reserved_item_type` is recorded only as an identity category; this repo does
+  not assign behavior to reserved item types.
 
 ## Scope and Boundary
 
