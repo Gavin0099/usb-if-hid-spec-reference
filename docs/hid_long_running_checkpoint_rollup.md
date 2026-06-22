@@ -1591,3 +1591,29 @@ Commit Checkpoint:
 - Next recommended slice:
   - Emit a daily memory entry for this checkpoint and optionally backfill older checkpoint history in a separate governed slice.
 
+### Checkpoint memory entry for HID-LRA-41
+
+- Commit: this checkpoint
+- Scope: record the `HID-LRA-41` tooling checkpoint in repo-local daily memory using `scripts/emit_checkpoint_memory_entry.py`.
+- Changed files:
+  - `memory/2026-06-22.md`
+  - `docs/hid_long_running_checkpoint_rollup.md`
+- Validation:
+  - PASS_WITH_WARNINGS `python -X utf8 scripts/validate_memory_records.py`
+- Stats before/after:
+  - reviewed: unchanged
+  - verified: unchanged
+  - scaffold: unchanged
+- Review level: 1 (memory visibility bookkeeping)
+- Can claim:
+  - `memory/2026-06-22.md` contains a bound entry for commit `30bcc23`.
+  - The new memory emitter was used for its own checkpoint record.
+- Cannot claim:
+  - cannot claim historical memory backfill is complete.
+  - cannot claim existing `NO_COMMIT` memory warnings are resolved.
+  - cannot claim HID semantic or verification uplift.
+- Residual risk:
+  - Historical `memory/2026-06-18.md` remains warning-only until separately remediated or intentionally retained as an audit finding.
+- Next recommended slice:
+  - Add historical backfill entries for key HID-LRA commits, or keep `NO_COMMIT` as an explicit warning if preserving the original audit trail is preferred.
+
