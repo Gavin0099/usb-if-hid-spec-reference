@@ -35,6 +35,9 @@ jobs:
       - name: Validate contract files
         run: python scripts/validate_contract_files.py --receipt-out evidence/validation_receipt_contract_files.json
 
+      - name: Validate memory records
+        run: python scripts/validate_memory_records.py --receipt-out evidence/validation_receipt_memory_records.json
+
       - name: Validate HID governed surface manifest
         run: python scripts/validate_hid_governed_surface_manifest.py
 

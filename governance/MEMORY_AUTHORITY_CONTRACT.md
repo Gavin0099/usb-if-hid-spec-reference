@@ -79,6 +79,19 @@ This is a warning heuristic, not a blocking gate in this repo.
 
 Violation code: `missing_canonical_memory`.
 
+## Checkpoint Memory Tooling
+
+Repo-local tooling:
+
+- `scripts/validate_memory_records.py` checks daily memory structure and reports
+  unbound entries such as `commit_hash: NO_COMMIT`.
+- `scripts/emit_checkpoint_memory_entry.py` emits a structured daily memory
+  entry for a completed checkpoint and refuses `NO_COMMIT` unless explicitly
+  run as a non-binding session note.
+
+The validator is warning-only by default. It creates visibility for missing or
+unbound memory without upgrading memory records into HID semantic authority.
+
 ## Violation Semantics
 
 | Code | Severity | Blocks | Meaning |
@@ -95,5 +108,5 @@ This contract does not add:
 - memory write enforcement
 - session-end hooks
 - CI gates
-- automatic freshness checks
+- blocking freshness checks
 - HID verification authority

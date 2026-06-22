@@ -95,4 +95,11 @@
 - gate: no scope-semantic imports until explicit scope and review checkpoint are set.
 - artifact: `docs/hid_6_2_2_import_eligibility.md`
 
+### HID-LRA-13: Checkpoint Memory Visibility
+
+- status: Completed
+- objective: add repo-local warning-only tooling that detects unbound daily
+  memory entries and emits checkpoint memory records.
+- gate: governance visibility only; no HID semantic or runtime-enforcement claim.
+
 

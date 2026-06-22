@@ -128,6 +128,8 @@ python scripts\validate_source_registry.py `
   --receipt-out evidence\validation_receipt_source_registry.json
 python scripts\validate_contract_files.py `
   --receipt-out evidence\validation_receipt_contract_files.json
+python scripts\validate_memory_records.py `
+  --receipt-out evidence\validation_receipt_memory_records.json
 python scripts\validate_hid_governed_surface_manifest.py
 python scripts\probe_table_fingerprint.py --mode check `
   --manifest exports\hid_governed_surface_manifest.yaml `
