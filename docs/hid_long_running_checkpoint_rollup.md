@@ -2057,3 +2057,39 @@ Commit Checkpoint:
 - Residual risk:
   - First real verified packet remains a separate Level 3 task.
 
+## Batch: HID-LRA-48 (GET_REPORT verified candidate packet skeleton)
+
+- Commit: this checkpoint
+- Scope: add a machine-checkable GET_REPORT candidate packet skeleton for future
+  Level 3 review preparation.
+- Changed files:
+  - `docs/evidence/candidates/hid_get_report_candidate.yaml`
+  - `docs/evidence_packet_schema.md`
+  - `scripts/validate_evidence_packet_schema.py`
+  - `tests/test_evidence_packet_schema.py`
+  - `governance/hid_work_queue.yaml`
+  - `docs/hid_long_running_roadmap.md`
+  - `docs/hid_long_running_checkpoint_rollup.md`
+- Validation:
+  - PASS `python -X utf8 scripts/validate_evidence_packet_schema.py`
+  - PASS `python -m unittest tests.test_evidence_packet_schema`
+- Stats before/after:
+  - tracked: unchanged at 19
+  - scaffold: unchanged at 0
+  - reviewed: unchanged at 19
+  - verified: unchanged at 0
+- Review level:
+  - Level 1 candidate-packet skeleton; no accepted packet and no status/count
+    movement.
+- Can claim:
+  - GET_REPORT has a machine-checkable candidate packet skeleton.
+  - The candidate binds to `hid_class_request_matrix.hid_get_report`.
+  - The candidate remains pending and cannot produce a verified promotion.
+- Cannot claim:
+  - cannot claim an accepted evidence packet.
+  - cannot claim any HID entry is verified.
+  - cannot claim firmware correctness, OS input stack behavior, parser/runtime
+    behavior, or report payload semantics.
+- Residual risk:
+  - Candidate content still requires future Level 3 review before acceptance.
+
