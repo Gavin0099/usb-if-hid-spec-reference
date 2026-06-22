@@ -341,3 +341,4 @@ queue:
       SET_IDLE, GET_PROTOCOL, and SET_PROTOCOL. These prepare Level 3 review
       input only; all candidate packets remain pending and no governed entry is
       promoted to verified.
+      checkpoint commit: d20d87d.
