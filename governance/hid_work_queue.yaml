@@ -274,5 +274,6 @@ queue:
       Promote the seven HID descriptor field identity entries from scaffold to
       reviewed wording. This remains identity-level only and does not verify
       parser/runtime behavior or firmware descriptor handling.
+      checkpoint commit: 21a956f.
 
 
