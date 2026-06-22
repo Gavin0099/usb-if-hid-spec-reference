@@ -55,6 +55,16 @@ Existing files under `docs/evidence/` are shell artifacts. They are useful for
 review navigation and claim-boundary planning, but they do not satisfy the
 verified gate.
 
+## Candidate Packet Location
+
+Candidate packets live under:
+
+- `docs/evidence/candidates/`
+
+Candidate packets are complete enough for Level 3 review preparation, but they
+still do not satisfy the verified gate because their approval record remains
+pending and their status is not `accepted`.
+
 ## Non-Claims
 
 This schema does not claim:

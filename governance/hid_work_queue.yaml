@@ -296,3 +296,24 @@ queue:
       preflight governance only and does not promote any governed entry to
       verified.
       checkpoint commit: 0937dc7.
+
+  - id: HID-VER-1
+    title: GET_REPORT verified candidate packet skeleton
+    authority: HID 1.11 Section 7.2
+    status: reviewed
+    allowed_status_change: candidate_packet_only
+    requires_human_approval: false
+    review_level: 1
+    gate: validation_required
+    forbidden_claims:
+      - accepted evidence packet
+      - verified status uplift
+      - firmware behavior correctness
+      - OS input stack behavior
+      - parser runtime behavior
+      - report payload semantics
+    notes: >
+      Add a machine-checkable GET_REPORT candidate packet skeleton under
+      docs/evidence/candidates/. This prepares Level 3 review input only; it
+      does not mark the packet accepted and does not promote hid_get_report to
+      verified.

@@ -20,6 +20,7 @@ import yaml
 ROOT = Path(__file__).resolve().parents[1]
 SCHEMA = ROOT / "contract" / "evidence_packet_schema.yaml"
 EVIDENCE_DIR = ROOT / "docs" / "evidence"
+CANDIDATE_DIR = EVIDENCE_DIR / "candidates"
 
 REQUIRED_STATUS_VALUES = {"shell", "candidate", "accepted", "rejected"}
 REQUIRED_SECTIONS = {
@@ -64,6 +65,36 @@ def _evidence_shell_statuses() -> dict[str, str]:
         match = pattern.search(text)
         statuses[str(path.relative_to(ROOT))] = match.group(1).strip() if match else "missing"
     return statuses
+
+
+def _load_candidate_packets() -> dict[str, dict[str, Any]]:
+    packets: dict[str, dict[str, Any]] = {}
+    if not CANDIDATE_DIR.exists():
+        return packets
+    for path in sorted(CANDIDATE_DIR.glob("*.yaml")):
+        packets[path.relative_to(ROOT).as_posix()] = _load_yaml(path)
+    return packets
+
+
+def _entry_index() -> dict[tuple[str, str], dict[str, Any]]:
+    index: dict[tuple[str, str], dict[str, Any]] = {}
+    matrix_paths = {
+        "hid_class_request_matrix": ROOT / "data" / "hid_class_request_matrix.yaml",
+        "hid_descriptor_fields_matrix": ROOT / "data" / "hid_descriptor_fields_matrix.yaml",
+        "hid_report_descriptor_items_matrix": ROOT / "data" / "hid_report_descriptor_items_matrix.yaml",
+    }
+    id_fields = ("request_id", "field_id", "item_id")
+    for matrix_id, path in matrix_paths.items():
+        if not path.exists():
+            continue
+        data = _load_yaml(path)
+        for entry in data.get("entries", []):
+            if not isinstance(entry, dict):
+                continue
+            entry_id = next((entry.get(field) for field in id_fields if isinstance(entry.get(field), str)), None)
+            if entry_id:
+                index[(matrix_id, entry_id)] = entry
+    return index
 
 
 def validate() -> tuple[list[str], dict[str, Any]]:
@@ -137,6 +168,49 @@ def validate() -> tuple[list[str], dict[str, Any]]:
         if "verified" in normalized:
             add_error("SHELL_PACKET_VERIFIED", f"{path} status must not contain verified")
 
+    candidate_packets = _load_candidate_packets()
+    entries = _entry_index()
+    for path, packet in candidate_packets.items():
+        for section in REQUIRED_SECTIONS:
+            section_data = packet.get(section)
+            if not isinstance(section_data, dict):
+                add_error("CANDIDATE_SECTION_MISSING", f"{path} missing section: {section}")
+                continue
+            for field in required_fields.get(section, []):
+                value = section_data.get(field)
+                if value in (None, "", []):
+                    add_error("CANDIDATE_FIELD_MISSING", f"{path} missing {section}.{field}")
+
+        identity = packet.get("packet_identity", {}) if isinstance(packet.get("packet_identity"), dict) else {}
+        status = identity.get("packet_status")
+        if status != "candidate":
+            add_error("CANDIDATE_STATUS_INVALID", f"{path} packet_identity.packet_status must be candidate")
+        if identity.get("target_claim_level") != "verified":
+            add_error("CANDIDATE_TARGET_INVALID", f"{path} packet_identity.target_claim_level must be verified")
+        if identity.get("review_level") != 3:
+            add_error("CANDIDATE_REVIEW_LEVEL_INVALID", f"{path} packet_identity.review_level must be 3")
+
+        binding = packet.get("governed_entry_binding", {}) if isinstance(packet.get("governed_entry_binding"), dict) else {}
+        matrix = binding.get("matrix")
+        entry_id = binding.get("entry_id")
+        entry = entries.get((matrix, entry_id)) if isinstance(matrix, str) and isinstance(entry_id, str) else None
+        if entry is None:
+            add_error("CANDIDATE_ENTRY_BINDING_INVALID", f"{path} does not bind to a known governed entry")
+        else:
+            if binding.get("current_claim_level") != entry.get("claim_level"):
+                add_error("CANDIDATE_CURRENT_CLAIM_MISMATCH", f"{path} current_claim_level does not match governed entry")
+            if binding.get("current_evidence_status") != entry.get("evidence_status"):
+                add_error("CANDIDATE_CURRENT_EVIDENCE_MISMATCH", f"{path} current_evidence_status does not match governed entry")
+
+        approval = packet.get("approval", {}) if isinstance(packet.get("approval"), dict) else {}
+        if approval.get("approval_record") not in {"pending", "rejected"}:
+            add_error("CANDIDATE_APPROVAL_INVALID", f"{path} candidate approval_record must remain pending or rejected")
+
+        claim_delta = packet.get("claim_delta", {}) if isinstance(packet.get("claim_delta"), dict) else {}
+        cannot_claim = claim_delta.get("cannot_claim_after_acceptance", [])
+        if not isinstance(cannot_claim, list) or "firmware behavior correctness" not in cannot_claim:
+            add_error("CANDIDATE_NON_CLAIM_INCOMPLETE", f"{path} must preserve firmware behavior correctness as a non-claim")
+
     receipt = {
         "validator": "validate_evidence_packet_schema.py",
         "authority_ceiling": "verified_preflight_contract_only",
@@ -149,6 +223,7 @@ def validate() -> tuple[list[str], dict[str, Any]]:
             "required_packet_status": gate.get("required_packet_status"),
         },
         "checked_shell_packets": shell_statuses,
+        "checked_candidate_packets": sorted(candidate_packets),
         "error_count": len(errors),
         "errors": errors,
         "findings": findings,
@@ -173,6 +248,7 @@ def main() -> int:
 
     print("PASS validate_evidence_packet_schema")
     print(f"- checked shell packets: {len(receipt['checked_shell_packets'])}")
+    print(f"- checked candidate packets: {len(receipt['checked_candidate_packets'])}")
     print(f"- required sections: {len(receipt['required_sections'])}")
     return 0
 

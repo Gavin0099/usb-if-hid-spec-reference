@@ -145,4 +145,12 @@
 - gate: governance preflight only; no verified count movement and no firmware,
   OS input stack, parser/runtime, or product-specific HID behavior claim.
 
+### HID-LRA-19: GET_REPORT Verified Candidate Packet Skeleton
+
+- status: In progress
+- objective: add a machine-checkable `HID-REQ-1` GET_REPORT candidate packet
+  skeleton for future Level 3 review preparation.
+- gate: candidate packet only; no accepted evidence packet and no verified count
+  movement.
+
 
