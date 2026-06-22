@@ -16,6 +16,7 @@ ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_MATRICES = [
     ROOT / "data" / "hid_class_request_matrix.yaml",
     ROOT / "data" / "hid_descriptor_fields_matrix.yaml",
+    ROOT / "data" / "hid_report_descriptor_items_matrix.yaml",
 ]
 DEFAULT_STATUS_PAGES = [
     ROOT / "specs" / "verification_status.md",
@@ -59,6 +60,8 @@ def expected_counts(matrix_paths: list[Path] | None = None) -> dict[str, int | d
             area = "HID class requests"
         elif matrix_id == "hid_descriptor_fields_matrix":
             area = "HID descriptors"
+        elif matrix_id == "hid_report_descriptor_items_matrix":
+            area = "HID report descriptors"
         else:
             raise ValueError(f"{matrix_path} matrix_id is not recognized")
 

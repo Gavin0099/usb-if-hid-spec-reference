@@ -110,4 +110,12 @@
 - latest checkpoint: 0c175d9
 - gate: import-prep only; no parser/report descriptor semantic claim.
 
+### HID-LRA-15: 6.2.2 Current Scaffold Import
+
+- status: Completed
+- objective: move Section 6.2.2 report descriptor item identity shells from
+  future-authorized preflight into current imported scaffold surface.
+- gate: Level 3 source-authority transition; no verified or parser semantic
+  claim.
+
 

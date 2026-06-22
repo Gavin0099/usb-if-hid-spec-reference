@@ -1,16 +1,16 @@
 matrix_id: hid_report_descriptor_items_matrix
 matrix_version: 0.1.0
-status: import_prep
+status: scaffold
 source_refs:
   - source_id: hid_spec_1_11
     title: "Device Class Definition for Human Interface Devices (HID), Version 1.11"
     url: "https://www.usb.org/sites/default/files/documents/hid1_11.pdf"
     section: "6.2.2"
-    scope_note: "Report descriptor item identity import-prep only; not current imported usage."
+    scope_note: "Report descriptor item identity scaffold only."
 claim_boundary:
-  current_imported_usage: false
+  current_imported_usage: true
   claim_level_default: scaffold
-  evidence_status_default: not_imported
+  evidence_status_default: not_verified
   verified_entries: 0
   reviewed_entries: 0
   non_claims:
@@ -24,7 +24,7 @@ entries:
     item_kind: item_prefix
     summary: "Short item prefix identity shell."
     claim_level: scaffold
-    evidence_status: not_imported
+    evidence_status: not_verified
     source_anchor:
       source_id: hid_spec_1_11
       section: "6.2.2"
@@ -34,7 +34,7 @@ entries:
     item_kind: item_prefix
     summary: "Long item prefix identity shell."
     claim_level: scaffold
-    evidence_status: not_imported
+    evidence_status: not_verified
     source_anchor:
       source_id: hid_spec_1_11
       section: "6.2.2"
@@ -44,7 +44,7 @@ entries:
     item_kind: item_type
     summary: "Main item type identity shell."
     claim_level: scaffold
-    evidence_status: not_imported
+    evidence_status: not_verified
     source_anchor:
       source_id: hid_spec_1_11
       section: "6.2.2"
@@ -54,7 +54,7 @@ entries:
     item_kind: item_type
     summary: "Global item type identity shell."
     claim_level: scaffold
-    evidence_status: not_imported
+    evidence_status: not_verified
     source_anchor:
       source_id: hid_spec_1_11
       section: "6.2.2"
@@ -64,7 +64,7 @@ entries:
     item_kind: item_type
     summary: "Local item type identity shell."
     claim_level: scaffold
-    evidence_status: not_imported
+    evidence_status: not_verified
     source_anchor:
       source_id: hid_spec_1_11
       section: "6.2.2"
@@ -74,7 +74,7 @@ entries:
     item_kind: item_type
     summary: "Reserved item type identity shell."
     claim_level: scaffold
-    evidence_status: not_imported
+    evidence_status: not_verified
     source_anchor:
       source_id: hid_spec_1_11
       section: "6.2.2"

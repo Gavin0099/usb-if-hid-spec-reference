@@ -25,13 +25,15 @@ primary_sources:
           - data/hid_descriptor_fields_matrix.yaml
           - specs/hid_descriptor_fields.md
           - specs/en/hid_descriptor_fields.md
-    future_authorized_usage:
       - section: "6.2.2"
         topic: "Report Descriptor item types"
-        status: scaffolded_preflight
+        status: scaffolded
+        covered_surface:
+          - data/hid_report_descriptor_items_matrix.yaml
+          - specs/hid_report_descriptor_items.md
+          - specs/en/hid_report_descriptor_items.md
+    future_authorized_usage: []
     not_yet_imported:
-      - section: "6.2.2"
-        topic: "Report Descriptor"
       - section: "6.2.2.4-6.2.2.8"
         topic: "Report descriptor Main / Global / Local item types"
 secondary_sources:

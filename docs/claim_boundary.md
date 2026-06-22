@@ -10,14 +10,14 @@ At the current stage, the repo may claim:
 - Repo-local governance boundary exists.
 - HID class request identity scaffold exists.
 - HID descriptor field scaffold exists.
-- HID report descriptor item import-prep shell exists.
+- HID report descriptor item identity scaffold exists.
 - Visible zh/en reference pages describe scaffold status.
 
 The repo must not claim:
 
 - HID spec coverage is complete.
 - HID request behavior is fully verified.
-- HID report descriptor item semantics are imported as current governed surface.
+- HID report descriptor item semantics are verified or complete.
 - HID firmware handler correctness is verified.
 - OS HID input stack behavior is covered.
 - Any HID entry has evidence-backed verified promotion.

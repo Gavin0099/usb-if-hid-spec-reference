@@ -10,7 +10,7 @@ Hub reference repo，或被 consuming repo 誤用成 firmware implementation tru
 | Area | Status | Notes |
 |---|---|---|
 | HID descriptors | scaffolded | Descriptor field identity scaffold is active |
-| HID report descriptors | planned | Item/tag/value reference boundary only |
+| HID report descriptors | scaffolded | Report descriptor item identity shell is active |
 | HID class requests | scaffolded | Request identity, direction, and recipient boundary only |
 | Report / boot / idle semantics | planned | Standard-side semantic reference only |
 | Evidence packets | planned | No packets exist yet |

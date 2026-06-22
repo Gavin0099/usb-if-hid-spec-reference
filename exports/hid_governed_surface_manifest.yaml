@@ -4,7 +4,8 @@ export_type: governed_surface_reference
 generated_at: "2026-06-18"
 description: >
   Machine-readable manifest for the USB HID reference scaffold surface.
-  Covers the current HID 1.11 class request and HID descriptor field matrices.
+  Covers the current HID 1.11 class request, HID descriptor field, and report
+  descriptor item matrices.
   Authority ceiling: scaffold_identity_reference_only for all surfaces.
 
 authority_surface:
@@ -12,15 +13,16 @@ authority_surface:
     state: scaffold
     summary: >
       HID 1.11 reference surface is identity-level only. HID class requests are
-      reviewed and HID descriptor fields remain scaffold. No entry-level
-      verified semantics or firmware behavior claims are made.
-    tracked: 13
-    scaffold: 7
+      reviewed; HID descriptor fields and report descriptor item shells remain
+      scaffold. No entry-level verified semantics or firmware behavior claims
+      are made.
+    tracked: 19
+    scaffold: 13
     verified: 0
     reviewed: 6
     evidence_packets: 0
     reviewed_meaning: repo_local_review_without_verified_semantics
-    pending_semantic_promotion: 13
+    pending_semantic_promotion: 19
 
 claim_ceiling:
   default: scaffold_identity_reference_only
@@ -72,3 +74,15 @@ governed_tables:
     reviewed: 0
     verified_scope: none
     scaffold_scope: descriptor_field_identity_only
+
+  - id: hid_report_descriptor_items_matrix
+    spec_family: hid11
+    path: data/hid_report_descriptor_items_matrix.yaml
+    validator: scripts/validate_hid_report_descriptor_items_matrix.py
+    state: scaffold
+    tracked: 6
+    scaffold: 6
+    verified: 0
+    reviewed: 0
+    verified_scope: none
+    scaffold_scope: report_descriptor_item_identity_only

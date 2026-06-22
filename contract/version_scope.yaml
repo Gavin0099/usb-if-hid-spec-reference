@@ -1,6 +1,6 @@
 schema_version: 1
 title: HID Version Scope Contract
-last_updated: 2026-06-18
+last_updated: 2026-06-22
 
 versions:
   hid11:
@@ -9,9 +9,11 @@ versions:
     imported_sections:
       - "7.2"
       - "6.2.1"
+      - "6.2.2"
     current_surfaces:
       - hid_class_requests
       - hid_descriptor_fields
+      - hid_report_descriptor_items
     claim_ceiling: scaffold_identity_reference_only
 
   hid_usage_tables:

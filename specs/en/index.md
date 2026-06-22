@@ -5,7 +5,8 @@ consuming firmware repositories.
 
 ## Current Status
 
-- HID class request governed matrix scaffold exists.
+- HID class request governed matrix has reviewed identity entries.
+- HID descriptor and report descriptor item scaffold matrices exist.
 - No evidence packet is defined yet.
 - No verified HID entry is claimed yet.
 - Current content is reference scaffold and scope boundary only.

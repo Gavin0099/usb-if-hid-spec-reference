@@ -61,8 +61,8 @@ def validate(path: Path = DEFAULT_AUTHORITY) -> list[str]:
         if not isinstance(usage, list):
             errors.append("hid_1_11.current_imported_usage must be a list")
             usage = []
-        elif len(usage) != 2:
-            errors.append("hid_1_11.current_imported_usage must contain exactly two entries")
+        elif len(usage) != 3:
+            errors.append("hid_1_11.current_imported_usage must contain exactly three entries")
         else:
             used_sections = {
                 entry.get("section")
@@ -93,8 +93,17 @@ def validate(path: Path = DEFAULT_AUTHORITY) -> list[str]:
                 if descriptor_entry.get("status") != "scaffolded":
                     errors.append("section 6.2.1 status must be scaffolded")
 
-            if used_sections != {"7.2", "6.2.1"}:
-                errors.append("hid_1_11.current_imported_usage sections must be 7.2 and 6.2.1 only")
+            report_descriptor_entry = usage_by_section.get("6.2.2")
+            if report_descriptor_entry is None:
+                errors.append("hid_1_11.current_imported_usage must include section 6.2.2")
+            else:
+                if report_descriptor_entry.get("topic") != "Report Descriptor item types":
+                    errors.append("section 6.2.2 topic must be Report Descriptor item types")
+                if report_descriptor_entry.get("status") != "scaffolded":
+                    errors.append("section 6.2.2 status must be scaffolded")
+
+            if used_sections != {"7.2", "6.2.1", "6.2.2"}:
+                errors.append("hid_1_11.current_imported_usage sections must be 7.2, 6.2.1, and 6.2.2 only")
 
         future_usage = hid_1_11.get("future_authorized_usage")
         if future_usage is None:

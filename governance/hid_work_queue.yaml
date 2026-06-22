@@ -214,4 +214,25 @@ queue:
       checkpoint memory entries. This is governance visibility only and does
       not introduce HID semantic authority or runtime enforcement.
 
+  - id: HID-EXT-3
+    title: Promote 6.2.2 to current imported scaffold
+    authority: HID 1.11 Section 6.2.2
+    status: reviewed
+    allowed_status_change: future_authorized_to_current_scaffold
+    requires_human_approval: true
+    review_level: 3
+    gate: checkpoint_required
+    future_authorized: false
+    forbidden_claims:
+      - firmware behavior correctness
+      - report parser semantics
+      - report payload semantics
+      - usage table parser behavior
+      - verified status uplift without evidence
+    notes: >
+      Move Section 6.2.2 report descriptor item identity shells from
+      future-authorized preflight into current imported scaffold surface.
+      This does not import Main / Global / Local item semantics beyond identity
+      shells and does not create verified entries.
+
 

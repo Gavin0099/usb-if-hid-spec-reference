@@ -1745,3 +1745,66 @@ Commit Checkpoint:
 - Residual risk:
   - Level 3 source-authority import remains pending explicit approval.
 
+## Batch: HID-LRA-44 (6.2.2 current scaffold import)
+
+- Commit: this checkpoint
+- Scope: move HID 1.11 Section 6.2.2 report descriptor item identity shells from future-authorized preflight into current imported scaffold surface.
+- Changed files:
+  - `data/source_authority.yaml`
+  - `data/hid_report_descriptor_items_matrix.yaml`
+  - `evidence/source_registry.yaml`
+  - `contract/version_scope.yaml`
+  - `exports/hid_governed_surface_manifest.yaml`
+  - `evidence/table_fingerprint_baseline.jsonl`
+  - `scripts/validate_source_authority.py`
+  - `scripts/validate_source_registry.py`
+  - `scripts/validate_verification_status.py`
+  - `scripts/validate_hid_report_descriptor_items_matrix.py`
+  - `scripts/smoke_consumer_integration_fixtures.py`
+  - `tests/test_source_authority.py`
+  - `tests/test_verification_status_counts.py`
+  - `tests/test_probe_table_fingerprint.py`
+  - `tests/test_contract_files.py`
+  - `specs/verification_status.md`
+  - `specs/en/verification_status.md`
+  - `specs/hid_report_descriptor_items.md`
+  - `specs/en/hid_report_descriptor_items.md`
+  - `specs/hid_scope.md`
+  - `specs/en/hid_scope.md`
+  - `docs/CONSUMER_INTEGRATION_CONTRACT.md`
+  - `docs/claim_boundary.md`
+  - `docs/source_authority.md`
+  - `docs/hid_6_2_2_import_eligibility.md`
+  - `README.md`
+  - `AGENTS.md`
+  - `governance/hid_work_queue.yaml`
+  - `docs/hid_long_running_roadmap.md`
+- Validation:
+  - PASS `python -X utf8 scripts/validate_source_authority.py`
+  - PASS `python -X utf8 scripts/validate_source_registry.py`
+  - PASS `python -X utf8 scripts/validate_contract_files.py`
+  - PASS `python -X utf8 scripts/validate_hid_governed_surface_manifest.py`
+  - PASS `python -X utf8 scripts/validate_verification_status.py`
+  - PASS `python -X utf8 scripts/validate_hid_report_descriptor_items_matrix.py`
+  - PASS `python -X utf8 scripts/probe_table_fingerprint.py --mode check --manifest exports/hid_governed_surface_manifest.yaml --baseline-in evidence/table_fingerprint_baseline.jsonl`
+  - PASS `python -X utf8 scripts/smoke_consumer_integration_fixtures.py`
+  - PASS `python -m unittest discover -s tests`
+- Stats before/after:
+  - tracked: 13 -> 19
+  - scaffold: 7 -> 13
+  - reviewed: 6 -> 6
+  - verified: 0 -> 0
+- Review level: 3 (source-authority current import)
+- Can claim:
+  - HID 1.11 Section 6.2.2 report descriptor item identity shells are now current imported scaffold surface.
+  - Consumer manifest and fingerprint baseline include the report descriptor item matrix.
+  - Verification pages now track 19 entries total: 13 scaffold, 6 reviewed, 0 verified.
+- Cannot claim:
+  - cannot claim report descriptor parser behavior.
+  - cannot claim report payload semantics.
+  - cannot claim Main / Global / Local item semantics beyond identity shells.
+  - cannot claim firmware or OS behavior correctness.
+  - cannot claim verified uplift.
+- Residual risk:
+  - The imported surface is still identity-level scaffold and requires future reviewed/verified work for semantic claims.
+

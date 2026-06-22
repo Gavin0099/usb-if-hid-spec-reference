@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Validate HID report descriptor item import-prep matrix."""
+"""Validate HID report descriptor item scaffold matrix."""
 
 from __future__ import annotations
 
@@ -38,8 +38,8 @@ def validate(path: Path = DEFAULT_MATRIX) -> list[str]:
 
     if data.get("matrix_id") != "hid_report_descriptor_items_matrix":
         errors.append("matrix_id must be hid_report_descriptor_items_matrix")
-    if data.get("status") != "import_prep":
-        errors.append("matrix status must be import_prep")
+    if data.get("status") != "scaffold":
+        errors.append("matrix status must be scaffold")
 
     source_refs = data.get("source_refs")
     if not isinstance(source_refs, list) or len(source_refs) != 1:
@@ -59,12 +59,12 @@ def validate(path: Path = DEFAULT_MATRIX) -> list[str]:
     if not isinstance(claim_boundary, dict):
         errors.append("claim_boundary must be a mapping")
         claim_boundary = {}
-    if claim_boundary.get("current_imported_usage") is not False:
-        errors.append("claim_boundary.current_imported_usage must be false")
+    if claim_boundary.get("current_imported_usage") is not True:
+        errors.append("claim_boundary.current_imported_usage must be true")
     if claim_boundary.get("claim_level_default") != "scaffold":
         errors.append("claim_boundary.claim_level_default must be scaffold")
-    if claim_boundary.get("evidence_status_default") != "not_imported":
-        errors.append("claim_boundary.evidence_status_default must be not_imported")
+    if claim_boundary.get("evidence_status_default") != "not_verified":
+        errors.append("claim_boundary.evidence_status_default must be not_verified")
     if claim_boundary.get("verified_entries") != 0:
         errors.append("claim_boundary.verified_entries must remain 0")
     if claim_boundary.get("reviewed_entries") != 0:
@@ -95,8 +95,8 @@ def validate(path: Path = DEFAULT_MATRIX) -> list[str]:
             errors.append(f"{name}.item_kind must be item_prefix or item_type")
         if entry.get("claim_level") != "scaffold":
             errors.append(f"{name}.claim_level must remain scaffold")
-        if entry.get("evidence_status") != "not_imported":
-            errors.append(f"{name}.evidence_status must remain not_imported")
+        if entry.get("evidence_status") != "not_verified":
+            errors.append(f"{name}.evidence_status must remain not_verified")
 
         source_anchor = entry.get("source_anchor")
         if not isinstance(source_anchor, dict):
