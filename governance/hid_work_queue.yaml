@@ -194,4 +194,22 @@ queue:
       This level defines required documentation and review gates only.
       checkpoint commit: this scope prep (planned).
 
+  - id: HID-GOV-1
+    title: Checkpoint memory visibility tooling
+    authority: Repo-local memory authority contract
+    status: reviewed
+    allowed_status_change: scaffold_to_reviewed
+    requires_human_approval: false
+    review_level: 1
+    gate: validation_required
+    forbidden_claims:
+      - HID semantic correctness
+      - memory as binding HID source authority
+      - runtime enforcement
+      - verified status uplift without evidence
+    notes: >
+      Add warning-only tooling to detect unbound daily memory entries and emit
+      checkpoint memory entries. This is governance visibility only and does
+      not introduce HID semantic authority or runtime enforcement.
+
 

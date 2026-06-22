@@ -106,6 +106,8 @@ Forbidden in this repo:
 - `governance/REVIEW_CRITERIA.md` - review/audit guidance
 - `governance/RESPONSE_ENVELOPE_CONTRACT.md` - structured closeout/reporting convention
 - `governance/MEMORY_AUTHORITY_CONTRACT.md` - repo-local memory authority boundary
+- `scripts/validate_memory_records.py` - warning-only repo-local memory record validator
+- `scripts/emit_checkpoint_memory_entry.py` - checkpoint-to-memory entry helper
 - `governance/AGENT_RUNTIME_PROFILE_BOUNDARY.md` - latest upstream runtime-profile boundary record
 - `governance/framework.lock.json` - imported governance framework baseline
 

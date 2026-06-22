@@ -1548,3 +1548,46 @@ Commit Checkpoint:
 - Next recommended slice:
   - Execute `HID-EXT-2` checkpoint in repo-native shell gate (or promote to Level 2 reviewed-draft once artifacts are accepted).
 
+## Batch: HID-LRA-41 (checkpoint memory visibility tooling)
+
+- Commit: this checkpoint
+- Scope: add repo-local warning-only tooling for checkpoint memory visibility and update validation/docs surfaces.
+- Changed files:
+  - `scripts/validate_memory_records.py`
+  - `scripts/emit_checkpoint_memory_entry.py`
+  - `tests/test_memory_records.py`
+  - `.github/workflows/validate.yml`
+  - `README.md`
+  - `AGENTS.md`
+  - `governance/MEMORY_AUTHORITY_CONTRACT.md`
+  - `governance/hid_work_queue.yaml`
+  - `docs/hid_long_running_roadmap.md`
+- Validation:
+  - PASS `python -X utf8 scripts/validate_source_authority.py`
+  - PASS `python -X utf8 scripts/validate_hid_class_request_matrix.py`
+  - PASS `python -X utf8 scripts/validate_hid_descriptor_fields_matrix.py`
+  - PASS `python -X utf8 scripts/validate_verification_status.py`
+  - PASS_WITH_WARNINGS `python -X utf8 scripts/validate_memory_records.py`
+  - PASS `python -m unittest discover -s tests`
+- Stats before/after:
+  - reviewed: unchanged
+  - verified: unchanged
+  - scaffold: unchanged
+- Gate mode: batch (batch_size: 1, approved_batch: true, approved_through: HID-REQ-6)
+- Review level: 1 (warning-only governance visibility tooling)
+- Can claim:
+  - Daily memory entries with `commit_hash: NO_COMMIT` are now detectable by repo-local tooling.
+  - Completed checkpoints can emit structured daily memory entries using a repo-local helper.
+  - CI runs the warning-only memory validator.
+- Cannot claim:
+  - cannot claim memory records are binding HID semantic authority.
+  - cannot claim runtime/session-end memory enforcement.
+  - cannot claim historical memory has all been backfilled.
+  - cannot claim reviewed/verified count uplift.
+- Residual risk:
+  - Existing `memory/2026-06-18.md` still contains an intentionally visible `NO_COMMIT` warning until a separate historical backfill is performed.
+- Requested approval:
+  - No approval required for Level 1 warning-only governance visibility.
+- Next recommended slice:
+  - Emit a daily memory entry for this checkpoint and optionally backfill older checkpoint history in a separate governed slice.
+
