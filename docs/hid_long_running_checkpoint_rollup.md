@@ -1909,3 +1909,52 @@ Commit Checkpoint:
 - Residual risk:
   - Semantic verification remains future work.
 
+## Batch: HID-LRA-46 (6.2.1 HID descriptor fields reviewed wording)
+
+- Commit: this checkpoint
+- Scope: promote seven HID 1.11 Section 6.2.1 HID descriptor field identity entries from scaffold to reviewed wording.
+- Changed files:
+  - `data/hid_descriptor_fields_matrix.yaml`
+  - `scripts/validate_hid_descriptor_fields_matrix.py`
+  - `specs/hid_descriptor_fields.md`
+  - `specs/en/hid_descriptor_fields.md`
+  - `specs/verification_status.md`
+  - `specs/en/verification_status.md`
+  - `exports/hid_governed_surface_manifest.yaml`
+  - `evidence/table_fingerprint_baseline.jsonl`
+  - `docs/CONSUMER_INTEGRATION_CONTRACT.md`
+  - `docs/claim_boundary.md`
+  - `README.md`
+  - `tests/test_contract_files.py`
+  - `tests/test_hid_descriptor_fields_matrix.py`
+  - `tests/test_verification_status_counts.py`
+  - `governance/hid_work_queue.yaml`
+  - `docs/hid_long_running_roadmap.md`
+- Validation:
+  - PASS `python -X utf8 scripts/validate_source_authority.py`
+  - PASS `python -X utf8 scripts/validate_source_registry.py`
+  - PASS `python -X utf8 scripts/validate_contract_files.py`
+  - PASS `python -X utf8 scripts/validate_hid_governed_surface_manifest.py`
+  - PASS `python -X utf8 scripts/validate_verification_status.py`
+  - PASS `python -X utf8 scripts/validate_hid_descriptor_fields_matrix.py`
+  - PASS `python -X utf8 scripts/probe_table_fingerprint.py --mode check --manifest exports/hid_governed_surface_manifest.yaml --baseline-in evidence/table_fingerprint_baseline.jsonl`
+  - PASS `python -X utf8 scripts/smoke_consumer_integration_fixtures.py`
+  - PASS `python -m unittest discover -s tests`
+- Stats before/after:
+  - tracked: unchanged at 19
+  - scaffold: 7 -> 0
+  - reviewed: 12 -> 19
+  - verified: 0 -> 0
+- Review level: 2 (reviewed identity wording)
+- Can claim:
+  - Seven HID descriptor field identity entries are now reviewed.
+  - Verification and consumer manifest counts now report 19 reviewed entries and 0 verified entries.
+- Cannot claim:
+  - cannot claim descriptor parser behavior.
+  - cannot claim runtime descriptor handling.
+  - cannot claim report descriptor semantics.
+  - cannot claim firmware or OS behavior correctness.
+  - cannot claim verified uplift.
+- Residual risk:
+  - Descriptor semantics remain identity-level reviewed wording only.
+

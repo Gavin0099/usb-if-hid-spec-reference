@@ -4,7 +4,7 @@ from scripts.validate_hid_descriptor_fields_matrix import EXPECTED_FIELDS, valid
 
 
 class HidDescriptorFieldsMatrixTests(unittest.TestCase):
-    def test_descriptor_fields_matrix_contains_only_expected_scaffold_fields(self) -> None:
+    def test_descriptor_fields_matrix_contains_only_expected_reviewed_fields(self) -> None:
         self.assertEqual(validate(), [])
         self.assertEqual(EXPECTED_FIELDS, {
             "bLength",
