@@ -124,6 +124,7 @@
 - status: Completed
 - objective: promote the six Section 6.2.2 report descriptor item identity
   shells from scaffold to reviewed wording.
+- latest checkpoint: cce6c21
 - gate: reviewed identity only; no verified or parser semantic claim.
 
 
