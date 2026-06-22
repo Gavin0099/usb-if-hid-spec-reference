@@ -142,8 +142,12 @@ def validate() -> tuple[list[str], dict[str, Any]]:
     surface = (manifest.get("authority_surface") or {}).get("hid11", {})
     if surface.get("verified") != 0:
         add_error("HID11_VERIFIED_NOT_ZERO", "HID scaffold manifest must keep verified count at 0")
-    if surface.get("scaffold") != surface.get("tracked"):
-        add_error("HID11_SCAFFOLD_TRACKED_MISMATCH", "HID scaffold count must equal tracked count")
+    tracked = int(surface.get("tracked", 0))
+    scaffold = int(surface.get("scaffold", 0))
+    reviewed = int(surface.get("reviewed", 0))
+    verified = int(surface.get("verified", 0))
+    if scaffold + reviewed + verified != tracked:
+        add_error("HID11_CLAIM_COUNT_MISMATCH", "HID scaffold/reviewed/verified counts must sum to tracked count")
 
     receipt = {
         "validator": "validate_contract_files.py",
@@ -155,6 +159,12 @@ def validate() -> tuple[list[str], dict[str, Any]]:
         "source_authority_sections": sorted(source_sections),
         "version_scope_sections": sorted(imported_sections),
         "manifest_claim_ceiling": manifest_ceiling,
+        "manifest_claim_counts": {
+            "tracked": tracked,
+            "scaffold": scaffold,
+            "reviewed": reviewed,
+            "verified": verified,
+        },
         "error_count": len(errors),
         "errors": errors,
         "findings": findings,
