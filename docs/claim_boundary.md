@@ -31,6 +31,19 @@ The repo must not claim:
 | `reviewed` | Entry has passed repo-local review but is not evidence-backed verified. |
 | `verified` | Entry has source-traceable evidence and an accepted evidence packet. |
 
+## Verified Promotion Preflight
+
+A `reviewed` entry may not become `verified` until the evidence packet schema and
+Level 3 gate are satisfied.
+
+Required references:
+
+- `contract/evidence_packet_schema.yaml`
+- `docs/evidence_packet_schema.md`
+- `scripts/validate_evidence_packet_schema.py`
+
+Existing shell artifacts under `docs/evidence/` do not satisfy this gate.
+
 ## Firmware Boundary
 
 Consuming firmware repos may use this repo as standard-side reference input.

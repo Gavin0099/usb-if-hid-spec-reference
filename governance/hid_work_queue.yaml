@@ -276,4 +276,23 @@ queue:
       parser/runtime behavior or firmware descriptor handling.
       checkpoint commit: 21a956f.
 
+  - id: HID-GOV-2
+    title: Verified evidence packet preflight gate
+    authority: Repo-local evidence packet governance
+    status: reviewed
+    allowed_status_change: governance_preflight_only
+    requires_human_approval: false
+    review_level: 1
+    gate: validation_required
+    forbidden_claims:
+      - verified status uplift
+      - firmware behavior correctness
+      - OS input stack behavior
+      - parser runtime behavior
+      - product-specific HID behavior
+    notes: >
+      Define the evidence packet schema, verified promotion gate, validator, and
+      Level 3 approval criteria for future reviewed-to-verified work. This is
+      preflight governance only and does not promote any governed entry to
+      verified.
 

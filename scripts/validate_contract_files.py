@@ -24,6 +24,7 @@ MANIFEST = ROOT / "exports" / "hid_governed_surface_manifest.yaml"
 REQUIRED_CONTRACTS = {
     "authority_levels.yaml",
     "claim_rules.yaml",
+    "evidence_packet_schema.yaml",
     "evidence_requirements.yaml",
     "version_scope.yaml",
 }
@@ -106,6 +107,19 @@ def validate() -> tuple[list[str], dict[str, Any]]:
     if not isinstance(claim_level_values, list) or "scaffold" not in claim_level_values or "verified" not in claim_level_values:
         add_error("CLAIM_LEVEL_VALUES_INCOMPLETE", "claim_level_values must include scaffold and verified")
 
+    packet_schema = docs.get("evidence_packet_schema.yaml", {})
+    if packet_schema.get("authority_ceiling") != "verified_preflight_contract_only":
+        add_error("EVIDENCE_PACKET_AUTHORITY_CEILING_INVALID", "evidence_packet_schema authority ceiling must be verified_preflight_contract_only")
+    packet_status_values = packet_schema.get("packet_status_values", [])
+    if not isinstance(packet_status_values, list) or "shell" not in packet_status_values or "accepted" not in packet_status_values:
+        add_error("EVIDENCE_PACKET_STATUS_VALUES_INCOMPLETE", "evidence packet schema must include shell and accepted packet statuses")
+    verified_gate = packet_schema.get("verified_gate", {})
+    if not isinstance(verified_gate, dict):
+        add_error("EVIDENCE_PACKET_VERIFIED_GATE_MISSING", "evidence packet schema must define verified_gate")
+        verified_gate = {}
+    if verified_gate.get("review_level") != 3 or verified_gate.get("required_packet_status") != "accepted":
+        add_error("EVIDENCE_PACKET_VERIFIED_GATE_INVALID", "verified gate must require Level 3 and accepted packet status")
+
     version_scope = docs.get("version_scope.yaml", {})
     versions = version_scope.get("versions", {})
     hid11 = versions.get("hid11", {}) if isinstance(versions, dict) else {}
@@ -164,6 +178,13 @@ def validate() -> tuple[list[str], dict[str, Any]]:
             "scaffold": scaffold,
             "reviewed": reviewed,
             "verified": verified,
+        },
+        "evidence_packet_schema": {
+            "authority_ceiling": packet_schema.get("authority_ceiling"),
+            "verified_gate": {
+                "review_level": verified_gate.get("review_level"),
+                "required_packet_status": verified_gate.get("required_packet_status"),
+            },
         },
         "error_count": len(errors),
         "errors": errors,

@@ -14,11 +14,19 @@ required_fields_for_each_governed_entry:
 rules:
   - id: verified_requires_evidence_packet
     condition: claim_level == verified
-    requirement: evidence_packet != missing
+    requirement: evidence_packet.status == accepted
 
   - id: verified_requires_section_reference
     condition: claim_level == verified
     requirement: source_section != section_unknown
+
+  - id: verified_requires_level3_approval
+    condition: claim_level == verified
+    requirement: review_level == 3 and approval_record != missing
+
+  - id: evidence_shell_must_not_claim_verified
+    condition: evidence_packet.status == shell
+    requirement: claim_level != verified
 
   - id: scaffold_must_not_claim_semantics
     condition: claim_level == scaffold
