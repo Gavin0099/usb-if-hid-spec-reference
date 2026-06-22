@@ -2,7 +2,8 @@
 """Validate the HID governed surface manifest.
 
 Authority ceiling: manifest_structural_integrity_only.
-Does not re-validate matrix semantics; use per-matrix validators for that.
+Checks manifest structure and aggregate count alignment against governed
+matrix claim levels. Per-matrix validators remain the semantic validators.
 """
 
 from __future__ import annotations
@@ -27,6 +28,19 @@ def _load_yaml(path: Path) -> dict[str, Any]:
     if not isinstance(data, dict):
         raise ValueError(f"{path} must contain a YAML mapping")
     return data
+
+
+def _matrix_counts(path: Path) -> dict[str, int]:
+    doc = _load_yaml(path)
+    entries = doc.get("entries", [])
+    if not isinstance(entries, list):
+        return {"tracked": 0, "scaffold": 0, "verified": 0, "reviewed": 0}
+    return {
+        "tracked": len([entry for entry in entries if isinstance(entry, dict)]),
+        "scaffold": sum(1 for entry in entries if isinstance(entry, dict) and entry.get("claim_level") == "scaffold"),
+        "verified": sum(1 for entry in entries if isinstance(entry, dict) and entry.get("claim_level") == "verified"),
+        "reviewed": sum(1 for entry in entries if isinstance(entry, dict) and entry.get("claim_level") == "reviewed"),
+    }
 
 
 def main() -> int:
@@ -69,6 +83,9 @@ def main() -> int:
         table_path = ROOT / str(raw_path)
         if raw_path and not table_path.exists():
             errors.append(f"R4: entry {entry_id!r} path does not exist: {table_path}")
+            actual_counts = None
+        else:
+            actual_counts = _matrix_counts(table_path) if raw_path else None
 
         raw_validator = entry.get("validator", "")
         validator_path = ROOT / str(raw_validator)
@@ -88,6 +105,15 @@ def main() -> int:
             family_scaffold[spec_family] = family_scaffold.get(spec_family, 0) + int(entry.get("scaffold", 0))
             family_verified[spec_family] = family_verified.get(spec_family, 0) + int(entry.get("verified", 0))
             family_reviewed[spec_family] = family_reviewed.get(spec_family, 0) + int(entry.get("reviewed", 0))
+
+        if actual_counts is not None:
+            for field, actual in actual_counts.items():
+                expected = int(entry.get(field, 0))
+                if expected != actual:
+                    errors.append(
+                        f"R9: entry {entry_id!r} {field} mismatch: "
+                        f"manifest={expected}, matrix={actual}"
+                    )
 
     authority = doc.get("authority_surface") or {}
     if not isinstance(authority, dict):

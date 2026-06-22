@@ -14,9 +14,9 @@ class sub-surface.
 - AI governance baseline: upstream formal release v1.2.0 plus latest observed
   `main` boundary snapshot (`65b3388`, 2026-06-04)
 - Tracked entries: 13
-- Scaffold entries: 13
+- Scaffold entries: 7
 - Verified entries: 0
-- Reviewed entries: 0
+- Reviewed entries: 6
 - Inferred entries: 0
 
 ## Scope
@@ -32,7 +32,7 @@ This repo may cover:
 
 Current covered surface:
 
-- HID class requests scaffold (7 entries)
+- HID class requests reviewed identity surface (6 entries)
 - HID descriptor field scaffold (7 entries)
 - No verified or fully interpreted behavior claims
 

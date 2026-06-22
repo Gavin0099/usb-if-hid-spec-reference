@@ -1641,3 +1641,34 @@ Commit Checkpoint:
 - Residual risk:
   - Additional historical commits may still benefit from optional summary backfill, but the visible `NO_COMMIT` problem is now resolved.
 
+## Batch: HID-LRA-42 (manifest and README reviewed-count alignment)
+
+- Commit: this checkpoint
+- Scope: align consumer-facing manifest and README counts with governed matrix claim levels and harden manifest validation against stale aggregates.
+- Changed files:
+  - `exports/hid_governed_surface_manifest.yaml`
+  - `scripts/validate_hid_governed_surface_manifest.py`
+  - `scripts/validate_contract_files.py`
+  - `tests/test_contract_files.py`
+  - `README.md`
+  - `docs/hid_long_running_checkpoint_rollup.md`
+- Validation:
+  - PASS `python -X utf8 scripts/validate_hid_governed_surface_manifest.py`
+  - PASS `python -X utf8 scripts/validate_contract_files.py`
+  - PASS `python -m unittest discover -s tests`
+- Stats before/after:
+  - reviewed: unchanged
+  - verified: unchanged
+  - scaffold: unchanged
+- Review level: 1 (aggregate/status alignment)
+- Can claim:
+  - Manifest aggregate counts now reflect `7` scaffold entries and `6` reviewed entries.
+  - README visible status now reflects `6` reviewed HID class request entries.
+  - Manifest validation now compares manifest table counts against actual governed matrix `claim_level` counts.
+- Cannot claim:
+  - cannot claim reviewed/verified count uplift in governed matrices.
+  - cannot claim HID semantic verification.
+  - cannot claim firmware or OS behavior correctness.
+- Residual risk:
+  - Manifest remains an advisory consumer surface; count alignment does not upgrade semantic authority.
+
