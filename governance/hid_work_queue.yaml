@@ -254,5 +254,6 @@ queue:
       Promote the six report descriptor item identity shells from scaffold to
       reviewed wording. This remains identity-level only and does not verify
       parser/runtime behavior or Main / Global / Local item semantics.
+      checkpoint commit: cce6c21.
 
 

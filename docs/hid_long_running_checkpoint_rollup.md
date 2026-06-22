@@ -1836,7 +1836,7 @@ Commit Checkpoint:
 
 ## Batch: HID-LRA-45 (6.2.2 reviewed identity wording)
 
-- Commit: this checkpoint
+- Commit: cce6c21
 - Scope: promote six HID 1.11 Section 6.2.2 report descriptor item identity shells from scaffold to reviewed wording.
 - Changed files:
   - `data/hid_report_descriptor_items_matrix.yaml`
@@ -1881,4 +1881,31 @@ Commit Checkpoint:
   - cannot claim verified uplift.
 - Residual risk:
   - Report descriptor item semantics remain identity-level reviewed wording only.
+
+### Checkpoint memory entry for HID-LRA-45
+
+- Commit: this checkpoint
+- Scope: record the `HID-LRA-45` reviewed wording checkpoint in repo-local daily memory using `scripts/emit_checkpoint_memory_entry.py`.
+- Changed files:
+  - `memory/2026-06-22.md`
+  - `governance/hid_work_queue.yaml`
+  - `docs/hid_long_running_roadmap.md`
+  - `docs/hid_long_running_checkpoint_rollup.md`
+- Validation:
+  - PASS `python -X utf8 scripts/validate_memory_records.py`
+  - PASS `python -m unittest discover -s tests`
+- Stats before/after:
+  - tracked: unchanged at 19
+  - scaffold: unchanged after `cce6c21`
+  - reviewed: unchanged after `cce6c21`
+  - verified: unchanged at 0
+- Can claim:
+  - `memory/2026-06-22.md` contains a bound entry for commit `cce6c21`.
+  - Queue and roadmap now point `HID-RD-1` / `HID-LRA-16` at commit `cce6c21`.
+- Cannot claim:
+  - cannot claim report descriptor parser behavior.
+  - cannot claim report payload semantics.
+  - cannot claim verified uplift.
+- Residual risk:
+  - Semantic verification remains future work.
 
