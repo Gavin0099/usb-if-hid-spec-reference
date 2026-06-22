@@ -12,10 +12,16 @@ class EvidencePacketSchemaTests(unittest.TestCase):
         self.assertEqual(receipt["verified_gate"]["review_level"], 3)
         self.assertEqual(receipt["verified_gate"]["required_packet_status"], "accepted")
         self.assertGreaterEqual(len(receipt["checked_shell_packets"]), 6)
-        self.assertIn(
+        self.assertEqual(len(receipt["checked_candidate_packets"]), 6)
+        for candidate in (
             "docs/evidence/candidates/hid_get_report_candidate.yaml",
-            receipt["checked_candidate_packets"],
-        )
+            "docs/evidence/candidates/hid_set_report_candidate.yaml",
+            "docs/evidence/candidates/hid_get_idle_candidate.yaml",
+            "docs/evidence/candidates/hid_set_idle_candidate.yaml",
+            "docs/evidence/candidates/hid_get_protocol_candidate.yaml",
+            "docs/evidence/candidates/hid_set_protocol_candidate.yaml",
+        ):
+            self.assertIn(candidate, receipt["checked_candidate_packets"])
 
 
 if __name__ == "__main__":
