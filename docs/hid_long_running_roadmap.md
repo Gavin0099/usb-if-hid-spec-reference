@@ -156,9 +156,10 @@
 
 ### HID-LRA-20: Remaining HID Request Candidate Packet Skeletons
 
-- status: In progress
+- status: Completed
 - objective: add machine-checkable candidate packet skeletons for SET_REPORT,
   GET_IDLE, SET_IDLE, GET_PROTOCOL, and SET_PROTOCOL.
+- latest checkpoint: d20d87d
 - gate: candidate packet only; no accepted evidence packet and no verified count
   movement.
 
