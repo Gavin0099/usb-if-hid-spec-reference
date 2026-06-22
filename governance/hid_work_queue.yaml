@@ -168,8 +168,8 @@ queue:
     notes: >
       Prepare governance-safe preflight for additional source authority import, scope
       expansion candidate mapping, and future LRA handoff.
-      HID-LRA-11 preflight work completed at this checkpoint.
-      checkpoint commit: this checkpoint.
+      HID-LRA-11 preflight work completed at checkpoint e0d42f1.
+      checkpoint commit: e0d42f1.
       scope is authority extension preflight only; this does not add imported
       semantics.
 
@@ -194,7 +194,7 @@ queue:
       Import-prep shell artifacts exist in data/specs/tests.
       This level defines required documentation and review gates only; it does
       not move `6.2.2` to current imported usage.
-      checkpoint commit: this checkpoint.
+      checkpoint commit: 0c175d9.
 
   - id: HID-GOV-1
     title: Checkpoint memory visibility tooling

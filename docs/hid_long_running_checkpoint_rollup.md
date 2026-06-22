@@ -1674,7 +1674,7 @@ Commit Checkpoint:
 
 ## Batch: HID-LRA-43 (HID-LRA-14 / 6.2.2 import-prep shell)
 
-- Commit: this checkpoint
+- Commit: 0c175d9
 - Scope: add `6.2.2` report descriptor item import-prep shell artifacts without moving the section into current imported usage.
 - Changed files:
   - `data/hid_report_descriptor_items_matrix.yaml`
@@ -1718,4 +1718,30 @@ Commit Checkpoint:
   - Formal `6.2.2` import remains a Level 3 source-authority transition and still requires explicit approval.
 - Next recommended slice:
   - If approved, perform the Level 3 transition that moves `6.2.2` from `future_authorized_usage` to `current_imported_usage` and updates governed manifest/count rules.
+
+### Checkpoint memory entry for HID-LRA-43
+
+- Commit: this checkpoint
+- Scope: record the `HID-LRA-43` import-prep shell checkpoint in repo-local daily memory using `scripts/emit_checkpoint_memory_entry.py`.
+- Changed files:
+  - `memory/2026-06-22.md`
+  - `governance/hid_work_queue.yaml`
+  - `docs/hid_long_running_roadmap.md`
+  - `docs/hid_long_running_checkpoint_rollup.md`
+- Validation:
+  - PASS `python -X utf8 scripts/validate_memory_records.py`
+  - PASS `python -m unittest discover -s tests`
+- Stats before/after:
+  - reviewed: unchanged
+  - verified: unchanged
+  - scaffold: unchanged for current imported governed surface
+- Can claim:
+  - `memory/2026-06-22.md` contains a bound entry for commit `0c175d9`.
+  - Queue and roadmap now point `HID-EXT-2` / `HID-LRA-14` at commit `0c175d9`.
+- Cannot claim:
+  - cannot claim `6.2.2` current imported usage.
+  - cannot claim report descriptor parser semantics.
+  - cannot claim reviewed/verified count uplift.
+- Residual risk:
+  - Level 3 source-authority import remains pending explicit approval.
 
