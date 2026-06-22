@@ -147,9 +147,10 @@
 
 ### HID-LRA-19: GET_REPORT Verified Candidate Packet Skeleton
 
-- status: In progress
+- status: Completed
 - objective: add a machine-checkable `HID-REQ-1` GET_REPORT candidate packet
   skeleton for future Level 3 review preparation.
+- latest checkpoint: ad0badb
 - gate: candidate packet only; no accepted evidence packet and no verified count
   movement.
 
