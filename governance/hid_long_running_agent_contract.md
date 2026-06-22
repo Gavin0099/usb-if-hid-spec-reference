@@ -1,6 +1,6 @@
 # HID Long-Running Agent Contract (LRA)
 
-> Version: 1.3.0
+> Version: 1.4.0
 > Established: 2026-06-18
 > Scope: `usb-if-hid-spec-reference` repository
 > Claim ceiling: `scaffold_identity_reference_only`
@@ -41,6 +41,8 @@ repo without broadening scope or accidentally creating verified claims.
 - specs/docs cleanup and consistency passes.
 - scaffold wording normalization (identity-level language only).
 - evidence packet shell scaffolding documentation.
+- verified promotion preflight schema and validator work, provided no governed
+  entry is promoted to `verified`.
 - validator receipt documentation updates.
 - zh/en page pair consistency checks for already-scaffolded pages.
 - residual boundary/reviewability reports.
@@ -68,6 +70,22 @@ While operating under this contract, Codex must not assert:
 - HID Usage Table semantic correctness.
 - `"verified"` status for any entry unless evidence packets and review gates are
   explicitly satisfied.
+
+## Verified Promotion Gate
+
+A future `reviewed` to `verified` transition must satisfy all of the following
+before any governed matrix entry changes:
+
+1. `contract/evidence_packet_schema.yaml` exists and validates.
+2. The target packet has `packet_status: accepted`.
+3. The packet binds to exactly one governed matrix entry.
+4. The source trace is already registered in `data/source_authority.yaml`.
+5. Level 3 human approval is recorded.
+6. Required validators pass, including `scripts/validate_evidence_packet_schema.py`.
+7. The checkpoint states firmware, OS input stack, parser/runtime, and
+   product-specific HID behavior non-claims.
+
+Shell or candidate packets cannot produce a verified promotion.
 
 ## Review Gate Modes (Level 2/3)
 
@@ -163,6 +181,7 @@ project standard order and report the observed PASS/FAIL result format:
 
 ```powershell
 python -X utf8 scripts\validate_source_authority.py
+python -X utf8 scripts\validate_evidence_packet_schema.py
 python -X utf8 scripts\validate_hid_class_request_matrix.py
 python -X utf8 scripts\validate_verification_status.py
 python -m unittest discover -s tests

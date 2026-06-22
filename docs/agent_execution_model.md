@@ -28,6 +28,8 @@ respecting the repo claim ceiling and forbidden domains.
   text) -> quick human checkpoint required before moving on.
 - Level 3 tasks: reviewed/verified uplift, source import, new matrix,
   descriptor semantic imports -> must stop and await explicit human approval.
+- Verified promotion preflight tasks may add schema, gate, or validator
+  structure, but they must not change any governed entry to `verified`.
 
 ## Checkpoint modes (Level 2/3)
 
@@ -84,6 +86,9 @@ A slice is not complete unless all of the following exist:
 - No OS/input stack claims.
 - No parser/driver/runtime assertions.
 - No verified claim without explicit evidence packet closure.
+- No `reviewed` to `verified` transition unless
+  `contract/evidence_packet_schema.yaml` is satisfied, the packet status is
+  `accepted`, validation passes, and Level 3 approval is recorded.
 
 ## Deliverable Contract
 

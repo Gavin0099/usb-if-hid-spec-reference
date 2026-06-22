@@ -1985,3 +1985,47 @@ Commit Checkpoint:
 - Residual risk:
   - Semantic verification remains future work.
 
+## Batch: HID-LRA-47 (verified evidence packet preflight gate)
+
+- Commit: this checkpoint
+- Scope: define the future evidence packet schema and verified promotion gate
+  without promoting any HID entry to `verified`.
+- Changed files:
+  - `contract/evidence_packet_schema.yaml`
+  - `contract/evidence_requirements.yaml`
+  - `docs/evidence_packet_schema.md`
+  - `docs/claim_boundary.md`
+  - `docs/agent_execution_model.md`
+  - `governance/hid_long_running_agent_contract.md`
+  - `governance/hid_work_queue.yaml`
+  - `docs/hid_long_running_roadmap.md`
+  - `scripts/validate_evidence_packet_schema.py`
+  - `scripts/validate_contract_files.py`
+  - `tests/test_evidence_packet_schema.py`
+  - `tests/test_contract_files.py`
+  - `README.md`
+- Validation:
+  - PASS `python -X utf8 scripts/validate_evidence_packet_schema.py`
+  - PASS `python -X utf8 scripts/validate_contract_files.py`
+  - PASS `python -m unittest tests.test_evidence_packet_schema tests.test_contract_files`
+- Stats before/after:
+  - tracked: unchanged at 19
+  - scaffold: unchanged at 0
+  - reviewed: unchanged at 19
+  - verified: unchanged at 0
+- Review level:
+  - Level 1 governance preflight; no status/count movement.
+- Can claim:
+  - Verified promotion preflight schema exists.
+  - Level 3 verified gate criteria are documented and machine-checked.
+  - Existing `docs/evidence/*_packet.md` shell packets are checked as non-accepted shell artifacts.
+- Cannot claim:
+  - cannot claim any HID entry is verified.
+  - cannot claim any evidence packet has been accepted.
+  - cannot claim firmware correctness.
+  - cannot claim OS input stack behavior.
+  - cannot claim parser/runtime behavior.
+- Residual risk:
+  - Future verified packets still require per-entry evidence content and explicit
+    Level 3 approval.
+

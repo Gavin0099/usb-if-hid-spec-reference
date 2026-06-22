@@ -13,6 +13,12 @@ class ContractFilesTests(unittest.TestCase):
         self.assertEqual(receipt["manifest_claim_counts"]["scaffold"], 0)
         self.assertEqual(receipt["manifest_claim_counts"]["reviewed"], 19)
         self.assertEqual(receipt["manifest_claim_counts"]["verified"], 0)
+        self.assertEqual(
+            receipt["evidence_packet_schema"]["authority_ceiling"],
+            "verified_preflight_contract_only",
+        )
+        self.assertEqual(receipt["evidence_packet_schema"]["verified_gate"]["review_level"], 3)
+        self.assertEqual(receipt["evidence_packet_schema"]["verified_gate"]["required_packet_status"], "accepted")
 
 
 if __name__ == "__main__":

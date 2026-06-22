@@ -65,6 +65,15 @@ this repo remains reviewed or scaffold identity-level reference material only.
 
 No verified HID entries are claimed yet.
 
+Verified promotion preflight is defined by:
+
+- `contract/evidence_packet_schema.yaml`
+- `docs/evidence_packet_schema.md`
+- `scripts/validate_evidence_packet_schema.py`
+
+These files define the future gate only. They do not promote any current HID
+entry to `verified`.
+
 ## Governance Boundary
 
 This repo adopts only repo-local reporting, memory authority, review criteria,
@@ -122,6 +131,7 @@ Core repo-local checks:
 
 ```powershell
 python scripts\validate_source_authority.py
+python scripts\validate_evidence_packet_schema.py
 python scripts\validate_hid_class_request_matrix.py
 python scripts\validate_hid_descriptor_fields_matrix.py
 python scripts\validate_hid_report_descriptor_items_matrix.py

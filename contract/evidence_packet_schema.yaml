@@ -1,0 +1,91 @@
+schema_version: 1
+title: HID Verified Evidence Packet Schema
+last_updated: 2026-06-22
+authority_ceiling: verified_preflight_contract_only
+
+purpose: >
+  Define the required structure for a future evidence-backed verified promotion.
+  This schema does not promote any HID entry to verified by itself.
+
+packet_status_values:
+  - shell
+  - candidate
+  - accepted
+  - rejected
+
+required_sections:
+  - packet_identity
+  - governed_entry_binding
+  - source_trace
+  - claim_delta
+  - evidence_body
+  - non_claims
+  - validation
+  - approval
+  - residual_risk
+
+required_fields:
+  packet_identity:
+    - packet_id
+    - packet_status
+    - review_level
+    - target_claim_level
+  governed_entry_binding:
+    - matrix
+    - entry_id
+    - current_claim_level
+    - current_evidence_status
+  source_trace:
+    - source_id
+    - source_section
+    - cited_source_authority_entry
+    - quoted_or_paraphrased_basis
+  claim_delta:
+    - can_claim_after_acceptance
+    - cannot_claim_after_acceptance
+    - forbidden_claim_check
+  evidence_body:
+    - identity_statement
+    - semantic_statement
+    - evidence_limits
+  non_claims:
+    - firmware_implementation_correctness
+    - os_input_stack_behavior
+    - parser_runtime_behavior
+    - product_specific_hid_behavior
+  validation:
+    - source_authority_validator
+    - matrix_validator
+    - verification_status_validator
+    - evidence_packet_validator
+    - unit_tests
+  approval:
+    - requested_approval
+    - approver
+    - approval_record
+  residual_risk:
+    - remaining_unverified_behavior
+    - consumer_repo_escalation_boundary
+
+verified_gate:
+  review_level: 3
+  required_packet_status: accepted
+  requires_human_approval: true
+  requires_registered_source_authority: true
+  requires_governed_entry_binding: true
+  requires_validation_pass: true
+  requires_non_claims:
+    - firmware implementation correctness
+    - OS input stack behavior
+    - parser/runtime behavior unless separately scoped
+    - product-specific HID behavior
+
+forbidden_promotions:
+  - id: shell_to_verified
+    rule: packet_status == shell must not promote claim_level to verified
+  - id: candidate_without_approval
+    rule: packet_status == candidate must not promote claim_level to verified
+  - id: missing_source_trace
+    rule: missing source_trace must block verified promotion
+  - id: missing_human_approval
+    rule: missing approval_record must block verified promotion

@@ -136,4 +136,12 @@
 - gate: reviewed identity only; no verified, parser, or runtime descriptor
   handling claim.
 
+### HID-LRA-18: Verified Evidence Packet Preflight Gate
+
+- status: In progress
+- objective: define the schema, validator, and Level 3 approval criteria needed
+  before any future reviewed-to-verified promotion.
+- gate: governance preflight only; no verified count movement and no firmware,
+  OS input stack, parser/runtime, or product-specific HID behavior claim.
+
 
