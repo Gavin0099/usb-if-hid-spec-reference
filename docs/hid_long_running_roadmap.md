@@ -330,6 +330,6 @@
 - status: Completed
 - objective: validate full proposal coverage/alignment for all 19 candidates
   and generate accepted-packet proposal summary Markdown/JSON artifacts.
-- latest checkpoint: this checkpoint
+- latest checkpoint: 1958b2c
 - gate: proposal coverage summary only; no production accepted packet and no
   verified count movement.

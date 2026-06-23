@@ -745,4 +745,4 @@ queue:
       proposal-to-candidate bindings are machine-checkable. Add Markdown/JSON
       proposal summary artifacts for all 19 candidates. This does not create
       accepted packets or change governed matrix status.
-      checkpoint commit: this checkpoint.
+      checkpoint commit: 1958b2c.
