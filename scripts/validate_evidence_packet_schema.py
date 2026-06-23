@@ -41,6 +41,15 @@ REQUIRED_GATE_FLAGS = {
     "requires_governed_entry_binding",
     "requires_validation_pass",
 }
+REQUIRED_ACCEPTANCE_WORKFLOW = {
+    "required_previous_status": "candidate",
+    "required_approval_record": "approved",
+    "required_approver": "human",
+    "required_checkpoint_commit": True,
+    "required_validation_receipt": True,
+    "required_level3_checkpoint": True,
+    "forbidden_direct_promotion": True,
+}
 
 
 def _load_yaml(path: Path) -> dict[str, Any]:
@@ -196,6 +205,13 @@ def validate(
     for flag in sorted(REQUIRED_GATE_FLAGS):
         if gate.get(flag) is not True:
             add_error("VERIFIED_GATE_FLAG_INVALID", f"verified_gate.{flag} must be true")
+    workflow = gate.get("acceptance_workflow")
+    if not isinstance(workflow, dict):
+        add_error("ACCEPTANCE_WORKFLOW_MISSING", "verified_gate.acceptance_workflow must be a mapping")
+        workflow = {}
+    for key, expected in REQUIRED_ACCEPTANCE_WORKFLOW.items():
+        if workflow.get(key) != expected:
+            add_error("ACCEPTANCE_WORKFLOW_INVALID", f"verified_gate.acceptance_workflow.{key} must be {expected!r}")
 
     non_claims = set(gate.get("requires_non_claims", []))
     for required in ("firmware implementation correctness", "OS input stack behavior"):
@@ -208,7 +224,14 @@ def validate(
         for item in forbidden_promotions
         if isinstance(item, dict) and isinstance(item.get("id"), str)
     }
-    for required in ("shell_to_verified", "candidate_without_approval", "missing_source_trace", "missing_human_approval"):
+    for required in (
+        "shell_to_verified",
+        "candidate_without_approval",
+        "missing_source_trace",
+        "missing_human_approval",
+        "accepted_without_level3_checkpoint",
+        "accepted_without_validation_receipt",
+    ):
         if required not in forbidden_ids:
             add_error("FORBIDDEN_PROMOTION_MISSING", f"missing forbidden promotion: {required}")
 
@@ -289,6 +312,7 @@ def validate(
         "verified_gate": {
             "review_level": gate.get("review_level"),
             "required_packet_status": gate.get("required_packet_status"),
+            "acceptance_workflow": workflow,
         },
         "checked_shell_packets": shell_statuses,
         "checked_candidate_packets": sorted(candidate_packets),

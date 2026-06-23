@@ -17,6 +17,9 @@ class EvidencePacketSchemaTests(unittest.TestCase):
         self.assertEqual(receipt["authority_ceiling"], "verified_preflight_contract_only")
         self.assertEqual(receipt["verified_gate"]["review_level"], 3)
         self.assertEqual(receipt["verified_gate"]["required_packet_status"], "accepted")
+        self.assertEqual(receipt["verified_gate"]["acceptance_workflow"]["required_previous_status"], "candidate")
+        self.assertEqual(receipt["verified_gate"]["acceptance_workflow"]["required_approval_record"], "approved")
+        self.assertIs(receipt["verified_gate"]["acceptance_workflow"]["required_validation_receipt"], True)
         self.assertGreaterEqual(len(receipt["checked_shell_packets"]), 6)
         self.assertIn("hid_1_11:7.2", receipt["checked_source_authority_bindings"])
         self.assertEqual(
@@ -138,6 +141,38 @@ class EvidencePacketSchemaTests(unittest.TestCase):
             errors, receipt = self._validate_fixture(Path(fixture))
             self.assertEqual(receipt["result"], "FAIL")
             self.assertTrue(any("current_claim_level does not match governed entry" in error for error in errors))
+
+    def test_schema_missing_acceptance_workflow_fails(self) -> None:
+        with self._fixture_root() as fixture:
+            schema = Path(fixture) / "contract" / "evidence_packet_schema.yaml"
+            schema.write_text(
+                schema.read_text(encoding="utf-8").replace(
+                    "  acceptance_workflow:\n"
+                    "    required_previous_status: candidate\n"
+                    "    required_approval_record: approved\n"
+                    "    required_approver: human\n"
+                    "    required_checkpoint_commit: true\n"
+                    "    required_validation_receipt: true\n"
+                    "    required_level3_checkpoint: true\n"
+                    "    forbidden_direct_promotion: true\n",
+                    "",
+                ),
+                encoding="utf-8",
+            )
+            errors, receipt = self._validate_fixture(Path(fixture))
+            self.assertEqual(receipt["result"], "FAIL")
+            self.assertTrue(any("acceptance_workflow" in error for error in errors))
+
+    def test_schema_with_weak_acceptance_workflow_fails(self) -> None:
+        with self._fixture_root() as fixture:
+            schema = Path(fixture) / "contract" / "evidence_packet_schema.yaml"
+            schema.write_text(
+                schema.read_text(encoding="utf-8").replace("required_validation_receipt: true", "required_validation_receipt: false"),
+                encoding="utf-8",
+            )
+            errors, receipt = self._validate_fixture(Path(fixture))
+            self.assertEqual(receipt["result"], "FAIL")
+            self.assertTrue(any("required_validation_receipt" in error for error in errors))
 
 
 if __name__ == "__main__":

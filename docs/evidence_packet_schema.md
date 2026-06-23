@@ -49,6 +49,23 @@ conditions must be true:
   correctness, OS input stack behavior, parser/runtime behavior unless
   separately scoped, and product-specific HID behavior.
 
+## Accepted Packet Workflow
+
+Accepted packets are Level 3 artifacts. A packet may not move from `candidate`
+to `accepted` unless all of these are recorded:
+
+- Previous status was `candidate`.
+- `approval_record` is `approved`.
+- `approver` identifies a human approval record.
+- A checkpoint commit exists.
+- A validation receipt exists.
+- The checkpoint is explicitly marked Level 3.
+- The accepted packet still preserves all required non-claims.
+
+This workflow only accepts an evidence packet. A later and separate Level 3
+promotion slice is still required before any governed matrix entry can become
+`verified`.
+
 ## Current Shell Packet Boundary
 
 Existing files under `docs/evidence/` are shell artifacts. They are useful for

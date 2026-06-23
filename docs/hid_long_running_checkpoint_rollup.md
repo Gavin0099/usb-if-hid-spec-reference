@@ -2622,3 +2622,40 @@ Commit Checkpoint:
 - Residual risk:
   - Candidate packet acceptance remains separate Level 3 work.
 
+## Batch: HID-LRA-56 (Level 3 accepted packet workflow contract)
+
+- Commit: this checkpoint
+- Scope: define the future candidate-to-accepted evidence packet workflow as a
+  machine-checkable contract.
+- Changed files:
+  - `contract/evidence_packet_schema.yaml`
+  - `docs/evidence_packet_schema.md`
+  - `scripts/validate_evidence_packet_schema.py`
+  - `tests/test_evidence_packet_schema.py`
+  - `governance/hid_work_queue.yaml`
+  - `docs/hid_long_running_roadmap.md`
+  - `docs/hid_long_running_checkpoint_rollup.md`
+- Validation:
+  - PASS `python -X utf8 scripts/validate_evidence_packet_schema.py`
+  - PASS `python -m unittest tests.test_evidence_packet_schema`
+- Stats before/after:
+  - tracked: unchanged at 19
+  - scaffold: unchanged at 0
+  - reviewed: unchanged at 19
+  - verified: unchanged at 0
+- Review level:
+  - Level 1 workflow contract only; no accepted packet and no status/count
+    movement.
+- Can claim:
+  - Accepted-packet workflow requirements are documented and machine-checked.
+  - Future accepted packets require prior candidate status, approved human
+    approval record, checkpoint commit, validation receipt, and Level 3
+    checkpoint.
+- Cannot claim:
+  - cannot claim accepted evidence packets.
+  - cannot claim any HID entry is verified.
+  - cannot claim new source authority import.
+  - cannot claim firmware, OS, parser/runtime, or product-specific HID behavior.
+- Residual risk:
+  - First actual accepted packet remains separate Level 3 work.
+
