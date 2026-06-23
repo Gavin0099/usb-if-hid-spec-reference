@@ -157,16 +157,40 @@ def write_summary(summary: dict[str, Any], *, markdown_out: Path, json_out: Path
     json_out.write_text(json.dumps(summary, ensure_ascii=True, indent=2) + "\n", encoding="utf-8")
 
 
+def build_receipt(summary: dict[str, Any], *, markdown_out: Path, json_out: Path) -> dict[str, Any]:
+    return {
+        "generator": "generate_preapproval_readiness_summary.py",
+        "check_mode": "refresh",
+        "candidate_count": summary["candidate_count"],
+        "preapproval_report_count": summary["preapproval_report_count"],
+        "production_accepted_packet_count": summary["production_accepted_packet_count"],
+        "verified_entry_count": summary["verified_entry_count"],
+        "stale_preapproval_report_count": summary["stale_preapproval_report_count"],
+        "markdown_out": _display_path(markdown_out),
+        "json_out": _display_path(json_out),
+    }
+
+
+def write_receipt(receipt_path: Path, summary: dict[str, Any], *, markdown_out: Path, json_out: Path) -> None:
+    receipt = build_receipt(summary, markdown_out=markdown_out, json_out=json_out)
+    receipt_path.parent.mkdir(parents=True, exist_ok=True)
+    receipt_path.write_text(json.dumps(receipt, ensure_ascii=True, indent=2) + "\n", encoding="utf-8")
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--markdown-out", default="docs/evidence/preapproval_summary.md")
     parser.add_argument("--json-out", default="evidence/preapproval_summary.json")
+    parser.add_argument("--receipt-out")
     args = parser.parse_args()
     try:
         markdown_out = _resolve_under_root(args.markdown_out)
         json_out = _resolve_under_root(args.json_out)
         summary = build_summary()
         write_summary(summary, markdown_out=markdown_out, json_out=json_out)
+        if args.receipt_out:
+            receipt_out = _resolve_under_root(args.receipt_out)
+            write_receipt(receipt_out, summary, markdown_out=markdown_out, json_out=json_out)
     except ValueError as error:
         print(f"ERROR: {error}", file=sys.stderr)
         return 1

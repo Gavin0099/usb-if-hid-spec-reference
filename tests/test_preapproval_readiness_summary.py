@@ -77,6 +77,58 @@ class PreapprovalReadinessSummaryTests(unittest.TestCase):
             self.assertEqual(data["preapproval_report_count"], 19)
             self.assertEqual(data["production_accepted_packet_count"], 0)
 
+    def test_cli_writes_receipt_inside_repo(self) -> None:
+        with tempfile.TemporaryDirectory(dir=ROOT) as tempdir:
+            temp = Path(tempdir)
+            markdown_out = temp / "summary.md"
+            json_out = temp / "summary.json"
+            receipt_out = temp / "receipt.json"
+            result = subprocess.run(
+                [
+                    sys.executable,
+                    "-X",
+                    "utf8",
+                    "scripts/generate_preapproval_readiness_summary.py",
+                    "--markdown-out",
+                    str(markdown_out.relative_to(ROOT)),
+                    "--json-out",
+                    str(json_out.relative_to(ROOT)),
+                    "--receipt-out",
+                    str(receipt_out.relative_to(ROOT)),
+                ],
+                cwd=ROOT,
+                check=False,
+                capture_output=True,
+                text=True,
+            )
+            self.assertEqual(result.returncode, 0, result.stderr)
+            self.assertTrue(receipt_out.exists())
+            data = json.loads(receipt_out.read_text(encoding="utf-8"))
+            self.assertEqual(data["generator"], "generate_preapproval_readiness_summary.py")
+            self.assertEqual(data["candidate_count"], 19)
+            self.assertEqual(data["production_accepted_packet_count"], 0)
+
+    def test_cli_rejects_receipt_output_path_outside_repo(self) -> None:
+        with tempfile.TemporaryDirectory() as tempdir:
+            receipt_out = Path(tempdir) / "receipt.json"
+            result = subprocess.run(
+                [
+                    sys.executable,
+                    "-X",
+                    "utf8",
+                    "scripts/generate_preapproval_readiness_summary.py",
+                    "--receipt-out",
+                    str(receipt_out),
+                ],
+                cwd=ROOT,
+                check=False,
+                capture_output=True,
+                text=True,
+            )
+            self.assertNotEqual(result.returncode, 0)
+            self.assertIn("output path must stay under repository root", result.stderr)
+            self.assertFalse(receipt_out.exists())
+
     def test_cli_rejects_output_path_outside_repo(self) -> None:
         with tempfile.TemporaryDirectory() as tempdir:
             markdown_out = Path(tempdir) / "summary.md"
