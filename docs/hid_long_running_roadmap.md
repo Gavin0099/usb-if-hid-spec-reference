@@ -260,9 +260,10 @@
 
 ### HID-LRA-31: Complete Candidate Pre-Approval Checklist Surface
 
-- status: In progress
+- status: Completed
 - objective: extend the pre-approval checklist generator with batch mode and
   generate gap reports for all 19 candidate packets under
   `docs/evidence/preapproval/`.
+- latest checkpoint: 4adaeba
 - gate: pre-approval gap report only; no production accepted packet and no
   verified count movement.

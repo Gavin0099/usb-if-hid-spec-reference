@@ -2892,7 +2892,7 @@ Commit Checkpoint:
 
 ## Batch: HID-LRA-60 (complete candidate pre-approval checklist surface)
 
-- Commit: this checkpoint
+- Commit: 4adaeba
 - Scope: extend the pre-approval checklist generator with batch mode and
   generate gap reports for all 19 candidate packets under
   `docs/evidence/preapproval/`.
@@ -2922,6 +2922,39 @@ Commit Checkpoint:
   - All 19 candidate packets have pre-approval checklist gap reports.
   - Batch generation writes pre-approval reports without creating accepted
     packet YAML files.
+- Cannot claim:
+  - cannot claim production accepted evidence packets.
+  - cannot claim any HID entry is verified.
+  - cannot claim new source authority import.
+  - cannot claim firmware, OS, parser/runtime, or product-specific HID behavior.
+- Residual risk:
+  - First production accepted packet remains separate Level 3 work.
+
+### Checkpoint memory entry for HID-LRA-60
+
+- Commit: this checkpoint
+- Scope: record the `HID-LRA-60` complete candidate pre-approval checklist
+  checkpoint in repo-local daily memory using
+  `scripts/emit_checkpoint_memory_entry.py`.
+- Changed files:
+  - `memory/2026-06-23.md`
+  - `governance/hid_work_queue.yaml`
+  - `docs/hid_long_running_roadmap.md`
+  - `docs/hid_long_running_checkpoint_rollup.md`
+- Validation:
+  - PASS `python -X utf8 scripts/validate_memory_records.py`
+  - PASS `python -m unittest discover -s tests`
+- Stats before/after:
+  - tracked: unchanged at 19
+  - scaffold: unchanged at 0
+  - reviewed: unchanged at 19
+  - verified: unchanged at 0
+  - pre-approval reports: unchanged at 19
+  - production accepted packets: unchanged at 0
+- Can claim:
+  - `memory/2026-06-23.md` contains a bound entry for commit `4adaeba`.
+  - Queue and roadmap now point `HID-VER-13` / `HID-LRA-31` at commit
+    `4adaeba`.
 - Cannot claim:
   - cannot claim production accepted evidence packets.
   - cannot claim any HID entry is verified.
