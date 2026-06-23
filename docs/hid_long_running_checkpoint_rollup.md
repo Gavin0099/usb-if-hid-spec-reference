@@ -855,6 +855,7 @@ Commit Checkpoint:
 - Changed files:
   - `docs/hid_long_running_roadmap.md`
   - `docs/hid_long_running_checkpoint_rollup.md`
+  - `memory/2026-06-23.md`
   - `governance/hid_work_queue.yaml`
   - `specs/hid_descriptor_fields.md`
 - Validation:
@@ -2754,6 +2755,49 @@ Commit Checkpoint:
   - cannot claim firmware, OS, parser/runtime, or product-specific HID behavior.
 - Residual risk:
   - First production accepted packet remains separate Level 3 work.
+
+## Batch: HID-LRA-69 (accepted packet production evidence surface)
+
+- Scope: close the final Level 3 accepted-packet status batch and align
+  readiness/proposal summaries to the current production accepted artifacts.
+- Changed files:
+  - `docs/hid_long_running_roadmap.md`
+  - `docs/hid_long_running_checkpoint_rollup.md`
+- Validation:
+  - PASS `python -X utf8 scripts/validate_source_authority.py`
+  - PASS `python -X utf8 scripts/validate_hid_class_request_matrix.py`
+  - PASS `python -X utf8 scripts/validate_hid_descriptor_fields_matrix.py`
+  - PASS `python -X utf8 scripts/validate_hid_report_descriptor_items_matrix.py`
+  - PASS `python -X utf8 scripts/validate_verification_status.py`
+  - PASS `python -X utf8 scripts/validate_accepted_packet_proposals.py`
+  - PASS `python -X utf8 scripts/validate_evidence_packet_schema.py`
+  - PASS `python -X utf8 scripts/probe_table_fingerprint.py --mode check --manifest exports/hid_governed_surface_manifest.yaml --baseline-in evidence/table_fingerprint_baseline.jsonl`
+  - PASS `python -X utf8 scripts/validate_memory_records.py`
+  - PASS `python -m unittest discover -s tests`
+- Stats before/after:
+  - tracked: unchanged at 19
+  - scaffold: unchanged at 0
+  - reviewed: unchanged at 19
+  - verified: unchanged at 0
+  - production accepted packets: 0 → 19
+  - accepted packet proposals: unchanged at 19
+  - pre-approval reports: unchanged at 19
+  - proposal summaries: unchanged at 2
+- Review level:
+  - Level 3 status checkpoint; no direct runtime or firmware behavior claim.
+- Can claim:
+  - 19 production accepted packets now exist under `docs/evidence/accepted/`.
+  - summary surfaces (`docs/evidence/accepted_proposal_summary.md`,
+    `docs/evidence/preapproval_summary.md`) now report production accepted
+    packet count as 19.
+  - roadmap reflects the accepted production checkpoint at commit `0903006`.
+- Cannot claim:
+  - cannot claim any HID entry is verified.
+  - cannot claim firmware, OS, parser/runtime, or product-specific HID behavior.
+  - cannot claim new source authority import.
+- Residual risk:
+  - production accepted packets are identity-level and do not imply runtime
+    behavior correctness.
 
 ## Batch: HID-LRA-58 (production accepted packet path and naming guard)
 
