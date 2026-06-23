@@ -588,4 +588,4 @@ queue:
       checklist gap reports for all 19 candidate packets under
       docs/evidence/preapproval/. This creates no production accepted packet
       and does not change governed matrix status.
-      checkpoint commit: this checkpoint.
+      checkpoint commit: 4adaeba.
