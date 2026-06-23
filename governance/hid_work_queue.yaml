@@ -409,3 +409,24 @@ queue:
       validate_evidence_packet_schema.py fails on source binding drift. This is
       test coverage only and does not accept or promote any evidence packet.
       checkpoint commit: 130dcdb.
+
+  - id: HID-VER-6
+    title: Candidate accepted-gate negative tests
+    authority: Repo-local evidence packet governance
+    status: reviewed
+    allowed_status_change: test_coverage_only
+    requires_human_approval: false
+    review_level: 1
+    gate: validation_required
+    forbidden_claims:
+      - accepted evidence packet
+      - verified status uplift
+      - new source authority import
+      - firmware behavior correctness
+      - OS input stack behavior
+      - parser runtime behavior
+    notes: >
+      Add negative fixture tests that intentionally set packet_status accepted,
+      approval_record non-pending, and current_claim_level verified to prove the
+      candidate flow cannot accidentally pass accepted or verified state. This
+      is test coverage only and does not accept or promote any evidence packet.

@@ -2407,3 +2407,37 @@ Commit Checkpoint:
 - Residual risk:
   - Candidate packet acceptance remains separate Level 3 work.
 
+## Batch: HID-LRA-53 (candidate accepted-gate negative tests)
+
+- Commit: this checkpoint
+- Scope: add negative fixture tests proving candidate packet validation fails on
+  accepted/approved/verified state drift.
+- Changed files:
+  - `scripts/validate_evidence_packet_schema.py`
+  - `tests/test_evidence_packet_schema.py`
+  - `governance/hid_work_queue.yaml`
+  - `docs/hid_long_running_roadmap.md`
+  - `docs/hid_long_running_checkpoint_rollup.md`
+- Validation:
+  - PASS `python -X utf8 scripts/validate_evidence_packet_schema.py`
+  - PASS `python -m unittest tests.test_evidence_packet_schema`
+- Stats before/after:
+  - tracked: unchanged at 19
+  - scaffold: unchanged at 0
+  - reviewed: unchanged at 19
+  - verified: unchanged at 0
+- Review level:
+  - Level 1 test coverage only; no accepted packet or status/count movement.
+- Can claim:
+  - Negative tests prove `packet_status: accepted` fails in candidate flow.
+  - Negative tests prove non-pending `approval_record` fails in candidate flow.
+  - Negative tests prove `current_claim_level: verified` fails when the governed
+    entry remains reviewed.
+- Cannot claim:
+  - cannot claim accepted evidence packets.
+  - cannot claim any HID entry is verified.
+  - cannot claim new source authority import.
+  - cannot claim firmware, OS, parser/runtime, or product-specific HID behavior.
+- Residual risk:
+  - Real accepted-packet workflow remains separate Level 3 work.
+
