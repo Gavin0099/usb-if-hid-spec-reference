@@ -499,3 +499,4 @@ queue:
       accepted packets require prior candidate status, approved human approval
       record, checkpoint commit, validation receipt, and Level 3 checkpoint.
       This is workflow contract only and does not accept or promote any packet.
+      checkpoint commit: f111729.
