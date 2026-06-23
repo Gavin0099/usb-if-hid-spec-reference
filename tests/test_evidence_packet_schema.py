@@ -13,6 +13,10 @@ class EvidencePacketSchemaTests(unittest.TestCase):
         self.assertEqual(receipt["verified_gate"]["required_packet_status"], "accepted")
         self.assertGreaterEqual(len(receipt["checked_shell_packets"]), 6)
         self.assertIn("hid_1_11:7.2", receipt["checked_source_authority_bindings"])
+        self.assertEqual(
+            receipt["checked_matrix_source_refs"]["hid_class_request_matrix"],
+            ["hid_1_11:7.2"],
+        )
         self.assertEqual(len(receipt["checked_candidate_packets"]), 6)
         for candidate in (
             "docs/evidence/candidates/hid_get_report_candidate.yaml",

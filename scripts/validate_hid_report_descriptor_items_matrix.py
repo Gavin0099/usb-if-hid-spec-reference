@@ -50,8 +50,8 @@ def validate(path: Path = DEFAULT_MATRIX) -> list[str]:
         if not isinstance(source_ref, dict):
             errors.append("source_refs[0] must be a mapping")
         else:
-            if source_ref.get("source_id") != "hid_spec_1_11":
-                errors.append("source_refs[0].source_id must be hid_spec_1_11")
+            if source_ref.get("source_id") != "hid_1_11":
+                errors.append("source_refs[0].source_id must be hid_1_11")
             if source_ref.get("section") != "6.2.2":
                 errors.append("source_refs[0].section must be 6.2.2")
 
@@ -102,8 +102,8 @@ def validate(path: Path = DEFAULT_MATRIX) -> list[str]:
         if not isinstance(source_anchor, dict):
             errors.append(f"{name} must include source_anchor")
             continue
-        if source_anchor.get("source_id") != "hid_spec_1_11":
-            errors.append(f"{name} source_id must be hid_spec_1_11")
+        if source_anchor.get("source_id") != "hid_1_11":
+            errors.append(f"{name} source_id must be hid_1_11")
         if source_anchor.get("section") != "6.2.2":
             errors.append(f"{name} source section must be 6.2.2")
         if not isinstance(source_anchor.get("topic"), str) or not source_anchor.get("topic"):

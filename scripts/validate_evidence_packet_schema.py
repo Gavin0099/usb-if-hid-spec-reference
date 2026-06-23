@@ -98,6 +98,28 @@ def _entry_index() -> dict[tuple[str, str], dict[str, Any]]:
     return index
 
 
+def _matrix_source_ref_index() -> dict[str, set[tuple[str, str]]]:
+    refs: dict[str, set[tuple[str, str]]] = {}
+    matrix_paths = {
+        "hid_class_request_matrix": ROOT / "data" / "hid_class_request_matrix.yaml",
+        "hid_descriptor_fields_matrix": ROOT / "data" / "hid_descriptor_fields_matrix.yaml",
+        "hid_report_descriptor_items_matrix": ROOT / "data" / "hid_report_descriptor_items_matrix.yaml",
+    }
+    for matrix_id, path in matrix_paths.items():
+        matrix_refs: set[tuple[str, str]] = set()
+        if path.exists():
+            data = _load_yaml(path)
+            for source_ref in data.get("source_refs", []):
+                if not isinstance(source_ref, dict):
+                    continue
+                source_id = source_ref.get("source_id")
+                section = source_ref.get("section")
+                if isinstance(source_id, str) and isinstance(section, str):
+                    matrix_refs.add((source_id, section))
+        refs[matrix_id] = matrix_refs
+    return refs
+
+
 def _source_authority_index() -> set[tuple[str, str]]:
     if not SOURCE_AUTHORITY.exists():
         return set()
@@ -186,6 +208,7 @@ def validate() -> tuple[list[str], dict[str, Any]]:
 
     candidate_packets = _load_candidate_packets()
     entries = _entry_index()
+    matrix_source_refs = _matrix_source_ref_index()
     source_authority_bindings = _source_authority_index()
     for path, packet in candidate_packets.items():
         for section in REQUIRED_SECTIONS:
@@ -227,6 +250,11 @@ def validate() -> tuple[list[str], dict[str, Any]]:
                 "CANDIDATE_SOURCE_AUTHORITY_MISMATCH",
                 f"{path} source_trace {source_id!r} section {source_section!r} is not current imported source authority",
             )
+        if isinstance(matrix, str) and (source_id, source_section) not in matrix_source_refs.get(matrix, set()):
+            add_error(
+                "CANDIDATE_MATRIX_SOURCE_REF_MISMATCH",
+                f"{path} source_trace {source_id!r} section {source_section!r} does not match {matrix}.source_refs",
+            )
 
         approval = packet.get("approval", {}) if isinstance(packet.get("approval"), dict) else {}
         if approval.get("approval_record") not in {"pending", "rejected"}:
@@ -254,6 +282,13 @@ def validate() -> tuple[list[str], dict[str, Any]]:
             f"{source_id}:{section}"
             for source_id, section in source_authority_bindings
         ),
+        "checked_matrix_source_refs": {
+            matrix_id: sorted(
+                f"{source_id}:{section}"
+                for source_id, section in refs
+            )
+            for matrix_id, refs in sorted(matrix_source_refs.items())
+        },
         "error_count": len(errors),
         "errors": errors,
         "findings": findings,

@@ -172,4 +172,12 @@
 - gate: validator hardening only; no source import, no accepted evidence packet,
   and no verified count movement.
 
+### HID-LRA-22: Candidate Matrix Source Ref Binding Validator
+
+- status: In progress
+- objective: require candidate packet source trace to match both source authority
+  current imported usage and the bound matrix `source_refs`.
+- gate: validator/source-id alignment only; no source import, no accepted
+  evidence packet, and no verified count movement.
+
 

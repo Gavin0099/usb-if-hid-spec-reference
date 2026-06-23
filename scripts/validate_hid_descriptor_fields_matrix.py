@@ -83,8 +83,8 @@ def validate(path: Path = DEFAULT_MATRIX) -> list[str]:
         if not isinstance(source_anchor, dict):
             errors.append(f"{name} must include source_anchor")
             continue
-        if source_anchor.get("source_id") != "hid_spec_1_11":
-            errors.append(f"{name} source_id must be hid_spec_1_11")
+        if source_anchor.get("source_id") != "hid_1_11":
+            errors.append(f"{name} source_id must be hid_1_11")
         if source_anchor.get("section") != "6.2.1":
             errors.append(f"{name} source section must be 6.2.1")
         if source_anchor.get("topic") != "HID Descriptor":
