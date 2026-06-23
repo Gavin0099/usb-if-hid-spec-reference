@@ -2548,7 +2548,7 @@ Commit Checkpoint:
 
 ## Batch: HID-LRA-55 (HID report descriptor item candidate packet skeletons)
 
-- Commit: this checkpoint
+- Commit: c2dae74
 - Scope: add pending verified-candidate packet skeletons for the six HID report
   descriptor item identity entries under Section 6.2.2.
 - Changed files:
@@ -2587,6 +2587,38 @@ Commit Checkpoint:
   - cannot claim firmware report descriptor parsing correctness, report
     descriptor parser behavior, item semantics, OS input stack behavior,
     parser/runtime behavior, or product-specific HID behavior.
+- Residual risk:
+  - Candidate packet acceptance remains separate Level 3 work.
+
+### Checkpoint memory entry for HID-LRA-55
+
+- Commit: this checkpoint
+- Scope: record the `HID-LRA-55` HID report descriptor item candidate packet
+  checkpoint in repo-local daily memory using
+  `scripts/emit_checkpoint_memory_entry.py`.
+- Changed files:
+  - `memory/2026-06-23.md`
+  - `governance/hid_work_queue.yaml`
+  - `docs/hid_long_running_roadmap.md`
+  - `docs/hid_long_running_checkpoint_rollup.md`
+- Validation:
+  - PASS `python -X utf8 scripts/validate_memory_records.py`
+  - PASS `python -m unittest discover -s tests`
+- Stats before/after:
+  - tracked: unchanged at 19
+  - scaffold: unchanged at 0
+  - reviewed: unchanged at 19
+  - verified: unchanged at 0
+- Can claim:
+  - `memory/2026-06-23.md` contains a bound entry for commit `c2dae74`.
+  - Queue and roadmap now point `HID-VER-8` / `HID-LRA-26` at commit `c2dae74`.
+- Cannot claim:
+  - cannot claim accepted evidence packets.
+  - cannot claim any HID entry is verified.
+  - cannot claim new source authority import.
+  - cannot claim firmware report descriptor parsing correctness, report
+    descriptor parser behavior, report descriptor item semantics, OS input stack
+    behavior, parser/runtime behavior, or product-specific HID behavior.
 - Residual risk:
   - Candidate packet acceptance remains separate Level 3 work.
 
