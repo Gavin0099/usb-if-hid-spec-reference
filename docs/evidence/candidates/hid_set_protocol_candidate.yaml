@@ -7,7 +7,7 @@ packet_identity:
 governed_entry_binding:
   matrix: hid_class_request_matrix
   entry_id: hid_set_protocol
-  current_claim_level: reviewed
+  current_claim_level: verified
   current_evidence_status: not_introduced
 
 source_trace:

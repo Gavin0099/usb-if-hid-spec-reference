@@ -10,7 +10,7 @@ source_refs:
 claim_boundary:
   claim_level_default: scaffold
   evidence_status_default: not_introduced
-  verified_entries: 5
+  verified_entries: 6
   non_claims:
     - firmware_handler_correctness
     - complete_request_behavior
@@ -75,5 +75,5 @@ entries:
     recipient: interface
     purpose: "Select HID boot protocol or report protocol."
     setup_scope: "Request identity, direction, and interface recipient only."
-    claim_level: reviewed
+    claim_level: verified
     evidence_status: not_introduced

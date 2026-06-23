@@ -3,7 +3,7 @@
   "candidate_count": 19,
   "preapproval_report_count": 19,
   "production_accepted_packet_count": 19,
-  "verified_entry_count": 5,
+  "verified_entry_count": 6,
   "stale_preapproval_report_count": 0,
   "entries": [
     {
@@ -273,7 +273,7 @@
       "preapproval_report": "docs/evidence/preapproval/hid_set_protocol_preapproval_checklist.md",
       "future_accepted_packet": "docs/evidence/accepted/hid_set_protocol_accepted.yaml",
       "accepted_packet_exists": true,
-      "current_claim_level": "reviewed",
+      "current_claim_level": "verified",
       "current_evidence_status": "not_introduced",
       "ready_check_count": 16,
       "gap_count": 12,
