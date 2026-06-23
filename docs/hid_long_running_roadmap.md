@@ -220,9 +220,10 @@
 
 ### HID-LRA-27: Level 3 Accepted Packet Workflow Contract
 
-- status: In progress
+- status: Completed
 - objective: define and validate the required workflow for future
   candidate-to-accepted evidence packet transitions.
+- latest checkpoint: f111729
 - gate: workflow contract only; no accepted evidence packet and no verified count
   movement.
 
