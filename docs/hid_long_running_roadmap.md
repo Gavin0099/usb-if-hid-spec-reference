@@ -359,3 +359,11 @@
 - latest checkpoint: 4364d5d
 - gate: Level 3 verified status transition after human approval; no firmware or
   runtime behavior claims.
+### HID-LRA-71: SET_REPORT Verified Promotion Gate
+
+- status: Completed
+- objective: promote `hid_set_report` to verified via the accepted packet evidence
+  gate and observed governance validators.
+- latest checkpoint: fa8e5d4
+- gate: Level 3 verified status transition after human approval; no firmware or
+  runtime behavior claims.

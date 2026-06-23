@@ -8,9 +8,9 @@ Source authority status: locked.
 |---|---:|---:|---:|---:|---:|
 | HID descriptors | 7 | 0 | 7 | 0 | 0 |
 | HID report descriptors | 6 | 0 | 6 | 0 | 0 |
-| HID class requests | 6 | 1 | 5 | 0 | 0 |
+| HID class requests | 6 | 2 | 4 | 0 | 0 |
 | Report / boot / idle semantics | 0 | 0 | 0 | 0 | 0 |
-| **Total** | **19** | **1** | **18** | **0** | **0** |
+| **Total** | **19** | **2** | **17** | **0** | **0** |
 
 ## Current Surface Summary
 
@@ -40,7 +40,7 @@ Source authority status: locked.
 ## Non-claims
 
 - This page does not claim HID content is complete.
-- This page explicitly tracks one verified HID class request entry (`GET_REPORT`)
+- This page explicitly tracks two verified HID class request entries (`GET_REPORT`, `SET_REPORT`)
   and does not claim any firmware implementation truth.
 - This page does not claim any governed table is complete.
 - This page does not claim firmware implementation truth.
