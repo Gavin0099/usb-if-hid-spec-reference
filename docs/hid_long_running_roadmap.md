@@ -321,6 +321,6 @@
 - objective: extend accepted-packet proposal generation to all 19 candidate
   packets, producing Markdown and JSON proposal artifacts under
   `accepted_proposals/`.
-- latest checkpoint: this checkpoint
+- latest checkpoint: 33915f3
 - gate: accepted packet proposal only; no production accepted packet and no
   verified count movement.
