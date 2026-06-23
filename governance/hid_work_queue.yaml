@@ -566,4 +566,4 @@ queue:
       docs/evidence/preapproval/. The report names the future accepted packet
       path and missing Level 3 acceptance artifacts, but does not create any
       production accepted packet.
-      checkpoint commit: this checkpoint.
+      checkpoint commit: 52d85ed.

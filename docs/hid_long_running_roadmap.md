@@ -250,9 +250,10 @@
 
 ### HID-LRA-30: GET_REPORT Accepted Packet Pre-Approval Checklist
 
-- status: In progress
+- status: Completed
 - objective: add a read-only generator for accepted-packet pre-approval
   checklist reports and generate the first GET_REPORT gap report under
   `docs/evidence/preapproval/`.
+- latest checkpoint: 52d85ed
 - gate: pre-approval gap report only; no production accepted packet and no
   verified count movement.
