@@ -9,6 +9,7 @@ create accepted packets, promote entries, or change verification status.
 from __future__ import annotations
 
 import argparse
+import sys
 from pathlib import Path
 from typing import Any
 
@@ -58,6 +59,15 @@ def _display_path(path: Path) -> str:
         return path.as_posix()
 
 
+def _resolve_under_root(path_value: str) -> Path:
+    path = Path(path_value)
+    resolved = path.resolve() if path.is_absolute() else (ROOT / path).resolve()
+    root = ROOT.resolve()
+    if resolved != root and root not in resolved.parents:
+        raise ValueError(f"output path must stay under repository root: {path_value}")
+    return resolved
+
+
 def _candidate_path(candidate_id: str, candidate_dir: Path) -> Path:
     candidate = Path(candidate_id)
     if candidate.suffix:
@@ -81,6 +91,21 @@ def _candidate_base(candidate_path: Path) -> str:
 
 def list_candidate_ids(candidate_dir: Path = CANDIDATE_DIR) -> list[str]:
     return [_candidate_base(path) for path in sorted(candidate_dir.glob("*_candidate.yaml"))]
+
+
+def stale_preapproval_reports(
+    *,
+    candidate_dir: Path = CANDIDATE_DIR,
+    preapproval_dir: Path = PREAPPROVAL_DIR,
+) -> list[Path]:
+    expected = {f"{candidate_id}_preapproval_checklist.md" for candidate_id in list_candidate_ids(candidate_dir)}
+    if not preapproval_dir.exists():
+        return []
+    return [
+        path
+        for path in sorted(preapproval_dir.glob("*_preapproval_checklist.md"))
+        if path.name not in expected
+    ]
 
 
 def build_checklist(
@@ -240,25 +265,37 @@ def main() -> int:
     parser.add_argument("--all", action="store_true")
     parser.add_argument("--out")
     parser.add_argument("--out-dir", default="docs/evidence/preapproval")
+    parser.add_argument("--prune-stale", action="store_true")
     args = parser.parse_args()
 
-    if args.all:
-        out_dir = ROOT / args.out_dir
-        out_dir.mkdir(parents=True, exist_ok=True)
-        for candidate_id in list_candidate_ids():
-            checklist = build_checklist(candidate_id=candidate_id)
-            out = out_dir / f"{candidate_id}_preapproval_checklist.md"
-            out.write_text(render_markdown(checklist), encoding="utf-8")
-        print(f"Generated {len(list_candidate_ids())} pre-approval checklist report(s) in {_display_path(out_dir)}")
-    else:
-        checklist = build_checklist(candidate_id=args.candidate)
-        output = render_markdown(checklist)
-        if args.out:
-            out = ROOT / args.out
-            out.parent.mkdir(parents=True, exist_ok=True)
-            out.write_text(output, encoding="utf-8")
+    try:
+        if args.all:
+            out_dir = _resolve_under_root(args.out_dir)
+            stale_reports = stale_preapproval_reports(preapproval_dir=out_dir)
+            if stale_reports and not args.prune_stale:
+                stale = ", ".join(_display_path(path) for path in stale_reports)
+                raise ValueError(f"stale pre-approval report(s) found: {stale}")
+            for stale_report in stale_reports:
+                stale_report.unlink()
+            candidate_ids = list_candidate_ids()
+            out_dir.mkdir(parents=True, exist_ok=True)
+            for candidate_id in candidate_ids:
+                checklist = build_checklist(candidate_id=candidate_id)
+                out = out_dir / f"{candidate_id}_preapproval_checklist.md"
+                out.write_text(render_markdown(checklist), encoding="utf-8")
+            print(f"Generated {len(candidate_ids)} pre-approval checklist report(s) in {_display_path(out_dir)}")
         else:
-            print(output, end="")
+            checklist = build_checklist(candidate_id=args.candidate)
+            output = render_markdown(checklist)
+            if args.out:
+                out = _resolve_under_root(args.out)
+                out.parent.mkdir(parents=True, exist_ok=True)
+                out.write_text(output, encoding="utf-8")
+            else:
+                print(output, end="")
+    except ValueError as error:
+        print(f"ERROR: {error}", file=sys.stderr)
+        return 1
     return 0
 
 

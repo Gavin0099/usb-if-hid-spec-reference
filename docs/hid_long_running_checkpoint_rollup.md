@@ -2962,3 +2962,40 @@ Commit Checkpoint:
   - cannot claim firmware, OS, parser/runtime, or product-specific HID behavior.
 - Residual risk:
   - First production accepted packet remains separate Level 3 work.
+
+## Batch: HID-LRA-61 (pre-approval generator stale-report and path guard)
+
+- Commit: this checkpoint
+- Scope: resolve review warnings by hardening the pre-approval checklist
+  generator for repo-contained output paths and stale report detection.
+- Changed files:
+  - `scripts/generate_accepted_packet_preapproval_checklist.py`
+  - `tests/test_accepted_packet_preapproval_checklist.py`
+  - `docs/evidence_packet_schema.md`
+  - `governance/hid_work_queue.yaml`
+  - `docs/hid_long_running_roadmap.md`
+  - `docs/hid_long_running_checkpoint_rollup.md`
+- Validation:
+  - PASS `python -m unittest tests.test_accepted_packet_preapproval_checklist`
+  - PASS `python -X utf8 scripts/generate_accepted_packet_preapproval_checklist.py --all`
+- Stats before/after:
+  - tracked: unchanged at 19
+  - scaffold: unchanged at 0
+  - reviewed: unchanged at 19
+  - verified: unchanged at 0
+  - pre-approval reports: unchanged at 19
+  - production accepted packets: unchanged at 0
+- Review level:
+  - Level 1 generator hardening only; no production accepted packet and no
+    status/count movement.
+- Can claim:
+  - `--out` and `--out-dir` must stay under the repository root.
+  - Batch generation fails on stale pre-approval reports unless
+    `--prune-stale` is explicitly requested.
+- Cannot claim:
+  - cannot claim production accepted evidence packets.
+  - cannot claim any HID entry is verified.
+  - cannot claim new source authority import.
+  - cannot claim firmware, OS, parser/runtime, or product-specific HID behavior.
+- Residual risk:
+  - First production accepted packet remains separate Level 3 work.
