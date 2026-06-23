@@ -295,3 +295,13 @@
 - latest checkpoint: 9b67f3a
 - gate: accepted packet proposal only; no production accepted packet and no
   verified count movement.
+
+### HID-LRA-35: Accepted Packet Proposal Validator
+
+- status: Completed
+- objective: add a validator for accepted-packet proposal artifacts covering
+  proposal-only status, future accepted path absence, candidate/pre-approval
+  bindings, Level 3 placeholders, and claim ceilings.
+- latest checkpoint: this checkpoint
+- gate: proposal validator only; no production accepted packet and no verified
+  count movement.
