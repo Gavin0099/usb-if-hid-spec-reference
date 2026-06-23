@@ -363,3 +363,4 @@ queue:
       source_trace.source_id/source_section must match current imported usage in
       data/source_authority.yaml. This is validator hardening only and does not
       accept or promote any evidence packet.
+      checkpoint commit: bf16027.

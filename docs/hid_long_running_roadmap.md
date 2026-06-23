@@ -165,9 +165,10 @@
 
 ### HID-LRA-21: Candidate Source Authority Binding Validator
 
-- status: In progress
+- status: Completed
 - objective: require candidate packet `source_trace.source_id/source_section` to
   match current imported usage in `data/source_authority.yaml`.
+- latest checkpoint: bf16027
 - gate: validator hardening only; no source import, no accepted evidence packet,
   and no verified count movement.
 
