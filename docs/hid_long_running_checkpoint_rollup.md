@@ -2191,3 +2191,46 @@ Commit Checkpoint:
 - Residual risk:
   - Candidate packet acceptance remains separate Level 3 work.
 
+## Batch: HID-LRA-50 (candidate source authority binding validator)
+
+- Commit: this checkpoint
+- Scope: harden candidate packet validation so `source_trace.source_id` and
+  `source_trace.source_section` must match `data/source_authority.yaml`
+  `current_imported_usage`.
+- Changed files:
+  - `scripts/validate_evidence_packet_schema.py`
+  - `tests/test_evidence_packet_schema.py`
+  - `docs/evidence/candidates/hid_get_report_candidate.yaml`
+  - `docs/evidence/candidates/hid_set_report_candidate.yaml`
+  - `docs/evidence/candidates/hid_get_idle_candidate.yaml`
+  - `docs/evidence/candidates/hid_set_idle_candidate.yaml`
+  - `docs/evidence/candidates/hid_get_protocol_candidate.yaml`
+  - `docs/evidence/candidates/hid_set_protocol_candidate.yaml`
+  - `docs/evidence_packet_schema.md`
+  - `governance/hid_work_queue.yaml`
+  - `docs/hid_long_running_roadmap.md`
+  - `docs/hid_long_running_checkpoint_rollup.md`
+- Validation:
+  - PASS `python -X utf8 scripts/validate_evidence_packet_schema.py`
+  - PASS `python -m unittest tests.test_evidence_packet_schema`
+- Stats before/after:
+  - tracked: unchanged at 19
+  - scaffold: unchanged at 0
+  - reviewed: unchanged at 19
+  - verified: unchanged at 0
+- Review level:
+  - Level 1 validator hardening; no source import, accepted packet, or
+    status/count movement.
+- Can claim:
+  - Candidate packet source bindings are machine-checked against current
+    imported source authority.
+  - All six HID request candidate packets use source id `hid_1_11` and section
+    `7.2`.
+- Cannot claim:
+  - cannot claim accepted evidence packets.
+  - cannot claim any HID entry is verified.
+  - cannot claim new source authority import.
+  - cannot claim firmware, OS, parser/runtime, or product-specific HID behavior.
+- Residual risk:
+  - Candidate packet acceptance remains separate Level 3 work.
+

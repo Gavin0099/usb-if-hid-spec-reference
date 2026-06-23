@@ -11,7 +11,7 @@ governed_entry_binding:
   current_evidence_status: not_introduced
 
 source_trace:
-  source_id: hid_spec_1_11
+  source_id: hid_1_11
   source_section: "7.2"
   cited_source_authority_entry: data/source_authority.yaml current_imported_usage section 7.2
   quoted_or_paraphrased_basis: >
