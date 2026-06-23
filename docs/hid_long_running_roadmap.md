@@ -382,6 +382,6 @@
 - status: Completed
 - objective: promote `hid_set_idle` to verified via the accepted packet evidence
   gate and observed governance validators.
-- latest checkpoint: 336efc9
+- latest checkpoint: aca70e5
 - gate: Level 3 verified status transition after human approval; no firmware or
   runtime behavior claims.

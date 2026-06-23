@@ -3827,7 +3827,7 @@ Commit Checkpoint:
 
 ## Batch: HID-LRA-73 (SET_IDLE verified promotion)
 
-- Commit: 336efc9
+- Commit: aca70e5
 - Scope: promote `HID-REQ-4`/`hid_set_idle` from accepted candidate to verified claim level through Level 3 approved checkpoint, then reflect the change in governing matrices, manifest, and evidence packet metadata.
 - Changed files:
   - `data/hid_class_request_matrix.yaml`
@@ -3881,7 +3881,7 @@ Commit Checkpoint:
 
 ### Checkpoint memory entry for HID-LRA-73
 
-- Commit: 336efc9
+- Commit: aca70e5
 - Scope: record the `HID-LRA-73` verified promotion checkpoint in repo-local daily memory.
 - Changed files:
   - `memory/2026-06-23.md`
@@ -3900,7 +3900,7 @@ Commit Checkpoint:
   - accepted-packet proposals: unchanged at 19
   - production accepted packets: unchanged at 19
 - Can claim:
-  - `memory/2026-06-23.md` contains a bound entry for commit `336efc9`.
+  - `memory/2026-06-23.md` contains a bound entry for commit `aca70e5`.
 - Cannot claim:
   - cannot claim firmware behavior correctness.
   - cannot claim OS input stack behavior.
