@@ -2546,3 +2546,47 @@ Commit Checkpoint:
 - Residual risk:
   - Candidate packet acceptance remains separate Level 3 work.
 
+## Batch: HID-LRA-55 (HID report descriptor item candidate packet skeletons)
+
+- Commit: this checkpoint
+- Scope: add pending verified-candidate packet skeletons for the six HID report
+  descriptor item identity entries under Section 6.2.2.
+- Changed files:
+  - `docs/evidence/candidates/report_descriptor_short_item_prefix_candidate.yaml`
+  - `docs/evidence/candidates/report_descriptor_long_item_prefix_candidate.yaml`
+  - `docs/evidence/candidates/report_descriptor_main_item_type_candidate.yaml`
+  - `docs/evidence/candidates/report_descriptor_global_item_type_candidate.yaml`
+  - `docs/evidence/candidates/report_descriptor_local_item_type_candidate.yaml`
+  - `docs/evidence/candidates/report_descriptor_reserved_item_type_candidate.yaml`
+  - `docs/evidence_packet_schema.md`
+  - `tests/test_evidence_packet_schema.py`
+  - `governance/hid_work_queue.yaml`
+  - `docs/hid_long_running_roadmap.md`
+  - `docs/hid_long_running_checkpoint_rollup.md`
+- Validation:
+  - PASS `python -X utf8 scripts/validate_evidence_packet_schema.py`
+  - PASS `python -m unittest tests.test_evidence_packet_schema`
+- Stats before/after:
+  - tracked: unchanged at 19
+  - scaffold: unchanged at 0
+  - reviewed: unchanged at 19
+  - verified: unchanged at 0
+- Review level:
+  - Level 1 candidate-packet skeletons; no accepted packet and no status/count
+    movement.
+- Can claim:
+  - All six HID report descriptor item identity entries now have
+    machine-checkable candidate packet skeletons.
+  - Each report descriptor candidate binds to one
+    `hid_report_descriptor_items_matrix` entry.
+  - All candidates remain pending and cannot produce verified promotion.
+- Cannot claim:
+  - cannot claim accepted evidence packets.
+  - cannot claim any HID entry is verified.
+  - cannot claim new source authority import.
+  - cannot claim firmware report descriptor parsing correctness, report
+    descriptor parser behavior, item semantics, OS input stack behavior,
+    parser/runtime behavior, or product-specific HID behavior.
+- Residual risk:
+  - Candidate packet acceptance remains separate Level 3 work.
+

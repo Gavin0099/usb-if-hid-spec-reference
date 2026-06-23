@@ -209,4 +209,12 @@
 - gate: candidate packet only; no accepted evidence packet and no verified count
   movement.
 
+### HID-LRA-26: HID Report Descriptor Item Candidate Packet Skeletons
+
+- status: In progress
+- objective: add machine-checkable candidate packet skeletons for the six HID
+  report descriptor item identity entries under Section 6.2.2.
+- gate: candidate packet only; no accepted evidence packet and no verified count
+  movement.
+
 
