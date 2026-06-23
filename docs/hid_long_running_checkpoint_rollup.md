@@ -2343,3 +2343,37 @@ Commit Checkpoint:
 - Residual risk:
   - Candidate packet acceptance remains separate Level 3 work.
 
+## Batch: HID-LRA-52 (candidate source binding negative tests)
+
+- Commit: this checkpoint
+- Scope: add negative fixture tests proving candidate packet source binding
+  validator fails on source drift.
+- Changed files:
+  - `scripts/validate_evidence_packet_schema.py`
+  - `tests/test_evidence_packet_schema.py`
+  - `governance/hid_work_queue.yaml`
+  - `docs/hid_long_running_roadmap.md`
+  - `docs/hid_long_running_checkpoint_rollup.md`
+- Validation:
+  - PASS `python -X utf8 scripts/validate_evidence_packet_schema.py`
+  - PASS `python -m unittest tests.test_evidence_packet_schema`
+- Stats before/after:
+  - tracked: unchanged at 19
+  - scaffold: unchanged at 0
+  - reviewed: unchanged at 19
+  - verified: unchanged at 0
+- Review level:
+  - Level 1 test coverage only; no source import, accepted packet, or
+    status/count movement.
+- Can claim:
+  - Negative tests prove wrong candidate `source_id` fails.
+  - Negative tests prove wrong candidate `source_section` fails.
+  - Negative tests prove conflicting matrix `source_refs` fails.
+- Cannot claim:
+  - cannot claim accepted evidence packets.
+  - cannot claim any HID entry is verified.
+  - cannot claim new source authority import.
+  - cannot claim firmware, OS, parser/runtime, or product-specific HID behavior.
+- Residual risk:
+  - Candidate packet acceptance remains separate Level 3 work.
+
