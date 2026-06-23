@@ -544,3 +544,26 @@ queue:
       with a matching <candidate-base>_candidate.yaml. This is path and naming
       validation only and does not add any production accepted packet.
       checkpoint commit: 7da0966.
+
+  - id: HID-VER-12
+    title: GET_REPORT accepted packet pre-approval checklist generator
+    authority: Repo-local evidence packet governance
+    status: reviewed
+    allowed_status_change: preapproval_gap_report_only
+    requires_human_approval: false
+    review_level: 1
+    gate: validation_required
+    forbidden_claims:
+      - accepted evidence packet
+      - verified status uplift
+      - new source authority import
+      - firmware behavior correctness
+      - OS input stack behavior
+      - parser runtime behavior
+    notes: >
+      Add a read-only generator for accepted-packet pre-approval checklist
+      reports and generate the first GET_REPORT gap report under
+      docs/evidence/preapproval/. The report names the future accepted packet
+      path and missing Level 3 acceptance artifacts, but does not create any
+      production accepted packet.
+      checkpoint commit: this checkpoint.

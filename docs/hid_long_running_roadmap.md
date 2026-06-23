@@ -247,3 +247,12 @@
 - latest checkpoint: 7da0966
 - gate: validator hardening only; no production accepted packet and no verified
   count movement.
+
+### HID-LRA-30: GET_REPORT Accepted Packet Pre-Approval Checklist
+
+- status: In progress
+- objective: add a read-only generator for accepted-packet pre-approval
+  checklist reports and generate the first GET_REPORT gap report under
+  `docs/evidence/preapproval/`.
+- gate: pre-approval gap report only; no production accepted packet and no
+  verified count movement.

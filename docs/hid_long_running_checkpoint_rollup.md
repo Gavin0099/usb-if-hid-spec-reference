@@ -2822,3 +2822,39 @@ Commit Checkpoint:
   - cannot claim firmware, OS, parser/runtime, or product-specific HID behavior.
 - Residual risk:
   - First production accepted packet remains separate Level 3 work.
+
+## Batch: HID-LRA-59 (GET_REPORT accepted packet pre-approval checklist)
+
+- Commit: this checkpoint
+- Scope: add a read-only accepted-packet pre-approval checklist generator and
+  generate the first GET_REPORT gap report under `docs/evidence/preapproval/`.
+- Changed files:
+  - `scripts/generate_accepted_packet_preapproval_checklist.py`
+  - `tests/test_accepted_packet_preapproval_checklist.py`
+  - `docs/evidence/preapproval/hid_get_report_preapproval_checklist.md`
+  - `docs/evidence_packet_schema.md`
+  - `governance/hid_work_queue.yaml`
+  - `docs/hid_long_running_roadmap.md`
+  - `docs/hid_long_running_checkpoint_rollup.md`
+- Validation:
+  - PASS `python -m unittest tests.test_accepted_packet_preapproval_checklist`
+- Stats before/after:
+  - tracked: unchanged at 19
+  - scaffold: unchanged at 0
+  - reviewed: unchanged at 19
+  - verified: unchanged at 0
+- Review level:
+  - Level 1 pre-approval gap report only; no production accepted packet and no
+    status/count movement.
+- Can claim:
+  - GET_REPORT has a pre-approval checklist report showing ready checks and
+    gaps before an accepted packet can be created.
+  - The generator can write checklist reports without creating accepted packet
+    YAML files.
+- Cannot claim:
+  - cannot claim production accepted evidence packets.
+  - cannot claim any HID entry is verified.
+  - cannot claim new source authority import.
+  - cannot claim firmware, OS, parser/runtime, or product-specific HID behavior.
+- Residual risk:
+  - First production accepted packet remains separate Level 3 work.
