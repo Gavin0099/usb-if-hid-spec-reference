@@ -302,6 +302,6 @@
 - objective: add a validator for accepted-packet proposal artifacts covering
   proposal-only status, future accepted path absence, candidate/pre-approval
   bindings, Level 3 placeholders, and claim ceilings.
-- latest checkpoint: this checkpoint
+- latest checkpoint: bc8a365
 - gate: proposal validator only; no production accepted packet and no verified
   count movement.

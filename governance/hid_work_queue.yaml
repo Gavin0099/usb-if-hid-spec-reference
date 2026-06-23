@@ -677,4 +677,4 @@ queue:
       status, future accepted path absence, candidate/pre-approval bindings,
       Level 3 placeholders, and claim ceilings are machine-checkable. This
       does not create accepted packets or change governed matrix status.
-      checkpoint commit: this checkpoint.
+      checkpoint commit: bc8a365.
