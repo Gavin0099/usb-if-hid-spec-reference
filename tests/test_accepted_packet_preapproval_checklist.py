@@ -5,7 +5,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from scripts.generate_accepted_packet_preapproval_checklist import build_checklist, render_markdown
+from scripts.generate_accepted_packet_preapproval_checklist import build_checklist, list_candidate_ids, render_markdown
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -55,6 +55,41 @@ class AcceptedPacketPreapprovalChecklistTests(unittest.TestCase):
             self.assertTrue(out.exists())
             self.assertEqual(before, after)
             self.assertIn("gap report only", out.read_text(encoding="utf-8"))
+
+    def test_candidate_id_listing_covers_all_candidate_packets(self) -> None:
+        candidate_ids = list_candidate_ids()
+        self.assertEqual(len(candidate_ids), 19)
+        self.assertIn("hid_get_report", candidate_ids)
+        self.assertIn("hid_set_protocol", candidate_ids)
+        self.assertIn("report_descriptor_reserved_item_type", candidate_ids)
+
+    def test_cli_all_writes_all_reports_without_creating_accepted_packets(self) -> None:
+        with tempfile.TemporaryDirectory() as tempdir:
+            out_dir = Path(tempdir) / "preapproval"
+            accepted_dir = ROOT / "docs" / "evidence" / "accepted"
+            before = sorted(accepted_dir.glob("*.yaml")) if accepted_dir.exists() else []
+            result = subprocess.run(
+                [
+                    sys.executable,
+                    "-X",
+                    "utf8",
+                    "scripts/generate_accepted_packet_preapproval_checklist.py",
+                    "--all",
+                    "--out-dir",
+                    str(out_dir),
+                ],
+                cwd=ROOT,
+                check=False,
+                capture_output=True,
+                text=True,
+            )
+            after = sorted(accepted_dir.glob("*.yaml")) if accepted_dir.exists() else []
+            reports = sorted(out_dir.glob("*_preapproval_checklist.md"))
+            self.assertEqual(result.returncode, 0, result.stderr)
+            self.assertEqual(len(reports), 19)
+            self.assertEqual(before, after)
+            self.assertIn("Generated 19 pre-approval checklist report", result.stdout)
+            self.assertTrue((out_dir / "hid_set_protocol_preapproval_checklist.md").exists())
 
     def test_fixture_candidate_missing_validation_shows_gap(self) -> None:
         with tempfile.TemporaryDirectory() as tempdir:

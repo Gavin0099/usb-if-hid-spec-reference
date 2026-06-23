@@ -2889,3 +2889,43 @@ Commit Checkpoint:
   - cannot claim firmware, OS, parser/runtime, or product-specific HID behavior.
 - Residual risk:
   - First production accepted packet remains separate Level 3 work.
+
+## Batch: HID-LRA-60 (complete candidate pre-approval checklist surface)
+
+- Commit: this checkpoint
+- Scope: extend the pre-approval checklist generator with batch mode and
+  generate gap reports for all 19 candidate packets under
+  `docs/evidence/preapproval/`.
+- Changed files:
+  - `scripts/generate_accepted_packet_preapproval_checklist.py`
+  - `tests/test_accepted_packet_preapproval_checklist.py`
+  - `docs/evidence/preapproval/*_preapproval_checklist.md`
+  - `docs/evidence_packet_schema.md`
+  - `governance/hid_work_queue.yaml`
+  - `docs/hid_long_running_roadmap.md`
+  - `docs/hid_long_running_checkpoint_rollup.md`
+- Validation:
+  - PASS `python -m unittest tests.test_accepted_packet_preapproval_checklist`
+  - PASS `python -X utf8 scripts/validate_evidence_packet_schema.py`
+  - PASS `python -m unittest discover -s tests`
+- Stats before/after:
+  - tracked: unchanged at 19
+  - scaffold: unchanged at 0
+  - reviewed: unchanged at 19
+  - verified: unchanged at 0
+  - pre-approval reports: 1 to 19
+  - production accepted packets: unchanged at 0
+- Review level:
+  - Level 1 pre-approval gap report only; no production accepted packet and no
+    status/count movement.
+- Can claim:
+  - All 19 candidate packets have pre-approval checklist gap reports.
+  - Batch generation writes pre-approval reports without creating accepted
+    packet YAML files.
+- Cannot claim:
+  - cannot claim production accepted evidence packets.
+  - cannot claim any HID entry is verified.
+  - cannot claim new source authority import.
+  - cannot claim firmware, OS, parser/runtime, or product-specific HID behavior.
+- Residual risk:
+  - First production accepted packet remains separate Level 3 work.

@@ -18,6 +18,7 @@ import yaml
 ROOT = Path(__file__).resolve().parents[1]
 CANDIDATE_DIR = ROOT / "docs" / "evidence" / "candidates"
 ACCEPTED_DIR = ROOT / "docs" / "evidence" / "accepted"
+PREAPPROVAL_DIR = ROOT / "docs" / "evidence" / "preapproval"
 SCHEMA = ROOT / "contract" / "evidence_packet_schema.yaml"
 
 REQUIRED_ACCEPTANCE_GATE_FIELDS = (
@@ -69,6 +70,17 @@ def _accepted_path_for_candidate(candidate_path: Path, accepted_dir: Path) -> Pa
     if not name.endswith("_candidate.yaml"):
         return accepted_dir / f"{candidate_path.stem}_accepted.yaml"
     return accepted_dir / f"{name[:-len('_candidate.yaml')]}_accepted.yaml"
+
+
+def _candidate_base(candidate_path: Path) -> str:
+    name = candidate_path.name
+    if name.endswith("_candidate.yaml"):
+        return name[:-len("_candidate.yaml")]
+    return candidate_path.stem
+
+
+def list_candidate_ids(candidate_dir: Path = CANDIDATE_DIR) -> list[str]:
+    return [_candidate_base(path) for path in sorted(candidate_dir.glob("*_candidate.yaml"))]
 
 
 def build_checklist(
@@ -225,17 +237,28 @@ def render_markdown(checklist: dict[str, Any]) -> str:
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--candidate", default="hid_get_report")
+    parser.add_argument("--all", action="store_true")
     parser.add_argument("--out")
+    parser.add_argument("--out-dir", default="docs/evidence/preapproval")
     args = parser.parse_args()
 
-    checklist = build_checklist(candidate_id=args.candidate)
-    output = render_markdown(checklist)
-    if args.out:
-        out = ROOT / args.out
-        out.parent.mkdir(parents=True, exist_ok=True)
-        out.write_text(output, encoding="utf-8")
+    if args.all:
+        out_dir = ROOT / args.out_dir
+        out_dir.mkdir(parents=True, exist_ok=True)
+        for candidate_id in list_candidate_ids():
+            checklist = build_checklist(candidate_id=candidate_id)
+            out = out_dir / f"{candidate_id}_preapproval_checklist.md"
+            out.write_text(render_markdown(checklist), encoding="utf-8")
+        print(f"Generated {len(list_candidate_ids())} pre-approval checklist report(s) in {_display_path(out_dir)}")
     else:
-        print(output, end="")
+        checklist = build_checklist(candidate_id=args.candidate)
+        output = render_markdown(checklist)
+        if args.out:
+            out = ROOT / args.out
+            out.parent.mkdir(parents=True, exist_ok=True)
+            out.write_text(output, encoding="utf-8")
+        else:
+            print(output, end="")
     return 0
 
 

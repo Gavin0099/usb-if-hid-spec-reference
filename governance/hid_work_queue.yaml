@@ -567,3 +567,25 @@ queue:
       path and missing Level 3 acceptance artifacts, but does not create any
       production accepted packet.
       checkpoint commit: 52d85ed.
+
+  - id: HID-VER-13
+    title: Complete candidate pre-approval checklist surface
+    authority: Repo-local evidence packet governance
+    status: reviewed
+    allowed_status_change: preapproval_gap_report_only
+    requires_human_approval: false
+    review_level: 1
+    gate: validation_required
+    forbidden_claims:
+      - accepted evidence packet
+      - verified status uplift
+      - new source authority import
+      - firmware behavior correctness
+      - OS input stack behavior
+      - parser runtime behavior
+    notes: >
+      Extend the pre-approval checklist generator with batch mode and generate
+      checklist gap reports for all 19 candidate packets under
+      docs/evidence/preapproval/. This creates no production accepted packet
+      and does not change governed matrix status.
+      checkpoint commit: this checkpoint.
