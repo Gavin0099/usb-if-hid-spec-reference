@@ -305,3 +305,12 @@
 - latest checkpoint: bc8a365
 - gate: proposal validator only; no production accepted packet and no verified
   count movement.
+
+### HID-LRA-36: Accepted Packet Proposal Validator Receipt Path Containment
+
+- status: Completed
+- objective: harden `--receipt-out` handling for the accepted-packet proposal
+  validator so receipt paths must resolve under the repository root.
+- latest checkpoint: this checkpoint
+- gate: validator hardening only; no production accepted packet and no verified
+  count movement.

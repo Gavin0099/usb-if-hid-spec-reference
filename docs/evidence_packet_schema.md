@@ -163,6 +163,10 @@ absence, candidate/pre-approval report bindings, Level 3 placeholder controls,
 and proposal claim ceilings. It does not create accepted packets and does not
 satisfy the verified gate.
 
+When the proposal validator writes a receipt with `--receipt-out`, the output
+path must resolve under this repository root. Absolute outside paths and
+relative escape paths are rejected.
+
 Current proposal artifacts:
 
 - `docs/evidence/accepted_proposals/hid_get_report_accepted_proposal.md`

@@ -1,5 +1,7 @@
 import json
 import shutil
+import subprocess
+import sys
 import tempfile
 import unittest
 from pathlib import Path
@@ -92,6 +94,69 @@ class AcceptedPacketProposalValidatorTests(unittest.TestCase):
             errors, receipt = validate(proposal_dir=root / "evidence" / "accepted_proposals", root=root)
             self.assertEqual(receipt["result"], "FAIL")
             self.assertTrue(any("checkpoint_commit must remain a TBD placeholder" in error for error in errors))
+
+    def test_receipt_out_under_repo_root_is_allowed(self) -> None:
+        receipt = ROOT / "tmp" / "test_accepted_packet_proposals_receipt.json"
+        try:
+            result = subprocess.run(
+                [
+                    sys.executable,
+                    "-X",
+                    "utf8",
+                    "scripts/validate_accepted_packet_proposals.py",
+                    "--receipt-out",
+                    "tmp/test_accepted_packet_proposals_receipt.json",
+                ],
+                cwd=ROOT,
+                check=False,
+                capture_output=True,
+                text=True,
+            )
+            self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+            self.assertTrue(receipt.exists())
+            data = json.loads(receipt.read_text(encoding="utf-8"))
+            self.assertEqual(data["result"], "PASS")
+        finally:
+            receipt.unlink(missing_ok=True)
+
+    def test_receipt_out_absolute_outside_repo_fails(self) -> None:
+        with tempfile.TemporaryDirectory() as tempdir:
+            outside = Path(tempdir) / "proposal_receipt.json"
+            result = subprocess.run(
+                [
+                    sys.executable,
+                    "-X",
+                    "utf8",
+                    "scripts/validate_accepted_packet_proposals.py",
+                    "--receipt-out",
+                    str(outside),
+                ],
+                cwd=ROOT,
+                check=False,
+                capture_output=True,
+                text=True,
+            )
+            self.assertNotEqual(result.returncode, 0)
+            self.assertIn("output path must stay under repository root", result.stdout)
+            self.assertFalse(outside.exists())
+
+    def test_receipt_out_relative_escape_fails(self) -> None:
+        result = subprocess.run(
+            [
+                sys.executable,
+                "-X",
+                "utf8",
+                "scripts/validate_accepted_packet_proposals.py",
+                "--receipt-out",
+                "../proposal_receipt.json",
+            ],
+            cwd=ROOT,
+            check=False,
+            capture_output=True,
+            text=True,
+        )
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn("output path must stay under repository root", result.stdout)
 
 
 if __name__ == "__main__":
