@@ -3993,7 +3993,7 @@ Commit Checkpoint:
   - No payload parser/runtime or host-side behavior verification was added.
 ## Batch: HID-LRA-75 (SET_PROTOCOL Verified Promotion)
 
-- Commit: 69d6766
+- Commit: 1cb083d
 - Scope: promote `HID-REQ-6`/`hid_set_protocol` from accepted candidate to verified claim level through Level 3 approved checkpoint, then reflect the change in governing matrices, manifest, and evidence packet metadata.
 - Changed files:
   - `data/hid_class_request_matrix.yaml`
@@ -4046,7 +4046,7 @@ Commit Checkpoint:
 
 ### Checkpoint memory entry for HID-LRA-75
 
-- Commit: 69d6766
+- Commit: 1cb083d
 - Scope: record the `HID-LRA-75` verified promotion checkpoint in repo-local daily memory.
 - Changed files:
   - `memory/2026-06-23.md`
