@@ -1,0 +1,79 @@
+packet_identity:
+  packet_id: report_descriptor_main_item_type_verified_candidate
+  packet_status: accepted
+  review_level: 3
+  target_claim_level: verified
+governed_entry_binding:
+  matrix: hid_report_descriptor_items_matrix
+  entry_id: report_descriptor_main_item_type
+  current_claim_level: reviewed
+  current_evidence_status: not_verified
+source_trace:
+  source_id: hid_1_11
+  source_section: 6.2.2
+  cited_source_authority_entry: data/source_authority.yaml current_imported_usage section 6.2.2
+  quoted_or_paraphrased_basis: 'HID 1.11 Section 6.2.2 is the registered authority for report descriptor item identity. This
+    candidate only binds the Main item type identity already present in the governed matrix and does not assert Main item
+    semantics.
+
+    '
+claim_delta:
+  can_claim_after_acceptance:
+  - Main item type identity has an accepted source-traceable evidence packet.
+  - The accepted packet is bound to hid_report_descriptor_items_matrix.report_descriptor_main_item_type.
+  cannot_claim_after_acceptance:
+  - firmware behavior correctness
+  - OS input stack behavior
+  - parser/runtime behavior
+  - report descriptor parser behavior
+  - Main item semantics
+  - product-specific HID behavior
+  forbidden_claim_check:
+  - no firmware report descriptor parsing correctness
+  - no host report descriptor interpretation behavior
+  - no parser/runtime behavior
+  - no Main item semantic completeness
+evidence_body:
+  identity_statement: 'main_item_type is the report descriptor item identity represented by hid_report_descriptor_items_matrix.report_descriptor_main_item_type.
+
+    '
+  semantic_statement: 'Candidate evidence is limited to report descriptor item identity binding. It does not verify Main item
+    semantics, report descriptor parsing, firmware implementation behavior, or host behavior.
+
+    '
+  evidence_limits:
+  - identity-level report descriptor item binding only
+  - no Main item semantics
+  - no firmware implementation correctness
+  - no host OS behavior
+  - no parser/runtime behavior
+non_claims:
+  firmware_implementation_correctness: not_claimed
+  os_input_stack_behavior: not_claimed
+  parser_runtime_behavior: not_claimed
+  product_specific_hid_behavior: not_claimed
+validation:
+  source_authority_validator: python -X utf8 scripts/validate_source_authority.py
+  matrix_validator: python -X utf8 scripts/validate_hid_report_descriptor_items_matrix.py
+  verification_status_validator: python -X utf8 scripts/validate_verification_status.py
+  evidence_packet_validator: python -X utf8 scripts/validate_evidence_packet_schema.py
+  unit_tests: python -m unittest discover -s tests
+approval:
+  requested_approval: Level 3 review for future accepted evidence packet status only.
+  approver: human:level3-reviewer-2026-06-23
+  approval_record: approved
+residual_risk:
+  remaining_unverified_behavior:
+  - runtime report descriptor parsing remains unverified
+  - Main item semantics remain unverified
+  - host stack behavior remains unverified
+  consumer_repo_escalation_boundary: 'Consuming firmware repositories must separately verify any implementation behavior or
+    product-specific report descriptor policy derived from Main item handling.
+
+    '
+acceptance_gate:
+  previous_packet_status: candidate
+  checkpoint_commit: 46f65d9
+  validation_receipt: evidence/validation_receipt_hid_all_accepted.json
+  level3_checkpoint: true
+  direct_promotion: false

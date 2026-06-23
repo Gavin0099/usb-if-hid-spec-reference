@@ -1,0 +1,116 @@
+{
+  "validator": "validate_evidence_packet_schema.py",
+  "authority_ceiling": "verified_preflight_contract_only",
+  "result": "PASS",
+  "schema": "contract/evidence_packet_schema.yaml",
+  "packet_status_values": [
+    "accepted",
+    "candidate",
+    "rejected",
+    "shell"
+  ],
+  "required_sections": [
+    "approval",
+    "claim_delta",
+    "evidence_body",
+    "governed_entry_binding",
+    "non_claims",
+    "packet_identity",
+    "residual_risk",
+    "source_trace",
+    "validation"
+  ],
+  "verified_gate": {
+    "review_level": 3,
+    "required_packet_status": "accepted",
+    "acceptance_workflow": {
+      "required_previous_status": "candidate",
+      "required_approval_record": "approved",
+      "required_approver": "human",
+      "required_checkpoint_commit": true,
+      "required_validation_receipt": true,
+      "required_level3_checkpoint": true,
+      "forbidden_direct_promotion": true
+    }
+  },
+  "accepted_packet_location": {
+    "directory": "docs/evidence/accepted",
+    "filename_pattern": "<candidate-base>_accepted.yaml",
+    "matching_candidate_pattern": "<candidate-base>_candidate.yaml",
+    "rule": "Accepted packet files must live under docs/evidence/accepted/ and must correspond to an existing candidate packet with the same base name.\n"
+  },
+  "checked_shell_packets": {
+    "docs/evidence/hid_get_idle_packet.md": "reviewed_draft_shell",
+    "docs/evidence/hid_get_protocol_packet.md": "reviewed_draft_shell",
+    "docs/evidence/hid_get_report_packet.md": "reviewed_draft_shell",
+    "docs/evidence/hid_set_idle_packet.md": "reviewed_draft_shell",
+    "docs/evidence/hid_set_protocol_packet.md": "reviewed_draft_shell",
+    "docs/evidence/hid_set_report_packet.md": "reviewed_draft_shell"
+  },
+  "checked_candidate_packets": [
+    "docs/evidence/candidates/hid_bCountryCode_candidate.yaml",
+    "docs/evidence/candidates/hid_bDescriptorType_candidate.yaml",
+    "docs/evidence/candidates/hid_bDescriptorType_subordinate_candidate.yaml",
+    "docs/evidence/candidates/hid_bLength_candidate.yaml",
+    "docs/evidence/candidates/hid_bNumDescriptors_candidate.yaml",
+    "docs/evidence/candidates/hid_bcdHID_candidate.yaml",
+    "docs/evidence/candidates/hid_get_idle_candidate.yaml",
+    "docs/evidence/candidates/hid_get_protocol_candidate.yaml",
+    "docs/evidence/candidates/hid_get_report_candidate.yaml",
+    "docs/evidence/candidates/hid_set_idle_candidate.yaml",
+    "docs/evidence/candidates/hid_set_protocol_candidate.yaml",
+    "docs/evidence/candidates/hid_set_report_candidate.yaml",
+    "docs/evidence/candidates/hid_wDescriptorLength_candidate.yaml",
+    "docs/evidence/candidates/report_descriptor_global_item_type_candidate.yaml",
+    "docs/evidence/candidates/report_descriptor_local_item_type_candidate.yaml",
+    "docs/evidence/candidates/report_descriptor_long_item_prefix_candidate.yaml",
+    "docs/evidence/candidates/report_descriptor_main_item_type_candidate.yaml",
+    "docs/evidence/candidates/report_descriptor_reserved_item_type_candidate.yaml",
+    "docs/evidence/candidates/report_descriptor_short_item_prefix_candidate.yaml"
+  ],
+  "checked_accepted_packets": [
+    "docs/evidence/accepted/hid_bCountryCode_accepted.yaml",
+    "docs/evidence/accepted/hid_bDescriptorType_accepted.yaml",
+    "docs/evidence/accepted/hid_bDescriptorType_subordinate_accepted.yaml",
+    "docs/evidence/accepted/hid_bLength_accepted.yaml",
+    "docs/evidence/accepted/hid_bNumDescriptors_accepted.yaml",
+    "docs/evidence/accepted/hid_bcdHID_accepted.yaml",
+    "docs/evidence/accepted/hid_get_idle_accepted.yaml",
+    "docs/evidence/accepted/hid_get_protocol_accepted.yaml",
+    "docs/evidence/accepted/hid_get_report_accepted.yaml",
+    "docs/evidence/accepted/hid_set_idle_accepted.yaml",
+    "docs/evidence/accepted/hid_set_protocol_accepted.yaml",
+    "docs/evidence/accepted/hid_set_report_accepted.yaml",
+    "docs/evidence/accepted/hid_wDescriptorLength_accepted.yaml",
+    "docs/evidence/accepted/report_descriptor_global_item_type_accepted.yaml",
+    "docs/evidence/accepted/report_descriptor_local_item_type_accepted.yaml",
+    "docs/evidence/accepted/report_descriptor_long_item_prefix_accepted.yaml",
+    "docs/evidence/accepted/report_descriptor_main_item_type_accepted.yaml",
+    "docs/evidence/accepted/report_descriptor_reserved_item_type_accepted.yaml",
+    "docs/evidence/accepted/report_descriptor_short_item_prefix_accepted.yaml"
+  ],
+  "accepted_path_guard": {
+    "required_directory_suffix": "docs/evidence/accepted",
+    "actual_directory": "E:/BackUp/Git_EE/usb-if-hid-spec-reference/docs/evidence/accepted",
+    "required_filename_pattern": "^[A-Za-z0-9_]+_accepted\\.yaml$"
+  },
+  "checked_source_authority_bindings": [
+    "hid_1_11:6.2.1",
+    "hid_1_11:6.2.2",
+    "hid_1_11:7.2"
+  ],
+  "checked_matrix_source_refs": {
+    "hid_class_request_matrix": [
+      "hid_1_11:7.2"
+    ],
+    "hid_descriptor_fields_matrix": [
+      "hid_1_11:6.2.1"
+    ],
+    "hid_report_descriptor_items_matrix": [
+      "hid_1_11:6.2.2"
+    ]
+  },
+  "error_count": 0,
+  "errors": [],
+  "findings": []
+}

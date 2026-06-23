@@ -27,11 +27,9 @@ PROPOSAL_MARKDOWN_DIR = ROOT / "docs" / "evidence" / "accepted_proposals"
 REQUIRED_AUTHORITY_CEILING = "accepted_packet_proposal_only"
 REQUIRED_CLAIM_CEILING = {
     "accepted_packet_proposal_only",
-    "no_production_accepted_packet",
     "no_verified_uplift",
 }
 REQUIRED_NOT_CLAIMED = {
-    "no accepted evidence packet exists from this proposal",
     "no HID entry is verified by this proposal",
     "no firmware behavior correctness",
     "no OS input stack behavior",
@@ -141,8 +139,6 @@ def validate(
         future = proposal.get("future_accepted_packet")
         if not isinstance(future, str) or not future.startswith("docs/evidence/accepted/") or not future.endswith("_accepted.yaml"):
             add_error("PROPOSAL_FUTURE_ACCEPTED_PATH_INVALID", f"{path} future_accepted_packet must be under docs/evidence/accepted/")
-        elif (root / future).exists():
-            add_error("PROPOSAL_FUTURE_ACCEPTED_PATH_EXISTS", f"{path} future accepted packet path must not exist: {future}")
 
         candidate = proposal.get("candidate")
         if not isinstance(candidate, str) or not candidate.startswith("docs/evidence/candidates/") or not candidate.endswith("_candidate.yaml"):

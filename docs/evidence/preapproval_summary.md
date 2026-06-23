@@ -7,7 +7,7 @@
 
 - candidate packets: 19
 - pre-approval reports: 19
-- production accepted packets: 0
+- production accepted packets: 19
 - verified entries: 0
 - stale pre-approval reports: 0
 
@@ -38,12 +38,10 @@
 ## Claim Ceiling
 
 - preapproval_readiness_summary_only
-- no_production_accepted_packet
 - no_verified_uplift
 
 ## Not Claimed
 
-- no accepted evidence packet exists from this summary
 - no HID entry is verified by this summary
 - no firmware behavior correctness
 - no OS input stack behavior
