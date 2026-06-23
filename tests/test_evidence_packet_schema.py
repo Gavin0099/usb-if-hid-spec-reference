@@ -93,6 +93,39 @@ class EvidencePacketSchemaTests(unittest.TestCase):
             self.assertEqual(receipt["result"], "FAIL")
             self.assertTrue(any("hid_class_request_matrix.source_refs" in error for error in errors))
 
+    def test_candidate_with_accepted_status_fails(self) -> None:
+        with self._fixture_root() as fixture:
+            candidate = Path(fixture) / "docs" / "evidence" / "candidates" / "hid_get_report_candidate.yaml"
+            candidate.write_text(
+                candidate.read_text(encoding="utf-8").replace("packet_status: candidate", "packet_status: accepted"),
+                encoding="utf-8",
+            )
+            errors, receipt = self._validate_fixture(Path(fixture))
+            self.assertEqual(receipt["result"], "FAIL")
+            self.assertTrue(any("packet_identity.packet_status must be candidate" in error for error in errors))
+
+    def test_candidate_with_non_pending_approval_fails(self) -> None:
+        with self._fixture_root() as fixture:
+            candidate = Path(fixture) / "docs" / "evidence" / "candidates" / "hid_get_report_candidate.yaml"
+            candidate.write_text(
+                candidate.read_text(encoding="utf-8").replace("approval_record: pending", "approval_record: approved"),
+                encoding="utf-8",
+            )
+            errors, receipt = self._validate_fixture(Path(fixture))
+            self.assertEqual(receipt["result"], "FAIL")
+            self.assertTrue(any("approval_record must remain pending" in error for error in errors))
+
+    def test_candidate_with_verified_current_claim_level_fails(self) -> None:
+        with self._fixture_root() as fixture:
+            candidate = Path(fixture) / "docs" / "evidence" / "candidates" / "hid_get_report_candidate.yaml"
+            candidate.write_text(
+                candidate.read_text(encoding="utf-8").replace("current_claim_level: reviewed", "current_claim_level: verified"),
+                encoding="utf-8",
+            )
+            errors, receipt = self._validate_fixture(Path(fixture))
+            self.assertEqual(receipt["result"], "FAIL")
+            self.assertTrue(any("current_claim_level does not match governed entry" in error for error in errors))
+
 
 if __name__ == "__main__":
     unittest.main()

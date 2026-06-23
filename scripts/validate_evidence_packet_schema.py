@@ -271,8 +271,8 @@ def validate(
             )
 
         approval = packet.get("approval", {}) if isinstance(packet.get("approval"), dict) else {}
-        if approval.get("approval_record") not in {"pending", "rejected"}:
-            add_error("CANDIDATE_APPROVAL_INVALID", f"{path} candidate approval_record must remain pending or rejected")
+        if approval.get("approval_record") != "pending":
+            add_error("CANDIDATE_APPROVAL_INVALID", f"{path} candidate approval_record must remain pending")
 
         claim_delta = packet.get("claim_delta", {}) if isinstance(packet.get("claim_delta"), dict) else {}
         cannot_claim = claim_delta.get("cannot_claim_after_acceptance", [])
