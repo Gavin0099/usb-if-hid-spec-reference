@@ -655,4 +655,4 @@ queue:
       names a future accepted packet path and Level 3 gate placeholders but
       does not create any production accepted packet or change governed matrix
       status.
-      checkpoint commit: this checkpoint.
+      checkpoint commit: 9b67f3a.
