@@ -314,3 +314,13 @@
 - latest checkpoint: 27bda5b
 - gate: validator hardening only; no production accepted packet and no verified
   count movement.
+
+### HID-LRA-37: Complete Accepted Packet Proposal Surface
+
+- status: Completed
+- objective: extend accepted-packet proposal generation to all 19 candidate
+  packets, producing Markdown and JSON proposal artifacts under
+  `accepted_proposals/`.
+- latest checkpoint: this checkpoint
+- gate: accepted packet proposal only; no production accepted packet and no
+  verified count movement.

@@ -19,12 +19,16 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 from scripts.generate_accepted_packet_preapproval_checklist import (
+    _display_path,
     _resolve_under_root,
     build_checklist,
+    list_candidate_ids,
 )
 
 
 DEFAULT_CANDIDATE = "hid_get_report"
+DEFAULT_MARKDOWN_DIR = ROOT / "docs" / "evidence" / "accepted_proposals"
+DEFAULT_JSON_DIR = ROOT / "evidence" / "accepted_proposals"
 
 
 def build_proposal(candidate_id: str = DEFAULT_CANDIDATE) -> dict[str, Any]:
@@ -130,13 +134,77 @@ def write_proposal(proposal: dict[str, Any], *, markdown_out: Path, json_out: Pa
     json_out.write_text(json.dumps(proposal, ensure_ascii=True, indent=2) + "\n", encoding="utf-8")
 
 
+def stale_proposal_artifacts(
+    *,
+    markdown_dir: Path = DEFAULT_MARKDOWN_DIR,
+    json_dir: Path = DEFAULT_JSON_DIR,
+) -> list[Path]:
+    expected = {f"{candidate_id}_accepted_proposal" for candidate_id in list_candidate_ids()}
+    stale: list[Path] = []
+    if markdown_dir.exists():
+        stale.extend(
+            path
+            for path in sorted(markdown_dir.glob("*_accepted_proposal.md"))
+            if path.stem not in expected
+        )
+    if json_dir.exists():
+        stale.extend(
+            path
+            for path in sorted(json_dir.glob("*_accepted_proposal.json"))
+            if path.stem not in expected
+        )
+    return stale
+
+
+def write_all_proposals(
+    *,
+    markdown_dir: Path = DEFAULT_MARKDOWN_DIR,
+    json_dir: Path = DEFAULT_JSON_DIR,
+    prune_stale: bool = False,
+) -> int:
+    stale = stale_proposal_artifacts(markdown_dir=markdown_dir, json_dir=json_dir)
+    if stale and not prune_stale:
+        paths = ", ".join(_display_path(path) for path in stale)
+        raise ValueError(f"stale accepted-packet proposal artifact(s) found: {paths}")
+    for stale_path in stale:
+        stale_path.unlink()
+    markdown_dir.mkdir(parents=True, exist_ok=True)
+    json_dir.mkdir(parents=True, exist_ok=True)
+    candidate_ids = list_candidate_ids()
+    for candidate_id in candidate_ids:
+        proposal = build_proposal(candidate_id=candidate_id)
+        write_proposal(
+            proposal,
+            markdown_out=markdown_dir / f"{candidate_id}_accepted_proposal.md",
+            json_out=json_dir / f"{candidate_id}_accepted_proposal.json",
+        )
+    return len(candidate_ids)
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--candidate", default=DEFAULT_CANDIDATE)
+    parser.add_argument("--all", action="store_true")
     parser.add_argument("--markdown-out", default="docs/evidence/accepted_proposals/hid_get_report_accepted_proposal.md")
     parser.add_argument("--json-out", default="evidence/accepted_proposals/hid_get_report_accepted_proposal.json")
+    parser.add_argument("--markdown-dir", default="docs/evidence/accepted_proposals")
+    parser.add_argument("--json-dir", default="evidence/accepted_proposals")
+    parser.add_argument("--prune-stale", action="store_true")
     args = parser.parse_args()
     try:
+        if args.all:
+            markdown_dir = _resolve_under_root(args.markdown_dir)
+            json_dir = _resolve_under_root(args.json_dir)
+            count = write_all_proposals(
+                markdown_dir=markdown_dir,
+                json_dir=json_dir,
+                prune_stale=args.prune_stale,
+            )
+            print(
+                "Generated accepted packet proposal batch: "
+                f"{count} proposal(s), accepted_created=false, verified_uplift=false"
+            )
+            return 0
         markdown_out = _resolve_under_root(args.markdown_out)
         json_out = _resolve_under_root(args.json_out)
         proposal = build_proposal(candidate_id=args.candidate)

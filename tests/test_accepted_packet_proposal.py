@@ -5,7 +5,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from scripts.generate_accepted_packet_proposal import build_proposal, render_markdown
+from scripts.generate_accepted_packet_proposal import build_proposal, render_markdown, write_all_proposals
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -95,6 +95,70 @@ class AcceptedPacketProposalTests(unittest.TestCase):
             self.assertNotEqual(result.returncode, 0)
             self.assertIn("output path must stay under repository root", result.stderr)
             self.assertFalse(markdown_out.exists())
+
+    def test_write_all_proposals_creates_batch_without_accepted_packets(self) -> None:
+        with tempfile.TemporaryDirectory(dir=ROOT) as tempdir:
+            temp = Path(tempdir)
+            markdown_dir = temp / "docs_proposals"
+            json_dir = temp / "json_proposals"
+            accepted_dir = ROOT / "docs" / "evidence" / "accepted"
+            before = sorted(accepted_dir.glob("*.yaml")) if accepted_dir.exists() else []
+            count = write_all_proposals(markdown_dir=markdown_dir, json_dir=json_dir)
+            after = sorted(accepted_dir.glob("*.yaml")) if accepted_dir.exists() else []
+            self.assertEqual(count, 19)
+            self.assertEqual(len(list(markdown_dir.glob("*_accepted_proposal.md"))), 19)
+            self.assertEqual(len(list(json_dir.glob("*_accepted_proposal.json"))), 19)
+            self.assertEqual(before, after)
+            sample = json.loads((json_dir / "hid_set_report_accepted_proposal.json").read_text(encoding="utf-8"))
+            self.assertEqual(sample["proposal_status"], "proposal_only")
+            self.assertEqual(sample["candidate"], "docs/evidence/candidates/hid_set_report_candidate.yaml")
+            self.assertFalse(sample["production_accepted_packet_created"])
+            self.assertFalse(sample["verified_uplift"])
+
+    def test_write_all_proposals_fails_on_stale_artifact(self) -> None:
+        with tempfile.TemporaryDirectory(dir=ROOT) as tempdir:
+            temp = Path(tempdir)
+            markdown_dir = temp / "docs_proposals"
+            json_dir = temp / "json_proposals"
+            markdown_dir.mkdir()
+            stale = markdown_dir / "stale_accepted_proposal.md"
+            stale.write_text("# stale\n", encoding="utf-8")
+            with self.assertRaisesRegex(ValueError, "stale accepted-packet proposal artifact"):
+                write_all_proposals(markdown_dir=markdown_dir, json_dir=json_dir)
+            self.assertTrue(stale.exists())
+
+    def test_write_all_proposals_prunes_stale_artifact_when_requested(self) -> None:
+        with tempfile.TemporaryDirectory(dir=ROOT) as tempdir:
+            temp = Path(tempdir)
+            markdown_dir = temp / "docs_proposals"
+            json_dir = temp / "json_proposals"
+            json_dir.mkdir()
+            stale = json_dir / "stale_accepted_proposal.json"
+            stale.write_text("{}\n", encoding="utf-8")
+            count = write_all_proposals(markdown_dir=markdown_dir, json_dir=json_dir, prune_stale=True)
+            self.assertEqual(count, 19)
+            self.assertFalse(stale.exists())
+            self.assertEqual(len(list(json_dir.glob("*_accepted_proposal.json"))), 19)
+
+    def test_cli_all_rejects_output_directory_outside_repo(self) -> None:
+        with tempfile.TemporaryDirectory() as tempdir:
+            result = subprocess.run(
+                [
+                    sys.executable,
+                    "-X",
+                    "utf8",
+                    "scripts/generate_accepted_packet_proposal.py",
+                    "--all",
+                    "--markdown-dir",
+                    str(Path(tempdir) / "docs_proposals"),
+                ],
+                cwd=ROOT,
+                check=False,
+                capture_output=True,
+                text=True,
+            )
+            self.assertNotEqual(result.returncode, 0)
+            self.assertIn("output path must stay under repository root", result.stderr)
 
 
 if __name__ == "__main__":

@@ -1,0 +1,87 @@
+{
+  "authority_ceiling": "accepted_packet_proposal_only",
+  "proposal_status": "proposal_only",
+  "candidate": "docs/evidence/candidates/hid_get_idle_candidate.yaml",
+  "preapproval_report": "docs/evidence/preapproval/hid_get_idle_preapproval_checklist.md",
+  "future_accepted_packet": "docs/evidence/accepted/hid_get_idle_accepted.yaml",
+  "production_accepted_packet_created": false,
+  "verified_uplift": false,
+  "governed_entry": {
+    "matrix": "hid_class_request_matrix",
+    "entry_id": "hid_get_idle",
+    "current_claim_level": "reviewed",
+    "current_evidence_status": "not_introduced"
+  },
+  "source_trace": {
+    "source_id": "hid_1_11",
+    "source_section": "7.2"
+  },
+  "required_level3_acceptance_gate": {
+    "previous_packet_status": "candidate",
+    "checkpoint_commit": "TBD_LEVEL3_ACCEPTED_PACKET_COMMIT",
+    "validation_receipt": "TBD_LEVEL3_VALIDATION_RECEIPT",
+    "level3_checkpoint": true,
+    "direct_promotion": false
+  },
+  "required_approval": {
+    "approval_record": "approved",
+    "approver": "TBD_HUMAN_APPROVER",
+    "requested_approval": "Level 3 approval for accepted packet status only"
+  },
+  "required_validators": [
+    "python -X utf8 scripts/validate_source_authority.py",
+    "python -X utf8 scripts/validate_evidence_packet_schema.py",
+    "python -X utf8 scripts/validate_hid_governed_surface_manifest.py",
+    "python -X utf8 scripts/validate_hid_class_request_matrix.py",
+    "python -X utf8 scripts/validate_hid_descriptor_fields_matrix.py",
+    "python -X utf8 scripts/validate_hid_report_descriptor_items_matrix.py",
+    "python -X utf8 scripts/validate_verification_status.py",
+    "python -X utf8 scripts/probe_table_fingerprint.py --mode check --manifest exports/hid_governed_surface_manifest.yaml --baseline-in evidence/table_fingerprint_baseline.jsonl",
+    "python -m unittest discover -s tests"
+  ],
+  "ready_checks": [
+    "candidate packet status is candidate",
+    "candidate packet is marked review_level 3",
+    "candidate packet targets verified claim level for future review",
+    "candidate approval is still pending as expected",
+    "validation command present: source_authority_validator",
+    "validation command present: matrix_validator",
+    "validation command present: verification_status_validator",
+    "validation command present: evidence_packet_validator",
+    "validation command present: unit_tests",
+    "non-claim preserved: firmware_implementation_correctness",
+    "non-claim preserved: os_input_stack_behavior",
+    "non-claim preserved: parser_runtime_behavior",
+    "non-claim preserved: product_specific_hid_behavior",
+    "governed matrix binding is present",
+    "source trace binding is present",
+    "future accepted packet directory is docs/evidence/accepted"
+  ],
+  "remaining_gaps": [
+    "future accepted packet must add acceptance_gate.previous_packet_status",
+    "future accepted packet must add acceptance_gate.checkpoint_commit",
+    "future accepted packet must add acceptance_gate.validation_receipt",
+    "future accepted packet must add acceptance_gate.level3_checkpoint",
+    "future accepted packet must add acceptance_gate.direct_promotion",
+    "human approver must be recorded before acceptance",
+    "approval_record must change to approved only in the accepted packet",
+    "checkpoint_commit must reference the accepted-packet checkpoint commit",
+    "validation_receipt must reference a durable receipt for the accepted-packet checkpoint",
+    "level3_checkpoint must be true only after Level 3 approval",
+    "direct_promotion must be false",
+    "accepted packet file must be reviewed before any later verified promotion slice"
+  ],
+  "claim_ceiling": [
+    "accepted_packet_proposal_only",
+    "no_production_accepted_packet",
+    "no_verified_uplift"
+  ],
+  "not_claimed": [
+    "no accepted evidence packet exists from this proposal",
+    "no HID entry is verified by this proposal",
+    "no firmware behavior correctness",
+    "no OS input stack behavior",
+    "no parser runtime behavior",
+    "no product-specific HID behavior"
+  ]
+}

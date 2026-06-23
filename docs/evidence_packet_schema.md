@@ -167,10 +167,51 @@ When the proposal validator writes a receipt with `--receipt-out`, the output
 path must resolve under this repository root. Absolute outside paths and
 relative escape paths are rejected.
 
-Current proposal artifacts:
+Current proposal artifacts cover all 19 candidate packets.
 
+Markdown proposals:
+
+- `docs/evidence/accepted_proposals/hid_bcdHID_accepted_proposal.md`
+- `docs/evidence/accepted_proposals/hid_bCountryCode_accepted_proposal.md`
+- `docs/evidence/accepted_proposals/hid_bDescriptorType_accepted_proposal.md`
+- `docs/evidence/accepted_proposals/hid_bDescriptorType_subordinate_accepted_proposal.md`
+- `docs/evidence/accepted_proposals/hid_bLength_accepted_proposal.md`
+- `docs/evidence/accepted_proposals/hid_bNumDescriptors_accepted_proposal.md`
+- `docs/evidence/accepted_proposals/hid_get_idle_accepted_proposal.md`
+- `docs/evidence/accepted_proposals/hid_get_protocol_accepted_proposal.md`
 - `docs/evidence/accepted_proposals/hid_get_report_accepted_proposal.md`
+- `docs/evidence/accepted_proposals/hid_set_idle_accepted_proposal.md`
+- `docs/evidence/accepted_proposals/hid_set_protocol_accepted_proposal.md`
+- `docs/evidence/accepted_proposals/hid_set_report_accepted_proposal.md`
+- `docs/evidence/accepted_proposals/hid_wDescriptorLength_accepted_proposal.md`
+- `docs/evidence/accepted_proposals/report_descriptor_global_item_type_accepted_proposal.md`
+- `docs/evidence/accepted_proposals/report_descriptor_local_item_type_accepted_proposal.md`
+- `docs/evidence/accepted_proposals/report_descriptor_long_item_prefix_accepted_proposal.md`
+- `docs/evidence/accepted_proposals/report_descriptor_main_item_type_accepted_proposal.md`
+- `docs/evidence/accepted_proposals/report_descriptor_reserved_item_type_accepted_proposal.md`
+- `docs/evidence/accepted_proposals/report_descriptor_short_item_prefix_accepted_proposal.md`
+
+JSON proposals:
+
+- `evidence/accepted_proposals/hid_bcdHID_accepted_proposal.json`
+- `evidence/accepted_proposals/hid_bCountryCode_accepted_proposal.json`
+- `evidence/accepted_proposals/hid_bDescriptorType_accepted_proposal.json`
+- `evidence/accepted_proposals/hid_bDescriptorType_subordinate_accepted_proposal.json`
+- `evidence/accepted_proposals/hid_bLength_accepted_proposal.json`
+- `evidence/accepted_proposals/hid_bNumDescriptors_accepted_proposal.json`
+- `evidence/accepted_proposals/hid_get_idle_accepted_proposal.json`
+- `evidence/accepted_proposals/hid_get_protocol_accepted_proposal.json`
 - `evidence/accepted_proposals/hid_get_report_accepted_proposal.json`
+- `evidence/accepted_proposals/hid_set_idle_accepted_proposal.json`
+- `evidence/accepted_proposals/hid_set_protocol_accepted_proposal.json`
+- `evidence/accepted_proposals/hid_set_report_accepted_proposal.json`
+- `evidence/accepted_proposals/hid_wDescriptorLength_accepted_proposal.json`
+- `evidence/accepted_proposals/report_descriptor_global_item_type_accepted_proposal.json`
+- `evidence/accepted_proposals/report_descriptor_local_item_type_accepted_proposal.json`
+- `evidence/accepted_proposals/report_descriptor_long_item_prefix_accepted_proposal.json`
+- `evidence/accepted_proposals/report_descriptor_main_item_type_accepted_proposal.json`
+- `evidence/accepted_proposals/report_descriptor_reserved_item_type_accepted_proposal.json`
+- `evidence/accepted_proposals/report_descriptor_short_item_prefix_accepted_proposal.json`
 
 ## Current Shell Packet Boundary
 

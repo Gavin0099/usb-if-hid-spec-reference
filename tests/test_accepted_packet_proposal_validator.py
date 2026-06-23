@@ -50,7 +50,7 @@ class AcceptedPacketProposalValidatorTests(unittest.TestCase):
         errors, receipt = validate()
         self.assertEqual(errors, [])
         self.assertEqual(receipt["result"], "PASS")
-        self.assertEqual(receipt["checked_proposal_count"], 1)
+        self.assertEqual(receipt["checked_proposal_count"], 19)
         self.assertIn("evidence/accepted_proposals/hid_get_report_accepted_proposal.json", receipt["checked_proposals"])
 
     def test_proposal_with_accepted_status_fails(self) -> None:
