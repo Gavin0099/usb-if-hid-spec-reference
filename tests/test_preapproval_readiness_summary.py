@@ -18,7 +18,7 @@ class PreapprovalReadinessSummaryTests(unittest.TestCase):
         self.assertEqual(summary["candidate_count"], 19)
         self.assertEqual(summary["preapproval_report_count"], 19)
         self.assertEqual(summary["production_accepted_packet_count"], 19)
-        self.assertEqual(summary["verified_entry_count"], 2)
+        self.assertEqual(summary["verified_entry_count"], 3)
         self.assertEqual(summary["stale_preapproval_report_count"], 0)
 
     def test_summary_entries_include_required_gap_fields(self) -> None:
@@ -46,7 +46,7 @@ class PreapprovalReadinessSummaryTests(unittest.TestCase):
         markdown = render_markdown(build_summary())
         self.assertIn("> Status: readiness summary only", markdown)
         self.assertIn("- production accepted packets: 19", markdown)
-        self.assertIn("- verified entries: 2", markdown)
+        self.assertIn("- verified entries: 3", markdown)
 
     def test_cli_writes_markdown_and_json_inside_repo(self) -> None:
         with tempfile.TemporaryDirectory(dir=ROOT) as tempdir:
