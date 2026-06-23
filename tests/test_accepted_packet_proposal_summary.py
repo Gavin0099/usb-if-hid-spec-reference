@@ -130,5 +130,62 @@ class AcceptedPacketProposalSummaryTests(unittest.TestCase):
             self.assertTrue(temp_summary.exists())
         self.assertTrue(tampered.exists())
 
+    def test_cli_assert_match_writes_receipt(self) -> None:
+        with tempfile.TemporaryDirectory(dir=ROOT) as tempdir:
+            receipt = Path(tempdir) / "summary_receipt.json"
+            result = subprocess.run(
+                [
+                    sys.executable,
+                    "-X",
+                    "utf8",
+                    "scripts/generate_accepted_packet_proposal_summary.py",
+                    "--assert-match",
+                    "evidence/accepted_proposal_summary.json",
+                    "--check-only",
+                    "--receipt-out",
+                    str(receipt),
+                ],
+                cwd=ROOT,
+                check=False,
+                capture_output=True,
+                text=True,
+            )
+            self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+            self.assertTrue(receipt.exists())
+            payload = json.loads(receipt.read_text(encoding="utf-8"))
+            self.assertEqual(payload["result"], "PASS")
+            self.assertEqual(payload["error_count"], 0)
+
+    def test_cli_assert_match_writes_receipt_on_fail(self) -> None:
+        with tempfile.TemporaryDirectory(dir=ROOT) as tempdir:
+            source = Path(tempdir) / "source.json"
+            bad = Path(tempdir) / "bad_summary.json"
+            good = json.loads((ROOT / "evidence" / "accepted_proposal_summary.json").read_text(encoding="utf-8"))
+            good["candidate_count"] = 999
+            source.write_text(json.dumps(good, ensure_ascii=True, indent=2) + "\n", encoding="utf-8")
+
+            result = subprocess.run(
+                [
+                    sys.executable,
+                    "-X",
+                    "utf8",
+                    "scripts/generate_accepted_packet_proposal_summary.py",
+                    "--assert-match",
+                    str(source.relative_to(ROOT)),
+                    "--check-only",
+                    "--receipt-out",
+                    str(bad),
+                ],
+                cwd=ROOT,
+                check=False,
+                capture_output=True,
+                text=True,
+            )
+            self.assertNotEqual(result.returncode, 0, result.stdout + result.stderr)
+            self.assertTrue(bad.exists())
+            payload = json.loads(bad.read_text(encoding="utf-8"))
+            self.assertEqual(payload["result"], "FAIL")
+            self.assertGreater(payload["error_count"], 0)
+
 if __name__ == "__main__":
     unittest.main()

@@ -3461,7 +3461,7 @@ Commit Checkpoint:
 
 ## Batch: HID-LRA-68 (accepted packet proposal summary drift gate)
 
-- Commit: 3e608be
+- Commit: this checkpoint
 - Scope: add proposal summary drift detection and compare mode checks so committed
   accepted-packet proposal summaries cannot drift from regenerated output.
 - Changed files:
@@ -3491,6 +3491,7 @@ Commit Checkpoint:
     checks for all current proposal IDs.
   - summary generation can now fail when generated output drifts from committed
     artifact without changing proposals.
+  - check-only summary drift gate now emits a validation receipt for CI traceability.
 - Cannot claim:
   - cannot claim production accepted evidence packets.
   - cannot claim any HID entry is verified.
@@ -3501,7 +3502,7 @@ Commit Checkpoint:
 
 ### Checkpoint memory entry for HID-LRA-68
 
-- Commit: 3e608be
+- Commit: this checkpoint
 - Scope: record the `HID-LRA-68` accepted-packet proposal summary drift gate
   checkpoint in repo-local daily memory using
   `scripts/emit_checkpoint_memory_entry.py`.
@@ -3522,9 +3523,9 @@ Commit Checkpoint:
   - accepted-packet proposals: unchanged at 19
   - production accepted packets: unchanged at 0
 - Can claim:
-  - `memory/2026-06-23.md` contains a bound entry for commit `3e608be`.
+  - `memory/2026-06-23.md` contains a bound entry for the current checkpoint.
   - Queue and roadmap now point `HID-VER-21` / `HID-LRA-68` at commit
-    `3e608be`.
+    the current checkpoint.
 - Cannot claim:
   - cannot claim production accepted evidence packets.
   - cannot claim any HID entry is verified.

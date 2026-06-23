@@ -109,6 +109,28 @@ def _compare_summary(expected: dict[str, Any], actual: dict[str, Any]) -> list[s
     return mismatches
 
 
+def _build_summary_receipt(
+    expected_path: str | None,
+    actual: dict[str, Any],
+    mismatches: list[str],
+) -> dict[str, Any]:
+    return {
+        "validator": "generate_accepted_packet_proposal_summary.py",
+        "result": "PASS" if not mismatches else "FAIL",
+        "assert_match": expected_path,
+        "checked_count": actual["proposal_json_count"],
+        "accepted_packet_count": actual["production_accepted_packet_count"],
+        "verified_entry_count": actual["verified_entry_count"],
+        "error_count": len(mismatches),
+        "errors": mismatches,
+    }
+
+
+def _write_receipt(path: Path, receipt: dict[str, Any]) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps(receipt, ensure_ascii=True, indent=2) + "\n", encoding="utf-8")
+
+
 def build_summary() -> dict[str, Any]:
     errors, receipt = validate()
     if errors:
@@ -226,6 +248,7 @@ def main() -> int:
     parser.add_argument("--json-out", default="evidence/accepted_proposal_summary.json")
     parser.add_argument("--assert-match")
     parser.add_argument("--check-only", action="store_true")
+    parser.add_argument("--receipt-out")
     args = parser.parse_args()
     if args.check_only and not args.assert_match:
         parser.error("--check-only requires --assert-match")
@@ -234,17 +257,31 @@ def main() -> int:
         markdown_out = _resolve_under_root(args.markdown_out)
         json_out = _resolve_under_root(args.json_out)
         summary = build_summary()
+        summary_mismatches: list[str] = []
         if args.assert_match:
             expected_summary_path = _resolve_under_root(args.assert_match)
             expected_summary = _load_json(expected_summary_path)
-            mismatches = _compare_summary(expected_summary, summary)
-            if mismatches:
+            summary_mismatches = _compare_summary(expected_summary, summary)
+            if summary_mismatches:
                 print("FAIL generate_accepted_packet_proposal_summary --assert-match")
-                for mismatch in mismatches:
+                for mismatch in summary_mismatches:
                     print(f"- {mismatch}")
+                if args.receipt_out:
+                    receipt_path = _resolve_under_root(args.receipt_out)
+                    _write_receipt(receipt_path, _build_summary_receipt(args.assert_match, summary, summary_mismatches))
                 return 1
         if not args.check_only:
             write_summary(summary, markdown_out=markdown_out, json_out=json_out)
+        if args.receipt_out:
+            receipt_path = _resolve_under_root(args.receipt_out)
+            _write_receipt(
+                receipt_path,
+                _build_summary_receipt(
+                    args.assert_match,
+                    summary,
+                    summary_mismatches,
+                ),
+            )
     except ValueError as error:
         print(f"ERROR: {error}", file=sys.stderr)
         return 1
