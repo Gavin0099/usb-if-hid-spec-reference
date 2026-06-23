@@ -311,6 +311,6 @@
 - status: Completed
 - objective: harden `--receipt-out` handling for the accepted-packet proposal
   validator so receipt paths must resolve under the repository root.
-- latest checkpoint: this checkpoint
+- latest checkpoint: 27bda5b
 - gate: validator hardening only; no production accepted packet and no verified
   count movement.
