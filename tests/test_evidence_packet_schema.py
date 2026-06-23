@@ -20,6 +20,9 @@ class EvidencePacketSchemaTests(unittest.TestCase):
         self.assertEqual(receipt["verified_gate"]["acceptance_workflow"]["required_previous_status"], "candidate")
         self.assertEqual(receipt["verified_gate"]["acceptance_workflow"]["required_approval_record"], "approved")
         self.assertIs(receipt["verified_gate"]["acceptance_workflow"]["required_validation_receipt"], True)
+        self.assertEqual(receipt["accepted_packet_location"]["directory"], "docs/evidence/accepted")
+        self.assertEqual(receipt["accepted_packet_location"]["filename_pattern"], "<candidate-base>_accepted.yaml")
+        self.assertEqual(receipt["accepted_packet_location"]["matching_candidate_pattern"], "<candidate-base>_candidate.yaml")
         self.assertGreaterEqual(len(receipt["checked_shell_packets"]), 6)
         self.assertIn("hid_1_11:7.2", receipt["checked_source_authority_bindings"])
         self.assertEqual(
@@ -27,6 +30,8 @@ class EvidencePacketSchemaTests(unittest.TestCase):
             ["hid_1_11:7.2"],
         )
         self.assertEqual(len(receipt["checked_candidate_packets"]), 19)
+        self.assertEqual(receipt["accepted_path_guard"]["required_directory_suffix"], "docs/evidence/accepted")
+        self.assertEqual(receipt["accepted_path_guard"]["required_filename_pattern"], r"^[A-Za-z0-9_]+_accepted\.yaml$")
         for candidate in (
             "docs/evidence/candidates/hid_get_report_candidate.yaml",
             "docs/evidence/candidates/hid_set_report_candidate.yaml",
@@ -202,6 +207,43 @@ class EvidencePacketSchemaTests(unittest.TestCase):
             self.assertEqual(errors, [])
             self.assertEqual(receipt["result"], "PASS")
             self.assertEqual(len(receipt["checked_accepted_packets"]), 1)
+
+    def test_accepted_packet_outside_accepted_dir_fails(self) -> None:
+        with self._fixture_root() as fixture:
+            root = Path(fixture)
+            accepted = self._write_accepted_fixture(root)
+            misplaced = root / "docs" / "evidence" / "candidates" / accepted.name
+            shutil.copy(accepted, misplaced)
+            errors, receipt = validate(
+                schema_path=root / "contract" / "evidence_packet_schema.yaml",
+                source_authority_path=root / "data" / "source_authority.yaml",
+                evidence_dir=root / "docs" / "evidence",
+                candidate_dir=root / "docs" / "evidence" / "candidates",
+                accepted_dir=root / "docs" / "evidence" / "candidates",
+                matrix_paths={
+                    "hid_class_request_matrix": root / "data" / "hid_class_request_matrix.yaml",
+                },
+            )
+            self.assertEqual(receipt["result"], "FAIL")
+            self.assertTrue(any("docs/evidence/accepted" in error for error in errors))
+
+    def test_accepted_packet_without_matching_candidate_name_fails(self) -> None:
+        with self._fixture_root() as fixture:
+            accepted = self._write_accepted_fixture(Path(fixture))
+            unbound = accepted.with_name("hid_unknown_accepted.yaml")
+            accepted.rename(unbound)
+            errors, receipt = self._validate_fixture(Path(fixture))
+            self.assertEqual(receipt["result"], "FAIL")
+            self.assertTrue(any("corresponding candidate packet" in error for error in errors))
+
+    def test_accepted_packet_with_invalid_filename_fails(self) -> None:
+        with self._fixture_root() as fixture:
+            accepted = self._write_accepted_fixture(Path(fixture))
+            invalid = accepted.with_name("hid-get-report-accepted.yaml")
+            accepted.rename(invalid)
+            errors, receipt = self._validate_fixture(Path(fixture))
+            self.assertEqual(receipt["result"], "FAIL")
+            self.assertTrue(any("filename must match" in error for error in errors))
 
     def test_accepted_dry_run_missing_approval_fails(self) -> None:
         with self._fixture_root() as fixture:

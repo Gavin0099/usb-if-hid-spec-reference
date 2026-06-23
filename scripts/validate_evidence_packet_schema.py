@@ -37,6 +37,8 @@ REQUIRED_SECTIONS = {
     "residual_risk",
 }
 ACCEPTED_REQUIRED_SECTIONS = {"acceptance_gate"}
+ACCEPTED_DIR_SUFFIX = ("docs", "evidence", "accepted")
+ACCEPTED_NAME_PATTERN = re.compile(r"^[A-Za-z0-9_]+_accepted\.yaml$")
 REQUIRED_GATE_FLAGS = {
     "requires_human_approval",
     "requires_registered_source_authority",
@@ -51,6 +53,11 @@ REQUIRED_ACCEPTANCE_WORKFLOW = {
     "required_validation_receipt": True,
     "required_level3_checkpoint": True,
     "forbidden_direct_promotion": True,
+}
+REQUIRED_ACCEPTED_LOCATION = {
+    "directory": "docs/evidence/accepted",
+    "filename_pattern": "<candidate-base>_accepted.yaml",
+    "matching_candidate_pattern": "<candidate-base>_candidate.yaml",
 }
 
 
@@ -102,6 +109,18 @@ def _load_accepted_packets(accepted_dir: Path = ACCEPTED_DIR) -> dict[str, dict[
     for path in sorted(accepted_dir.glob("*.yaml")):
         packets[_display_path(path)] = _load_yaml(path)
     return packets
+
+
+def _has_path_suffix(path: Path, suffix: tuple[str, ...]) -> bool:
+    normalized = tuple(part.lower() for part in path.parts)
+    expected = tuple(part.lower() for part in suffix)
+    return len(normalized) >= len(expected) and normalized[-len(expected):] == expected
+
+
+def _candidate_name_for_accepted(accepted_name: str) -> str | None:
+    if not accepted_name.endswith("_accepted.yaml"):
+        return None
+    return f"{accepted_name[:-len('_accepted.yaml')]}_candidate.yaml"
 
 
 def _default_matrix_paths() -> dict[str, Path]:
@@ -229,6 +248,14 @@ def validate(
         if workflow.get(key) != expected:
             add_error("ACCEPTANCE_WORKFLOW_INVALID", f"verified_gate.acceptance_workflow.{key} must be {expected!r}")
 
+    accepted_location = schema.get("accepted_packet_location")
+    if not isinstance(accepted_location, dict):
+        add_error("ACCEPTED_LOCATION_MISSING", "accepted_packet_location must be a mapping")
+        accepted_location = {}
+    for key, expected in REQUIRED_ACCEPTED_LOCATION.items():
+        if accepted_location.get(key) != expected:
+            add_error("ACCEPTED_LOCATION_INVALID", f"accepted_packet_location.{key} must be {expected!r}")
+
     non_claims = set(gate.get("requires_non_claims", []))
     for required in ("firmware implementation correctness", "OS input stack behavior"):
         if required not in non_claims:
@@ -261,6 +288,17 @@ def validate(
 
     candidate_packets = _load_candidate_packets(candidate_dir)
     accepted_packets = _load_accepted_packets(accepted_dir)
+    candidate_packet_names = {Path(path).name for path in candidate_packets}
+    accepted_path_guard = {
+        "required_directory_suffix": "/".join(ACCEPTED_DIR_SUFFIX),
+        "actual_directory": accepted_dir.as_posix(),
+        "required_filename_pattern": ACCEPTED_NAME_PATTERN.pattern,
+    }
+    if not _has_path_suffix(accepted_dir, ACCEPTED_DIR_SUFFIX):
+        add_error(
+            "ACCEPTED_DIR_INVALID",
+            f"{accepted_dir.as_posix()} must end with {'/'.join(ACCEPTED_DIR_SUFFIX)}",
+        )
     entries = _entry_index(matrix_paths)
     matrix_source_refs = _matrix_source_ref_index(matrix_paths)
     source_authority_bindings = _source_authority_index(source_authority_path)
@@ -320,6 +358,16 @@ def validate(
             add_error("CANDIDATE_NON_CLAIM_INCOMPLETE", f"{path} must preserve firmware behavior correctness as a non-claim")
 
     for path, packet in accepted_packets.items():
+        accepted_name = Path(path).name
+        expected_candidate = _candidate_name_for_accepted(accepted_name)
+        if not ACCEPTED_NAME_PATTERN.match(accepted_name):
+            add_error("ACCEPTED_FILENAME_INVALID", f"{path} filename must match <candidate-base>_accepted.yaml")
+        elif expected_candidate not in candidate_packet_names:
+            add_error(
+                "ACCEPTED_FILENAME_UNBOUND",
+                f"{path} must have a corresponding candidate packet named {expected_candidate}",
+            )
+
         for section in REQUIRED_SECTIONS | ACCEPTED_REQUIRED_SECTIONS:
             section_data = packet.get(section)
             if not isinstance(section_data, dict):
@@ -400,9 +448,11 @@ def validate(
             "required_packet_status": gate.get("required_packet_status"),
             "acceptance_workflow": workflow,
         },
+        "accepted_packet_location": accepted_location,
         "checked_shell_packets": shell_statuses,
         "checked_candidate_packets": sorted(candidate_packets),
         "checked_accepted_packets": sorted(accepted_packets),
+        "accepted_path_guard": accepted_path_guard,
         "checked_source_authority_bindings": sorted(
             f"{source_id}:{section}"
             for source_id, section in source_authority_bindings

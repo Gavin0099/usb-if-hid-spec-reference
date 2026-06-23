@@ -70,6 +70,20 @@ The validator supports dry-run accepted packet fixtures in test-only directories
 The production repository currently has no accepted packet under
 `docs/evidence/accepted/`.
 
+Production accepted packets must live under:
+
+- `docs/evidence/accepted/`
+
+Accepted packet filenames must use the matching candidate base name:
+
+- candidate: `docs/evidence/candidates/<candidate-base>_candidate.yaml`
+- accepted: `docs/evidence/accepted/<candidate-base>_accepted.yaml`
+
+The validator rejects accepted packet validation when the accepted directory does
+not end with `docs/evidence/accepted`, when a filename does not match the
+`<candidate-base>_accepted.yaml` pattern, or when the matching candidate packet
+does not exist.
+
 ## Current Shell Packet Boundary
 
 Existing files under `docs/evidence/` are shell artifacts. They are useful for
