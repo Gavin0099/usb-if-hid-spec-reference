@@ -56,34 +56,45 @@ def _write_receipt(path: Path, receipt: dict[str, Any]) -> None:
     path.write_text(json.dumps(receipt, ensure_ascii=True, indent=2) + "\n", encoding="utf-8")
 
 
-def _evidence_shell_statuses() -> dict[str, str]:
+def _evidence_shell_statuses(evidence_dir: Path = EVIDENCE_DIR) -> dict[str, str]:
     statuses: dict[str, str] = {}
-    if not EVIDENCE_DIR.exists():
+    if not evidence_dir.exists():
         return statuses
     pattern = re.compile(r"^>\s*Status:\s*(.+?)\s*$", re.IGNORECASE | re.MULTILINE)
-    for path in sorted(EVIDENCE_DIR.glob("*_packet.md")):
+    for path in sorted(evidence_dir.glob("*_packet.md")):
         text = path.read_text(encoding="utf-8")
         match = pattern.search(text)
-        statuses[str(path.relative_to(ROOT))] = match.group(1).strip() if match else "missing"
+        statuses[_display_path(path)] = match.group(1).strip() if match else "missing"
     return statuses
 
 
-def _load_candidate_packets() -> dict[str, dict[str, Any]]:
+def _display_path(path: Path) -> str:
+    try:
+        return path.relative_to(ROOT).as_posix()
+    except ValueError:
+        return path.as_posix()
+
+
+def _load_candidate_packets(candidate_dir: Path = CANDIDATE_DIR) -> dict[str, dict[str, Any]]:
     packets: dict[str, dict[str, Any]] = {}
-    if not CANDIDATE_DIR.exists():
+    if not candidate_dir.exists():
         return packets
-    for path in sorted(CANDIDATE_DIR.glob("*.yaml")):
-        packets[path.relative_to(ROOT).as_posix()] = _load_yaml(path)
+    for path in sorted(candidate_dir.glob("*.yaml")):
+        packets[_display_path(path)] = _load_yaml(path)
     return packets
 
 
-def _entry_index() -> dict[tuple[str, str], dict[str, Any]]:
-    index: dict[tuple[str, str], dict[str, Any]] = {}
-    matrix_paths = {
+def _default_matrix_paths() -> dict[str, Path]:
+    return {
         "hid_class_request_matrix": ROOT / "data" / "hid_class_request_matrix.yaml",
         "hid_descriptor_fields_matrix": ROOT / "data" / "hid_descriptor_fields_matrix.yaml",
         "hid_report_descriptor_items_matrix": ROOT / "data" / "hid_report_descriptor_items_matrix.yaml",
     }
+
+
+def _entry_index(matrix_paths: dict[str, Path] | None = None) -> dict[tuple[str, str], dict[str, Any]]:
+    index: dict[tuple[str, str], dict[str, Any]] = {}
+    matrix_paths = matrix_paths or _default_matrix_paths()
     id_fields = ("request_id", "field_id", "item_id")
     for matrix_id, path in matrix_paths.items():
         if not path.exists():
@@ -98,13 +109,9 @@ def _entry_index() -> dict[tuple[str, str], dict[str, Any]]:
     return index
 
 
-def _matrix_source_ref_index() -> dict[str, set[tuple[str, str]]]:
+def _matrix_source_ref_index(matrix_paths: dict[str, Path] | None = None) -> dict[str, set[tuple[str, str]]]:
     refs: dict[str, set[tuple[str, str]]] = {}
-    matrix_paths = {
-        "hid_class_request_matrix": ROOT / "data" / "hid_class_request_matrix.yaml",
-        "hid_descriptor_fields_matrix": ROOT / "data" / "hid_descriptor_fields_matrix.yaml",
-        "hid_report_descriptor_items_matrix": ROOT / "data" / "hid_report_descriptor_items_matrix.yaml",
-    }
+    matrix_paths = matrix_paths or _default_matrix_paths()
     for matrix_id, path in matrix_paths.items():
         matrix_refs: set[tuple[str, str]] = set()
         if path.exists():
@@ -120,10 +127,10 @@ def _matrix_source_ref_index() -> dict[str, set[tuple[str, str]]]:
     return refs
 
 
-def _source_authority_index() -> set[tuple[str, str]]:
-    if not SOURCE_AUTHORITY.exists():
+def _source_authority_index(source_authority: Path = SOURCE_AUTHORITY) -> set[tuple[str, str]]:
+    if not source_authority.exists():
         return set()
-    data = _load_yaml(SOURCE_AUTHORITY)
+    data = _load_yaml(source_authority)
     allowed: set[tuple[str, str]] = set()
     for source in data.get("primary_sources", []):
         if not isinstance(source, dict) or not isinstance(source.get("id"), str):
@@ -135,7 +142,14 @@ def _source_authority_index() -> set[tuple[str, str]]:
     return allowed
 
 
-def validate() -> tuple[list[str], dict[str, Any]]:
+def validate(
+    *,
+    schema_path: Path = SCHEMA,
+    source_authority_path: Path = SOURCE_AUTHORITY,
+    evidence_dir: Path = EVIDENCE_DIR,
+    candidate_dir: Path = CANDIDATE_DIR,
+    matrix_paths: dict[str, Path] | None = None,
+) -> tuple[list[str], dict[str, Any]]:
     errors: list[str] = []
     findings: list[dict[str, str]] = []
 
@@ -143,11 +157,11 @@ def validate() -> tuple[list[str], dict[str, Any]]:
         errors.append(message)
         findings.append({"code": code, "message": message})
 
-    if not SCHEMA.exists():
-        add_error("SCHEMA_MISSING", f"{SCHEMA.relative_to(ROOT)} is missing")
+    if not schema_path.exists():
+        add_error("SCHEMA_MISSING", f"{_display_path(schema_path)} is missing")
         schema: dict[str, Any] = {}
     else:
-        schema = _load_yaml(SCHEMA)
+        schema = _load_yaml(schema_path)
 
     if schema.get("authority_ceiling") != "verified_preflight_contract_only":
         add_error("AUTHORITY_CEILING_INVALID", "authority_ceiling must be verified_preflight_contract_only")
@@ -198,7 +212,7 @@ def validate() -> tuple[list[str], dict[str, Any]]:
         if required not in forbidden_ids:
             add_error("FORBIDDEN_PROMOTION_MISSING", f"missing forbidden promotion: {required}")
 
-    shell_statuses = _evidence_shell_statuses()
+    shell_statuses = _evidence_shell_statuses(evidence_dir)
     for path, status in shell_statuses.items():
         normalized = status.lower()
         if normalized == "accepted":
@@ -206,10 +220,10 @@ def validate() -> tuple[list[str], dict[str, Any]]:
         if "verified" in normalized:
             add_error("SHELL_PACKET_VERIFIED", f"{path} status must not contain verified")
 
-    candidate_packets = _load_candidate_packets()
-    entries = _entry_index()
-    matrix_source_refs = _matrix_source_ref_index()
-    source_authority_bindings = _source_authority_index()
+    candidate_packets = _load_candidate_packets(candidate_dir)
+    entries = _entry_index(matrix_paths)
+    matrix_source_refs = _matrix_source_ref_index(matrix_paths)
+    source_authority_bindings = _source_authority_index(source_authority_path)
     for path, packet in candidate_packets.items():
         for section in REQUIRED_SECTIONS:
             section_data = packet.get(section)
@@ -269,7 +283,7 @@ def validate() -> tuple[list[str], dict[str, Any]]:
         "validator": "validate_evidence_packet_schema.py",
         "authority_ceiling": "verified_preflight_contract_only",
         "result": "PASS" if not errors else "FAIL",
-        "schema": str(SCHEMA.relative_to(ROOT)),
+        "schema": _display_path(schema_path),
         "packet_status_values": sorted(status_values),
         "required_sections": sorted(sections),
         "verified_gate": {

@@ -1,6 +1,12 @@
 import unittest
+import shutil
+import tempfile
+from pathlib import Path
 
 from scripts.validate_evidence_packet_schema import validate
+
+
+ROOT = Path(__file__).resolve().parents[1]
 
 
 class EvidencePacketSchemaTests(unittest.TestCase):
@@ -27,6 +33,65 @@ class EvidencePacketSchemaTests(unittest.TestCase):
             "docs/evidence/candidates/hid_set_protocol_candidate.yaml",
         ):
             self.assertIn(candidate, receipt["checked_candidate_packets"])
+
+    def _fixture_root(self) -> tempfile.TemporaryDirectory[str]:
+        fixture = tempfile.TemporaryDirectory()
+        root = Path(fixture.name)
+        (root / "contract").mkdir()
+        (root / "data").mkdir()
+        (root / "docs" / "evidence" / "candidates").mkdir(parents=True)
+        shutil.copy(ROOT / "contract" / "evidence_packet_schema.yaml", root / "contract" / "evidence_packet_schema.yaml")
+        shutil.copy(ROOT / "data" / "source_authority.yaml", root / "data" / "source_authority.yaml")
+        shutil.copy(ROOT / "data" / "hid_class_request_matrix.yaml", root / "data" / "hid_class_request_matrix.yaml")
+        shutil.copy(
+            ROOT / "docs" / "evidence" / "candidates" / "hid_get_report_candidate.yaml",
+            root / "docs" / "evidence" / "candidates" / "hid_get_report_candidate.yaml",
+        )
+        return fixture
+
+    def _validate_fixture(self, root: Path):
+        return validate(
+            schema_path=root / "contract" / "evidence_packet_schema.yaml",
+            source_authority_path=root / "data" / "source_authority.yaml",
+            evidence_dir=root / "docs" / "evidence",
+            candidate_dir=root / "docs" / "evidence" / "candidates",
+            matrix_paths={
+                "hid_class_request_matrix": root / "data" / "hid_class_request_matrix.yaml",
+            },
+        )
+
+    def test_candidate_with_unknown_source_id_fails(self) -> None:
+        with self._fixture_root() as fixture:
+            candidate = Path(fixture) / "docs" / "evidence" / "candidates" / "hid_get_report_candidate.yaml"
+            candidate.write_text(
+                candidate.read_text(encoding="utf-8").replace("source_id: hid_1_11", "source_id: hid_fake_1_11"),
+                encoding="utf-8",
+            )
+            errors, receipt = self._validate_fixture(Path(fixture))
+            self.assertEqual(receipt["result"], "FAIL")
+            self.assertTrue(any("current imported source authority" in error for error in errors))
+
+    def test_candidate_with_wrong_source_section_fails(self) -> None:
+        with self._fixture_root() as fixture:
+            candidate = Path(fixture) / "docs" / "evidence" / "candidates" / "hid_get_report_candidate.yaml"
+            candidate.write_text(
+                candidate.read_text(encoding="utf-8").replace('source_section: "7.2"', 'source_section: "6.2.1"'),
+                encoding="utf-8",
+            )
+            errors, receipt = self._validate_fixture(Path(fixture))
+            self.assertEqual(receipt["result"], "FAIL")
+            self.assertTrue(any("hid_class_request_matrix.source_refs" in error for error in errors))
+
+    def test_candidate_conflicting_matrix_source_ref_fails(self) -> None:
+        with self._fixture_root() as fixture:
+            matrix = Path(fixture) / "data" / "hid_class_request_matrix.yaml"
+            matrix.write_text(
+                matrix.read_text(encoding="utf-8").replace('section: "7.2"', 'section: "6.2.1"', 1),
+                encoding="utf-8",
+            )
+            errors, receipt = self._validate_fixture(Path(fixture))
+            self.assertEqual(receipt["result"], "FAIL")
+            self.assertTrue(any("hid_class_request_matrix.source_refs" in error for error in errors))
 
 
 if __name__ == "__main__":
