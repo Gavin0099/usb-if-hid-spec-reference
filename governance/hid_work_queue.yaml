@@ -767,4 +767,4 @@ queue:
       summary artifacts. Existing CI validation now checks proposal summary
       consistency via --assert-match in check-only mode. This does not create
       accepted packets or change governed matrix status.
-      checkpoint commit: this checkpoint.
+      checkpoint commit: 3e608be.
