@@ -202,9 +202,10 @@
 
 ### HID-LRA-25: HID Descriptor Field Candidate Packet Skeletons
 
-- status: In progress
+- status: Completed
 - objective: add machine-checkable candidate packet skeletons for the seven HID
   descriptor field entries under Section 6.2.1.
+- latest checkpoint: 211c438
 - gate: candidate packet only; no accepted evidence packet and no verified count
   movement.
 
