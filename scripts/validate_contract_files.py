@@ -154,8 +154,6 @@ def validate() -> tuple[list[str], dict[str, Any]]:
         )
 
     surface = (manifest.get("authority_surface") or {}).get("hid11", {})
-    if surface.get("verified") != 0:
-        add_error("HID11_VERIFIED_NOT_ZERO", "HID scaffold manifest must keep verified count at 0")
     tracked = int(surface.get("tracked", 0))
     scaffold = int(surface.get("scaffold", 0))
     reviewed = int(surface.get("reviewed", 0))

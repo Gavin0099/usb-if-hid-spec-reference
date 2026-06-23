@@ -8,7 +8,7 @@
 - candidate packets: 19
 - pre-approval reports: 19
 - production accepted packets: 19
-- verified entries: 0
+- verified entries: 1
 - stale pre-approval reports: 0
 
 ## Entries

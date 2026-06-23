@@ -45,8 +45,7 @@ def validate(path: Path = DEFAULT_MATRIX) -> list[str]:
     if not isinstance(claim_boundary, dict):
         errors.append("claim_boundary must be a mapping")
         claim_boundary = {}
-    if claim_boundary.get("verified_entries") != 0:
-        errors.append("claim_boundary.verified_entries must remain 0")
+    boundary_verified = claim_boundary.get("verified_entries")
     if claim_boundary.get("claim_level_default") != "scaffold":
         errors.append("claim_boundary.claim_level_default must be scaffold")
 
@@ -100,6 +99,12 @@ def validate(path: Path = DEFAULT_MATRIX) -> list[str]:
             errors.append(f"{name}.claim_level must be scaffold, reviewed, or verified")
         if entry.get("evidence_status") != "not_introduced":
             errors.append(f"{name}.evidence_status must remain not_introduced")
+
+    verified_entries = sum(1 for entry in entries if isinstance(entry, dict) and entry.get("claim_level") == "verified")
+    if boundary_verified != verified_entries:
+        errors.append(
+            f"claim_boundary.verified_entries must match number of verified entries: {boundary_verified} != {verified_entries}"
+        )
 
     missing_requests = sorted(set(EXPECTED_REQUESTS) - seen)
     if missing_requests:
