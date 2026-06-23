@@ -385,3 +385,12 @@
 - latest checkpoint: aca70e5
 - gate: Level 3 verified status transition after human approval; no firmware or
   runtime behavior claims.
+
+### HID-LRA-74: GET_PROTOCOL Verified Promotion Gate
+
+- status: Completed
+- objective: promote `hid_get_protocol` to verified via the accepted packet evidence
+  gate and observed governance validators.
+- latest checkpoint: a54ffe2
+- gate: Level 3 verified status transition after human approval; no firmware or
+  runtime behavior claims.
