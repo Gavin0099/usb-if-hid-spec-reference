@@ -22,6 +22,7 @@ SCHEMA = ROOT / "contract" / "evidence_packet_schema.yaml"
 SOURCE_AUTHORITY = ROOT / "data" / "source_authority.yaml"
 EVIDENCE_DIR = ROOT / "docs" / "evidence"
 CANDIDATE_DIR = EVIDENCE_DIR / "candidates"
+ACCEPTED_DIR = EVIDENCE_DIR / "accepted"
 
 REQUIRED_STATUS_VALUES = {"shell", "candidate", "accepted", "rejected"}
 REQUIRED_SECTIONS = {
@@ -35,6 +36,7 @@ REQUIRED_SECTIONS = {
     "approval",
     "residual_risk",
 }
+ACCEPTED_REQUIRED_SECTIONS = {"acceptance_gate"}
 REQUIRED_GATE_FLAGS = {
     "requires_human_approval",
     "requires_registered_source_authority",
@@ -89,6 +91,15 @@ def _load_candidate_packets(candidate_dir: Path = CANDIDATE_DIR) -> dict[str, di
     if not candidate_dir.exists():
         return packets
     for path in sorted(candidate_dir.glob("*.yaml")):
+        packets[_display_path(path)] = _load_yaml(path)
+    return packets
+
+
+def _load_accepted_packets(accepted_dir: Path = ACCEPTED_DIR) -> dict[str, dict[str, Any]]:
+    packets: dict[str, dict[str, Any]] = {}
+    if not accepted_dir.exists():
+        return packets
+    for path in sorted(accepted_dir.glob("*.yaml")):
         packets[_display_path(path)] = _load_yaml(path)
     return packets
 
@@ -157,6 +168,7 @@ def validate(
     source_authority_path: Path = SOURCE_AUTHORITY,
     evidence_dir: Path = EVIDENCE_DIR,
     candidate_dir: Path = CANDIDATE_DIR,
+    accepted_dir: Path = ACCEPTED_DIR,
     matrix_paths: dict[str, Path] | None = None,
 ) -> tuple[list[str], dict[str, Any]]:
     errors: list[str] = []
@@ -184,6 +196,10 @@ def validate(
     missing_sections = sorted(REQUIRED_SECTIONS - sections)
     if missing_sections:
         add_error("REQUIRED_SECTIONS_INCOMPLETE", f"missing required sections: {', '.join(missing_sections)}")
+    accepted_sections = set(schema.get("accepted_packet_required_sections", []))
+    missing_accepted_sections = sorted(ACCEPTED_REQUIRED_SECTIONS - accepted_sections)
+    if missing_accepted_sections:
+        add_error("ACCEPTED_REQUIRED_SECTIONS_INCOMPLETE", f"missing accepted packet sections: {', '.join(missing_accepted_sections)}")
 
     required_fields = schema.get("required_fields", {})
     if not isinstance(required_fields, dict):
@@ -244,6 +260,7 @@ def validate(
             add_error("SHELL_PACKET_VERIFIED", f"{path} status must not contain verified")
 
     candidate_packets = _load_candidate_packets(candidate_dir)
+    accepted_packets = _load_accepted_packets(accepted_dir)
     entries = _entry_index(matrix_paths)
     matrix_source_refs = _matrix_source_ref_index(matrix_paths)
     source_authority_bindings = _source_authority_index(source_authority_path)
@@ -302,6 +319,75 @@ def validate(
         if not isinstance(cannot_claim, list) or "firmware behavior correctness" not in cannot_claim:
             add_error("CANDIDATE_NON_CLAIM_INCOMPLETE", f"{path} must preserve firmware behavior correctness as a non-claim")
 
+    for path, packet in accepted_packets.items():
+        for section in REQUIRED_SECTIONS | ACCEPTED_REQUIRED_SECTIONS:
+            section_data = packet.get(section)
+            if not isinstance(section_data, dict):
+                add_error("ACCEPTED_SECTION_MISSING", f"{path} missing section: {section}")
+                continue
+            for field in required_fields.get(section, []):
+                value = section_data.get(field)
+                if value in (None, "", []):
+                    add_error("ACCEPTED_FIELD_MISSING", f"{path} missing {section}.{field}")
+
+        identity = packet.get("packet_identity", {}) if isinstance(packet.get("packet_identity"), dict) else {}
+        if identity.get("packet_status") != "accepted":
+            add_error("ACCEPTED_STATUS_INVALID", f"{path} packet_identity.packet_status must be accepted")
+        if identity.get("target_claim_level") != "verified":
+            add_error("ACCEPTED_TARGET_INVALID", f"{path} packet_identity.target_claim_level must be verified")
+        if identity.get("review_level") != 3:
+            add_error("ACCEPTED_REVIEW_LEVEL_INVALID", f"{path} packet_identity.review_level must be 3")
+
+        binding = packet.get("governed_entry_binding", {}) if isinstance(packet.get("governed_entry_binding"), dict) else {}
+        matrix = binding.get("matrix")
+        entry_id = binding.get("entry_id")
+        entry = entries.get((matrix, entry_id)) if isinstance(matrix, str) and isinstance(entry_id, str) else None
+        if entry is None:
+            add_error("ACCEPTED_ENTRY_BINDING_INVALID", f"{path} does not bind to a known governed entry")
+        else:
+            if binding.get("current_claim_level") != entry.get("claim_level"):
+                add_error("ACCEPTED_CURRENT_CLAIM_MISMATCH", f"{path} current_claim_level does not match governed entry")
+            if binding.get("current_evidence_status") != entry.get("evidence_status"):
+                add_error("ACCEPTED_CURRENT_EVIDENCE_MISMATCH", f"{path} current_evidence_status does not match governed entry")
+
+        source_trace = packet.get("source_trace", {}) if isinstance(packet.get("source_trace"), dict) else {}
+        source_id = source_trace.get("source_id")
+        source_section = source_trace.get("source_section")
+        if (source_id, source_section) not in source_authority_bindings:
+            add_error(
+                "ACCEPTED_SOURCE_AUTHORITY_MISMATCH",
+                f"{path} source_trace {source_id!r} section {source_section!r} is not current imported source authority",
+            )
+        if isinstance(matrix, str) and (source_id, source_section) not in matrix_source_refs.get(matrix, set()):
+            add_error(
+                "ACCEPTED_MATRIX_SOURCE_REF_MISMATCH",
+                f"{path} source_trace {source_id!r} section {source_section!r} does not match {matrix}.source_refs",
+            )
+
+        approval = packet.get("approval", {}) if isinstance(packet.get("approval"), dict) else {}
+        if approval.get("approval_record") != workflow.get("required_approval_record"):
+            add_error("ACCEPTED_APPROVAL_INVALID", f"{path} approval_record must be {workflow.get('required_approval_record')!r}")
+        approver = approval.get("approver")
+        if not isinstance(approver, str) or approver.lower() in {"", "pending", "none"}:
+            add_error("ACCEPTED_APPROVER_INVALID", f"{path} approver must identify a human approval record")
+
+        acceptance_gate = packet.get("acceptance_gate", {}) if isinstance(packet.get("acceptance_gate"), dict) else {}
+        if acceptance_gate.get("previous_packet_status") != workflow.get("required_previous_status"):
+            add_error("ACCEPTED_PREVIOUS_STATUS_INVALID", f"{path} previous_packet_status must be candidate")
+        if not isinstance(acceptance_gate.get("checkpoint_commit"), str) or not acceptance_gate.get("checkpoint_commit"):
+            add_error("ACCEPTED_CHECKPOINT_COMMIT_MISSING", f"{path} checkpoint_commit must be present")
+        if not isinstance(acceptance_gate.get("validation_receipt"), str) or not acceptance_gate.get("validation_receipt"):
+            add_error("ACCEPTED_VALIDATION_RECEIPT_MISSING", f"{path} validation_receipt must be present")
+        if acceptance_gate.get("level3_checkpoint") is not True:
+            add_error("ACCEPTED_LEVEL3_CHECKPOINT_INVALID", f"{path} level3_checkpoint must be true")
+        if acceptance_gate.get("direct_promotion") is not False:
+            add_error("ACCEPTED_DIRECT_PROMOTION_INVALID", f"{path} direct_promotion must be false")
+
+        claim_delta = packet.get("claim_delta", {}) if isinstance(packet.get("claim_delta"), dict) else {}
+        cannot_claim = claim_delta.get("cannot_claim_after_acceptance", [])
+        if not isinstance(cannot_claim, list) or "firmware behavior correctness" not in cannot_claim:
+            add_error("ACCEPTED_NON_CLAIM_INCOMPLETE", f"{path} must preserve firmware behavior correctness as a non-claim")
+
     receipt = {
         "validator": "validate_evidence_packet_schema.py",
         "authority_ceiling": "verified_preflight_contract_only",
@@ -316,6 +402,7 @@ def validate(
         },
         "checked_shell_packets": shell_statuses,
         "checked_candidate_packets": sorted(candidate_packets),
+        "checked_accepted_packets": sorted(accepted_packets),
         "checked_source_authority_bindings": sorted(
             f"{source_id}:{section}"
             for source_id, section in source_authority_bindings
@@ -352,6 +439,7 @@ def main() -> int:
     print("PASS validate_evidence_packet_schema")
     print(f"- checked shell packets: {len(receipt['checked_shell_packets'])}")
     print(f"- checked candidate packets: {len(receipt['checked_candidate_packets'])}")
+    print(f"- checked accepted packets: {len(receipt['checked_accepted_packets'])}")
     print(f"- required sections: {len(receipt['required_sections'])}")
     return 0
 

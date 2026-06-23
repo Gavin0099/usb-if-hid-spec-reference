@@ -66,6 +66,10 @@ This workflow only accepts an evidence packet. A later and separate Level 3
 promotion slice is still required before any governed matrix entry can become
 `verified`.
 
+The validator supports dry-run accepted packet fixtures in test-only directories.
+The production repository currently has no accepted packet under
+`docs/evidence/accepted/`.
+
 ## Current Shell Packet Boundary
 
 Existing files under `docs/evidence/` are shell artifacts. They are useful for
