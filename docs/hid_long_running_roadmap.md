@@ -229,10 +229,11 @@
 
 ### HID-LRA-28: Level 3 Accepted Packet Dry-Run Fixtures
 
-- status: In progress
+- status: Completed
 - objective: add test-only accepted packet dry-run fixtures proving the
   accepted workflow can pass when complete and fail when approval, validation
   receipt, Level 3 checkpoint, or no-direct-promotion controls are missing.
+- latest checkpoint: 72ba835
 - gate: test coverage only; no production accepted packet and no verified count
   movement.
 

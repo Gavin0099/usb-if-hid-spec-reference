@@ -2690,7 +2690,7 @@ Commit Checkpoint:
 
 ## Batch: HID-LRA-57 (Level 3 accepted packet dry-run fixtures)
 
-- Commit: this checkpoint
+- Commit: 72ba835
 - Scope: add test-only accepted packet dry-run fixtures and validator support
   for accepted packet directories.
 - Changed files:
@@ -2725,4 +2725,33 @@ Commit Checkpoint:
   - cannot claim firmware, OS, parser/runtime, or product-specific HID behavior.
 - Residual risk:
   - First actual accepted packet remains separate Level 3 work.
+
+### Checkpoint memory entry for HID-LRA-57
+
+- Commit: this checkpoint
+- Scope: record the `HID-LRA-57` accepted-packet dry-run fixture checkpoint in
+  repo-local daily memory using `scripts/emit_checkpoint_memory_entry.py`.
+- Changed files:
+  - `memory/2026-06-23.md`
+  - `governance/hid_work_queue.yaml`
+  - `docs/hid_long_running_roadmap.md`
+  - `docs/hid_long_running_checkpoint_rollup.md`
+- Validation:
+  - PASS `python -X utf8 scripts/validate_memory_records.py`
+  - PASS `python -m unittest discover -s tests`
+- Stats before/after:
+  - tracked: unchanged at 19
+  - scaffold: unchanged at 0
+  - reviewed: unchanged at 19
+  - verified: unchanged at 0
+- Can claim:
+  - `memory/2026-06-23.md` contains a bound entry for commit `72ba835`.
+  - Queue and roadmap now point `HID-VER-10` / `HID-LRA-28` at commit `72ba835`.
+- Cannot claim:
+  - cannot claim production accepted evidence packets.
+  - cannot claim any HID entry is verified.
+  - cannot claim new source authority import.
+  - cannot claim firmware, OS, parser/runtime, or product-specific HID behavior.
+- Residual risk:
+  - First production accepted packet remains separate Level 3 work.
 
