@@ -521,3 +521,4 @@ queue:
       accepted packet can pass in a temp fixture, while missing approval,
       missing validation receipt, missing Level 3 checkpoint, or direct
       promotion fail. This does not add any production accepted packet.
+      checkpoint commit: 72ba835.
