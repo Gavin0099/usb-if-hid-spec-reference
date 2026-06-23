@@ -161,7 +161,7 @@ class EvidencePacketSchemaTests(unittest.TestCase):
         with self._fixture_root() as fixture:
             candidate = Path(fixture) / "docs" / "evidence" / "candidates" / "hid_get_report_candidate.yaml"
             candidate.write_text(
-                candidate.read_text(encoding="utf-8").replace("current_claim_level: reviewed", "current_claim_level: verified"),
+                candidate.read_text(encoding="utf-8").replace("current_claim_level: verified", "current_claim_level: reviewed"),
                 encoding="utf-8",
             )
             errors, receipt = self._validate_fixture(Path(fixture))

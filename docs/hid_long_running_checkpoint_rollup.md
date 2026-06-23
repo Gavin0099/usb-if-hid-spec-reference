@@ -886,7 +886,7 @@ Commit Checkpoint:
 
 ### Checkpoint continuation in batch HID-LRA-24
 
-- Commit: this checkpoint
+- Commit: 4364d5d
 - Scope: finalize HID-DESC-1 Chinese descriptor scaffold wording with explicit identity-boundary language and checkpoint bookkeeping alignment.
 - Changed files:
   - `specs/hid_descriptor_fields.md`
@@ -3580,3 +3580,83 @@ Commit Checkpoint:
   - cannot claim firmware, OS, parser/runtime, or product-specific HID behavior.
 - Residual risk:
   - First production accepted packet remains separate Level 3 work.
+
+## Batch: HID-LRA-70 (GET_REPORT verified promotion)
+
+- Commit: 4364d5d
+- Scope: promote `HID-REQ-1`/`hid_get_report` from accepted candidate to verified claim level through Level 3 approved checkpoint, then reflect the change in governing matrices, manifest, and evidence packet metadata.
+- Changed files:
+  - `data/hid_class_request_matrix.yaml`
+  - `docs/evidence/accepted/hid_get_report_accepted.yaml`
+  - `exports/hid_governed_surface_manifest.yaml`
+  - `governance/hid_work_queue.yaml`
+  - `scripts/validate_hid_class_request_matrix.py`
+  - `scripts/validate_contract_files.py`
+  - `tests/test_contract_files.py`
+  - `tests/test_verification_status_counts.py`
+  - `specs/verification_status.md`
+  - `specs/en/verification_status.md`
+  - `docs/hid_long_running_roadmap.md`
+  - `docs/hid_long_running_checkpoint_rollup.md`
+- Validation:
+  - PASS `python -X utf8 scripts/validate_source_authority.py`
+  - PASS `python -X utf8 scripts/validate_hid_class_request_matrix.py`
+  - PASS `python -X utf8 scripts/validate_hid_descriptor_fields_matrix.py`
+  - PASS `python -X utf8 scripts/validate_hid_report_descriptor_items_matrix.py`
+  - PASS `python -X utf8 scripts/validate_verification_status.py`
+  - PASS `python -X utf8 scripts/validate_evidence_packet_schema.py`
+  - PASS `python -X utf8 scripts/validate_contract_files.py`
+  - PASS `python -X utf8 scripts/probe_table_fingerprint.py --mode check --manifest exports/hid_governed_surface_manifest.yaml --baseline-in evidence/table_fingerprint_baseline.jsonl`
+  - PASS `python -X utf8 scripts/validate_memory_records.py`
+  - PASS `python -m unittest discover -s tests`
+- Stats before/after:
+  - tracked: unchanged at 19
+  - scaffold: unchanged at 0
+  - reviewed: 19 -> 18
+  - verified: 0 -> 1
+  - accepted-packet proposals: unchanged at 19
+  - production accepted packets: unchanged at 19
+- Review level:
+  - Level 3 verified status transition only; no new production accepted packet emission.
+- Can claim:
+  - `hid_get_report` is now `verified` in `data/hid_class_request_matrix.yaml`.
+  - `data/hid_class_request_matrix.yaml` and `exports/hid_governed_surface_manifest.yaml` now report verified counts as consistent.
+  - `docs/evidence/accepted/hid_get_report_accepted.yaml` now records `current_claim_level: verified`.
+  - validation checks and tests pass with no claimed firmware/parser/OS behavior semantics.
+- Cannot claim:
+  - cannot claim verified semantics beyond accepted identity-level scope for `GET_REPORT`.
+  - cannot claim firmware behavior correctness.
+  - cannot claim OS input stack behavior.
+  - cannot claim parser/runtime behavior.
+  - cannot claim product-specific HID behavior.
+- Residual risk:
+  - No accepted packet status semantics or payload-level behavior has been verified in this slice.
+
+### Checkpoint memory entry for HID-LRA-70
+
+- Commit: 4364d5d
+- Scope: record the `HID-LRA-70` verified promotion checkpoint in repo-local daily memory using `scripts/emit_checkpoint_memory_entry.py` and align roadmap/queue checkpoints.
+- Changed files:
+  - `memory/2026-06-23.md`
+  - `governance/hid_work_queue.yaml`
+  - `docs/hid_long_running_roadmap.md`
+  - `docs/hid_long_running_checkpoint_rollup.md`
+- Validation:
+  - PASS `python -X utf8 scripts/validate_memory_records.py`
+  - PASS `python -m unittest discover -s tests`
+- Stats before/after:
+  - tracked: unchanged at 19
+  - scaffold: unchanged at 0
+  - reviewed: 19 -> 18
+  - verified: 0 -> 1
+  - accepted-packet proposals: unchanged at 19
+  - production accepted packets: unchanged at 19
+- Can claim:
+  - `memory/2026-06-23.md` contains a bound entry for commit `4364d5d`.
+- Cannot claim:
+  - cannot claim firmware behavior correctness.
+  - cannot claim OS input stack behavior.
+  - cannot claim parser/runtime behavior.
+  - cannot claim product-specific HID behavior.
+- Residual risk:
+  - No payload parser/runtime or host-side behavior verification was added.

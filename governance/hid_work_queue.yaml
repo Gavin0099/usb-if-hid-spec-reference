@@ -300,10 +300,10 @@ queue:
   - id: HID-VER-1
     title: GET_REPORT verified candidate packet skeleton
     authority: HID 1.11 Section 7.2
-    status: reviewed
-    allowed_status_change: candidate_packet_only
-    requires_human_approval: false
-    review_level: 1
+    status: verified
+    allowed_status_change: candidate_to_verified
+    requires_human_approval: true
+    review_level: 3
     gate: validation_required
     forbidden_claims:
       - accepted evidence packet
@@ -314,10 +314,12 @@ queue:
       - report payload semantics
     notes: >
       Add a machine-checkable GET_REPORT candidate packet skeleton under
-      docs/evidence/candidates/. This prepares Level 3 review input only; it
-      does not mark the packet accepted and does not promote hid_get_report to
-      verified.
-      checkpoint commit: ad0badb.
+      docs/evidence/candidates/. This Level 3 approval slice completes the
+      reviewed->verified status transition for `hid_get_report` using the
+      accepted evidence packet and validated matrix claims.
+      User-approved Level 3 gate completed and status transition to verified is
+      recorded.
+      checkpoint commit: 4364d5d.
 
   - id: HID-VER-2
     title: Remaining HID request verified candidate packet skeletons

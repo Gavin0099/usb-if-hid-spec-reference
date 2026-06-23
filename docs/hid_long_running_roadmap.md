@@ -350,3 +350,12 @@
   and align proposal/readiness summaries to the post-production accepted surface.
 - latest checkpoint: 0903006
 - gate: production accepted evidence status only; no verified count movement.
+
+### HID-LRA-70: GET_REPORT Verified Promotion Gate
+
+- status: Completed
+- objective: promote `hid_get_report` to verified via the accepted packet evidence
+  gate and observed governance validators.
+- latest checkpoint: 4364d5d
+- gate: Level 3 verified status transition after human approval; no firmware or
+  runtime behavior claims.
