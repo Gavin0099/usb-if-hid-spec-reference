@@ -193,9 +193,10 @@
 
 ### HID-LRA-24: Candidate Accepted-Gate Negative Tests
 
-- status: In progress
+- status: Completed
 - objective: add negative fixture tests proving candidate validation fails on
   accepted packet status, non-pending approval, and verified current claim level.
+- latest checkpoint: 184dbab
 - gate: test coverage only; no accepted evidence packet and no verified count
   movement.
 

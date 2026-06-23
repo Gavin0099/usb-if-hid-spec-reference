@@ -430,3 +430,4 @@ queue:
       approval_record non-pending, and current_claim_level verified to prove the
       candidate flow cannot accidentally pass accepted or verified state. This
       is test coverage only and does not accept or promote any evidence packet.
+      checkpoint commit: 184dbab.
