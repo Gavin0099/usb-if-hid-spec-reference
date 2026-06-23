@@ -342,3 +342,24 @@ queue:
       input only; all candidate packets remain pending and no governed entry is
       promoted to verified.
       checkpoint commit: d20d87d.
+
+  - id: HID-VER-3
+    title: Candidate packet source authority binding validator
+    authority: Repo-local evidence packet governance
+    status: reviewed
+    allowed_status_change: validator_hardening_only
+    requires_human_approval: false
+    review_level: 1
+    gate: validation_required
+    forbidden_claims:
+      - accepted evidence packet
+      - verified status uplift
+      - new source authority import
+      - firmware behavior correctness
+      - OS input stack behavior
+      - parser runtime behavior
+    notes: >
+      Harden validate_evidence_packet_schema.py so candidate packet
+      source_trace.source_id/source_section must match current imported usage in
+      data/source_authority.yaml. This is validator hardening only and does not
+      accept or promote any evidence packet.

@@ -19,6 +19,7 @@ import yaml
 
 ROOT = Path(__file__).resolve().parents[1]
 SCHEMA = ROOT / "contract" / "evidence_packet_schema.yaml"
+SOURCE_AUTHORITY = ROOT / "data" / "source_authority.yaml"
 EVIDENCE_DIR = ROOT / "docs" / "evidence"
 CANDIDATE_DIR = EVIDENCE_DIR / "candidates"
 
@@ -97,6 +98,21 @@ def _entry_index() -> dict[tuple[str, str], dict[str, Any]]:
     return index
 
 
+def _source_authority_index() -> set[tuple[str, str]]:
+    if not SOURCE_AUTHORITY.exists():
+        return set()
+    data = _load_yaml(SOURCE_AUTHORITY)
+    allowed: set[tuple[str, str]] = set()
+    for source in data.get("primary_sources", []):
+        if not isinstance(source, dict) or not isinstance(source.get("id"), str):
+            continue
+        source_id = source["id"]
+        for usage in source.get("current_imported_usage", []):
+            if isinstance(usage, dict) and isinstance(usage.get("section"), str):
+                allowed.add((source_id, usage["section"]))
+    return allowed
+
+
 def validate() -> tuple[list[str], dict[str, Any]]:
     errors: list[str] = []
     findings: list[dict[str, str]] = []
@@ -170,6 +186,7 @@ def validate() -> tuple[list[str], dict[str, Any]]:
 
     candidate_packets = _load_candidate_packets()
     entries = _entry_index()
+    source_authority_bindings = _source_authority_index()
     for path, packet in candidate_packets.items():
         for section in REQUIRED_SECTIONS:
             section_data = packet.get(section)
@@ -202,6 +219,15 @@ def validate() -> tuple[list[str], dict[str, Any]]:
             if binding.get("current_evidence_status") != entry.get("evidence_status"):
                 add_error("CANDIDATE_CURRENT_EVIDENCE_MISMATCH", f"{path} current_evidence_status does not match governed entry")
 
+        source_trace = packet.get("source_trace", {}) if isinstance(packet.get("source_trace"), dict) else {}
+        source_id = source_trace.get("source_id")
+        source_section = source_trace.get("source_section")
+        if (source_id, source_section) not in source_authority_bindings:
+            add_error(
+                "CANDIDATE_SOURCE_AUTHORITY_MISMATCH",
+                f"{path} source_trace {source_id!r} section {source_section!r} is not current imported source authority",
+            )
+
         approval = packet.get("approval", {}) if isinstance(packet.get("approval"), dict) else {}
         if approval.get("approval_record") not in {"pending", "rejected"}:
             add_error("CANDIDATE_APPROVAL_INVALID", f"{path} candidate approval_record must remain pending or rejected")
@@ -224,6 +250,10 @@ def validate() -> tuple[list[str], dict[str, Any]]:
         },
         "checked_shell_packets": shell_statuses,
         "checked_candidate_packets": sorted(candidate_packets),
+        "checked_source_authority_bindings": sorted(
+            f"{source_id}:{section}"
+            for source_id, section in source_authority_bindings
+        ),
         "error_count": len(errors),
         "errors": errors,
         "findings": findings,

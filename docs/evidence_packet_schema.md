@@ -65,6 +65,11 @@ Candidate packets are complete enough for Level 3 review preparation, but they
 still do not satisfy the verified gate because their approval record remains
 pending and their status is not `accepted`.
 
+Each candidate packet must bind `source_trace.source_id` and
+`source_trace.source_section` to a current imported usage entry in
+`data/source_authority.yaml`. Textual source claims are not sufficient unless the
+machine-readable binding is valid.
+
 Current candidate packets:
 
 - `docs/evidence/candidates/hid_get_report_candidate.yaml`
