@@ -257,3 +257,12 @@
 - latest checkpoint: 52d85ed
 - gate: pre-approval gap report only; no production accepted packet and no
   verified count movement.
+
+### HID-LRA-31: Complete Candidate Pre-Approval Checklist Surface
+
+- status: In progress
+- objective: extend the pre-approval checklist generator with batch mode and
+  generate gap reports for all 19 candidate packets under
+  `docs/evidence/preapproval/`.
+- gate: pre-approval gap report only; no production accepted packet and no
+  verified count movement.

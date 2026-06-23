@@ -98,9 +98,27 @@ They are gap reports for Level 3 review preparation only. They may name a future
 accepted packet path, but they do not create that accepted packet and do not
 satisfy the verified gate.
 
-Current pre-approval checklist reports:
+Current pre-approval checklist reports cover all 19 candidate packets:
 
+- `docs/evidence/preapproval/hid_bcdHID_preapproval_checklist.md`
+- `docs/evidence/preapproval/hid_bCountryCode_preapproval_checklist.md`
+- `docs/evidence/preapproval/hid_bDescriptorType_preapproval_checklist.md`
+- `docs/evidence/preapproval/hid_bDescriptorType_subordinate_preapproval_checklist.md`
+- `docs/evidence/preapproval/hid_bLength_preapproval_checklist.md`
+- `docs/evidence/preapproval/hid_bNumDescriptors_preapproval_checklist.md`
+- `docs/evidence/preapproval/hid_get_idle_preapproval_checklist.md`
+- `docs/evidence/preapproval/hid_get_protocol_preapproval_checklist.md`
 - `docs/evidence/preapproval/hid_get_report_preapproval_checklist.md`
+- `docs/evidence/preapproval/hid_set_idle_preapproval_checklist.md`
+- `docs/evidence/preapproval/hid_set_protocol_preapproval_checklist.md`
+- `docs/evidence/preapproval/hid_set_report_preapproval_checklist.md`
+- `docs/evidence/preapproval/hid_wDescriptorLength_preapproval_checklist.md`
+- `docs/evidence/preapproval/report_descriptor_global_item_type_preapproval_checklist.md`
+- `docs/evidence/preapproval/report_descriptor_local_item_type_preapproval_checklist.md`
+- `docs/evidence/preapproval/report_descriptor_long_item_prefix_preapproval_checklist.md`
+- `docs/evidence/preapproval/report_descriptor_main_item_type_preapproval_checklist.md`
+- `docs/evidence/preapproval/report_descriptor_reserved_item_type_preapproval_checklist.md`
+- `docs/evidence/preapproval/report_descriptor_short_item_prefix_preapproval_checklist.md`
 
 ## Current Shell Packet Boundary
 
