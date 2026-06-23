@@ -98,6 +98,10 @@ They are gap reports for Level 3 review preparation only. They may name a future
 accepted packet path, but they do not create that accepted packet and do not
 satisfy the verified gate.
 
+Batch generation is repo-contained: `--out` and `--out-dir` outputs must stay
+under this repository root. Batch mode also fails when stale pre-approval
+reports are present unless `--prune-stale` is explicitly provided.
+
 Current pre-approval checklist reports cover all 19 candidate packets:
 
 - `docs/evidence/preapproval/hid_bcdHID_preapproval_checklist.md`

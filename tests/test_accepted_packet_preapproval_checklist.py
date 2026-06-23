@@ -5,7 +5,12 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from scripts.generate_accepted_packet_preapproval_checklist import build_checklist, list_candidate_ids, render_markdown
+from scripts.generate_accepted_packet_preapproval_checklist import (
+    build_checklist,
+    list_candidate_ids,
+    render_markdown,
+    stale_preapproval_reports,
+)
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -30,7 +35,7 @@ class AcceptedPacketPreapprovalChecklistTests(unittest.TestCase):
         self.assertIn("no accepted evidence packet exists from this report", markdown)
 
     def test_cli_out_writes_report_without_creating_accepted_packet(self) -> None:
-        with tempfile.TemporaryDirectory() as tempdir:
+        with tempfile.TemporaryDirectory(dir=ROOT) as tempdir:
             out = Path(tempdir) / "hid_get_report_preapproval_checklist.md"
             accepted_dir = ROOT / "docs" / "evidence" / "accepted"
             before = sorted(accepted_dir.glob("*.yaml")) if accepted_dir.exists() else []
@@ -43,7 +48,7 @@ class AcceptedPacketPreapprovalChecklistTests(unittest.TestCase):
                     "--candidate",
                     "hid_get_report",
                     "--out",
-                    str(out),
+                    str(out.relative_to(ROOT)),
                 ],
                 cwd=ROOT,
                 check=False,
@@ -64,7 +69,7 @@ class AcceptedPacketPreapprovalChecklistTests(unittest.TestCase):
         self.assertIn("report_descriptor_reserved_item_type", candidate_ids)
 
     def test_cli_all_writes_all_reports_without_creating_accepted_packets(self) -> None:
-        with tempfile.TemporaryDirectory() as tempdir:
+        with tempfile.TemporaryDirectory(dir=ROOT) as tempdir:
             out_dir = Path(tempdir) / "preapproval"
             accepted_dir = ROOT / "docs" / "evidence" / "accepted"
             before = sorted(accepted_dir.glob("*.yaml")) if accepted_dir.exists() else []
@@ -76,7 +81,7 @@ class AcceptedPacketPreapprovalChecklistTests(unittest.TestCase):
                     "scripts/generate_accepted_packet_preapproval_checklist.py",
                     "--all",
                     "--out-dir",
-                    str(out_dir),
+                    str(out_dir.relative_to(ROOT)),
                 ],
                 cwd=ROOT,
                 check=False,
@@ -90,6 +95,84 @@ class AcceptedPacketPreapprovalChecklistTests(unittest.TestCase):
             self.assertEqual(before, after)
             self.assertIn("Generated 19 pre-approval checklist report", result.stdout)
             self.assertTrue((out_dir / "hid_set_protocol_preapproval_checklist.md").exists())
+
+    def test_cli_rejects_output_path_outside_repo(self) -> None:
+        with tempfile.TemporaryDirectory() as tempdir:
+            out = Path(tempdir) / "outside_preapproval_checklist.md"
+            result = subprocess.run(
+                [
+                    sys.executable,
+                    "-X",
+                    "utf8",
+                    "scripts/generate_accepted_packet_preapproval_checklist.py",
+                    "--candidate",
+                    "hid_get_report",
+                    "--out",
+                    str(out),
+                ],
+                cwd=ROOT,
+                check=False,
+                capture_output=True,
+                text=True,
+            )
+            self.assertNotEqual(result.returncode, 0)
+            self.assertIn("output path must stay under repository root", result.stderr)
+            self.assertFalse(out.exists())
+
+    def test_cli_all_rejects_stale_preapproval_report_without_prune(self) -> None:
+        with tempfile.TemporaryDirectory(dir=ROOT) as tempdir:
+            out_dir = Path(tempdir) / "preapproval"
+            out_dir.mkdir()
+            stale = out_dir / "stale_entry_preapproval_checklist.md"
+            stale.write_text("stale\n", encoding="utf-8")
+            result = subprocess.run(
+                [
+                    sys.executable,
+                    "-X",
+                    "utf8",
+                    "scripts/generate_accepted_packet_preapproval_checklist.py",
+                    "--all",
+                    "--out-dir",
+                    str(out_dir.relative_to(ROOT)),
+                ],
+                cwd=ROOT,
+                check=False,
+                capture_output=True,
+                text=True,
+            )
+            self.assertNotEqual(result.returncode, 0)
+            self.assertIn("stale pre-approval report", result.stderr)
+            self.assertTrue(stale.exists())
+
+    def test_cli_all_prunes_stale_preapproval_report_when_requested(self) -> None:
+        with tempfile.TemporaryDirectory(dir=ROOT) as tempdir:
+            out_dir = Path(tempdir) / "preapproval"
+            out_dir.mkdir()
+            stale = out_dir / "stale_entry_preapproval_checklist.md"
+            stale.write_text("stale\n", encoding="utf-8")
+            result = subprocess.run(
+                [
+                    sys.executable,
+                    "-X",
+                    "utf8",
+                    "scripts/generate_accepted_packet_preapproval_checklist.py",
+                    "--all",
+                    "--prune-stale",
+                    "--out-dir",
+                    str(out_dir.relative_to(ROOT)),
+                ],
+                cwd=ROOT,
+                check=False,
+                capture_output=True,
+                text=True,
+            )
+            reports = sorted(out_dir.glob("*_preapproval_checklist.md"))
+            self.assertEqual(result.returncode, 0, result.stderr)
+            self.assertFalse(stale.exists())
+            self.assertEqual(len(reports), 19)
+
+    def test_current_preapproval_surface_has_no_stale_reports(self) -> None:
+        self.assertEqual(stale_preapproval_reports(), [])
 
     def test_fixture_candidate_missing_validation_shows_gap(self) -> None:
         with tempfile.TemporaryDirectory() as tempdir:

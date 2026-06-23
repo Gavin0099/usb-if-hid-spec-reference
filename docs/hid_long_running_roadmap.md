@@ -267,3 +267,12 @@
 - latest checkpoint: 4adaeba
 - gate: pre-approval gap report only; no production accepted packet and no
   verified count movement.
+
+### HID-LRA-32: Pre-Approval Generator Stale-Report and Path Guard
+
+- status: In progress
+- objective: harden the pre-approval checklist generator so output paths stay
+  under the repository root and stale reports fail batch generation unless
+  explicitly pruned.
+- gate: generator hardening only; no production accepted packet and no verified
+  count movement.
