@@ -286,3 +286,11 @@
 - latest checkpoint: c521303
 - gate: readiness summary only; no production accepted packet and no verified
   count movement.
+
+### HID-LRA-34: GET_REPORT Accepted Packet Proposal Generator
+
+- status: In progress
+- objective: add an accepted-packet proposal generator and generate GET_REPORT
+  Markdown/JSON proposal artifacts under `accepted_proposals/`.
+- gate: accepted packet proposal only; no production accepted packet and no
+  verified count movement.

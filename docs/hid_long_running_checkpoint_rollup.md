@@ -3104,3 +3104,40 @@ Commit Checkpoint:
   - cannot claim firmware, OS, parser/runtime, or product-specific HID behavior.
 - Residual risk:
   - First production accepted packet remains separate Level 3 work.
+
+## Batch: HID-LRA-63 (GET_REPORT accepted packet proposal generator)
+
+- Commit: this checkpoint
+- Scope: add an accepted-packet proposal generator and generate GET_REPORT
+  Markdown/JSON proposal artifacts under `accepted_proposals/`.
+- Changed files:
+  - `scripts/generate_accepted_packet_proposal.py`
+  - `tests/test_accepted_packet_proposal.py`
+  - `docs/evidence/accepted_proposals/hid_get_report_accepted_proposal.md`
+  - `evidence/accepted_proposals/hid_get_report_accepted_proposal.json`
+  - `docs/evidence_packet_schema.md`
+  - `governance/hid_work_queue.yaml`
+  - `docs/hid_long_running_roadmap.md`
+  - `docs/hid_long_running_checkpoint_rollup.md`
+- Validation:
+  - PASS `python -X utf8 scripts/generate_accepted_packet_proposal.py`
+  - PASS `python -m unittest tests.test_accepted_packet_proposal`
+- Stats before/after:
+  - tracked: unchanged at 19
+  - scaffold: unchanged at 0
+  - reviewed: unchanged at 19
+  - verified: unchanged at 0
+  - production accepted packets: unchanged at 0
+- Review level:
+  - Level 1 proposal only; no production accepted packet and no status/count
+    movement.
+- Can claim:
+  - GET_REPORT has accepted-packet proposal Markdown/JSON artifacts.
+  - Proposal artifacts name required Level 3 acceptance-gate placeholders.
+- Cannot claim:
+  - cannot claim production accepted evidence packets.
+  - cannot claim any HID entry is verified.
+  - cannot claim new source authority import.
+  - cannot claim firmware, OS, parser/runtime, or product-specific HID behavior.
+- Residual risk:
+  - First production accepted packet remains separate Level 3 work.
