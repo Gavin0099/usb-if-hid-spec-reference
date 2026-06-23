@@ -3381,3 +3381,47 @@ Commit Checkpoint:
   - cannot claim firmware, OS, parser/runtime, or product-specific HID behavior.
 - Residual risk:
   - First production accepted packet remains separate Level 3 work.
+
+## Batch: HID-LRA-67 (accepted packet proposal coverage guard and summary)
+
+- Commit: this checkpoint
+- Scope: harden accepted-packet proposal validation for full candidate coverage
+  and generate proposal summary Markdown/JSON artifacts.
+- Changed files:
+  - `scripts/validate_accepted_packet_proposals.py`
+  - `tests/test_accepted_packet_proposal_validator.py`
+  - `scripts/generate_accepted_packet_proposal_summary.py`
+  - `tests/test_accepted_packet_proposal_summary.py`
+  - `docs/evidence/accepted_proposal_summary.md`
+  - `evidence/accepted_proposal_summary.json`
+  - `docs/evidence_packet_schema.md`
+  - `governance/hid_work_queue.yaml`
+  - `docs/hid_long_running_roadmap.md`
+  - `docs/hid_long_running_checkpoint_rollup.md`
+- Validation:
+  - PASS `python -X utf8 scripts/validate_accepted_packet_proposals.py`
+  - PASS `python -X utf8 scripts/generate_accepted_packet_proposal_summary.py`
+  - PASS `python -m unittest tests.test_accepted_packet_proposal_validator tests.test_accepted_packet_proposal_summary`
+- Stats before/after:
+  - tracked: unchanged at 19
+  - scaffold: unchanged at 0
+  - reviewed: unchanged at 19
+  - verified: unchanged at 0
+  - accepted-packet proposals: unchanged at 19
+  - proposal summaries: 0 -> 2
+  - production accepted packets: unchanged at 0
+- Review level:
+  - Level 1 proposal coverage summary only; no production accepted packet and
+    no status/count movement.
+- Can claim:
+  - proposal validation checks full candidate coverage and Markdown/JSON
+    proposal alignment.
+  - accepted-packet proposal summary artifacts report 19 proposals, 0 accepted
+    packets, and 0 verified entries.
+- Cannot claim:
+  - cannot claim production accepted evidence packets.
+  - cannot claim any HID entry is verified.
+  - cannot claim new source authority import.
+  - cannot claim firmware, OS, parser/runtime, or product-specific HID behavior.
+- Residual risk:
+  - First production accepted packet remains separate Level 3 work.

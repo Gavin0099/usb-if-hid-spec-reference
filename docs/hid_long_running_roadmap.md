@@ -324,3 +324,12 @@
 - latest checkpoint: 33915f3
 - gate: accepted packet proposal only; no production accepted packet and no
   verified count movement.
+
+### HID-LRA-38: Accepted Packet Proposal Coverage Guard and Summary
+
+- status: Completed
+- objective: validate full proposal coverage/alignment for all 19 candidates
+  and generate accepted-packet proposal summary Markdown/JSON artifacts.
+- latest checkpoint: this checkpoint
+- gate: proposal coverage summary only; no production accepted packet and no
+  verified count movement.
