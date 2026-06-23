@@ -24,6 +24,9 @@ required_sections:
   - approval
   - residual_risk
 
+accepted_packet_required_sections:
+  - acceptance_gate
+
 required_fields:
   packet_identity:
     - packet_id
@@ -66,6 +69,12 @@ required_fields:
   residual_risk:
     - remaining_unverified_behavior
     - consumer_repo_escalation_boundary
+  acceptance_gate:
+    - previous_packet_status
+    - checkpoint_commit
+    - validation_receipt
+    - level3_checkpoint
+    - direct_promotion
 
 verified_gate:
   review_level: 3

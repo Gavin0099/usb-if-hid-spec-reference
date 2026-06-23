@@ -227,4 +227,13 @@
 - gate: workflow contract only; no accepted evidence packet and no verified count
   movement.
 
+### HID-LRA-28: Level 3 Accepted Packet Dry-Run Fixtures
+
+- status: In progress
+- objective: add test-only accepted packet dry-run fixtures proving the
+  accepted workflow can pass when complete and fail when approval, validation
+  receipt, Level 3 checkpoint, or no-direct-promotion controls are missing.
+- gate: test coverage only; no production accepted packet and no verified count
+  movement.
+
 

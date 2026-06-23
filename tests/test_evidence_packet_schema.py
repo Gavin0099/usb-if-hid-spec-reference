@@ -71,10 +71,31 @@ class EvidencePacketSchemaTests(unittest.TestCase):
             source_authority_path=root / "data" / "source_authority.yaml",
             evidence_dir=root / "docs" / "evidence",
             candidate_dir=root / "docs" / "evidence" / "candidates",
+            accepted_dir=root / "docs" / "evidence" / "accepted",
             matrix_paths={
                 "hid_class_request_matrix": root / "data" / "hid_class_request_matrix.yaml",
             },
         )
+
+    def _write_accepted_fixture(self, root: Path) -> Path:
+        accepted_dir = root / "docs" / "evidence" / "accepted"
+        accepted_dir.mkdir(parents=True, exist_ok=True)
+        candidate = root / "docs" / "evidence" / "candidates" / "hid_get_report_candidate.yaml"
+        accepted = accepted_dir / "hid_get_report_accepted.yaml"
+        accepted.write_text(
+            candidate.read_text(encoding="utf-8")
+            .replace("packet_status: candidate", "packet_status: accepted")
+            .replace("approval_record: pending", "approval_record: approved")
+            .replace("approver: pending", "approver: human:HID-LRA-dry-run")
+            + "\nacceptance_gate:\n"
+            + "  previous_packet_status: candidate\n"
+            + "  checkpoint_commit: dryrun123\n"
+            + "  validation_receipt: evidence/dryrun_validation_receipt.json\n"
+            + "  level3_checkpoint: true\n"
+            + "  direct_promotion: false\n",
+            encoding="utf-8",
+        )
+        return accepted
 
     def test_candidate_with_unknown_source_id_fails(self) -> None:
         with self._fixture_root() as fixture:
@@ -173,6 +194,58 @@ class EvidencePacketSchemaTests(unittest.TestCase):
             errors, receipt = self._validate_fixture(Path(fixture))
             self.assertEqual(receipt["result"], "FAIL")
             self.assertTrue(any("required_validation_receipt" in error for error in errors))
+
+    def test_accepted_dry_run_fixture_passes(self) -> None:
+        with self._fixture_root() as fixture:
+            self._write_accepted_fixture(Path(fixture))
+            errors, receipt = self._validate_fixture(Path(fixture))
+            self.assertEqual(errors, [])
+            self.assertEqual(receipt["result"], "PASS")
+            self.assertEqual(len(receipt["checked_accepted_packets"]), 1)
+
+    def test_accepted_dry_run_missing_approval_fails(self) -> None:
+        with self._fixture_root() as fixture:
+            accepted = self._write_accepted_fixture(Path(fixture))
+            accepted.write_text(
+                accepted.read_text(encoding="utf-8").replace("approval_record: approved", "approval_record: pending"),
+                encoding="utf-8",
+            )
+            errors, receipt = self._validate_fixture(Path(fixture))
+            self.assertEqual(receipt["result"], "FAIL")
+            self.assertTrue(any("approval_record" in error for error in errors))
+
+    def test_accepted_dry_run_missing_validation_receipt_fails(self) -> None:
+        with self._fixture_root() as fixture:
+            accepted = self._write_accepted_fixture(Path(fixture))
+            accepted.write_text(
+                accepted.read_text(encoding="utf-8").replace("  validation_receipt: evidence/dryrun_validation_receipt.json\n", ""),
+                encoding="utf-8",
+            )
+            errors, receipt = self._validate_fixture(Path(fixture))
+            self.assertEqual(receipt["result"], "FAIL")
+            self.assertTrue(any("validation_receipt" in error for error in errors))
+
+    def test_accepted_dry_run_without_level3_checkpoint_fails(self) -> None:
+        with self._fixture_root() as fixture:
+            accepted = self._write_accepted_fixture(Path(fixture))
+            accepted.write_text(
+                accepted.read_text(encoding="utf-8").replace("level3_checkpoint: true", "level3_checkpoint: false"),
+                encoding="utf-8",
+            )
+            errors, receipt = self._validate_fixture(Path(fixture))
+            self.assertEqual(receipt["result"], "FAIL")
+            self.assertTrue(any("level3_checkpoint" in error for error in errors))
+
+    def test_accepted_dry_run_direct_promotion_fails(self) -> None:
+        with self._fixture_root() as fixture:
+            accepted = self._write_accepted_fixture(Path(fixture))
+            accepted.write_text(
+                accepted.read_text(encoding="utf-8").replace("direct_promotion: false", "direct_promotion: true"),
+                encoding="utf-8",
+            )
+            errors, receipt = self._validate_fixture(Path(fixture))
+            self.assertEqual(receipt["result"], "FAIL")
+            self.assertTrue(any("direct_promotion" in error for error in errors))
 
 
 if __name__ == "__main__":

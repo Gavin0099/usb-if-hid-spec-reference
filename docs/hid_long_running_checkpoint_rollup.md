@@ -2688,3 +2688,41 @@ Commit Checkpoint:
 - Residual risk:
   - First actual accepted packet remains separate Level 3 work.
 
+## Batch: HID-LRA-57 (Level 3 accepted packet dry-run fixtures)
+
+- Commit: this checkpoint
+- Scope: add test-only accepted packet dry-run fixtures and validator support
+  for accepted packet directories.
+- Changed files:
+  - `contract/evidence_packet_schema.yaml`
+  - `docs/evidence_packet_schema.md`
+  - `scripts/validate_evidence_packet_schema.py`
+  - `tests/test_evidence_packet_schema.py`
+  - `governance/hid_work_queue.yaml`
+  - `docs/hid_long_running_roadmap.md`
+  - `docs/hid_long_running_checkpoint_rollup.md`
+- Validation:
+  - PASS `python -X utf8 scripts/validate_evidence_packet_schema.py`
+  - PASS `python -m unittest tests.test_evidence_packet_schema`
+- Stats before/after:
+  - tracked: unchanged at 19
+  - scaffold: unchanged at 0
+  - reviewed: unchanged at 19
+  - verified: unchanged at 0
+- Review level:
+  - Level 1 test coverage only; no production accepted packet and no
+    status/count movement.
+- Can claim:
+  - Test-only accepted packet dry-run can pass when approval, validation receipt,
+    checkpoint commit, Level 3 checkpoint, and no-direct-promotion controls are
+    present.
+  - Negative tests prove missing approval, missing validation receipt, missing
+    Level 3 checkpoint, and direct promotion fail.
+- Cannot claim:
+  - cannot claim production accepted evidence packets.
+  - cannot claim any HID entry is verified.
+  - cannot claim new source authority import.
+  - cannot claim firmware, OS, parser/runtime, or product-specific HID behavior.
+- Residual risk:
+  - First actual accepted packet remains separate Level 3 work.
+
