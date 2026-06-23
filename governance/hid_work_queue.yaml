@@ -699,4 +699,4 @@ queue:
       under the repository root and rejects absolute outside paths or relative
       escape paths. This is validator path-containment hardening only and does
       not create accepted packets or change governed matrix status.
-      checkpoint commit: this checkpoint.
+      checkpoint commit: 27bda5b.
