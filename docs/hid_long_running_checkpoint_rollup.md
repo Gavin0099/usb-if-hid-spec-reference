@@ -2470,3 +2470,47 @@ Commit Checkpoint:
 - Residual risk:
   - Accepted packet workflow remains separate Level 3 work.
 
+## Batch: HID-LRA-54 (HID descriptor field candidate packet skeletons)
+
+- Commit: this checkpoint
+- Scope: add pending verified-candidate packet skeletons for the seven HID
+  descriptor field entries under Section 6.2.1.
+- Changed files:
+  - `docs/evidence/candidates/hid_bLength_candidate.yaml`
+  - `docs/evidence/candidates/hid_bDescriptorType_candidate.yaml`
+  - `docs/evidence/candidates/hid_bcdHID_candidate.yaml`
+  - `docs/evidence/candidates/hid_bCountryCode_candidate.yaml`
+  - `docs/evidence/candidates/hid_bNumDescriptors_candidate.yaml`
+  - `docs/evidence/candidates/hid_bDescriptorType_subordinate_candidate.yaml`
+  - `docs/evidence/candidates/hid_wDescriptorLength_candidate.yaml`
+  - `docs/evidence_packet_schema.md`
+  - `tests/test_evidence_packet_schema.py`
+  - `governance/hid_work_queue.yaml`
+  - `docs/hid_long_running_roadmap.md`
+  - `docs/hid_long_running_checkpoint_rollup.md`
+- Validation:
+  - PASS `python -X utf8 scripts/validate_evidence_packet_schema.py`
+  - PASS `python -m unittest tests.test_evidence_packet_schema`
+- Stats before/after:
+  - tracked: unchanged at 19
+  - scaffold: unchanged at 0
+  - reviewed: unchanged at 19
+  - verified: unchanged at 0
+- Review level:
+  - Level 1 candidate-packet skeletons; no accepted packet and no status/count
+    movement.
+- Can claim:
+  - All seven HID descriptor field entries now have machine-checkable candidate
+    packet skeletons.
+  - Each descriptor candidate binds to one `hid_descriptor_fields_matrix` entry.
+  - All candidates remain pending and cannot produce verified promotion.
+- Cannot claim:
+  - cannot claim accepted evidence packets.
+  - cannot claim any HID entry is verified.
+  - cannot claim new source authority import.
+  - cannot claim firmware descriptor parsing correctness, descriptor parser
+    behavior, OS input stack behavior, parser/runtime behavior, or
+    product-specific HID behavior.
+- Residual risk:
+  - Candidate packet acceptance remains separate Level 3 work.
+
