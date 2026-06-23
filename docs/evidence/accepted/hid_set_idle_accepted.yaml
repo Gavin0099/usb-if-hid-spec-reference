@@ -1,0 +1,79 @@
+packet_identity:
+  packet_id: hid_set_idle_verified_candidate
+  packet_status: accepted
+  review_level: 3
+  target_claim_level: verified
+governed_entry_binding:
+  matrix: hid_class_request_matrix
+  entry_id: hid_set_idle
+  current_claim_level: reviewed
+  current_evidence_status: not_introduced
+source_trace:
+  source_id: hid_1_11
+  source_section: '7.2'
+  cited_source_authority_entry: data/source_authority.yaml current_imported_usage section 7.2
+  quoted_or_paraphrased_basis: 'HID 1.11 Section 7.2 is the registered authority for class-specific request identity. This
+    candidate only binds SET_IDLE setup identity already present in the governed matrix and does not assert runtime idle-rate
+    behavior.
+
+    '
+claim_delta:
+  can_claim_after_acceptance:
+  - SET_IDLE identity has an accepted source-traceable evidence packet.
+  - The accepted packet is bound to hid_class_request_matrix.hid_set_idle.
+  cannot_claim_after_acceptance:
+  - firmware behavior correctness
+  - OS input stack behavior
+  - parser/runtime behavior
+  - idle-rate runtime behavior
+  - product-specific HID behavior
+  forbidden_claim_check:
+  - no firmware handler correctness
+  - no host driver behavior
+  - no report parser behavior
+  - no idle-rate behavior completeness
+evidence_body:
+  identity_statement: 'SET_IDLE is the HID class-specific request identity represented by hid_class_request_matrix.hid_set_idle
+    with bRequest 0x0A, host-to-device direction, class request type, and interface recipient.
+
+    '
+  semantic_statement: 'Candidate evidence is limited to request identity and setup-frame field binding. It does not verify
+    idle-rate values, host stack behavior, firmware implementation behavior, or parser behavior.
+
+    '
+  evidence_limits:
+  - identity-level request binding only
+  - no idle-rate runtime semantics
+  - no firmware implementation correctness
+  - no host OS behavior
+  - no parser/runtime behavior
+non_claims:
+  firmware_implementation_correctness: not_claimed
+  os_input_stack_behavior: not_claimed
+  parser_runtime_behavior: not_claimed
+  product_specific_hid_behavior: not_claimed
+validation:
+  source_authority_validator: python -X utf8 scripts/validate_source_authority.py
+  matrix_validator: python -X utf8 scripts/validate_hid_class_request_matrix.py
+  verification_status_validator: python -X utf8 scripts/validate_verification_status.py
+  evidence_packet_validator: python -X utf8 scripts/validate_evidence_packet_schema.py
+  unit_tests: python -m unittest discover -s tests
+approval:
+  requested_approval: Level 3 review for future accepted evidence packet status only.
+  approver: human:level3-reviewer-2026-06-23
+  approval_record: approved
+residual_risk:
+  remaining_unverified_behavior:
+  - runtime SET_IDLE handling remains unverified
+  - idle-rate contents remain unverified
+  - host stack behavior remains unverified
+  consumer_repo_escalation_boundary: 'Consuming firmware repositories must separately verify any implementation behavior or
+    product-specific input policy derived from SET_IDLE.
+
+    '
+acceptance_gate:
+  previous_packet_status: candidate
+  checkpoint_commit: 46f65d9
+  validation_receipt: evidence/validation_receipt_hid_all_accepted.json
+  level3_checkpoint: true
+  direct_promotion: false

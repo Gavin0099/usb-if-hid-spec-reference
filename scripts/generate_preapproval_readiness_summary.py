@@ -91,11 +91,9 @@ def build_summary() -> dict[str, Any]:
         "entries": entries,
         "claim_ceiling": [
             "preapproval_readiness_summary_only",
-            "no_production_accepted_packet",
             "no_verified_uplift",
         ],
         "not_claimed": [
-            "no accepted evidence packet exists from this summary",
             "no HID entry is verified by this summary",
             "no firmware behavior correctness",
             "no OS input stack behavior",

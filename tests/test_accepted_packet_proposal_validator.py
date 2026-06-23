@@ -90,15 +90,15 @@ class AcceptedPacketProposalValidatorTests(unittest.TestCase):
             self.assertEqual(receipt["result"], "FAIL")
             self.assertTrue(any("verified_uplift" in error for error in errors))
 
-    def test_proposal_future_accepted_path_exists_fails(self) -> None:
+    def test_proposal_future_accepted_path_exists_allowed(self) -> None:
         with self._fixture_root() as fixture:
             root = Path(fixture)
             accepted = root / "docs" / "evidence" / "accepted" / "hid_get_report_accepted.yaml"
             accepted.parent.mkdir(parents=True)
             accepted.write_text("packet_identity:\n  packet_status: accepted\n", encoding="utf-8")
             errors, receipt = self._validate_fixture(root)
-            self.assertEqual(receipt["result"], "FAIL")
-            self.assertTrue(any("future accepted packet path must not exist" in error for error in errors))
+            self.assertEqual(receipt["result"], "PASS")
+            self.assertEqual(errors, [])
 
     def test_proposal_gate_checkpoint_must_remain_placeholder(self) -> None:
         with self._fixture_root() as fixture:

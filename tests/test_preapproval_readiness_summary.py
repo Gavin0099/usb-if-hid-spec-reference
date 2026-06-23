@@ -17,7 +17,7 @@ class PreapprovalReadinessSummaryTests(unittest.TestCase):
         self.assertEqual(summary["authority_ceiling"], "preapproval_readiness_summary_only")
         self.assertEqual(summary["candidate_count"], 19)
         self.assertEqual(summary["preapproval_report_count"], 19)
-        self.assertEqual(summary["production_accepted_packet_count"], 0)
+        self.assertEqual(summary["production_accepted_packet_count"], 19)
         self.assertEqual(summary["verified_entry_count"], 0)
         self.assertEqual(summary["stale_preapproval_report_count"], 0)
 
@@ -40,14 +40,13 @@ class PreapprovalReadinessSummaryTests(unittest.TestCase):
         )
         self.assertTrue(get_report["requires_human_approval"])
         self.assertTrue(get_report["requires_validation_receipt"])
-        self.assertFalse(get_report["accepted_packet_exists"])
+        self.assertTrue(get_report["accepted_packet_exists"])
 
     def test_markdown_preserves_summary_claim_ceiling(self) -> None:
         markdown = render_markdown(build_summary())
         self.assertIn("> Status: readiness summary only", markdown)
-        self.assertIn("- production accepted packets: 0", markdown)
+        self.assertIn("- production accepted packets: 19", markdown)
         self.assertIn("- verified entries: 0", markdown)
-        self.assertIn("no_production_accepted_packet", markdown)
 
     def test_cli_writes_markdown_and_json_inside_repo(self) -> None:
         with tempfile.TemporaryDirectory(dir=ROOT) as tempdir:
@@ -75,7 +74,7 @@ class PreapprovalReadinessSummaryTests(unittest.TestCase):
             self.assertTrue(json_out.exists())
             data = json.loads(json_out.read_text(encoding="utf-8"))
             self.assertEqual(data["preapproval_report_count"], 19)
-            self.assertEqual(data["production_accepted_packet_count"], 0)
+            self.assertEqual(data["production_accepted_packet_count"], 19)
 
     def test_cli_writes_receipt_inside_repo(self) -> None:
         with tempfile.TemporaryDirectory(dir=ROOT) as tempdir:
@@ -106,7 +105,7 @@ class PreapprovalReadinessSummaryTests(unittest.TestCase):
             data = json.loads(receipt_out.read_text(encoding="utf-8"))
             self.assertEqual(data["generator"], "generate_preapproval_readiness_summary.py")
             self.assertEqual(data["candidate_count"], 19)
-            self.assertEqual(data["production_accepted_packet_count"], 0)
+            self.assertEqual(data["production_accepted_packet_count"], 19)
 
     def test_cli_rejects_receipt_output_path_outside_repo(self) -> None:
         with tempfile.TemporaryDirectory() as tempdir:
