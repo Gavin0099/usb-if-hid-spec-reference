@@ -1,0 +1,516 @@
+{
+  "authority_ceiling": "preapproval_readiness_summary_only",
+  "candidate_count": 19,
+  "preapproval_report_count": 19,
+  "production_accepted_packet_count": 0,
+  "verified_entry_count": 0,
+  "stale_preapproval_report_count": 0,
+  "entries": [
+    {
+      "entry_id": "hid_bcdHID",
+      "matrix": "hid_descriptor_fields_matrix",
+      "candidate": "docs/evidence/candidates/hid_bcdHID_candidate.yaml",
+      "preapproval_report": "docs/evidence/preapproval/hid_bcdHID_preapproval_checklist.md",
+      "future_accepted_packet": "docs/evidence/accepted/hid_bcdHID_accepted.yaml",
+      "accepted_packet_exists": false,
+      "current_claim_level": "reviewed",
+      "current_evidence_status": "not_verified",
+      "ready_check_count": 16,
+      "gap_count": 12,
+      "missing_acceptance_gate_fields": [
+        "previous_packet_status",
+        "checkpoint_commit",
+        "validation_receipt",
+        "level3_checkpoint",
+        "direct_promotion"
+      ],
+      "requires_human_approval": true,
+      "requires_validation_receipt": true,
+      "claim_ceiling": [
+        "preapproval_checklist_only",
+        "no_production_accepted_packet",
+        "no_verified_uplift"
+      ]
+    },
+    {
+      "entry_id": "hid_bCountryCode",
+      "matrix": "hid_descriptor_fields_matrix",
+      "candidate": "docs/evidence/candidates/hid_bCountryCode_candidate.yaml",
+      "preapproval_report": "docs/evidence/preapproval/hid_bCountryCode_preapproval_checklist.md",
+      "future_accepted_packet": "docs/evidence/accepted/hid_bCountryCode_accepted.yaml",
+      "accepted_packet_exists": false,
+      "current_claim_level": "reviewed",
+      "current_evidence_status": "not_verified",
+      "ready_check_count": 16,
+      "gap_count": 12,
+      "missing_acceptance_gate_fields": [
+        "previous_packet_status",
+        "checkpoint_commit",
+        "validation_receipt",
+        "level3_checkpoint",
+        "direct_promotion"
+      ],
+      "requires_human_approval": true,
+      "requires_validation_receipt": true,
+      "claim_ceiling": [
+        "preapproval_checklist_only",
+        "no_production_accepted_packet",
+        "no_verified_uplift"
+      ]
+    },
+    {
+      "entry_id": "hid_bDescriptorType",
+      "matrix": "hid_descriptor_fields_matrix",
+      "candidate": "docs/evidence/candidates/hid_bDescriptorType_candidate.yaml",
+      "preapproval_report": "docs/evidence/preapproval/hid_bDescriptorType_preapproval_checklist.md",
+      "future_accepted_packet": "docs/evidence/accepted/hid_bDescriptorType_accepted.yaml",
+      "accepted_packet_exists": false,
+      "current_claim_level": "reviewed",
+      "current_evidence_status": "not_verified",
+      "ready_check_count": 16,
+      "gap_count": 12,
+      "missing_acceptance_gate_fields": [
+        "previous_packet_status",
+        "checkpoint_commit",
+        "validation_receipt",
+        "level3_checkpoint",
+        "direct_promotion"
+      ],
+      "requires_human_approval": true,
+      "requires_validation_receipt": true,
+      "claim_ceiling": [
+        "preapproval_checklist_only",
+        "no_production_accepted_packet",
+        "no_verified_uplift"
+      ]
+    },
+    {
+      "entry_id": "hid_bDescriptorType_subordinate",
+      "matrix": "hid_descriptor_fields_matrix",
+      "candidate": "docs/evidence/candidates/hid_bDescriptorType_subordinate_candidate.yaml",
+      "preapproval_report": "docs/evidence/preapproval/hid_bDescriptorType_subordinate_preapproval_checklist.md",
+      "future_accepted_packet": "docs/evidence/accepted/hid_bDescriptorType_subordinate_accepted.yaml",
+      "accepted_packet_exists": false,
+      "current_claim_level": "reviewed",
+      "current_evidence_status": "not_verified",
+      "ready_check_count": 16,
+      "gap_count": 12,
+      "missing_acceptance_gate_fields": [
+        "previous_packet_status",
+        "checkpoint_commit",
+        "validation_receipt",
+        "level3_checkpoint",
+        "direct_promotion"
+      ],
+      "requires_human_approval": true,
+      "requires_validation_receipt": true,
+      "claim_ceiling": [
+        "preapproval_checklist_only",
+        "no_production_accepted_packet",
+        "no_verified_uplift"
+      ]
+    },
+    {
+      "entry_id": "hid_bLength",
+      "matrix": "hid_descriptor_fields_matrix",
+      "candidate": "docs/evidence/candidates/hid_bLength_candidate.yaml",
+      "preapproval_report": "docs/evidence/preapproval/hid_bLength_preapproval_checklist.md",
+      "future_accepted_packet": "docs/evidence/accepted/hid_bLength_accepted.yaml",
+      "accepted_packet_exists": false,
+      "current_claim_level": "reviewed",
+      "current_evidence_status": "not_verified",
+      "ready_check_count": 16,
+      "gap_count": 12,
+      "missing_acceptance_gate_fields": [
+        "previous_packet_status",
+        "checkpoint_commit",
+        "validation_receipt",
+        "level3_checkpoint",
+        "direct_promotion"
+      ],
+      "requires_human_approval": true,
+      "requires_validation_receipt": true,
+      "claim_ceiling": [
+        "preapproval_checklist_only",
+        "no_production_accepted_packet",
+        "no_verified_uplift"
+      ]
+    },
+    {
+      "entry_id": "hid_bNumDescriptors",
+      "matrix": "hid_descriptor_fields_matrix",
+      "candidate": "docs/evidence/candidates/hid_bNumDescriptors_candidate.yaml",
+      "preapproval_report": "docs/evidence/preapproval/hid_bNumDescriptors_preapproval_checklist.md",
+      "future_accepted_packet": "docs/evidence/accepted/hid_bNumDescriptors_accepted.yaml",
+      "accepted_packet_exists": false,
+      "current_claim_level": "reviewed",
+      "current_evidence_status": "not_verified",
+      "ready_check_count": 16,
+      "gap_count": 12,
+      "missing_acceptance_gate_fields": [
+        "previous_packet_status",
+        "checkpoint_commit",
+        "validation_receipt",
+        "level3_checkpoint",
+        "direct_promotion"
+      ],
+      "requires_human_approval": true,
+      "requires_validation_receipt": true,
+      "claim_ceiling": [
+        "preapproval_checklist_only",
+        "no_production_accepted_packet",
+        "no_verified_uplift"
+      ]
+    },
+    {
+      "entry_id": "hid_get_idle",
+      "matrix": "hid_class_request_matrix",
+      "candidate": "docs/evidence/candidates/hid_get_idle_candidate.yaml",
+      "preapproval_report": "docs/evidence/preapproval/hid_get_idle_preapproval_checklist.md",
+      "future_accepted_packet": "docs/evidence/accepted/hid_get_idle_accepted.yaml",
+      "accepted_packet_exists": false,
+      "current_claim_level": "reviewed",
+      "current_evidence_status": "not_introduced",
+      "ready_check_count": 16,
+      "gap_count": 12,
+      "missing_acceptance_gate_fields": [
+        "previous_packet_status",
+        "checkpoint_commit",
+        "validation_receipt",
+        "level3_checkpoint",
+        "direct_promotion"
+      ],
+      "requires_human_approval": true,
+      "requires_validation_receipt": true,
+      "claim_ceiling": [
+        "preapproval_checklist_only",
+        "no_production_accepted_packet",
+        "no_verified_uplift"
+      ]
+    },
+    {
+      "entry_id": "hid_get_protocol",
+      "matrix": "hid_class_request_matrix",
+      "candidate": "docs/evidence/candidates/hid_get_protocol_candidate.yaml",
+      "preapproval_report": "docs/evidence/preapproval/hid_get_protocol_preapproval_checklist.md",
+      "future_accepted_packet": "docs/evidence/accepted/hid_get_protocol_accepted.yaml",
+      "accepted_packet_exists": false,
+      "current_claim_level": "reviewed",
+      "current_evidence_status": "not_introduced",
+      "ready_check_count": 16,
+      "gap_count": 12,
+      "missing_acceptance_gate_fields": [
+        "previous_packet_status",
+        "checkpoint_commit",
+        "validation_receipt",
+        "level3_checkpoint",
+        "direct_promotion"
+      ],
+      "requires_human_approval": true,
+      "requires_validation_receipt": true,
+      "claim_ceiling": [
+        "preapproval_checklist_only",
+        "no_production_accepted_packet",
+        "no_verified_uplift"
+      ]
+    },
+    {
+      "entry_id": "hid_get_report",
+      "matrix": "hid_class_request_matrix",
+      "candidate": "docs/evidence/candidates/hid_get_report_candidate.yaml",
+      "preapproval_report": "docs/evidence/preapproval/hid_get_report_preapproval_checklist.md",
+      "future_accepted_packet": "docs/evidence/accepted/hid_get_report_accepted.yaml",
+      "accepted_packet_exists": false,
+      "current_claim_level": "reviewed",
+      "current_evidence_status": "not_introduced",
+      "ready_check_count": 16,
+      "gap_count": 12,
+      "missing_acceptance_gate_fields": [
+        "previous_packet_status",
+        "checkpoint_commit",
+        "validation_receipt",
+        "level3_checkpoint",
+        "direct_promotion"
+      ],
+      "requires_human_approval": true,
+      "requires_validation_receipt": true,
+      "claim_ceiling": [
+        "preapproval_checklist_only",
+        "no_production_accepted_packet",
+        "no_verified_uplift"
+      ]
+    },
+    {
+      "entry_id": "hid_set_idle",
+      "matrix": "hid_class_request_matrix",
+      "candidate": "docs/evidence/candidates/hid_set_idle_candidate.yaml",
+      "preapproval_report": "docs/evidence/preapproval/hid_set_idle_preapproval_checklist.md",
+      "future_accepted_packet": "docs/evidence/accepted/hid_set_idle_accepted.yaml",
+      "accepted_packet_exists": false,
+      "current_claim_level": "reviewed",
+      "current_evidence_status": "not_introduced",
+      "ready_check_count": 16,
+      "gap_count": 12,
+      "missing_acceptance_gate_fields": [
+        "previous_packet_status",
+        "checkpoint_commit",
+        "validation_receipt",
+        "level3_checkpoint",
+        "direct_promotion"
+      ],
+      "requires_human_approval": true,
+      "requires_validation_receipt": true,
+      "claim_ceiling": [
+        "preapproval_checklist_only",
+        "no_production_accepted_packet",
+        "no_verified_uplift"
+      ]
+    },
+    {
+      "entry_id": "hid_set_protocol",
+      "matrix": "hid_class_request_matrix",
+      "candidate": "docs/evidence/candidates/hid_set_protocol_candidate.yaml",
+      "preapproval_report": "docs/evidence/preapproval/hid_set_protocol_preapproval_checklist.md",
+      "future_accepted_packet": "docs/evidence/accepted/hid_set_protocol_accepted.yaml",
+      "accepted_packet_exists": false,
+      "current_claim_level": "reviewed",
+      "current_evidence_status": "not_introduced",
+      "ready_check_count": 16,
+      "gap_count": 12,
+      "missing_acceptance_gate_fields": [
+        "previous_packet_status",
+        "checkpoint_commit",
+        "validation_receipt",
+        "level3_checkpoint",
+        "direct_promotion"
+      ],
+      "requires_human_approval": true,
+      "requires_validation_receipt": true,
+      "claim_ceiling": [
+        "preapproval_checklist_only",
+        "no_production_accepted_packet",
+        "no_verified_uplift"
+      ]
+    },
+    {
+      "entry_id": "hid_set_report",
+      "matrix": "hid_class_request_matrix",
+      "candidate": "docs/evidence/candidates/hid_set_report_candidate.yaml",
+      "preapproval_report": "docs/evidence/preapproval/hid_set_report_preapproval_checklist.md",
+      "future_accepted_packet": "docs/evidence/accepted/hid_set_report_accepted.yaml",
+      "accepted_packet_exists": false,
+      "current_claim_level": "reviewed",
+      "current_evidence_status": "not_introduced",
+      "ready_check_count": 16,
+      "gap_count": 12,
+      "missing_acceptance_gate_fields": [
+        "previous_packet_status",
+        "checkpoint_commit",
+        "validation_receipt",
+        "level3_checkpoint",
+        "direct_promotion"
+      ],
+      "requires_human_approval": true,
+      "requires_validation_receipt": true,
+      "claim_ceiling": [
+        "preapproval_checklist_only",
+        "no_production_accepted_packet",
+        "no_verified_uplift"
+      ]
+    },
+    {
+      "entry_id": "hid_wDescriptorLength",
+      "matrix": "hid_descriptor_fields_matrix",
+      "candidate": "docs/evidence/candidates/hid_wDescriptorLength_candidate.yaml",
+      "preapproval_report": "docs/evidence/preapproval/hid_wDescriptorLength_preapproval_checklist.md",
+      "future_accepted_packet": "docs/evidence/accepted/hid_wDescriptorLength_accepted.yaml",
+      "accepted_packet_exists": false,
+      "current_claim_level": "reviewed",
+      "current_evidence_status": "not_verified",
+      "ready_check_count": 16,
+      "gap_count": 12,
+      "missing_acceptance_gate_fields": [
+        "previous_packet_status",
+        "checkpoint_commit",
+        "validation_receipt",
+        "level3_checkpoint",
+        "direct_promotion"
+      ],
+      "requires_human_approval": true,
+      "requires_validation_receipt": true,
+      "claim_ceiling": [
+        "preapproval_checklist_only",
+        "no_production_accepted_packet",
+        "no_verified_uplift"
+      ]
+    },
+    {
+      "entry_id": "report_descriptor_global_item_type",
+      "matrix": "hid_report_descriptor_items_matrix",
+      "candidate": "docs/evidence/candidates/report_descriptor_global_item_type_candidate.yaml",
+      "preapproval_report": "docs/evidence/preapproval/report_descriptor_global_item_type_preapproval_checklist.md",
+      "future_accepted_packet": "docs/evidence/accepted/report_descriptor_global_item_type_accepted.yaml",
+      "accepted_packet_exists": false,
+      "current_claim_level": "reviewed",
+      "current_evidence_status": "not_verified",
+      "ready_check_count": 16,
+      "gap_count": 12,
+      "missing_acceptance_gate_fields": [
+        "previous_packet_status",
+        "checkpoint_commit",
+        "validation_receipt",
+        "level3_checkpoint",
+        "direct_promotion"
+      ],
+      "requires_human_approval": true,
+      "requires_validation_receipt": true,
+      "claim_ceiling": [
+        "preapproval_checklist_only",
+        "no_production_accepted_packet",
+        "no_verified_uplift"
+      ]
+    },
+    {
+      "entry_id": "report_descriptor_local_item_type",
+      "matrix": "hid_report_descriptor_items_matrix",
+      "candidate": "docs/evidence/candidates/report_descriptor_local_item_type_candidate.yaml",
+      "preapproval_report": "docs/evidence/preapproval/report_descriptor_local_item_type_preapproval_checklist.md",
+      "future_accepted_packet": "docs/evidence/accepted/report_descriptor_local_item_type_accepted.yaml",
+      "accepted_packet_exists": false,
+      "current_claim_level": "reviewed",
+      "current_evidence_status": "not_verified",
+      "ready_check_count": 16,
+      "gap_count": 12,
+      "missing_acceptance_gate_fields": [
+        "previous_packet_status",
+        "checkpoint_commit",
+        "validation_receipt",
+        "level3_checkpoint",
+        "direct_promotion"
+      ],
+      "requires_human_approval": true,
+      "requires_validation_receipt": true,
+      "claim_ceiling": [
+        "preapproval_checklist_only",
+        "no_production_accepted_packet",
+        "no_verified_uplift"
+      ]
+    },
+    {
+      "entry_id": "report_descriptor_long_item_prefix",
+      "matrix": "hid_report_descriptor_items_matrix",
+      "candidate": "docs/evidence/candidates/report_descriptor_long_item_prefix_candidate.yaml",
+      "preapproval_report": "docs/evidence/preapproval/report_descriptor_long_item_prefix_preapproval_checklist.md",
+      "future_accepted_packet": "docs/evidence/accepted/report_descriptor_long_item_prefix_accepted.yaml",
+      "accepted_packet_exists": false,
+      "current_claim_level": "reviewed",
+      "current_evidence_status": "not_verified",
+      "ready_check_count": 16,
+      "gap_count": 12,
+      "missing_acceptance_gate_fields": [
+        "previous_packet_status",
+        "checkpoint_commit",
+        "validation_receipt",
+        "level3_checkpoint",
+        "direct_promotion"
+      ],
+      "requires_human_approval": true,
+      "requires_validation_receipt": true,
+      "claim_ceiling": [
+        "preapproval_checklist_only",
+        "no_production_accepted_packet",
+        "no_verified_uplift"
+      ]
+    },
+    {
+      "entry_id": "report_descriptor_main_item_type",
+      "matrix": "hid_report_descriptor_items_matrix",
+      "candidate": "docs/evidence/candidates/report_descriptor_main_item_type_candidate.yaml",
+      "preapproval_report": "docs/evidence/preapproval/report_descriptor_main_item_type_preapproval_checklist.md",
+      "future_accepted_packet": "docs/evidence/accepted/report_descriptor_main_item_type_accepted.yaml",
+      "accepted_packet_exists": false,
+      "current_claim_level": "reviewed",
+      "current_evidence_status": "not_verified",
+      "ready_check_count": 16,
+      "gap_count": 12,
+      "missing_acceptance_gate_fields": [
+        "previous_packet_status",
+        "checkpoint_commit",
+        "validation_receipt",
+        "level3_checkpoint",
+        "direct_promotion"
+      ],
+      "requires_human_approval": true,
+      "requires_validation_receipt": true,
+      "claim_ceiling": [
+        "preapproval_checklist_only",
+        "no_production_accepted_packet",
+        "no_verified_uplift"
+      ]
+    },
+    {
+      "entry_id": "report_descriptor_reserved_item_type",
+      "matrix": "hid_report_descriptor_items_matrix",
+      "candidate": "docs/evidence/candidates/report_descriptor_reserved_item_type_candidate.yaml",
+      "preapproval_report": "docs/evidence/preapproval/report_descriptor_reserved_item_type_preapproval_checklist.md",
+      "future_accepted_packet": "docs/evidence/accepted/report_descriptor_reserved_item_type_accepted.yaml",
+      "accepted_packet_exists": false,
+      "current_claim_level": "reviewed",
+      "current_evidence_status": "not_verified",
+      "ready_check_count": 16,
+      "gap_count": 12,
+      "missing_acceptance_gate_fields": [
+        "previous_packet_status",
+        "checkpoint_commit",
+        "validation_receipt",
+        "level3_checkpoint",
+        "direct_promotion"
+      ],
+      "requires_human_approval": true,
+      "requires_validation_receipt": true,
+      "claim_ceiling": [
+        "preapproval_checklist_only",
+        "no_production_accepted_packet",
+        "no_verified_uplift"
+      ]
+    },
+    {
+      "entry_id": "report_descriptor_short_item_prefix",
+      "matrix": "hid_report_descriptor_items_matrix",
+      "candidate": "docs/evidence/candidates/report_descriptor_short_item_prefix_candidate.yaml",
+      "preapproval_report": "docs/evidence/preapproval/report_descriptor_short_item_prefix_preapproval_checklist.md",
+      "future_accepted_packet": "docs/evidence/accepted/report_descriptor_short_item_prefix_accepted.yaml",
+      "accepted_packet_exists": false,
+      "current_claim_level": "reviewed",
+      "current_evidence_status": "not_verified",
+      "ready_check_count": 16,
+      "gap_count": 12,
+      "missing_acceptance_gate_fields": [
+        "previous_packet_status",
+        "checkpoint_commit",
+        "validation_receipt",
+        "level3_checkpoint",
+        "direct_promotion"
+      ],
+      "requires_human_approval": true,
+      "requires_validation_receipt": true,
+      "claim_ceiling": [
+        "preapproval_checklist_only",
+        "no_production_accepted_packet",
+        "no_verified_uplift"
+      ]
+    }
+  ],
+  "claim_ceiling": [
+    "preapproval_readiness_summary_only",
+    "no_production_accepted_packet",
+    "no_verified_uplift"
+  ],
+  "not_claimed": [
+    "no accepted evidence packet exists from this summary",
+    "no HID entry is verified by this summary",
+    "no firmware behavior correctness",
+    "no OS input stack behavior",
+    "no parser runtime behavior"
+  ]
+}

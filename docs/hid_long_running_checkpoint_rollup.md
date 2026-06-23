@@ -3032,3 +3032,42 @@ Commit Checkpoint:
   - cannot claim firmware, OS, parser/runtime, or product-specific HID behavior.
 - Residual risk:
   - First production accepted packet remains separate Level 3 work.
+
+## Batch: HID-LRA-62 (accepted packet pre-approval readiness summary)
+
+- Commit: this checkpoint
+- Scope: add a readiness summary generator and generate Markdown/JSON summary
+  artifacts for all 19 pre-approval checklist reports.
+- Changed files:
+  - `scripts/generate_preapproval_readiness_summary.py`
+  - `tests/test_preapproval_readiness_summary.py`
+  - `docs/evidence/preapproval_summary.md`
+  - `evidence/preapproval_summary.json`
+  - `docs/evidence_packet_schema.md`
+  - `governance/hid_work_queue.yaml`
+  - `docs/hid_long_running_roadmap.md`
+  - `docs/hid_long_running_checkpoint_rollup.md`
+- Validation:
+  - PASS `python -X utf8 scripts/generate_preapproval_readiness_summary.py`
+  - PASS `python -m unittest tests.test_preapproval_readiness_summary`
+- Stats before/after:
+  - tracked: unchanged at 19
+  - scaffold: unchanged at 0
+  - reviewed: unchanged at 19
+  - verified: unchanged at 0
+  - pre-approval reports: unchanged at 19
+  - production accepted packets: unchanged at 0
+- Review level:
+  - Level 1 readiness summary only; no production accepted packet and no
+    status/count movement.
+- Can claim:
+  - 19 pre-approval reports are summarized in Markdown and JSON.
+  - Summary artifacts report production accepted packets at 0 and verified
+    entries at 0.
+- Cannot claim:
+  - cannot claim production accepted evidence packets.
+  - cannot claim any HID entry is verified.
+  - cannot claim new source authority import.
+  - cannot claim firmware, OS, parser/runtime, or product-specific HID behavior.
+- Residual risk:
+  - First production accepted packet remains separate Level 3 work.

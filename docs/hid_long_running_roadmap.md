@@ -277,3 +277,11 @@
 - latest checkpoint: ef1865f
 - gate: generator hardening only; no production accepted packet and no verified
   count movement.
+
+### HID-LRA-33: Accepted Packet Pre-Approval Readiness Summary
+
+- status: In progress
+- objective: add a readiness summary generator and generate Markdown/JSON
+  summary artifacts for all 19 pre-approval checklist reports.
+- gate: readiness summary only; no production accepted packet and no verified
+  count movement.
