@@ -3311,7 +3311,7 @@ Commit Checkpoint:
 
 ## Batch: HID-LRA-66 (complete accepted packet proposal surface)
 
-- Commit: this checkpoint
+- Commit: 33915f3
 - Scope: extend the accepted-packet proposal generator with batch mode and
   generate Markdown/JSON proposal artifacts for all 19 candidate packets.
 - Changed files:
@@ -3341,6 +3341,39 @@ Commit Checkpoint:
   - all 19 candidate packets have accepted-packet proposal Markdown and JSON
     artifacts.
   - proposal validator checks 19 proposal JSON artifacts.
+- Cannot claim:
+  - cannot claim production accepted evidence packets.
+  - cannot claim any HID entry is verified.
+  - cannot claim new source authority import.
+  - cannot claim firmware, OS, parser/runtime, or product-specific HID behavior.
+- Residual risk:
+  - First production accepted packet remains separate Level 3 work.
+
+### Checkpoint memory entry for HID-LRA-66
+
+- Commit: this checkpoint
+- Scope: record the `HID-LRA-66` complete accepted-packet proposal surface
+  checkpoint in repo-local daily memory using
+  `scripts/emit_checkpoint_memory_entry.py`.
+- Changed files:
+  - `memory/2026-06-23.md`
+  - `governance/hid_work_queue.yaml`
+  - `docs/hid_long_running_roadmap.md`
+  - `docs/hid_long_running_checkpoint_rollup.md`
+- Validation:
+  - PASS `python -X utf8 scripts/validate_memory_records.py`
+  - PASS `python -m unittest discover -s tests`
+- Stats before/after:
+  - tracked: unchanged at 19
+  - scaffold: unchanged at 0
+  - reviewed: unchanged at 19
+  - verified: unchanged at 0
+  - accepted-packet proposals: unchanged at 19
+  - production accepted packets: unchanged at 0
+- Can claim:
+  - `memory/2026-06-23.md` contains a bound entry for commit `33915f3`.
+  - Queue and roadmap now point `HID-VER-19` / `HID-LRA-37` at commit
+    `33915f3`.
 - Cannot claim:
   - cannot claim production accepted evidence packets.
   - cannot claim any HID entry is verified.
