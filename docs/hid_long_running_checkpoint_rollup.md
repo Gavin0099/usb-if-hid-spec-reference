@@ -3240,3 +3240,39 @@ Commit Checkpoint:
   - cannot claim firmware, OS, parser/runtime, or product-specific HID behavior.
 - Residual risk:
   - First production accepted packet remains separate Level 3 work.
+
+## Batch: HID-LRA-65 (accepted packet proposal validator receipt path containment)
+
+- Commit: this checkpoint
+- Scope: harden accepted-packet proposal validator receipt output handling so
+  `--receipt-out` paths must resolve under the repository root.
+- Changed files:
+  - `scripts/validate_accepted_packet_proposals.py`
+  - `tests/test_accepted_packet_proposal_validator.py`
+  - `docs/evidence_packet_schema.md`
+  - `governance/hid_work_queue.yaml`
+  - `docs/hid_long_running_roadmap.md`
+  - `docs/hid_long_running_checkpoint_rollup.md`
+- Validation:
+  - PASS `python -X utf8 scripts/validate_accepted_packet_proposals.py`
+  - PASS `python -m unittest tests.test_accepted_packet_proposal_validator`
+- Stats before/after:
+  - tracked: unchanged at 19
+  - scaffold: unchanged at 0
+  - reviewed: unchanged at 19
+  - verified: unchanged at 0
+  - production accepted packets: unchanged at 0
+- Review level:
+  - Level 1 validator hardening only; no production accepted packet and no
+    status/count movement.
+- Can claim:
+  - accepted-packet proposal validator receipt outputs must stay under the
+    repository root.
+  - absolute outside paths and relative escape paths are rejected.
+- Cannot claim:
+  - cannot claim production accepted evidence packets.
+  - cannot claim any HID entry is verified.
+  - cannot claim new source authority import.
+  - cannot claim firmware, OS, parser/runtime, or product-specific HID behavior.
+- Residual risk:
+  - First production accepted packet remains separate Level 3 work.

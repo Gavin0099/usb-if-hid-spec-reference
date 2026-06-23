@@ -46,6 +46,18 @@ def _load_json(path: Path, root: Path = ROOT) -> dict[str, Any]:
     return data
 
 
+def _resolve_under_root(path_arg: str, *, root: Path = ROOT) -> Path:
+    path = Path(path_arg)
+    candidate = path if path.is_absolute() else root / path
+    resolved_root = root.resolve()
+    resolved = candidate.resolve()
+    try:
+        resolved.relative_to(resolved_root)
+    except ValueError as exc:
+        raise ValueError(f"output path must stay under repository root: {path_arg}") from exc
+    return resolved
+
+
 def _write_receipt(path: Path, receipt: dict[str, Any]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(receipt, ensure_ascii=True, indent=2) + "\n", encoding="utf-8")
@@ -143,7 +155,13 @@ def main() -> int:
 
     errors, receipt = validate()
     if args.receipt_out:
-        _write_receipt(ROOT / args.receipt_out, receipt)
+        try:
+            receipt_path = _resolve_under_root(args.receipt_out)
+        except ValueError as exc:
+            print("FAIL validate_accepted_packet_proposals")
+            print(f"- {exc}")
+            return 1
+        _write_receipt(receipt_path, receipt)
 
     if errors:
         print("FAIL validate_accepted_packet_proposals")
