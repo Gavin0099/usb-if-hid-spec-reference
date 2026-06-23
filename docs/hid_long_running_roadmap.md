@@ -342,3 +342,11 @@
 - latest checkpoint: 9d606db
 - gate: summary drift guard only; no production accepted packet and no verified
   count movement.
+
+### HID-LRA-69: Accepted Packet Production Batch
+
+- status: Completed
+- objective: generate production accepted packet artifacts for all 19 identities
+  and align proposal/readiness summaries to the post-production accepted surface.
+- latest checkpoint: 0903006
+- gate: production accepted evidence status only; no verified count movement.
