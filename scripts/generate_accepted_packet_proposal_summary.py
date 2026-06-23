@@ -48,8 +48,65 @@ def _load_json(path: Path) -> dict[str, Any]:
     return data
 
 
+def _normalize_entries(entries: list[dict[str, Any]]) -> dict[str, dict[str, Any]]:
+    normalized: dict[str, dict[str, Any]] = {}
+    for entry in entries:
+        entry_id = entry.get("entry_id")
+        if not isinstance(entry_id, str):
+            continue
+        normalized[entry_id] = entry
+    return normalized
+
+
 def _accepted_packet_exists(path_text: str) -> bool:
     return (ROOT / path_text).exists()
+
+
+def _compare_summary(expected: dict[str, Any], actual: dict[str, Any]) -> list[str]:
+    mismatches: list[str] = []
+    top_level_fields = [
+        "authority_ceiling",
+        "candidate_count",
+        "proposal_markdown_count",
+        "proposal_json_count",
+        "production_accepted_packet_count",
+        "verified_entry_count",
+        "validator_checked_proposal_count",
+    ]
+    for field in top_level_fields:
+        if expected.get(field) != actual.get(field):
+            mismatches.append(
+                f"summary field mismatch {field}: expected {expected.get(field)!r}, got {actual.get(field)!r}"
+            )
+
+    for field in ("claim_ceiling", "not_claimed"):
+        expected_values = sorted(expected.get(field, [])) if isinstance(expected.get(field), list) else []
+        actual_values = sorted(actual.get(field, [])) if isinstance(actual.get(field), list) else []
+        if expected_values != actual_values:
+            mismatches.append(f"summary field mismatch {field}: {expected_values!r} != {actual_values!r}")
+
+    expected_entries = _normalize_entries(expected.get("entries", []))
+    actual_entries = _normalize_entries(actual.get("entries", []))
+    if set(expected_entries) != set(actual_entries):
+        mismatches.append(f"entry ids mismatch: expected {sorted(expected_entries)}, got {sorted(actual_entries)}")
+    shared_entry_ids = sorted(set(expected_entries) & set(actual_entries))
+    for entry_id in shared_entry_ids:
+        expected_entry = expected_entries[entry_id]
+        actual_entry = actual_entries[entry_id]
+        for field in (
+            "ready_check_count",
+            "gap_count",
+            "current_claim_level",
+            "current_evidence_status",
+            "future_accepted_packet",
+            "accepted_packet_exists",
+        ):
+            if expected_entry.get(field) != actual_entry.get(field):
+                mismatches.append(
+                    f"entry {entry_id} field mismatch {field}: "
+                    f"expected {expected_entry.get(field)!r}, got {actual_entry.get(field)!r}"
+                )
+    return mismatches
 
 
 def build_summary() -> dict[str, Any]:
@@ -167,12 +224,27 @@ def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--markdown-out", default="docs/evidence/accepted_proposal_summary.md")
     parser.add_argument("--json-out", default="evidence/accepted_proposal_summary.json")
+    parser.add_argument("--assert-match")
+    parser.add_argument("--check-only", action="store_true")
     args = parser.parse_args()
+    if args.check_only and not args.assert_match:
+        parser.error("--check-only requires --assert-match")
+
     try:
         markdown_out = _resolve_under_root(args.markdown_out)
         json_out = _resolve_under_root(args.json_out)
         summary = build_summary()
-        write_summary(summary, markdown_out=markdown_out, json_out=json_out)
+        if args.assert_match:
+            expected_summary_path = _resolve_under_root(args.assert_match)
+            expected_summary = _load_json(expected_summary_path)
+            mismatches = _compare_summary(expected_summary, summary)
+            if mismatches:
+                print("FAIL generate_accepted_packet_proposal_summary --assert-match")
+                for mismatch in mismatches:
+                    print(f"- {mismatch}")
+                return 1
+        if not args.check_only:
+            write_summary(summary, markdown_out=markdown_out, json_out=json_out)
     except ValueError as error:
         print(f"ERROR: {error}", file=sys.stderr)
         return 1
@@ -182,6 +254,11 @@ def main() -> int:
         f"{summary['production_accepted_packet_count']} accepted packet(s), "
         f"{summary['verified_entry_count']} verified entry(s)"
     )
+    if args.assert_match:
+        if args.check_only:
+            print(f"PASS accepted proposal summary matches {args.assert_match}")
+        else:
+            print(f"PASS accepted proposal summary match check against {args.assert_match}")
     return 0
 
 

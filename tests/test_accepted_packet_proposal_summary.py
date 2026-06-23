@@ -1,6 +1,7 @@
 import json
 import subprocess
 import sys
+import shutil
 import tempfile
 import unittest
 from pathlib import Path
@@ -81,6 +82,53 @@ class AcceptedPacketProposalSummaryTests(unittest.TestCase):
             self.assertIn("output path must stay under repository root", result.stderr)
             self.assertFalse(markdown_out.exists())
 
+    def test_cli_assert_match_passes_on_committed_summary(self) -> None:
+        result = subprocess.run(
+            [
+                sys.executable,
+                "-X",
+                "utf8",
+                "scripts/generate_accepted_packet_proposal_summary.py",
+                "--assert-match",
+                "evidence/accepted_proposal_summary.json",
+                "--check-only",
+            ],
+            cwd=ROOT,
+            check=False,
+            capture_output=True,
+            text=True,
+        )
+        self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+        self.assertIn("PASS accepted proposal summary matches evidence/accepted_proposal_summary.json", result.stdout)
+
+    def test_cli_assert_match_detects_tampered_summary(self) -> None:
+        tampered = ROOT / "evidence" / "accepted_proposal_summary.json"
+        with tempfile.TemporaryDirectory(dir=ROOT) as tempdir:
+            temp_summary = Path(tempdir) / "accepted_proposal_summary.json"
+            shutil.copy(tampered, temp_summary)
+            temp_data = json.loads(temp_summary.read_text(encoding="utf-8"))
+            temp_data["candidate_count"] = 999
+            temp_summary.write_text(json.dumps(temp_data, ensure_ascii=True, indent=2) + "\n", encoding="utf-8")
+
+            result = subprocess.run(
+                [
+                    sys.executable,
+                    "-X",
+                    "utf8",
+                    "scripts/generate_accepted_packet_proposal_summary.py",
+                    "--assert-match",
+                    str(temp_summary.relative_to(ROOT)),
+                    "--check-only",
+                ],
+                cwd=ROOT,
+                check=False,
+                capture_output=True,
+                text=True,
+            )
+            self.assertNotEqual(result.returncode, 0, result.stdout + result.stderr)
+            self.assertIn("summary field mismatch candidate_count", result.stdout + result.stderr)
+            self.assertTrue(temp_summary.exists())
+        self.assertTrue(tampered.exists())
 
 if __name__ == "__main__":
     unittest.main()
