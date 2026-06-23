@@ -522,3 +522,25 @@ queue:
       missing validation receipt, missing Level 3 checkpoint, or direct
       promotion fail. This does not add any production accepted packet.
       checkpoint commit: 72ba835.
+
+  - id: HID-VER-11
+    title: Production accepted packet path and naming guard
+    authority: Repo-local evidence packet governance
+    status: reviewed
+    allowed_status_change: validator_hardening_only
+    requires_human_approval: false
+    review_level: 1
+    gate: validation_required
+    forbidden_claims:
+      - accepted evidence packet
+      - verified status uplift
+      - new source authority import
+      - firmware behavior correctness
+      - OS input stack behavior
+      - parser runtime behavior
+    notes: >
+      Harden accepted packet validation so accepted packets must be checked
+      from docs/evidence/accepted/ and named <candidate-base>_accepted.yaml
+      with a matching <candidate-base>_candidate.yaml. This is path and naming
+      validation only and does not add any production accepted packet.
+      checkpoint commit: this checkpoint.

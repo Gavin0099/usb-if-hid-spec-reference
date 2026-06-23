@@ -237,4 +237,13 @@
 - gate: test coverage only; no production accepted packet and no verified count
   movement.
 
+### HID-LRA-29: Production Accepted Packet Path and Naming Guard
+
+- status: In progress
+- objective: harden accepted packet validation so future production accepted
+  packets must live under `docs/evidence/accepted/`, use the
+  `<candidate-base>_accepted.yaml` filename form, and bind to an existing
+  `<candidate-base>_candidate.yaml` packet.
+- gate: validator hardening only; no production accepted packet and no verified
+  count movement.
 

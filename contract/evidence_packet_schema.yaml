@@ -27,6 +27,14 @@ required_sections:
 accepted_packet_required_sections:
   - acceptance_gate
 
+accepted_packet_location:
+  directory: docs/evidence/accepted
+  filename_pattern: "<candidate-base>_accepted.yaml"
+  matching_candidate_pattern: "<candidate-base>_candidate.yaml"
+  rule: >
+    Accepted packet files must live under docs/evidence/accepted/ and must
+    correspond to an existing candidate packet with the same base name.
+
 required_fields:
   packet_identity:
     - packet_id
