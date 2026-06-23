@@ -70,6 +70,10 @@ Each candidate packet must bind `source_trace.source_id` and
 `data/source_authority.yaml`. Textual source claims are not sufficient unless the
 machine-readable binding is valid.
 
+The same `source_trace` pair must also match the `source_refs` declared by the
+candidate packet's bound governed matrix. This prevents candidate packets from
+claiming one source while the matrix points at a different source ID or section.
+
 Current candidate packets:
 
 - `docs/evidence/candidates/hid_get_report_candidate.yaml`

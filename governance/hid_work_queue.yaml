@@ -364,3 +364,25 @@ queue:
       data/source_authority.yaml. This is validator hardening only and does not
       accept or promote any evidence packet.
       checkpoint commit: bf16027.
+
+  - id: HID-VER-4
+    title: Candidate packet matrix source_refs binding validator
+    authority: Repo-local evidence packet governance
+    status: reviewed
+    allowed_status_change: validator_hardening_only
+    requires_human_approval: false
+    review_level: 1
+    gate: validation_required
+    forbidden_claims:
+      - accepted evidence packet
+      - verified status uplift
+      - new source authority import
+      - firmware behavior correctness
+      - OS input stack behavior
+      - parser runtime behavior
+    notes: >
+      Harden validate_evidence_packet_schema.py so candidate source_trace must
+      match both data/source_authority.yaml current imported usage and the bound
+      matrix source_refs. Align governed matrix source_ids to the registered
+      source authority id hid_1_11. This does not accept or promote any evidence
+      packet.

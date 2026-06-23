@@ -2263,3 +2263,54 @@ Commit Checkpoint:
 - Residual risk:
   - Candidate packet acceptance remains separate Level 3 work.
 
+## Batch: HID-LRA-51 (candidate matrix source_refs binding validator)
+
+- Commit: this checkpoint
+- Scope: harden candidate packet validation so `source_trace.source_id` and
+  `source_trace.source_section` must match both `data/source_authority.yaml`
+  current imported usage and the bound governed matrix `source_refs`.
+- Changed files:
+  - `scripts/validate_evidence_packet_schema.py`
+  - `tests/test_evidence_packet_schema.py`
+  - `data/hid_class_request_matrix.yaml`
+  - `data/hid_descriptor_fields_matrix.yaml`
+  - `data/hid_report_descriptor_items_matrix.yaml`
+  - `scripts/validate_hid_descriptor_fields_matrix.py`
+  - `scripts/validate_hid_report_descriptor_items_matrix.py`
+  - `evidence/table_fingerprint_baseline.jsonl`
+  - `docs/evidence_packet_schema.md`
+  - `governance/hid_work_queue.yaml`
+  - `docs/hid_long_running_roadmap.md`
+  - `docs/hid_long_running_checkpoint_rollup.md`
+- Validation:
+  - PASS `python -X utf8 scripts/validate_source_authority.py`
+  - PASS `python -X utf8 scripts/validate_evidence_packet_schema.py`
+  - PASS `python -X utf8 scripts/validate_contract_files.py`
+  - PASS `python -X utf8 scripts/validate_hid_class_request_matrix.py`
+  - PASS `python -X utf8 scripts/validate_hid_descriptor_fields_matrix.py`
+  - PASS `python -X utf8 scripts/validate_hid_report_descriptor_items_matrix.py`
+  - PASS `python -X utf8 scripts/validate_hid_governed_surface_manifest.py`
+  - PASS `python -X utf8 scripts/validate_verification_status.py`
+  - PASS `python -X utf8 scripts/probe_table_fingerprint.py --mode check --manifest exports/hid_governed_surface_manifest.yaml --baseline-in evidence/table_fingerprint_baseline.jsonl`
+  - PASS `python -m unittest discover -s tests`
+- Stats before/after:
+  - tracked: unchanged at 19
+  - scaffold: unchanged at 0
+  - reviewed: unchanged at 19
+  - verified: unchanged at 0
+- Review level:
+  - Level 1 validator/source-id alignment; no source import, accepted packet, or
+    status/count movement.
+- Can claim:
+  - Candidate packet source traces are machine-checked against both source
+    authority and bound matrix source refs.
+  - Governed matrix source refs now use registered source authority id
+    `hid_1_11`.
+- Cannot claim:
+  - cannot claim accepted evidence packets.
+  - cannot claim any HID entry is verified.
+  - cannot claim new source authority import.
+  - cannot claim firmware, OS, parser/runtime, or product-specific HID behavior.
+- Residual risk:
+  - Candidate packet acceptance remains separate Level 3 work.
+

@@ -2,7 +2,7 @@ matrix_id: hid_report_descriptor_items_matrix
 matrix_version: 0.1.0
 status: scaffold
 source_refs:
-  - source_id: hid_spec_1_11
+  - source_id: hid_1_11
     title: "Device Class Definition for Human Interface Devices (HID), Version 1.11"
     url: "https://www.usb.org/sites/default/files/documents/hid1_11.pdf"
     section: "6.2.2"
@@ -26,7 +26,7 @@ entries:
     claim_level: reviewed
     evidence_status: not_verified
     source_anchor:
-      source_id: hid_spec_1_11
+      source_id: hid_1_11
       section: "6.2.2"
       topic: "Report Descriptor item format"
   - item_id: report_descriptor_long_item_prefix
@@ -36,7 +36,7 @@ entries:
     claim_level: reviewed
     evidence_status: not_verified
     source_anchor:
-      source_id: hid_spec_1_11
+      source_id: hid_1_11
       section: "6.2.2"
       topic: "Report Descriptor item format"
   - item_id: report_descriptor_main_item_type
@@ -46,7 +46,7 @@ entries:
     claim_level: reviewed
     evidence_status: not_verified
     source_anchor:
-      source_id: hid_spec_1_11
+      source_id: hid_1_11
       section: "6.2.2"
       topic: "Report Descriptor item type"
   - item_id: report_descriptor_global_item_type
@@ -56,7 +56,7 @@ entries:
     claim_level: reviewed
     evidence_status: not_verified
     source_anchor:
-      source_id: hid_spec_1_11
+      source_id: hid_1_11
       section: "6.2.2"
       topic: "Report Descriptor item type"
   - item_id: report_descriptor_local_item_type
@@ -66,7 +66,7 @@ entries:
     claim_level: reviewed
     evidence_status: not_verified
     source_anchor:
-      source_id: hid_spec_1_11
+      source_id: hid_1_11
       section: "6.2.2"
       topic: "Report Descriptor item type"
   - item_id: report_descriptor_reserved_item_type
@@ -76,6 +76,6 @@ entries:
     claim_level: reviewed
     evidence_status: not_verified
     source_anchor:
-      source_id: hid_spec_1_11
+      source_id: hid_1_11
       section: "6.2.2"
       topic: "Report Descriptor item type"
