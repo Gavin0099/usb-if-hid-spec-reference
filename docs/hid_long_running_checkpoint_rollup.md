@@ -2472,7 +2472,7 @@ Commit Checkpoint:
 
 ## Batch: HID-LRA-54 (HID descriptor field candidate packet skeletons)
 
-- Commit: this checkpoint
+- Commit: 211c438
 - Scope: add pending verified-candidate packet skeletons for the seven HID
   descriptor field entries under Section 6.2.1.
 - Changed files:
@@ -2504,6 +2504,38 @@ Commit Checkpoint:
     packet skeletons.
   - Each descriptor candidate binds to one `hid_descriptor_fields_matrix` entry.
   - All candidates remain pending and cannot produce verified promotion.
+- Cannot claim:
+  - cannot claim accepted evidence packets.
+  - cannot claim any HID entry is verified.
+  - cannot claim new source authority import.
+  - cannot claim firmware descriptor parsing correctness, descriptor parser
+    behavior, OS input stack behavior, parser/runtime behavior, or
+    product-specific HID behavior.
+- Residual risk:
+  - Candidate packet acceptance remains separate Level 3 work.
+
+### Checkpoint memory entry for HID-LRA-54
+
+- Commit: this checkpoint
+- Scope: record the `HID-LRA-54` HID descriptor field candidate packet
+  checkpoint in repo-local daily memory using
+  `scripts/emit_checkpoint_memory_entry.py`.
+- Changed files:
+  - `memory/2026-06-23.md`
+  - `governance/hid_work_queue.yaml`
+  - `docs/hid_long_running_roadmap.md`
+  - `docs/hid_long_running_checkpoint_rollup.md`
+- Validation:
+  - PASS `python -X utf8 scripts/validate_memory_records.py`
+  - PASS `python -m unittest discover -s tests`
+- Stats before/after:
+  - tracked: unchanged at 19
+  - scaffold: unchanged at 0
+  - reviewed: unchanged at 19
+  - verified: unchanged at 0
+- Can claim:
+  - `memory/2026-06-23.md` contains a bound entry for commit `211c438`.
+  - Queue and roadmap now point `HID-VER-7` / `HID-LRA-25` at commit `211c438`.
 - Cannot claim:
   - cannot claim accepted evidence packets.
   - cannot claim any HID entry is verified.

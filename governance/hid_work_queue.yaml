@@ -453,3 +453,4 @@ queue:
       descriptor field entries. These prepare future Level 3 review input only;
       all candidate packets remain pending and no governed entry is promoted to
       verified.
+      checkpoint commit: 211c438.
