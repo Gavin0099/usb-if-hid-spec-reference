@@ -24,6 +24,12 @@ class AcceptedPacketProposalValidatorTests(unittest.TestCase):
             ROOT / "evidence" / "accepted_proposals" / "hid_get_report_accepted_proposal.json",
             proposal_dir / "hid_get_report_accepted_proposal.json",
         )
+        markdown_dir = root / "docs" / "evidence" / "accepted_proposals"
+        markdown_dir.mkdir(parents=True)
+        shutil.copy(
+            ROOT / "docs" / "evidence" / "accepted_proposals" / "hid_get_report_accepted_proposal.md",
+            markdown_dir / "hid_get_report_accepted_proposal.md",
+        )
         shutil.copy(
             ROOT / "docs" / "evidence" / "candidates" / "hid_get_report_candidate.yaml",
             root / "docs" / "evidence" / "candidates" / "hid_get_report_candidate.yaml",
@@ -46,6 +52,13 @@ class AcceptedPacketProposalValidatorTests(unittest.TestCase):
         target[key_path[-1]] = value
         path.write_text(json.dumps(data, ensure_ascii=True, indent=2) + "\n", encoding="utf-8")
 
+    def _validate_fixture(self, root: Path):
+        return validate(
+            proposal_dir=root / "evidence" / "accepted_proposals",
+            markdown_dir=root / "docs" / "evidence" / "accepted_proposals",
+            root=root,
+        )
+
     def test_current_proposals_are_valid(self) -> None:
         errors, receipt = validate()
         self.assertEqual(errors, [])
@@ -57,7 +70,7 @@ class AcceptedPacketProposalValidatorTests(unittest.TestCase):
         with self._fixture_root() as fixture:
             root = Path(fixture)
             self._edit_proposal(root, ("proposal_status",), "accepted")
-            errors, receipt = validate(proposal_dir=root / "evidence" / "accepted_proposals", root=root)
+            errors, receipt = self._validate_fixture(root)
             self.assertEqual(receipt["result"], "FAIL")
             self.assertTrue(any("proposal_status" in error for error in errors))
 
@@ -65,7 +78,7 @@ class AcceptedPacketProposalValidatorTests(unittest.TestCase):
         with self._fixture_root() as fixture:
             root = Path(fixture)
             self._edit_proposal(root, ("production_accepted_packet_created",), True)
-            errors, receipt = validate(proposal_dir=root / "evidence" / "accepted_proposals", root=root)
+            errors, receipt = self._validate_fixture(root)
             self.assertEqual(receipt["result"], "FAIL")
             self.assertTrue(any("production_accepted_packet_created" in error for error in errors))
 
@@ -73,7 +86,7 @@ class AcceptedPacketProposalValidatorTests(unittest.TestCase):
         with self._fixture_root() as fixture:
             root = Path(fixture)
             self._edit_proposal(root, ("verified_uplift",), True)
-            errors, receipt = validate(proposal_dir=root / "evidence" / "accepted_proposals", root=root)
+            errors, receipt = self._validate_fixture(root)
             self.assertEqual(receipt["result"], "FAIL")
             self.assertTrue(any("verified_uplift" in error for error in errors))
 
@@ -83,7 +96,7 @@ class AcceptedPacketProposalValidatorTests(unittest.TestCase):
             accepted = root / "docs" / "evidence" / "accepted" / "hid_get_report_accepted.yaml"
             accepted.parent.mkdir(parents=True)
             accepted.write_text("packet_identity:\n  packet_status: accepted\n", encoding="utf-8")
-            errors, receipt = validate(proposal_dir=root / "evidence" / "accepted_proposals", root=root)
+            errors, receipt = self._validate_fixture(root)
             self.assertEqual(receipt["result"], "FAIL")
             self.assertTrue(any("future accepted packet path must not exist" in error for error in errors))
 
@@ -91,9 +104,44 @@ class AcceptedPacketProposalValidatorTests(unittest.TestCase):
         with self._fixture_root() as fixture:
             root = Path(fixture)
             self._edit_proposal(root, ("required_level3_acceptance_gate", "checkpoint_commit"), "abc1234")
-            errors, receipt = validate(proposal_dir=root / "evidence" / "accepted_proposals", root=root)
+            errors, receipt = self._validate_fixture(root)
             self.assertEqual(receipt["result"], "FAIL")
             self.assertTrue(any("checkpoint_commit must remain a TBD placeholder" in error for error in errors))
+
+    def test_missing_json_proposal_fails_coverage(self) -> None:
+        with self._fixture_root() as fixture:
+            root = Path(fixture)
+            self._proposal_path(root).unlink()
+            errors, receipt = self._validate_fixture(root)
+            self.assertEqual(receipt["result"], "FAIL")
+            self.assertTrue(any("missing JSON proposal" in error for error in errors))
+
+    def test_missing_markdown_proposal_fails_coverage(self) -> None:
+        with self._fixture_root() as fixture:
+            root = Path(fixture)
+            (root / "docs" / "evidence" / "accepted_proposals" / "hid_get_report_accepted_proposal.md").unlink()
+            errors, receipt = self._validate_fixture(root)
+            self.assertEqual(receipt["result"], "FAIL")
+            self.assertTrue(any("missing Markdown proposal" in error for error in errors))
+
+    def test_stale_json_proposal_fails_coverage(self) -> None:
+        with self._fixture_root() as fixture:
+            root = Path(fixture)
+            shutil.copy(
+                self._proposal_path(root),
+                root / "evidence" / "accepted_proposals" / "stale_accepted_proposal.json",
+            )
+            errors, receipt = self._validate_fixture(root)
+            self.assertEqual(receipt["result"], "FAIL")
+            self.assertTrue(any("stale JSON proposal" in error for error in errors))
+
+    def test_proposal_candidate_must_match_basename(self) -> None:
+        with self._fixture_root() as fixture:
+            root = Path(fixture)
+            self._edit_proposal(root, ("candidate",), "docs/evidence/candidates/hid_set_report_candidate.yaml")
+            errors, receipt = self._validate_fixture(root)
+            self.assertEqual(receipt["result"], "FAIL")
+            self.assertTrue(any("candidate must match proposal basename" in error for error in errors))
 
     def test_receipt_out_under_repo_root_is_allowed(self) -> None:
         receipt = ROOT / "tmp" / "test_accepted_packet_proposals_receipt.json"
