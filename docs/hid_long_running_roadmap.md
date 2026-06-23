@@ -367,3 +367,12 @@
 - latest checkpoint: fa8e5d4
 - gate: Level 3 verified status transition after human approval; no firmware or
   runtime behavior claims.
+
+### HID-LRA-72: GET_IDLE Verified Promotion Gate
+
+- status: Completed
+- objective: promote `hid_get_idle` to verified via the accepted packet evidence
+  gate and observed governance validators.
+- latest checkpoint: fdaf74b
+- gate: Level 3 verified status transition after human approval; no firmware or
+  runtime behavior claims.
