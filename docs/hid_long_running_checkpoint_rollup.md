@@ -2345,7 +2345,7 @@ Commit Checkpoint:
 
 ## Batch: HID-LRA-52 (candidate source binding negative tests)
 
-- Commit: this checkpoint
+- Commit: 130dcdb
 - Scope: add negative fixture tests proving candidate packet source binding
   validator fails on source drift.
 - Changed files:
@@ -2369,6 +2369,36 @@ Commit Checkpoint:
   - Negative tests prove wrong candidate `source_id` fails.
   - Negative tests prove wrong candidate `source_section` fails.
   - Negative tests prove conflicting matrix `source_refs` fails.
+- Cannot claim:
+  - cannot claim accepted evidence packets.
+  - cannot claim any HID entry is verified.
+  - cannot claim new source authority import.
+  - cannot claim firmware, OS, parser/runtime, or product-specific HID behavior.
+- Residual risk:
+  - Candidate packet acceptance remains separate Level 3 work.
+
+### Checkpoint memory entry for HID-LRA-52
+
+- Commit: this checkpoint
+- Scope: record the `HID-LRA-52` candidate source binding negative-test
+  checkpoint in repo-local daily memory using
+  `scripts/emit_checkpoint_memory_entry.py`.
+- Changed files:
+  - `memory/2026-06-23.md`
+  - `governance/hid_work_queue.yaml`
+  - `docs/hid_long_running_roadmap.md`
+  - `docs/hid_long_running_checkpoint_rollup.md`
+- Validation:
+  - PASS `python -X utf8 scripts/validate_memory_records.py`
+  - PASS `python -m unittest discover -s tests`
+- Stats before/after:
+  - tracked: unchanged at 19
+  - scaffold: unchanged at 0
+  - reviewed: unchanged at 19
+  - verified: unchanged at 0
+- Can claim:
+  - `memory/2026-06-23.md` contains a bound entry for commit `130dcdb`.
+  - Queue and roadmap now point `HID-VER-5` / `HID-LRA-23` at commit `130dcdb`.
 - Cannot claim:
   - cannot claim accepted evidence packets.
   - cannot claim any HID entry is verified.

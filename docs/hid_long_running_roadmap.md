@@ -183,10 +183,11 @@
 
 ### HID-LRA-23: Candidate Source Binding Negative Tests
 
-- status: In progress
+- status: Completed
 - objective: add negative fixture tests that prove candidate source binding
   validation fails on wrong source id, wrong source section, or conflicting
   matrix source refs.
+- latest checkpoint: 130dcdb
 - gate: test coverage only; no source import, no accepted evidence packet, and
   no verified count movement.
 
