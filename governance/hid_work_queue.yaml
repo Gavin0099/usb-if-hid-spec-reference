@@ -543,4 +543,4 @@ queue:
       from docs/evidence/accepted/ and named <candidate-base>_accepted.yaml
       with a matching <candidate-base>_candidate.yaml. This is path and naming
       validation only and does not add any production accepted packet.
-      checkpoint commit: this checkpoint.
+      checkpoint commit: 7da0966.

@@ -239,11 +239,11 @@
 
 ### HID-LRA-29: Production Accepted Packet Path and Naming Guard
 
-- status: In progress
+- status: Completed
 - objective: harden accepted packet validation so future production accepted
   packets must live under `docs/evidence/accepted/`, use the
   `<candidate-base>_accepted.yaml` filename form, and bind to an existing
   `<candidate-base>_candidate.yaml` packet.
+- latest checkpoint: 7da0966
 - gate: validator hardening only; no production accepted packet and no verified
   count movement.
-
