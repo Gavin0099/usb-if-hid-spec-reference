@@ -270,9 +270,10 @@
 
 ### HID-LRA-32: Pre-Approval Generator Stale-Report and Path Guard
 
-- status: In progress
+- status: Completed
 - objective: harden the pre-approval checklist generator so output paths stay
   under the repository root and stale reports fail batch generation unless
   explicitly pruned.
+- latest checkpoint: ef1865f
 - gate: generator hardening only; no production accepted packet and no verified
   count movement.

@@ -610,4 +610,4 @@ queue:
       under the repository root and batch generation fails on stale reports
       unless --prune-stale is explicitly requested. This resolves review
       warnings only and does not create any production accepted packet.
-      checkpoint commit: this checkpoint.
+      checkpoint commit: ef1865f.
