@@ -2409,7 +2409,7 @@ Commit Checkpoint:
 
 ## Batch: HID-LRA-53 (candidate accepted-gate negative tests)
 
-- Commit: this checkpoint
+- Commit: 184dbab
 - Scope: add negative fixture tests proving candidate packet validation fails on
   accepted/approved/verified state drift.
 - Changed files:
@@ -2440,4 +2440,33 @@ Commit Checkpoint:
   - cannot claim firmware, OS, parser/runtime, or product-specific HID behavior.
 - Residual risk:
   - Real accepted-packet workflow remains separate Level 3 work.
+
+### Checkpoint memory entry for HID-LRA-53
+
+- Commit: this checkpoint
+- Scope: record the `HID-LRA-53` accepted-gate negative-test checkpoint in
+  repo-local daily memory using `scripts/emit_checkpoint_memory_entry.py`.
+- Changed files:
+  - `memory/2026-06-23.md`
+  - `governance/hid_work_queue.yaml`
+  - `docs/hid_long_running_roadmap.md`
+  - `docs/hid_long_running_checkpoint_rollup.md`
+- Validation:
+  - PASS `python -X utf8 scripts/validate_memory_records.py`
+  - PASS `python -m unittest discover -s tests`
+- Stats before/after:
+  - tracked: unchanged at 19
+  - scaffold: unchanged at 0
+  - reviewed: unchanged at 19
+  - verified: unchanged at 0
+- Can claim:
+  - `memory/2026-06-23.md` contains a bound entry for commit `184dbab`.
+  - Queue and roadmap now point `HID-VER-6` / `HID-LRA-24` at commit `184dbab`.
+- Cannot claim:
+  - cannot claim accepted evidence packets.
+  - cannot claim any HID entry is verified.
+  - cannot claim new source authority import.
+  - cannot claim firmware, OS, parser/runtime, or product-specific HID behavior.
+- Residual risk:
+  - Accepted packet workflow remains separate Level 3 work.
 
