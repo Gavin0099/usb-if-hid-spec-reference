@@ -2757,7 +2757,7 @@ Commit Checkpoint:
 
 ## Batch: HID-LRA-58 (production accepted packet path and naming guard)
 
-- Commit: this checkpoint
+- Commit: 7da0966
 - Scope: harden accepted packet validation so production accepted packet checks
   are restricted to `docs/evidence/accepted/` and require
   `<candidate-base>_accepted.yaml` filenames with matching candidate packets.
@@ -2784,6 +2784,37 @@ Commit Checkpoint:
   - Accepted packet validation now checks the accepted directory suffix.
   - Accepted packet validation now checks filename shape and candidate-name
     correspondence.
+- Cannot claim:
+  - cannot claim production accepted evidence packets.
+  - cannot claim any HID entry is verified.
+  - cannot claim new source authority import.
+  - cannot claim firmware, OS, parser/runtime, or product-specific HID behavior.
+- Residual risk:
+  - First production accepted packet remains separate Level 3 work.
+
+### Checkpoint memory entry for HID-LRA-58
+
+- Commit: this checkpoint
+- Scope: record the `HID-LRA-58` accepted-packet path and naming guard
+  checkpoint in repo-local daily memory using
+  `scripts/emit_checkpoint_memory_entry.py`.
+- Changed files:
+  - `memory/2026-06-23.md`
+  - `governance/hid_work_queue.yaml`
+  - `docs/hid_long_running_roadmap.md`
+  - `docs/hid_long_running_checkpoint_rollup.md`
+- Validation:
+  - PASS `python -X utf8 scripts/validate_memory_records.py`
+  - PASS `python -m unittest discover -s tests`
+- Stats before/after:
+  - tracked: unchanged at 19
+  - scaffold: unchanged at 0
+  - reviewed: unchanged at 19
+  - verified: unchanged at 0
+- Can claim:
+  - `memory/2026-06-23.md` contains a bound entry for commit `7da0966`.
+  - Queue and roadmap now point `HID-VER-11` / `HID-LRA-29` at commit
+    `7da0966`.
 - Cannot claim:
   - cannot claim production accepted evidence packets.
   - cannot claim any HID entry is verified.
