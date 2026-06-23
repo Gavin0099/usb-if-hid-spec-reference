@@ -768,4 +768,4 @@ queue:
       consistency via --assert-match in check-only mode. It now also emits a
       validation receipt in evidence/validation_receipt_accepted_packet_proposal_summary.json.
       This does not create accepted packets or change governed matrix status.
-      checkpoint commit: 3e608be.
+      checkpoint commit: 9d606db.
