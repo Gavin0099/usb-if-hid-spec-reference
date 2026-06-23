@@ -1,0 +1,160 @@
+#!/usr/bin/env python3
+"""Validate accepted-packet proposal artifacts.
+
+Authority ceiling: accepted_packet_proposal_validation_only.
+This validator checks proposal structure and claim ceilings only. It does not
+create accepted packets, promote entries, or change verification status.
+"""
+
+from __future__ import annotations
+
+import argparse
+import json
+import sys
+from pathlib import Path
+from typing import Any
+
+
+ROOT = Path(__file__).resolve().parents[1]
+PROPOSAL_DIR = ROOT / "evidence" / "accepted_proposals"
+REQUIRED_AUTHORITY_CEILING = "accepted_packet_proposal_only"
+REQUIRED_CLAIM_CEILING = {
+    "accepted_packet_proposal_only",
+    "no_production_accepted_packet",
+    "no_verified_uplift",
+}
+REQUIRED_NOT_CLAIMED = {
+    "no accepted evidence packet exists from this proposal",
+    "no HID entry is verified by this proposal",
+    "no firmware behavior correctness",
+    "no OS input stack behavior",
+    "no parser runtime behavior",
+}
+
+
+def _display_path(path: Path, root: Path = ROOT) -> str:
+    try:
+        return path.relative_to(root).as_posix()
+    except ValueError:
+        return path.as_posix()
+
+
+def _load_json(path: Path, root: Path = ROOT) -> dict[str, Any]:
+    data = json.loads(path.read_text(encoding="utf-8"))
+    if not isinstance(data, dict):
+        raise ValueError(f"{_display_path(path, root)} must contain a JSON object")
+    return data
+
+
+def _write_receipt(path: Path, receipt: dict[str, Any]) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps(receipt, ensure_ascii=True, indent=2) + "\n", encoding="utf-8")
+
+
+def validate(proposal_dir: Path = PROPOSAL_DIR, *, root: Path = ROOT) -> tuple[list[str], dict[str, Any]]:
+    errors: list[str] = []
+    findings: list[dict[str, str]] = []
+
+    def add_error(code: str, message: str) -> None:
+        errors.append(message)
+        findings.append({"code": code, "message": message})
+
+    proposals: dict[str, dict[str, Any]] = {}
+    if proposal_dir.exists():
+        for path in sorted(proposal_dir.glob("*_accepted_proposal.json")):
+            proposals[_display_path(path, root)] = _load_json(path, root)
+
+    for path, proposal in proposals.items():
+        if proposal.get("authority_ceiling") != REQUIRED_AUTHORITY_CEILING:
+            add_error("PROPOSAL_AUTHORITY_CEILING_INVALID", f"{path} authority_ceiling must be {REQUIRED_AUTHORITY_CEILING}")
+        if proposal.get("proposal_status") != "proposal_only":
+            add_error("PROPOSAL_STATUS_INVALID", f"{path} proposal_status must be proposal_only")
+        if proposal.get("production_accepted_packet_created") is not False:
+            add_error("PROPOSAL_ACCEPTED_CREATED_INVALID", f"{path} production_accepted_packet_created must be false")
+        if proposal.get("verified_uplift") is not False:
+            add_error("PROPOSAL_VERIFIED_UPLIFT_INVALID", f"{path} verified_uplift must be false")
+
+        future = proposal.get("future_accepted_packet")
+        if not isinstance(future, str) or not future.startswith("docs/evidence/accepted/") or not future.endswith("_accepted.yaml"):
+            add_error("PROPOSAL_FUTURE_ACCEPTED_PATH_INVALID", f"{path} future_accepted_packet must be under docs/evidence/accepted/")
+        elif (root / future).exists():
+            add_error("PROPOSAL_FUTURE_ACCEPTED_PATH_EXISTS", f"{path} future accepted packet path must not exist: {future}")
+
+        candidate = proposal.get("candidate")
+        if not isinstance(candidate, str) or not candidate.startswith("docs/evidence/candidates/") or not candidate.endswith("_candidate.yaml"):
+            add_error("PROPOSAL_CANDIDATE_PATH_INVALID", f"{path} candidate must be under docs/evidence/candidates/")
+        elif not (root / candidate).exists():
+            add_error("PROPOSAL_CANDIDATE_MISSING", f"{path} candidate does not exist: {candidate}")
+
+        preapproval = proposal.get("preapproval_report")
+        if not isinstance(preapproval, str) or not preapproval.startswith("docs/evidence/preapproval/") or not preapproval.endswith("_preapproval_checklist.md"):
+            add_error("PROPOSAL_PREAPPROVAL_PATH_INVALID", f"{path} preapproval_report must be under docs/evidence/preapproval/")
+        elif not (root / preapproval).exists():
+            add_error("PROPOSAL_PREAPPROVAL_MISSING", f"{path} preapproval report does not exist: {preapproval}")
+
+        governed_entry = proposal.get("governed_entry", {})
+        if not isinstance(governed_entry, dict) or governed_entry.get("current_claim_level") == "verified":
+            add_error("PROPOSAL_CURRENT_CLAIM_INVALID", f"{path} governed entry must not be currently verified")
+
+        gate = proposal.get("required_level3_acceptance_gate", {})
+        if not isinstance(gate, dict):
+            add_error("PROPOSAL_GATE_MISSING", f"{path} required_level3_acceptance_gate must be a mapping")
+            gate = {}
+        expected_gate = {
+            "previous_packet_status": "candidate",
+            "level3_checkpoint": True,
+            "direct_promotion": False,
+        }
+        for key, expected in expected_gate.items():
+            if gate.get(key) != expected:
+                add_error("PROPOSAL_GATE_INVALID", f"{path} required_level3_acceptance_gate.{key} must be {expected!r}")
+        if not isinstance(gate.get("checkpoint_commit"), str) or "TBD" not in gate.get("checkpoint_commit", ""):
+            add_error("PROPOSAL_GATE_CHECKPOINT_NOT_PLACEHOLDER", f"{path} checkpoint_commit must remain a TBD placeholder")
+        if not isinstance(gate.get("validation_receipt"), str) or "TBD" not in gate.get("validation_receipt", ""):
+            add_error("PROPOSAL_GATE_RECEIPT_NOT_PLACEHOLDER", f"{path} validation_receipt must remain a TBD placeholder")
+
+        claim_ceiling = set(proposal.get("claim_ceiling", []))
+        missing_claims = sorted(REQUIRED_CLAIM_CEILING - claim_ceiling)
+        if missing_claims:
+            add_error("PROPOSAL_CLAIM_CEILING_INCOMPLETE", f"{path} missing claim ceiling: {', '.join(missing_claims)}")
+
+        not_claimed = set(proposal.get("not_claimed", []))
+        missing_not_claimed = sorted(REQUIRED_NOT_CLAIMED - not_claimed)
+        if missing_not_claimed:
+            add_error("PROPOSAL_NOT_CLAIMED_INCOMPLETE", f"{path} missing not_claimed: {', '.join(missing_not_claimed)}")
+
+    receipt = {
+        "validator": "validate_accepted_packet_proposals.py",
+        "authority_ceiling": "accepted_packet_proposal_validation_only",
+        "result": "PASS" if not errors else "FAIL",
+        "checked_proposals": sorted(proposals),
+        "checked_proposal_count": len(proposals),
+        "error_count": len(errors),
+        "errors": errors,
+        "findings": findings,
+    }
+    return errors, receipt
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--receipt-out")
+    args = parser.parse_args()
+
+    errors, receipt = validate()
+    if args.receipt_out:
+        _write_receipt(ROOT / args.receipt_out, receipt)
+
+    if errors:
+        print("FAIL validate_accepted_packet_proposals")
+        for error in errors:
+            print(f"- {error}")
+        return 1
+
+    print("PASS validate_accepted_packet_proposals")
+    print(f"- checked proposals: {receipt['checked_proposal_count']}")
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

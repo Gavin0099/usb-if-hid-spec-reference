@@ -3172,3 +3172,40 @@ Commit Checkpoint:
   - cannot claim firmware, OS, parser/runtime, or product-specific HID behavior.
 - Residual risk:
   - First production accepted packet remains separate Level 3 work.
+
+## Batch: HID-LRA-64 (accepted packet proposal validator)
+
+- Commit: this checkpoint
+- Scope: add an accepted-packet proposal validator that checks proposal-only
+  status, future accepted path absence, candidate/pre-approval bindings, Level
+  3 placeholders, and claim ceilings.
+- Changed files:
+  - `scripts/validate_accepted_packet_proposals.py`
+  - `tests/test_accepted_packet_proposal_validator.py`
+  - `docs/evidence_packet_schema.md`
+  - `governance/hid_work_queue.yaml`
+  - `docs/hid_long_running_roadmap.md`
+  - `docs/hid_long_running_checkpoint_rollup.md`
+- Validation:
+  - PASS `python -X utf8 scripts/validate_accepted_packet_proposals.py`
+  - PASS `python -m unittest tests.test_accepted_packet_proposal_validator`
+- Stats before/after:
+  - tracked: unchanged at 19
+  - scaffold: unchanged at 0
+  - reviewed: unchanged at 19
+  - verified: unchanged at 0
+  - production accepted packets: unchanged at 0
+- Review level:
+  - Level 1 proposal validator only; no production accepted packet and no
+    status/count movement.
+- Can claim:
+  - accepted-packet proposal artifacts are machine-checkable for proposal-only
+    status and claim ceilings.
+  - future accepted packet paths named by proposals must not already exist.
+- Cannot claim:
+  - cannot claim production accepted evidence packets.
+  - cannot claim any HID entry is verified.
+  - cannot claim new source authority import.
+  - cannot claim firmware, OS, parser/runtime, or product-specific HID behavior.
+- Residual risk:
+  - First production accepted packet remains separate Level 3 work.
