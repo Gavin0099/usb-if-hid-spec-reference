@@ -174,9 +174,10 @@
 
 ### HID-LRA-22: Candidate Matrix Source Ref Binding Validator
 
-- status: In progress
+- status: Completed
 - objective: require candidate packet source trace to match both source authority
   current imported usage and the bound matrix `source_refs`.
+- latest checkpoint: 35b16dd
 - gate: validator/source-id alignment only; no source import, no accepted
   evidence packet, and no verified count movement.
 
