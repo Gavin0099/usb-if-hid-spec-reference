@@ -82,6 +82,13 @@ Current candidate packets:
 - `docs/evidence/candidates/hid_set_idle_candidate.yaml`
 - `docs/evidence/candidates/hid_get_protocol_candidate.yaml`
 - `docs/evidence/candidates/hid_set_protocol_candidate.yaml`
+- `docs/evidence/candidates/hid_bLength_candidate.yaml`
+- `docs/evidence/candidates/hid_bDescriptorType_candidate.yaml`
+- `docs/evidence/candidates/hid_bcdHID_candidate.yaml`
+- `docs/evidence/candidates/hid_bCountryCode_candidate.yaml`
+- `docs/evidence/candidates/hid_bNumDescriptors_candidate.yaml`
+- `docs/evidence/candidates/hid_bDescriptorType_subordinate_candidate.yaml`
+- `docs/evidence/candidates/hid_wDescriptorLength_candidate.yaml`
 
 ## Non-Claims
 

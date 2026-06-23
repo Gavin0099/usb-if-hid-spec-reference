@@ -23,7 +23,7 @@ class EvidencePacketSchemaTests(unittest.TestCase):
             receipt["checked_matrix_source_refs"]["hid_class_request_matrix"],
             ["hid_1_11:7.2"],
         )
-        self.assertEqual(len(receipt["checked_candidate_packets"]), 6)
+        self.assertEqual(len(receipt["checked_candidate_packets"]), 13)
         for candidate in (
             "docs/evidence/candidates/hid_get_report_candidate.yaml",
             "docs/evidence/candidates/hid_set_report_candidate.yaml",
@@ -31,6 +31,13 @@ class EvidencePacketSchemaTests(unittest.TestCase):
             "docs/evidence/candidates/hid_set_idle_candidate.yaml",
             "docs/evidence/candidates/hid_get_protocol_candidate.yaml",
             "docs/evidence/candidates/hid_set_protocol_candidate.yaml",
+            "docs/evidence/candidates/hid_bLength_candidate.yaml",
+            "docs/evidence/candidates/hid_bDescriptorType_candidate.yaml",
+            "docs/evidence/candidates/hid_bcdHID_candidate.yaml",
+            "docs/evidence/candidates/hid_bCountryCode_candidate.yaml",
+            "docs/evidence/candidates/hid_bNumDescriptors_candidate.yaml",
+            "docs/evidence/candidates/hid_bDescriptorType_subordinate_candidate.yaml",
+            "docs/evidence/candidates/hid_wDescriptorLength_candidate.yaml",
         ):
             self.assertIn(candidate, receipt["checked_candidate_packets"])
 

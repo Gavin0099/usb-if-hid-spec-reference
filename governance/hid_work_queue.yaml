@@ -431,3 +431,25 @@ queue:
       candidate flow cannot accidentally pass accepted or verified state. This
       is test coverage only and does not accept or promote any evidence packet.
       checkpoint commit: 184dbab.
+
+  - id: HID-VER-7
+    title: HID descriptor field verified candidate packet skeletons
+    authority: HID 1.11 Section 6.2.1
+    status: reviewed
+    allowed_status_change: candidate_packet_only
+    requires_human_approval: false
+    review_level: 1
+    gate: validation_required
+    forbidden_claims:
+      - accepted evidence packet
+      - verified status uplift
+      - new source authority import
+      - firmware descriptor parsing correctness
+      - descriptor parser behavior
+      - OS input stack behavior
+      - parser runtime behavior
+    notes: >
+      Add machine-checkable candidate packet skeletons for the seven HID
+      descriptor field entries. These prepare future Level 3 review input only;
+      all candidate packets remain pending and no governed entry is promoted to
+      verified.
