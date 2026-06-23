@@ -746,3 +746,25 @@ queue:
       proposal summary artifacts for all 19 candidates. This does not create
       accepted packets or change governed matrix status.
       checkpoint commit: 1958b2c.
+
+  - id: HID-VER-21
+    title: Accepted packet proposal summary drift gate
+    authority: Repo-local evidence packet governance
+    status: reviewed
+    allowed_status_change: summary_drift_gate_only
+    requires_human_approval: false
+    review_level: 1
+    gate: validation_required
+    forbidden_claims:
+      - accepted evidence packet
+      - verified status uplift
+      - new source authority import
+      - firmware behavior correctness
+      - OS input stack behavior
+      - parser runtime behavior
+    notes: >
+      Add summary integrity checks and drift comparison for accepted proposal
+      summary artifacts. Existing CI validation now checks proposal summary
+      consistency via --assert-match in check-only mode. This does not create
+      accepted packets or change governed matrix status.
+      checkpoint commit: this checkpoint.

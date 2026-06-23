@@ -3458,3 +3458,77 @@ Commit Checkpoint:
   - cannot claim firmware, OS, parser/runtime, or product-specific HID behavior.
 - Residual risk:
   - First production accepted packet remains separate Level 3 work.
+
+## Batch: HID-LRA-68 (accepted packet proposal summary drift gate)
+
+- Commit: this checkpoint
+- Scope: add proposal summary drift detection and compare mode checks so committed
+  accepted-packet proposal summaries cannot drift from regenerated output.
+- Changed files:
+  - `scripts/generate_accepted_packet_proposal_summary.py`
+  - `tests/test_accepted_packet_proposal_summary.py`
+  - `.github/workflows/validate.yml`
+  - `governance/hid_work_queue.yaml`
+  - `docs/hid_long_running_roadmap.md`
+  - `docs/hid_long_running_checkpoint_rollup.md`
+- Validation:
+  - PASS `python -X utf8 scripts/validate_accepted_packet_proposals.py`
+  - PASS `python -X utf8 scripts/generate_accepted_packet_proposal_summary.py --assert-match evidence/accepted_proposal_summary.json --check-only`
+  - PASS `python -m unittest tests.test_accepted_packet_proposal_summary`
+- Stats before/after:
+  - tracked: unchanged at 19
+  - scaffold: unchanged at 0
+  - reviewed: unchanged at 19
+  - verified: unchanged at 0
+  - accepted-packet proposals: unchanged at 19
+  - proposal summaries: unchanged at 2
+  - production accepted packets: unchanged at 0
+- Review level:
+  - Level 1 summary drift guard only; no production accepted packet and no
+    status/count movement.
+- Can claim:
+  - proposal summary output includes top-level totals, ceilings, and per-entry drift
+    checks for all current proposal IDs.
+  - summary generation can now fail when generated output drifts from committed
+    artifact without changing proposals.
+- Cannot claim:
+  - cannot claim production accepted evidence packets.
+  - cannot claim any HID entry is verified.
+  - cannot claim new source authority import.
+  - cannot claim firmware, OS, parser/runtime, or product-specific HID behavior.
+- Residual risk:
+  - First production accepted packet remains separate Level 3 work.
+
+### Checkpoint memory entry for HID-LRA-68
+
+- Commit: this checkpoint
+- Scope: record the `HID-LRA-68` accepted-packet proposal summary drift gate
+  checkpoint in repo-local daily memory using
+  `scripts/emit_checkpoint_memory_entry.py`.
+- Changed files:
+  - `memory/2026-06-23.md`
+  - `governance/hid_work_queue.yaml`
+  - `docs/hid_long_running_roadmap.md`
+  - `docs/hid_long_running_checkpoint_rollup.md`
+- Validation:
+  - PASS `python -X utf8 scripts/validate_memory_records.py`
+  - PASS `python -X utf8 scripts/generate_accepted_packet_proposal_summary.py --assert-match evidence/accepted_proposal_summary.json --check-only`
+  - PASS `python -m unittest tests.test_accepted_packet_proposal_summary`
+- Stats before/after:
+  - tracked: unchanged at 19
+  - scaffold: unchanged at 0
+  - reviewed: unchanged at 19
+  - verified: unchanged at 0
+  - accepted-packet proposals: unchanged at 19
+  - production accepted packets: unchanged at 0
+- Can claim:
+  - `memory/2026-06-23.md` contains a bound entry for commit `this checkpoint`.
+  - Queue and roadmap now point `HID-VER-21` / `HID-LRA-68` at the current
+    checkpoint.
+- Cannot claim:
+  - cannot claim production accepted evidence packets.
+  - cannot claim any HID entry is verified.
+  - cannot claim new source authority import.
+  - cannot claim firmware, OS, parser/runtime, or product-specific HID behavior.
+- Residual risk:
+  - First production accepted packet remains separate Level 3 work.

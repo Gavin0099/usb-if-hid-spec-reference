@@ -333,3 +333,12 @@
 - latest checkpoint: 1958b2c
 - gate: proposal coverage summary only; no production accepted packet and no
   verified count movement.
+
+### HID-LRA-68: Accepted Packet Proposal Summary Drift Gate
+
+- status: Completed
+- objective: add summary integrity checks so committed accepted-packet proposal
+  summaries are rejected if regenerated output drifts.
+- latest checkpoint: this checkpoint
+- gate: summary drift guard only; no production accepted packet and no verified
+  count movement.
