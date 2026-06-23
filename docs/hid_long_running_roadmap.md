@@ -339,6 +339,6 @@
 - status: Completed
 - objective: add summary integrity checks so committed accepted-packet proposal
   summaries are rejected if regenerated output drifts.
-- latest checkpoint: this checkpoint
+- latest checkpoint: 9d606db
 - gate: summary drift guard only; no production accepted packet and no verified
   count movement.

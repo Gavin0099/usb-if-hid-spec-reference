@@ -3461,7 +3461,7 @@ Commit Checkpoint:
 
 ## Batch: HID-LRA-68 (accepted packet proposal summary drift gate)
 
-- Commit: this checkpoint
+- Commit: 9d606db
 - Scope: add proposal summary drift detection and compare mode checks so committed
   accepted-packet proposal summaries cannot drift from regenerated output.
 - Changed files:
@@ -3502,7 +3502,7 @@ Commit Checkpoint:
 
 ### Checkpoint memory entry for HID-LRA-68
 
-- Commit: this checkpoint
+- Commit: 9d606db
 - Scope: record the `HID-LRA-68` accepted-packet proposal summary drift gate
   checkpoint in repo-local daily memory using
   `scripts/emit_checkpoint_memory_entry.py`.
@@ -3523,7 +3523,7 @@ Commit Checkpoint:
   - accepted-packet proposals: unchanged at 19
   - production accepted packets: unchanged at 0
 - Can claim:
-  - `memory/2026-06-23.md` contains a bound entry for the current checkpoint.
+  - `memory/2026-06-23.md` contains a bound entry for commit `9d606db`.
   - Queue and roadmap now point `HID-VER-21` / `HID-LRA-68` at commit
     the current checkpoint.
 - Cannot claim:
