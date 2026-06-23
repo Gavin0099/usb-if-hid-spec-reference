@@ -41,6 +41,9 @@ jobs:
       - name: Validate accepted packet proposal summary
         run: python scripts/generate_accepted_packet_proposal_summary.py --assert-match evidence/accepted_proposal_summary.json --check-only --receipt-out evidence/validation_receipt_accepted_packet_proposal_summary.json
 
+      - name: Validate pre-approval readiness summary
+        run: python scripts/generate_preapproval_readiness_summary.py --receipt-out evidence/validation_receipt_preapproval_readiness_summary.json
+
       - name: Validate contract files
         run: python scripts/validate_contract_files.py --receipt-out evidence/validation_receipt_contract_files.json
 
