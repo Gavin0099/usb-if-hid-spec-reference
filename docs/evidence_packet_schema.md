@@ -89,6 +89,12 @@ Current candidate packets:
 - `docs/evidence/candidates/hid_bNumDescriptors_candidate.yaml`
 - `docs/evidence/candidates/hid_bDescriptorType_subordinate_candidate.yaml`
 - `docs/evidence/candidates/hid_wDescriptorLength_candidate.yaml`
+- `docs/evidence/candidates/report_descriptor_short_item_prefix_candidate.yaml`
+- `docs/evidence/candidates/report_descriptor_long_item_prefix_candidate.yaml`
+- `docs/evidence/candidates/report_descriptor_main_item_type_candidate.yaml`
+- `docs/evidence/candidates/report_descriptor_global_item_type_candidate.yaml`
+- `docs/evidence/candidates/report_descriptor_local_item_type_candidate.yaml`
+- `docs/evidence/candidates/report_descriptor_reserved_item_type_candidate.yaml`
 
 ## Non-Claims
 
