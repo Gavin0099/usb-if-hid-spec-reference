@@ -478,3 +478,24 @@ queue:
       input only; all candidate packets remain pending and no governed entry is
       promoted to verified.
       checkpoint commit: c2dae74.
+
+  - id: HID-VER-9
+    title: Level 3 accepted packet workflow contract
+    authority: Repo-local evidence packet governance
+    status: reviewed
+    allowed_status_change: workflow_contract_only
+    requires_human_approval: false
+    review_level: 1
+    gate: validation_required
+    forbidden_claims:
+      - accepted evidence packet
+      - verified status uplift
+      - new source authority import
+      - firmware behavior correctness
+      - OS input stack behavior
+      - parser runtime behavior
+    notes: >
+      Define the Level 3 accepted-packet workflow contract and validator checks:
+      accepted packets require prior candidate status, approved human approval
+      record, checkpoint commit, validation receipt, and Level 3 checkpoint.
+      This is workflow contract only and does not accept or promote any packet.

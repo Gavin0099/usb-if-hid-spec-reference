@@ -218,4 +218,12 @@
 - gate: candidate packet only; no accepted evidence packet and no verified count
   movement.
 
+### HID-LRA-27: Level 3 Accepted Packet Workflow Contract
+
+- status: In progress
+- objective: define and validate the required workflow for future
+  candidate-to-accepted evidence packet transitions.
+- gate: workflow contract only; no accepted evidence packet and no verified count
+  movement.
+
 

@@ -79,6 +79,14 @@ verified_gate:
     - OS input stack behavior
     - parser/runtime behavior unless separately scoped
     - product-specific HID behavior
+  acceptance_workflow:
+    required_previous_status: candidate
+    required_approval_record: approved
+    required_approver: human
+    required_checkpoint_commit: true
+    required_validation_receipt: true
+    required_level3_checkpoint: true
+    forbidden_direct_promotion: true
 
 forbidden_promotions:
   - id: shell_to_verified
@@ -89,3 +97,7 @@ forbidden_promotions:
     rule: missing source_trace must block verified promotion
   - id: missing_human_approval
     rule: missing approval_record must block verified promotion
+  - id: accepted_without_level3_checkpoint
+    rule: packet_status == accepted requires review_level == 3 and approval_record == approved
+  - id: accepted_without_validation_receipt
+    rule: packet_status == accepted requires validation receipt and checkpoint commit
