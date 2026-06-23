@@ -1,4 +1,4 @@
-# HID Long-Running Roadmap
+﻿# HID Long-Running Roadmap
 
 ## Phase Summary
 
@@ -391,6 +391,17 @@
 - status: Completed
 - objective: promote `hid_get_protocol` to verified via the accepted packet evidence
   gate and observed governance validators.
-- latest checkpoint: a54ffe2
+- latest checkpoint: 120f088
 - gate: Level 3 verified status transition after human approval; no firmware or
   runtime behavior claims.
+
+### HID-LRA-75: SET_PROTOCOL Verified Promotion Gate
+
+- status: Completed
+- objective: promote `hid_set_protocol` to verified via the accepted packet evidence
+  gate and observed governance validators.
+- latest checkpoint: 69d6766
+- gate: Level 3 verified status transition after human approval; no firmware or
+  runtime behavior claims.
+
+
