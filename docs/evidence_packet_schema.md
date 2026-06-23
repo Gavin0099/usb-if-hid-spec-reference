@@ -228,6 +228,24 @@ They aggregate the 19 accepted-packet proposal artifacts into a scan-friendly
 table and JSON receipt. They are summary artifacts only; they do not create
 accepted packets and do not satisfy the verified gate.
 
+## Accepted Packet Production Prep Script
+
+The production accepted packet transition is now available as a read-to-write
+tool:
+
+- `scripts/generate_accepted_packet.py`
+
+This script upgrades a `*_candidate.yaml` packet to `*_accepted.yaml` only when
+the Level 3 transition context is explicitly provided:
+
+- concrete approver marker (not `pending`)
+- explicit checkpoint commit
+- explicit validation receipt path
+
+It does not modify `data/*`, does not modify governed counts, and does not
+promote any matrix entry. It emits an error on missing or inconsistent
+transition prerequisites and rejects output paths that escape repository root.
+
 ## Current Shell Packet Boundary
 
 Existing files under `docs/evidence/` are shell artifacts. They are useful for
