@@ -3035,7 +3035,7 @@ Commit Checkpoint:
 
 ## Batch: HID-LRA-62 (accepted packet pre-approval readiness summary)
 
-- Commit: c521303
+- Commit: 63e1160
 - Scope: add a readiness summary generator and generate Markdown/JSON summary
   artifacts for all 19 pre-approval checklist reports.
 - Changed files:
@@ -3047,8 +3047,10 @@ Commit Checkpoint:
   - `governance/hid_work_queue.yaml`
   - `docs/hid_long_running_roadmap.md`
   - `docs/hid_long_running_checkpoint_rollup.md`
+  - `.github/workflows/validate.yml`
 - Validation:
   - PASS `python -X utf8 scripts/generate_preapproval_readiness_summary.py`
+  - PASS `python -X utf8 scripts/generate_preapproval_readiness_summary.py --receipt-out evidence/validation_receipt_preapproval_readiness_summary.json`
   - PASS `python -m unittest tests.test_preapproval_readiness_summary`
 - Stats before/after:
   - tracked: unchanged at 19
@@ -3074,7 +3076,7 @@ Commit Checkpoint:
 
 ### Checkpoint memory entry for HID-LRA-62
 
-- Commit: this checkpoint
+- Commit: 63e1160
 - Scope: record the `HID-LRA-62` accepted-packet pre-approval readiness summary
   checkpoint in repo-local daily memory using
   `scripts/emit_checkpoint_memory_entry.py`.
@@ -3083,6 +3085,7 @@ Commit Checkpoint:
   - `governance/hid_work_queue.yaml`
   - `docs/hid_long_running_roadmap.md`
   - `docs/hid_long_running_checkpoint_rollup.md`
+  - `.github/workflows/validate.yml`
 - Validation:
   - PASS `python -X utf8 scripts/validate_memory_records.py`
   - PASS `python -m unittest discover -s tests`
@@ -3094,9 +3097,9 @@ Commit Checkpoint:
   - pre-approval reports: unchanged at 19
   - production accepted packets: unchanged at 0
 - Can claim:
-  - `memory/2026-06-23.md` contains a bound entry for commit `c521303`.
+  - `memory/2026-06-23.md` contains a bound entry for commit `63e1160`.
   - Queue and roadmap now point `HID-VER-15` / `HID-LRA-33` at commit
-    `c521303`.
+    `63e1160`.
 - Cannot claim:
   - cannot claim production accepted evidence packets.
   - cannot claim any HID entry is verified.
