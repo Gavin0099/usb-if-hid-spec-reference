@@ -2193,7 +2193,7 @@ Commit Checkpoint:
 
 ## Batch: HID-LRA-50 (candidate source authority binding validator)
 
-- Commit: this checkpoint
+- Commit: bf16027
 - Scope: harden candidate packet validation so `source_trace.source_id` and
   `source_trace.source_section` must match `data/source_authority.yaml`
   `current_imported_usage`.
@@ -2226,6 +2226,35 @@ Commit Checkpoint:
     imported source authority.
   - All six HID request candidate packets use source id `hid_1_11` and section
     `7.2`.
+- Cannot claim:
+  - cannot claim accepted evidence packets.
+  - cannot claim any HID entry is verified.
+  - cannot claim new source authority import.
+  - cannot claim firmware, OS, parser/runtime, or product-specific HID behavior.
+- Residual risk:
+  - Candidate packet acceptance remains separate Level 3 work.
+
+### Checkpoint memory entry for HID-LRA-50
+
+- Commit: this checkpoint
+- Scope: record the `HID-LRA-50` source-authority binding validator checkpoint
+  in repo-local daily memory using `scripts/emit_checkpoint_memory_entry.py`.
+- Changed files:
+  - `memory/2026-06-23.md`
+  - `governance/hid_work_queue.yaml`
+  - `docs/hid_long_running_roadmap.md`
+  - `docs/hid_long_running_checkpoint_rollup.md`
+- Validation:
+  - PASS `python -X utf8 scripts/validate_memory_records.py`
+  - PASS `python -m unittest discover -s tests`
+- Stats before/after:
+  - tracked: unchanged at 19
+  - scaffold: unchanged at 0
+  - reviewed: unchanged at 19
+  - verified: unchanged at 0
+- Can claim:
+  - `memory/2026-06-23.md` contains a bound entry for commit `bf16027`.
+  - Queue and roadmap now point `HID-VER-3` / `HID-LRA-21` at commit `bf16027`.
 - Cannot claim:
   - cannot claim accepted evidence packets.
   - cannot claim any HID entry is verified.
