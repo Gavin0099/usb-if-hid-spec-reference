@@ -23,6 +23,8 @@ from scripts.validate_source_authority_import_proposals import (
     DEFAULT_EXECUTION_PLAN,
     DEFAULT_EXECUTION_PLAN_MARKDOWN,
     DEFAULT_MARKDOWN,
+    DEFAULT_SOURCE_IDENTITY_MARKDOWN,
+    DEFAULT_SOURCE_IDENTITY_PACKET,
     DEFAULT_PROPOSAL,
     DEFAULT_SOURCE_AUTHORITY,
     DEFAULT_SOURCE_REGISTRY,
@@ -47,6 +49,7 @@ def _compare_summary(expected: dict[str, Any], actual: dict[str, Any]) -> list[s
         "proposal_count",
         "checklist_count",
         "execution_plan_count",
+        "source_identity_packet_count",
         "source_authority_status",
         "source_registry_section_count",
         "production_source_authority_change_count",
@@ -118,6 +121,9 @@ def build_summary() -> dict[str, Any]:
         "proposal_count": 1,
         "checklist_count": 1 if DEFAULT_CHECKLIST.exists() else 0,
         "execution_plan_count": 1 if DEFAULT_EXECUTION_PLAN.exists() and DEFAULT_EXECUTION_PLAN_MARKDOWN.exists() else 0,
+        "source_identity_packet_count": 1
+        if DEFAULT_SOURCE_IDENTITY_PACKET.exists() and DEFAULT_SOURCE_IDENTITY_MARKDOWN.exists()
+        else 0,
         "source_authority_status": source_status,
         "source_registry_section_count": len(registry_sections),
         "production_source_authority_change_count": 1
@@ -137,6 +143,8 @@ def build_summary() -> dict[str, Any]:
                 "preapproval_checklist": _display_path(DEFAULT_CHECKLIST),
                 "execution_plan_json": _display_path(DEFAULT_EXECUTION_PLAN),
                 "execution_plan_markdown": _display_path(DEFAULT_EXECUTION_PLAN_MARKDOWN),
+                "source_identity_json": _display_path(DEFAULT_SOURCE_IDENTITY_PACKET),
+                "source_identity_markdown": _display_path(DEFAULT_SOURCE_IDENTITY_MARKDOWN),
                 "approval_record": gate["approval_record"],
                 "approver": gate["approver"],
                 "direct_import": gate["direct_import"],
@@ -174,6 +182,7 @@ def render_markdown(summary: dict[str, Any]) -> str:
         f"- proposal artifacts: {summary['proposal_count']}",
         f"- preapproval checklists: {summary['checklist_count']}",
         f"- execution plans: {summary['execution_plan_count']}",
+        f"- source identity packets: {summary['source_identity_packet_count']}",
         f"- source authority status: `{summary['source_authority_status']}`",
         f"- source registry Usage Tables sections: {summary['source_registry_section_count']}",
         f"- production source authority changes: {summary['production_source_authority_change_count']}",

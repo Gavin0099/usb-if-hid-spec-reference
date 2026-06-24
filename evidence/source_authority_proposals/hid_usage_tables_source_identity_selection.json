@@ -1,0 +1,30 @@
+{
+  "authority_ceiling": "source_identity_selection_checklist_only",
+  "packet_status": "checklist_only",
+  "source_id": "hid_usage_tables",
+  "current_status": "not_imported",
+  "selected_publication_identity": "TBD_LEVEL3_APPROVAL",
+  "source_authority_import_created": false,
+  "citation_authority_enabled": false,
+  "required_identity_fields": [
+    "publisher",
+    "document_title",
+    "publication_version_or_revision",
+    "publication_date",
+    "canonical_url",
+    "imported_scope",
+    "excluded_scope"
+  ],
+  "required_review_questions": [
+    "Does the selected source identity match the document being imported?",
+    "Is the imported scope narrow enough for the first source-authority slice?",
+    "Is the excluded scope explicit enough to prevent report payload or parser claims?",
+    "Are citation and source-registry updates in the same checkpoint?"
+  ],
+  "non_claims": [
+    "no selected publication identity in this packet",
+    "no source authority import in this packet",
+    "no Usage Tables citation authority in this packet",
+    "no Usage Tables governed entries in this packet"
+  ]
+}

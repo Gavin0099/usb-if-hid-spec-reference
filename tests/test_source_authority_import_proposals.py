@@ -8,6 +8,7 @@ import yaml
 from scripts.validate_source_authority_import_proposals import (
     DEFAULT_CHECKLIST,
     DEFAULT_EXECUTION_PLAN,
+    DEFAULT_SOURCE_IDENTITY_PACKET,
     DEFAULT_MARKDOWN,
     DEFAULT_PROPOSAL,
     DEFAULT_SOURCE_AUTHORITY,
@@ -137,6 +138,40 @@ class SourceAuthorityImportProposalTests(unittest.TestCase):
             )
 
         self.assertTrue(any("usage_tables_governed_entries_created must be false" in error for error in errors))
+
+    def test_source_identity_selected_too_early_fails(self) -> None:
+        with tempfile.TemporaryDirectory(prefix="tmp_source_proposal_", dir=ROOT) as tempdir:
+            temp = Path(tempdir)
+            source_identity = json.loads(DEFAULT_SOURCE_IDENTITY_PACKET.read_text(encoding="utf-8"))
+            source_identity["selected_publication_identity"] = "HID Usage Tables 1.5"
+            source_identity_path = temp / "source_identity.json"
+            _write_json(source_identity_path, source_identity)
+
+            errors, _receipt = validate(
+                DEFAULT_PROPOSAL,
+                markdown_path=DEFAULT_MARKDOWN,
+                checklist_path=DEFAULT_CHECKLIST,
+                source_identity_path=source_identity_path,
+            )
+
+        self.assertTrue(any("selected_publication_identity must remain TBD" in error for error in errors))
+
+    def test_source_identity_citation_enabled_fails(self) -> None:
+        with tempfile.TemporaryDirectory(prefix="tmp_source_proposal_", dir=ROOT) as tempdir:
+            temp = Path(tempdir)
+            source_identity = json.loads(DEFAULT_SOURCE_IDENTITY_PACKET.read_text(encoding="utf-8"))
+            source_identity["citation_authority_enabled"] = True
+            source_identity_path = temp / "source_identity.json"
+            _write_json(source_identity_path, source_identity)
+
+            errors, _receipt = validate(
+                DEFAULT_PROPOSAL,
+                markdown_path=DEFAULT_MARKDOWN,
+                checklist_path=DEFAULT_CHECKLIST,
+                source_identity_path=source_identity_path,
+            )
+
+        self.assertTrue(any("citation_authority_enabled must be false" in error for error in errors))
 
 
 if __name__ == "__main__":

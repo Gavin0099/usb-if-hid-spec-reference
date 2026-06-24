@@ -23,6 +23,8 @@ DEFAULT_MARKDOWN = ROOT / "docs" / "evidence" / "source_authority_proposals" / "
 DEFAULT_CHECKLIST = ROOT / "docs" / "evidence" / "source_authority_proposals" / "hid_usage_tables_import_preapproval_checklist.md"
 DEFAULT_EXECUTION_PLAN = ROOT / "evidence" / "source_authority_proposals" / "hid_usage_tables_import_execution_plan.json"
 DEFAULT_EXECUTION_PLAN_MARKDOWN = ROOT / "docs" / "evidence" / "source_authority_proposals" / "hid_usage_tables_import_execution_plan.md"
+DEFAULT_SOURCE_IDENTITY_PACKET = ROOT / "evidence" / "source_authority_proposals" / "hid_usage_tables_source_identity_selection.json"
+DEFAULT_SOURCE_IDENTITY_MARKDOWN = ROOT / "docs" / "evidence" / "source_authority_proposals" / "hid_usage_tables_source_identity_selection.md"
 DEFAULT_SOURCE_AUTHORITY = ROOT / "data" / "source_authority.yaml"
 DEFAULT_SOURCE_REGISTRY = ROOT / "evidence" / "source_registry.yaml"
 DEFAULT_RECEIPT = ROOT / "evidence" / "validation_receipt_source_authority_import_proposals.json"
@@ -47,6 +49,21 @@ REQUIRED_EXECUTION_NON_CLAIMS = {
     "no Usage Tables governed entries in this plan",
     "no Usage Tables coverage claim in this plan",
     "no verified uplift in this plan",
+}
+REQUIRED_SOURCE_IDENTITY_FIELDS = {
+    "publisher",
+    "document_title",
+    "publication_version_or_revision",
+    "publication_date",
+    "canonical_url",
+    "imported_scope",
+    "excluded_scope",
+}
+REQUIRED_SOURCE_IDENTITY_NON_CLAIMS = {
+    "no selected publication identity in this packet",
+    "no source authority import in this packet",
+    "no Usage Tables citation authority in this packet",
+    "no Usage Tables governed entries in this packet",
 }
 ALLOWED_FIRST_SLICE_FILES = {
     "data/source_authority.yaml",
@@ -124,6 +141,8 @@ def validate(
     checklist_path: Path = DEFAULT_CHECKLIST,
     execution_plan_path: Path = DEFAULT_EXECUTION_PLAN,
     execution_plan_markdown_path: Path = DEFAULT_EXECUTION_PLAN_MARKDOWN,
+    source_identity_path: Path = DEFAULT_SOURCE_IDENTITY_PACKET,
+    source_identity_markdown_path: Path = DEFAULT_SOURCE_IDENTITY_MARKDOWN,
     source_authority_path: Path = DEFAULT_SOURCE_AUTHORITY,
     source_registry_path: Path = DEFAULT_SOURCE_REGISTRY,
 ) -> tuple[list[str], dict[str, Any]]:
@@ -140,6 +159,8 @@ def validate(
         (checklist_path, "PREAPPROVAL_CHECKLIST_MISSING"),
         (execution_plan_path, "EXECUTION_PLAN_JSON_MISSING"),
         (execution_plan_markdown_path, "EXECUTION_PLAN_MARKDOWN_MISSING"),
+        (source_identity_path, "SOURCE_IDENTITY_JSON_MISSING"),
+        (source_identity_markdown_path, "SOURCE_IDENTITY_MARKDOWN_MISSING"),
     ):
         if not required_path.exists():
             add_error(code, f"missing required artifact: {_display_path(required_path)}")
@@ -249,6 +270,54 @@ def validate(
             f"execution plan missing non-claim(s): {', '.join(missing_execution_non_claims)}",
         )
 
+    source_identity: dict[str, Any]
+    try:
+        source_identity = _load_json(source_identity_path)
+    except Exception as exc:
+        add_error("SOURCE_IDENTITY_JSON_LOAD_FAILED", str(exc))
+        source_identity = {}
+
+    if source_identity.get("authority_ceiling") != "source_identity_selection_checklist_only":
+        add_error(
+            "SOURCE_IDENTITY_AUTHORITY_CEILING_INVALID",
+            "source identity authority_ceiling must be source_identity_selection_checklist_only",
+        )
+    if source_identity.get("packet_status") != "checklist_only":
+        add_error("SOURCE_IDENTITY_STATUS_INVALID", "source identity packet_status must be checklist_only")
+    if source_identity.get("source_id") != "hid_usage_tables":
+        add_error("SOURCE_IDENTITY_SOURCE_ID_INVALID", "source identity source_id must be hid_usage_tables")
+    if source_identity.get("selected_publication_identity") != "TBD_LEVEL3_APPROVAL":
+        add_error(
+            "SOURCE_IDENTITY_SELECTED_TOO_EARLY",
+            "source identity selected_publication_identity must remain TBD_LEVEL3_APPROVAL",
+        )
+    if source_identity.get("source_authority_import_created") is not False:
+        add_error("SOURCE_IDENTITY_IMPORT_CREATED", "source identity source_authority_import_created must be false")
+    if source_identity.get("citation_authority_enabled") is not False:
+        add_error("SOURCE_IDENTITY_CITATION_ENABLED", "source identity citation_authority_enabled must be false")
+
+    required_fields = (
+        set(source_identity.get("required_identity_fields", []))
+        if isinstance(source_identity.get("required_identity_fields"), list)
+        else set()
+    )
+    missing_identity_fields = sorted(REQUIRED_SOURCE_IDENTITY_FIELDS - required_fields)
+    if missing_identity_fields:
+        add_error(
+            "SOURCE_IDENTITY_FIELDS_INCOMPLETE",
+            f"source identity packet missing required field(s): {', '.join(missing_identity_fields)}",
+        )
+
+    identity_non_claims = (
+        set(source_identity.get("non_claims", [])) if isinstance(source_identity.get("non_claims"), list) else set()
+    )
+    missing_identity_non_claims = sorted(REQUIRED_SOURCE_IDENTITY_NON_CLAIMS - identity_non_claims)
+    if missing_identity_non_claims:
+        add_error(
+            "SOURCE_IDENTITY_NON_CLAIMS_INCOMPLETE",
+            f"source identity packet missing non-claim(s): {', '.join(missing_identity_non_claims)}",
+        )
+
     try:
         source_status = _usage_tables_source_authority_status(source_authority_path)
         if source_status != "not_imported":
@@ -274,6 +343,8 @@ def validate(
         "checked_checklist": _display_path(checklist_path),
         "checked_execution_plan": _display_path(execution_plan_path),
         "checked_execution_plan_markdown": _display_path(execution_plan_markdown_path),
+        "checked_source_identity_packet": _display_path(source_identity_path),
+        "checked_source_identity_markdown": _display_path(source_identity_markdown_path),
         "source_authority_status": source_status,
         "source_registry_sections": registry_sections,
         "error_count": len(errors),
@@ -290,6 +361,8 @@ def main() -> int:
     parser.add_argument("--checklist")
     parser.add_argument("--execution-plan")
     parser.add_argument("--execution-plan-markdown")
+    parser.add_argument("--source-identity")
+    parser.add_argument("--source-identity-markdown")
     parser.add_argument("--source-authority")
     parser.add_argument("--source-registry")
     parser.add_argument("--receipt-out")
@@ -301,6 +374,8 @@ def main() -> int:
         checklist = _resolve_under_root(args.checklist, DEFAULT_CHECKLIST)
         execution_plan = _resolve_under_root(args.execution_plan, DEFAULT_EXECUTION_PLAN)
         execution_plan_markdown = _resolve_under_root(args.execution_plan_markdown, DEFAULT_EXECUTION_PLAN_MARKDOWN)
+        source_identity = _resolve_under_root(args.source_identity, DEFAULT_SOURCE_IDENTITY_PACKET)
+        source_identity_markdown = _resolve_under_root(args.source_identity_markdown, DEFAULT_SOURCE_IDENTITY_MARKDOWN)
         source_authority = _resolve_under_root(args.source_authority, DEFAULT_SOURCE_AUTHORITY)
         source_registry = _resolve_under_root(args.source_registry, DEFAULT_SOURCE_REGISTRY)
         receipt_out = _resolve_under_root(args.receipt_out, DEFAULT_RECEIPT)
@@ -314,6 +389,8 @@ def main() -> int:
         checklist_path=checklist,
         execution_plan_path=execution_plan,
         execution_plan_markdown_path=execution_plan_markdown,
+        source_identity_path=source_identity,
+        source_identity_markdown_path=source_identity_markdown,
         source_authority_path=source_authority,
         source_registry_path=source_registry,
     )

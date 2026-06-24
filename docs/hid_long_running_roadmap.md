@@ -518,3 +518,14 @@
   Tables citation as authority, no Usage Tables matrices, no matrix count
   movement, and no firmware, OS, parser/runtime, report payload, or
   product-specific behavior claims.
+
+### HID-LRA-91: HID Usage Tables Source Identity Selection Checklist Packet
+
+- status: Completed
+- objective: add a machine-checkable source identity checklist packet for the
+  future Level 3 Usage Tables source-authority import.
+- latest checkpoint: this checkpoint
+- gate: source identity checklist only; no selected publication identity, no
+  source authority import, no Usage Tables citation as authority, no Usage
+  Tables matrices, no matrix count movement, and no firmware, OS,
+  parser/runtime, report payload, or product-specific behavior claims.

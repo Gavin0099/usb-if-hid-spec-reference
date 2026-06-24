@@ -342,6 +342,36 @@ queue:
       does not create Usage Tables matrices, and does not change current
       governed subset counts.
 
+  - id: HID-EXT-8
+    title: HID Usage Tables source identity selection checklist packet
+    authority: HID Usage Tables secondary authority boundary
+    status: verified
+    allowed_status_change: source_identity_checklist_only
+    requires_human_approval: false
+    review_level: 1
+    gate: validation_required
+    future_authorized: false
+    forbidden_claims:
+      - selected Usage Tables publication identity
+      - HID Usage Tables imported authority
+      - Usage Tables citation authority
+      - Usage Tables coverage
+      - Usage Tables governed entries
+      - Usage Tables matrix creation
+      - report payload semantics
+      - report parser semantics
+      - firmware behavior correctness
+      - OS input stack behavior
+      - product-specific HID behavior
+      - verified status uplift without evidence
+    notes: >
+      Add a machine-checkable checklist packet for the source identity fields
+      required before a future Level 3 Usage Tables source-authority import.
+      This does not select a publication identity, does not update
+      `data/source_authority.yaml`, does not cite Usage Tables as authority,
+      does not create Usage Tables matrices, and does not change current
+      governed subset counts.
+
   - id: HID-RD-1
     title: 6.2.2 report descriptor item reviewed wording pass
     authority: HID 1.11 Section 6.2.2

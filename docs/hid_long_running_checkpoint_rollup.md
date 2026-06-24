@@ -4833,3 +4833,51 @@ Commit Checkpoint:
   - cannot claim product-specific HID behavior.
 - Residual risk:
   - actual source-authority import remains a separate Level 3 transition.
+
+## Batch: HID-LRA-91 (HID Usage Tables Source Identity Selection Checklist Packet)
+
+- Commit: this checkpoint
+- Scope: add a machine-checkable source identity checklist packet for the future
+  Level 3 HID Usage Tables source-authority import.
+- Changed files:
+  - `docs/evidence/source_authority_proposals/hid_usage_tables_source_identity_selection.md`
+  - `evidence/source_authority_proposals/hid_usage_tables_source_identity_selection.json`
+  - `scripts/validate_source_authority_import_proposals.py`
+  - `tests/test_source_authority_import_proposals.py`
+  - `scripts/generate_source_authority_import_proposal_summary.py`
+  - `tests/test_source_authority_import_proposal_summary.py`
+  - proposal summary and validation receipt artifacts
+  - `docs/hid_hub_parity_completion_plan.md`
+  - `governance/hid_work_queue.yaml`
+  - `docs/hid_long_running_roadmap.md`
+  - `docs/hid_long_running_checkpoint_rollup.md`
+- Validation:
+  - PASS `python -X utf8 scripts/validate_source_authority_import_proposals.py --receipt-out evidence/validation_receipt_source_authority_import_proposals.json`
+  - PASS `python -B -m unittest tests.test_source_authority_import_proposals tests.test_source_authority_import_proposal_summary`
+  - PASS `python -X utf8 scripts/generate_source_authority_import_proposal_summary.py --assert-match evidence/source_authority_proposals/summary.json --check-only --receipt-out evidence/validation_receipt_source_authority_import_proposal_summary.json`
+- Stats before/after:
+  - source authority imports: unchanged
+  - Usage Tables governed matrices: 0 -> 0
+  - tracked entries: unchanged at 19
+  - verified entries: unchanged at 19
+  - work queue entries: 39 -> 40
+- Can claim:
+  - HID Usage Tables source identity checklist packet exists.
+  - validator checks the packet remains checklist-only and rejects selected
+    publication identity or enabled citation authority.
+- Cannot claim:
+  - cannot claim a Usage Tables publication identity is selected.
+  - cannot claim HID Usage Tables are imported.
+  - cannot claim Usage Tables citation authority.
+  - cannot claim Usage Tables coverage.
+  - cannot claim Usage Tables entries are tracked, reviewed, or verified.
+  - cannot claim Usage Tables matrices exist.
+  - cannot claim report descriptor semantic completeness.
+  - cannot claim report payload semantics.
+  - cannot claim firmware behavior correctness.
+  - cannot claim OS input stack behavior.
+  - cannot claim parser/runtime behavior.
+  - cannot claim product-specific HID behavior.
+- Residual risk:
+  - actual source identity selection and source-authority import remain separate
+    Level 3 transitions.

@@ -7,6 +7,8 @@
   "checked_checklist": "docs/evidence/source_authority_proposals/hid_usage_tables_import_preapproval_checklist.md",
   "checked_execution_plan": "evidence/source_authority_proposals/hid_usage_tables_import_execution_plan.json",
   "checked_execution_plan_markdown": "docs/evidence/source_authority_proposals/hid_usage_tables_import_execution_plan.md",
+  "checked_source_identity_packet": "evidence/source_authority_proposals/hid_usage_tables_source_identity_selection.json",
+  "checked_source_identity_markdown": "docs/evidence/source_authority_proposals/hid_usage_tables_source_identity_selection.md",
   "source_authority_status": "not_imported",
   "source_registry_sections": [],
   "error_count": 0,
