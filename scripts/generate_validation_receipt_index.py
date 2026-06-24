@@ -168,6 +168,18 @@ GATE_COMMANDS = [
         "memory_record_structural_visibility_only",
     ),
     GateCommand(
+        "validation_receipt_index",
+        [
+            "python",
+            "-X",
+            "utf8",
+            "scripts/validate_validation_receipt_index.py",
+            "--receipt-out",
+            "evidence/validation_receipt_validation_receipt_index.json",
+        ],
+        "validation_receipt_index_integrity_only",
+    ),
+    GateCommand(
         "unit_tests",
         ["python", "-B", "-m", "unittest", "discover", "-s", "tests"],
         "regression_test_result_only",

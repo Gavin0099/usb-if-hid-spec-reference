@@ -1,0 +1,17 @@
+{
+  "validator": "validate_validation_receipt_index.py",
+  "authority_ceiling": "validation_receipt_index_integrity_only",
+  "result": "PASS",
+  "index": "evidence/validation_receipt_index.json",
+  "receipt_dir": "evidence/validation_receipts/hid_current_gate",
+  "checked_receipts": 16,
+  "error_count": 0,
+  "errors": [],
+  "findings": [],
+  "claim_ceiling": [
+    "validation_receipt_index_integrity_only",
+    "no_new_source_authority_import",
+    "no_matrix_semantic_change",
+    "no_verified_uplift"
+  ]
+}

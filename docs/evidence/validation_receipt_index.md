@@ -6,8 +6,8 @@
 ## Summary
 
 - result: PASS
-- checked commands: 15
-- pass count: 15
+- checked commands: 16
+- pass count: 16
 - fail count: 0
 - receipt directory: `evidence/validation_receipts/hid_current_gate`
 
@@ -29,6 +29,7 @@
 | `hid_governed_surface_manifest` | PASS | `manifest_structural_integrity_only` | `evidence/validation_receipts/hid_current_gate/hid_governed_surface_manifest.json` |
 | `table_fingerprint` | PASS | `table_content_fingerprint_drift_only` | `evidence/validation_receipts/hid_current_gate/table_fingerprint.json` |
 | `memory_records` | PASS | `memory_record_structural_visibility_only` | `evidence/validation_receipts/hid_current_gate/memory_records.json` |
+| `validation_receipt_index` | PASS | `validation_receipt_index_integrity_only` | `evidence/validation_receipts/hid_current_gate/validation_receipt_index.json` |
 | `unit_tests` | PASS | `regression_test_result_only` | `evidence/validation_receipts/hid_current_gate/unit_tests.json` |
 
 ## Claim Ceiling

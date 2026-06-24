@@ -80,6 +80,8 @@ Purpose: make validation evidence durable and inspectable.
 
 Status: in progress. `HID-LRA-84` adds the first durable validation receipt
 index and per-command receipt archive for the current HID gate suite.
+`HID-LRA-85` adds a receipt freshness/staleness validator so missing, failed,
+mismatched, or stale receipt files fail the gate.
 
 Actions:
 

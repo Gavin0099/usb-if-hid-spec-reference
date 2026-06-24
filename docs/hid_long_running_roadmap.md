@@ -463,3 +463,13 @@
 - gate: receipt/index generation only; no new source authority import, no
   matrix semantic change, no verified uplift, and no firmware, OS,
   parser/runtime, or product-specific behavior claims.
+
+### HID-LRA-85: Validation Receipt Freshness Gate
+
+- status: Completed
+- objective: add a validator that rejects missing, failed, mismatched, or stale
+  validation receipt files in the current receipt index archive.
+- latest checkpoint: this checkpoint
+- gate: receipt/index integrity only; no new source authority import, no matrix
+  semantic change, no verified uplift, and no firmware, OS, parser/runtime, or
+  product-specific behavior claims.
