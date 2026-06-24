@@ -3659,6 +3659,61 @@ Commit Checkpoint:
   - cannot claim product-specific HID behavior.
 - Residual risk:
   - No payload parser/runtime or host-side behavior verification was added.
+
+## Batch: HID-LRA-76 (HID_BLength Verified Promotion)
+
+- Commit: b7004f6
+- Scope: promote `HID-REQ-?`/`hid_bLength` from accepted candidate to verified claim level through Level 3 approved checkpoint, then reflect the change in governing matrices, manifest, and evidence packet metadata.
+- Changed files:
+  - `data/hid_descriptor_fields_matrix.yaml`
+  - `docs/evidence/accepted/hid_bLength_accepted.yaml`
+  - `docs/evidence/candidates/hid_bLength_candidate.yaml`
+  - `docs/evidence/preapproval_summary.md`
+  - `evidence/preapproval_summary.json`
+  - `evidence/table_fingerprint_baseline.jsonl`
+  - `exports/hid_governed_surface_manifest.yaml`
+  - `specs/en/verification_status.md`
+  - `specs/verification_status.md`
+  - `tests/test_contract_files.py`
+  - `tests/test_preapproval_readiness_summary.py`
+  - `tests/test_verification_status_counts.py`
+  - `scripts/validate_hid_descriptor_fields_matrix.py`
+  - `scripts/validate_hid_report_descriptor_items_matrix.py`
+- Validation:
+  - PASS `python -X utf8 scripts/validate_source_authority.py`
+  - PASS `python -X utf8 scripts/validate_hid_class_request_matrix.py`
+  - PASS `python -X utf8 scripts/validate_hid_descriptor_fields_matrix.py`
+  - PASS `python -X utf8 scripts/validate_hid_report_descriptor_items_matrix.py`
+  - PASS `python -X utf8 scripts/validate_verification_status.py`
+  - PASS `python -X utf8 scripts/validate_evidence_packet_schema.py`
+  - PASS `python -X utf8 scripts/validate_contract_files.py`
+  - PASS `python -X utf8 scripts/probe_table_fingerprint.py --mode check --manifest exports/hid_governed_surface_manifest.yaml --baseline-in evidence/table_fingerprint_baseline.jsonl`
+  - PASS `python -X utf8 scripts/validate_memory_records.py`
+  - PASS `python -m unittest discover -s tests`
+- Stats before/after:
+  - tracked: unchanged at 19
+  - scaffold: unchanged at 0
+  - reviewed: 12 -> 11
+  - verified: 6 -> 7
+  - accepted-packet proposals: unchanged at 19
+  - production accepted packets: unchanged at 19
+- Review level:
+  - Level 3 verified status transition only; no new production accepted packet emission.
+- Can claim:
+  - `hid_bLength` is now `verified` in `data/hid_descriptor_fields_matrix.yaml`.
+  - `exports/hid_governed_surface_manifest.yaml` now reports verified counts as consistent.
+  - `docs/evidence/accepted/hid_bLength_accepted.yaml` now records `current_claim_level: verified`.
+  - `docs/evidence/candidates/hid_bLength_candidate.yaml` now records `current_claim_level: verified`.
+  - `docs/evidence/preapproval_summary.*` now tracks 7 verified entries.
+  - validation checks and tests pass with no claimed firmware/parser/OS behavior semantics.
+- Cannot claim:
+  - cannot claim verified semantics beyond accepted identity-level scope for `hid_bLength`.
+  - cannot claim firmware behavior correctness.
+  - cannot claim OS input stack behavior.
+  - cannot claim parser/runtime behavior.
+  - cannot claim product-specific HID behavior.
+- Residual risk:
+  - No payload parser/runtime or host-side behavior verification was verified in this slice.
 ## Batch: HID-LRA-71 (SET_REPORT verified promotion)
 
 - Commit: fa8e5d4
@@ -4073,6 +4128,5 @@ Commit Checkpoint:
   - cannot claim product-specific HID behavior.
 - Residual risk:
   - No payload parser/runtime or host-side behavior verification was added.
-
 
 
