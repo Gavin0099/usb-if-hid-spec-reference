@@ -1,11 +1,11 @@
 {
   "validator": "generate_validation_receipt_index.py",
   "authority_ceiling": "validation_receipt_index_only",
-  "generated_at": "2026-06-24T07:06:16+00:00",
+  "generated_at": "2026-06-24T07:19:52+00:00",
   "result": "PASS",
   "receipt_dir": "evidence/validation_receipts/hid_current_gate",
-  "checked_commands": 17,
-  "pass_count": 17,
+  "checked_commands": 18,
+  "pass_count": 18,
   "fail_count": 0,
   "receipts": [
     {
@@ -67,6 +67,21 @@
         "--check-only",
         "--receipt-out",
         "evidence/validation_receipt_source_authority_import_proposal_summary.json"
+      ]
+    },
+    {
+      "receipt_id": "usage_tables_matrix_proposals",
+      "result": "PASS",
+      "returncode": 0,
+      "claim_ceiling": "usage_tables_matrix_schema_proposal_validation_only",
+      "receipt_path": "evidence/validation_receipts/hid_current_gate/usage_tables_matrix_proposals.json",
+      "command": [
+        "python",
+        "-X",
+        "utf8",
+        "scripts/validate_usage_tables_matrix_proposals.py",
+        "--receipt-out",
+        "evidence/validation_receipt_usage_tables_matrix_proposals.json"
       ]
     },
     {

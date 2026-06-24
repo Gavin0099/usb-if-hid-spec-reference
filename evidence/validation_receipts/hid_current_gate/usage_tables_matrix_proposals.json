@@ -1,0 +1,19 @@
+{
+  "receipt_id": "usage_tables_matrix_proposals",
+  "command": [
+    "python",
+    "-X",
+    "utf8",
+    "scripts/validate_usage_tables_matrix_proposals.py",
+    "--receipt-out",
+    "evidence/validation_receipt_usage_tables_matrix_proposals.json"
+  ],
+  "claim_ceiling": "usage_tables_matrix_schema_proposal_validation_only",
+  "result": "PASS",
+  "returncode": 0,
+  "stdout": [
+    "PASS validate_usage_tables_matrix_proposals",
+    "- checked proposal: evidence/usage_tables_matrix_proposals/usage_page_identity_matrix_proposal.json"
+  ],
+  "stderr": []
+}

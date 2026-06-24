@@ -529,3 +529,14 @@
   source authority import, no Usage Tables citation as authority, no Usage
   Tables matrices, no matrix count movement, and no firmware, OS,
   parser/runtime, report payload, or product-specific behavior claims.
+
+### HID-LRA-92: Usage Page Identity Matrix Schema Proposal
+
+- status: Completed
+- objective: add the first Usage Tables matrix schema proposal and validator for
+  a future usage page identity matrix.
+- latest checkpoint: this checkpoint
+- gate: matrix schema proposal only; no source authority import, no Usage
+  Tables citation as authority, no production Usage Tables matrix, no matrix
+  count movement, and no firmware, OS, parser/runtime, report payload, or
+  product-specific behavior claims.

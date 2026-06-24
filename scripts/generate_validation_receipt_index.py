@@ -77,6 +77,18 @@ GATE_COMMANDS = [
         "source_authority_import_proposal_summary_only",
     ),
     GateCommand(
+        "usage_tables_matrix_proposals",
+        [
+            "python",
+            "-X",
+            "utf8",
+            "scripts/validate_usage_tables_matrix_proposals.py",
+            "--receipt-out",
+            "evidence/validation_receipt_usage_tables_matrix_proposals.json",
+        ],
+        "usage_tables_matrix_schema_proposal_validation_only",
+    ),
+    GateCommand(
         "contract_files",
         [
             "python",

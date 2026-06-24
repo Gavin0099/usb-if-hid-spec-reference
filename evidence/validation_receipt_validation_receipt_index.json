@@ -4,7 +4,7 @@
   "result": "PASS",
   "index": "evidence/validation_receipt_index.json",
   "receipt_dir": "evidence/validation_receipts/hid_current_gate",
-  "checked_receipts": 17,
+  "checked_receipts": 18,
   "error_count": 0,
   "errors": [],
   "findings": [],

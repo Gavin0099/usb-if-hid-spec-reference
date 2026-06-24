@@ -1,0 +1,12 @@
+{
+  "validator": "validate_usage_tables_matrix_proposals.py",
+  "authority_ceiling": "usage_tables_matrix_schema_proposal_validation_only",
+  "result": "PASS",
+  "checked_proposal": "evidence/usage_tables_matrix_proposals/usage_page_identity_matrix_proposal.json",
+  "checked_markdown": "docs/evidence/usage_tables_matrix_proposals/usage_page_identity_matrix_proposal.md",
+  "source_authority_status": "not_imported",
+  "future_matrix_exists": false,
+  "error_count": 0,
+  "errors": [],
+  "findings": []
+}
