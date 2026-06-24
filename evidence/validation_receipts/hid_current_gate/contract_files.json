@@ -1,0 +1,20 @@
+{
+  "receipt_id": "contract_files",
+  "command": [
+    "python",
+    "-X",
+    "utf8",
+    "scripts/validate_contract_files.py",
+    "--receipt-out",
+    "evidence/validation_receipt_contract_files.json"
+  ],
+  "claim_ceiling": "contract_structural_consistency_only",
+  "result": "PASS",
+  "returncode": 0,
+  "stdout": [
+    "PASS validate_contract_files",
+    "- checked contracts: 5",
+    "- claim ceiling: scaffold_identity_reference_only"
+  ],
+  "stderr": []
+}

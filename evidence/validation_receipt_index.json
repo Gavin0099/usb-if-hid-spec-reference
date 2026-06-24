@@ -1,0 +1,252 @@
+{
+  "validator": "generate_validation_receipt_index.py",
+  "authority_ceiling": "validation_receipt_index_only",
+  "generated_at": "2026-06-24T03:57:51+00:00",
+  "result": "PASS",
+  "receipt_dir": "evidence/validation_receipts/hid_current_gate",
+  "checked_commands": 15,
+  "pass_count": 15,
+  "fail_count": 0,
+  "receipts": [
+    {
+      "receipt_id": "source_authority",
+      "result": "PASS",
+      "returncode": 0,
+      "claim_ceiling": "source_authority_structural_validation_only",
+      "receipt_path": "evidence/validation_receipts/hid_current_gate/source_authority.json",
+      "command": [
+        "python",
+        "-X",
+        "utf8",
+        "scripts/validate_source_authority.py"
+      ]
+    },
+    {
+      "receipt_id": "source_registry",
+      "result": "PASS",
+      "returncode": 0,
+      "claim_ceiling": "structural_registry_validation_only",
+      "receipt_path": "evidence/validation_receipts/hid_current_gate/source_registry.json",
+      "command": [
+        "python",
+        "-X",
+        "utf8",
+        "scripts/validate_source_registry.py",
+        "--receipt-out",
+        "evidence/validation_receipt_source_registry.json"
+      ]
+    },
+    {
+      "receipt_id": "contract_files",
+      "result": "PASS",
+      "returncode": 0,
+      "claim_ceiling": "contract_structural_consistency_only",
+      "receipt_path": "evidence/validation_receipts/hid_current_gate/contract_files.json",
+      "command": [
+        "python",
+        "-X",
+        "utf8",
+        "scripts/validate_contract_files.py",
+        "--receipt-out",
+        "evidence/validation_receipt_contract_files.json"
+      ]
+    },
+    {
+      "receipt_id": "hid_class_request_matrix",
+      "result": "PASS",
+      "returncode": 0,
+      "claim_ceiling": "matrix_identity_validation_only",
+      "receipt_path": "evidence/validation_receipts/hid_current_gate/hid_class_request_matrix.json",
+      "command": [
+        "python",
+        "-X",
+        "utf8",
+        "scripts/validate_hid_class_request_matrix.py"
+      ]
+    },
+    {
+      "receipt_id": "hid_descriptor_fields_matrix",
+      "result": "PASS",
+      "returncode": 0,
+      "claim_ceiling": "matrix_identity_validation_only",
+      "receipt_path": "evidence/validation_receipts/hid_current_gate/hid_descriptor_fields_matrix.json",
+      "command": [
+        "python",
+        "-X",
+        "utf8",
+        "scripts/validate_hid_descriptor_fields_matrix.py"
+      ]
+    },
+    {
+      "receipt_id": "hid_report_descriptor_items_matrix",
+      "result": "PASS",
+      "returncode": 0,
+      "claim_ceiling": "matrix_identity_validation_only",
+      "receipt_path": "evidence/validation_receipts/hid_current_gate/hid_report_descriptor_items_matrix.json",
+      "command": [
+        "python",
+        "-X",
+        "utf8",
+        "scripts/validate_hid_report_descriptor_items_matrix.py"
+      ]
+    },
+    {
+      "receipt_id": "verification_status",
+      "result": "PASS",
+      "returncode": 0,
+      "claim_ceiling": "verification_status_count_consistency_only",
+      "receipt_path": "evidence/validation_receipts/hid_current_gate/verification_status.json",
+      "command": [
+        "python",
+        "-X",
+        "utf8",
+        "scripts/validate_verification_status.py"
+      ]
+    },
+    {
+      "receipt_id": "evidence_packet_schema",
+      "result": "PASS",
+      "returncode": 0,
+      "claim_ceiling": "verified_preflight_contract_only",
+      "receipt_path": "evidence/validation_receipts/hid_current_gate/evidence_packet_schema.json",
+      "command": [
+        "python",
+        "-X",
+        "utf8",
+        "scripts/validate_evidence_packet_schema.py",
+        "--receipt-out",
+        "evidence/validation_receipt_hid_all_accepted.json"
+      ]
+    },
+    {
+      "receipt_id": "accepted_packet_proposals",
+      "result": "PASS",
+      "returncode": 0,
+      "claim_ceiling": "accepted_packet_proposal_validation_only",
+      "receipt_path": "evidence/validation_receipts/hid_current_gate/accepted_packet_proposals.json",
+      "command": [
+        "python",
+        "-X",
+        "utf8",
+        "scripts/validate_accepted_packet_proposals.py",
+        "--receipt-out",
+        "evidence/validation_receipt_accepted_packet_proposals.json"
+      ]
+    },
+    {
+      "receipt_id": "accepted_packet_proposal_summary",
+      "result": "PASS",
+      "returncode": 0,
+      "claim_ceiling": "accepted_packet_proposal_summary_only",
+      "receipt_path": "evidence/validation_receipts/hid_current_gate/accepted_packet_proposal_summary.json",
+      "command": [
+        "python",
+        "-X",
+        "utf8",
+        "scripts/generate_accepted_packet_proposal_summary.py",
+        "--assert-match",
+        "evidence/accepted_proposal_summary.json",
+        "--check-only",
+        "--receipt-out",
+        "evidence/validation_receipt_accepted_packet_proposal_summary.json"
+      ]
+    },
+    {
+      "receipt_id": "preapproval_readiness_summary",
+      "result": "PASS",
+      "returncode": 0,
+      "claim_ceiling": "preapproval_readiness_summary_only",
+      "receipt_path": "evidence/validation_receipts/hid_current_gate/preapproval_readiness_summary.json",
+      "command": [
+        "python",
+        "-X",
+        "utf8",
+        "scripts/generate_preapproval_readiness_summary.py",
+        "--receipt-out",
+        "evidence/validation_receipt_preapproval_readiness_summary.json"
+      ]
+    },
+    {
+      "receipt_id": "hid_governed_surface_manifest",
+      "result": "PASS",
+      "returncode": 0,
+      "claim_ceiling": "manifest_structural_integrity_only",
+      "receipt_path": "evidence/validation_receipts/hid_current_gate/hid_governed_surface_manifest.json",
+      "command": [
+        "python",
+        "-X",
+        "utf8",
+        "scripts/validate_hid_governed_surface_manifest.py"
+      ]
+    },
+    {
+      "receipt_id": "table_fingerprint",
+      "result": "PASS",
+      "returncode": 0,
+      "claim_ceiling": "table_content_fingerprint_drift_only",
+      "receipt_path": "evidence/validation_receipts/hid_current_gate/table_fingerprint.json",
+      "command": [
+        "python",
+        "-X",
+        "utf8",
+        "scripts/probe_table_fingerprint.py",
+        "--mode",
+        "check",
+        "--manifest",
+        "exports/hid_governed_surface_manifest.yaml",
+        "--baseline-in",
+        "evidence/table_fingerprint_baseline.jsonl",
+        "--receipt-out",
+        "evidence/validation_receipt_table_fingerprint.json"
+      ]
+    },
+    {
+      "receipt_id": "memory_records",
+      "result": "PASS",
+      "returncode": 0,
+      "claim_ceiling": "memory_record_structural_visibility_only",
+      "receipt_path": "evidence/validation_receipts/hid_current_gate/memory_records.json",
+      "command": [
+        "python",
+        "-X",
+        "utf8",
+        "scripts/validate_memory_records.py",
+        "--receipt-out",
+        "evidence/validation_receipt_memory_records.json"
+      ]
+    },
+    {
+      "receipt_id": "unit_tests",
+      "result": "PASS",
+      "returncode": 0,
+      "claim_ceiling": "regression_test_result_only",
+      "receipt_path": "evidence/validation_receipts/hid_current_gate/unit_tests.json",
+      "command": [
+        "python",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests"
+      ]
+    }
+  ],
+  "claim_ceiling": [
+    "validation_receipt_index_only",
+    "no_new_source_authority_import",
+    "no_matrix_semantic_change",
+    "no_verified_uplift_by_receipt_index",
+    "no_firmware_behavior_claim"
+  ],
+  "not_claimed": [
+    "full HID spec coverage",
+    "HID Usage Tables coverage",
+    "report descriptor semantic completeness",
+    "report payload semantics",
+    "firmware behavior correctness",
+    "OS input stack behavior",
+    "parser/runtime behavior",
+    "product-specific HID behavior"
+  ]
+}

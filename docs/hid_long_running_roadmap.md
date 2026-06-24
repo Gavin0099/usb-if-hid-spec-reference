@@ -453,3 +453,13 @@
 - gate: docs/governance only; no new source authority import, no matrix status
   movement, no firmware, OS, parser/runtime, or product-specific behavior
   claims.
+
+### HID-LRA-84: HUB-Style Validation Receipt Surface
+
+- status: Completed
+- objective: add a durable validation receipt index and per-command receipt
+  archive for the current HID governed gate suite.
+- latest checkpoint: this checkpoint
+- gate: receipt/index generation only; no new source authority import, no
+  matrix semantic change, no verified uplift, and no firmware, OS,
+  parser/runtime, or product-specific behavior claims.

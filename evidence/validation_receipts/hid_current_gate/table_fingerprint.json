@@ -1,0 +1,24 @@
+{
+  "receipt_id": "table_fingerprint",
+  "command": [
+    "python",
+    "-X",
+    "utf8",
+    "scripts/probe_table_fingerprint.py",
+    "--mode",
+    "check",
+    "--manifest",
+    "exports/hid_governed_surface_manifest.yaml",
+    "--baseline-in",
+    "evidence/table_fingerprint_baseline.jsonl",
+    "--receipt-out",
+    "evidence/validation_receipt_table_fingerprint.json"
+  ],
+  "claim_ceiling": "table_content_fingerprint_drift_only",
+  "result": "PASS",
+  "returncode": 0,
+  "stdout": [
+    "Table fingerprint check PASSED: 3 table(s), 0 drift"
+  ],
+  "stderr": []
+}

@@ -1,0 +1,16 @@
+{
+  "receipt_id": "hid_descriptor_fields_matrix",
+  "command": [
+    "python",
+    "-X",
+    "utf8",
+    "scripts/validate_hid_descriptor_fields_matrix.py"
+  ],
+  "claim_ceiling": "matrix_identity_validation_only",
+  "result": "PASS",
+  "returncode": 0,
+  "stdout": [
+    "PASS validate_hid_descriptor_fields_matrix"
+  ],
+  "stderr": []
+}

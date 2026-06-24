@@ -1,0 +1,22 @@
+{
+  "receipt_id": "accepted_packet_proposal_summary",
+  "command": [
+    "python",
+    "-X",
+    "utf8",
+    "scripts/generate_accepted_packet_proposal_summary.py",
+    "--assert-match",
+    "evidence/accepted_proposal_summary.json",
+    "--check-only",
+    "--receipt-out",
+    "evidence/validation_receipt_accepted_packet_proposal_summary.json"
+  ],
+  "claim_ceiling": "accepted_packet_proposal_summary_only",
+  "result": "PASS",
+  "returncode": 0,
+  "stdout": [
+    "Generated accepted proposal summary: 19 proposal(s), 19 accepted packet(s), 0 verified entry(s)",
+    "PASS accepted proposal summary matches evidence/accepted_proposal_summary.json"
+  ],
+  "stderr": []
+}

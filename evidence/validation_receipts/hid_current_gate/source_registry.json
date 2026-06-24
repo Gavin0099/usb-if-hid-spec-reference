@@ -1,0 +1,20 @@
+{
+  "receipt_id": "source_registry",
+  "command": [
+    "python",
+    "-X",
+    "utf8",
+    "scripts/validate_source_registry.py",
+    "--receipt-out",
+    "evidence/validation_receipt_source_registry.json"
+  ],
+  "claim_ceiling": "structural_registry_validation_only",
+  "result": "PASS",
+  "returncode": 0,
+  "stdout": [
+    "PASS validate_source_registry",
+    "- checked authority levels: 5",
+    "- checked sources: 7"
+  ],
+  "stderr": []
+}

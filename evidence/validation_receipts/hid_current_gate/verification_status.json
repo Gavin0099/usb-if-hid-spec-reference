@@ -1,0 +1,16 @@
+{
+  "receipt_id": "verification_status",
+  "command": [
+    "python",
+    "-X",
+    "utf8",
+    "scripts/validate_verification_status.py"
+  ],
+  "claim_ceiling": "verification_status_count_consistency_only",
+  "result": "PASS",
+  "returncode": 0,
+  "stdout": [
+    "PASS validate_verification_status"
+  ],
+  "stderr": []
+}

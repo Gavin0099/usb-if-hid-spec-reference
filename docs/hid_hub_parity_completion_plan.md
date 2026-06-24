@@ -78,6 +78,9 @@ Gate:
 
 Purpose: make validation evidence durable and inspectable.
 
+Status: in progress. `HID-LRA-84` adds the first durable validation receipt
+index and per-command receipt archive for the current HID gate suite.
+
 Actions:
 
 - Add committed validation receipts for the current validators.

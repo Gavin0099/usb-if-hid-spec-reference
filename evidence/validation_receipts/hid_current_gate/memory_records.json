@@ -1,0 +1,20 @@
+{
+  "receipt_id": "memory_records",
+  "command": [
+    "python",
+    "-X",
+    "utf8",
+    "scripts/validate_memory_records.py",
+    "--receipt-out",
+    "evidence/validation_receipt_memory_records.json"
+  ],
+  "claim_ceiling": "memory_record_structural_visibility_only",
+  "result": "PASS",
+  "returncode": 0,
+  "stdout": [
+    "PASS validate_memory_records",
+    "- checked files: 3",
+    "- checked sections: 43"
+  ],
+  "stderr": []
+}

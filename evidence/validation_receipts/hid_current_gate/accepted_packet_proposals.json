@@ -1,0 +1,19 @@
+{
+  "receipt_id": "accepted_packet_proposals",
+  "command": [
+    "python",
+    "-X",
+    "utf8",
+    "scripts/validate_accepted_packet_proposals.py",
+    "--receipt-out",
+    "evidence/validation_receipt_accepted_packet_proposals.json"
+  ],
+  "claim_ceiling": "accepted_packet_proposal_validation_only",
+  "result": "PASS",
+  "returncode": 0,
+  "stdout": [
+    "PASS validate_accepted_packet_proposals",
+    "- checked proposals: 19"
+  ],
+  "stderr": []
+}

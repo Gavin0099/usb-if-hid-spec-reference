@@ -1,0 +1,22 @@
+{
+  "receipt_id": "evidence_packet_schema",
+  "command": [
+    "python",
+    "-X",
+    "utf8",
+    "scripts/validate_evidence_packet_schema.py",
+    "--receipt-out",
+    "evidence/validation_receipt_hid_all_accepted.json"
+  ],
+  "claim_ceiling": "verified_preflight_contract_only",
+  "result": "PASS",
+  "returncode": 0,
+  "stdout": [
+    "PASS validate_evidence_packet_schema",
+    "- checked shell packets: 6",
+    "- checked candidate packets: 19",
+    "- checked accepted packets: 19",
+    "- required sections: 9"
+  ],
+  "stderr": []
+}

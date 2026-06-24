@@ -1,0 +1,11 @@
+{
+  "generator": "generate_preapproval_readiness_summary.py",
+  "check_mode": "refresh",
+  "candidate_count": 19,
+  "preapproval_report_count": 19,
+  "production_accepted_packet_count": 19,
+  "verified_entry_count": 19,
+  "stale_preapproval_report_count": 0,
+  "markdown_out": "docs/evidence/preapproval_summary.md",
+  "json_out": "evidence/preapproval_summary.json"
+}

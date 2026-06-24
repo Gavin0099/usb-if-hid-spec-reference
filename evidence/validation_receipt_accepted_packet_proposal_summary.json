@@ -1,0 +1,10 @@
+{
+  "validator": "generate_accepted_packet_proposal_summary.py",
+  "result": "PASS",
+  "assert_match": "evidence/accepted_proposal_summary.json",
+  "checked_count": 19,
+  "accepted_packet_count": 19,
+  "verified_entry_count": 0,
+  "error_count": 0,
+  "errors": []
+}

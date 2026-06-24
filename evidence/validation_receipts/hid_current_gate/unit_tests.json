@@ -1,0 +1,29 @@
+{
+  "receipt_id": "unit_tests",
+  "command": [
+    "python",
+    "-B",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "tests"
+  ],
+  "claim_ceiling": "regression_test_result_only",
+  "result": "PASS",
+  "returncode": 0,
+  "stdout": [
+    "PASS: hid_governed_surface_manifest validation",
+    "  manifest_id: hid_governed_surface_manifest",
+    "  governed_tables: 3 (hid11=3)",
+    "  hid11: state=scaffold tracked=19 scaffold=0 verified=19 reviewed=0",
+    "Table fingerprint check PASSED: 3 table(s), 0 drift"
+  ],
+  "stderr": [
+    ".......................................................................................",
+    "----------------------------------------------------------------------",
+    "Ran 87 tests in 7.417s",
+    "",
+    "OK"
+  ]
+}

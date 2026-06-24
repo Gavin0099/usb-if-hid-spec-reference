@@ -1,0 +1,28 @@
+{
+  "validator": "validate_source_registry.py",
+  "authority_ceiling": "structural_registry_validation_only",
+  "result": "PASS",
+  "checked_authority_levels": 5,
+  "checked_sources": 7,
+  "source_authority_ids": [
+    "firmware_handler_correctness",
+    "hid_1_11",
+    "hid_over_i2c",
+    "hid_usage_tables",
+    "hub_class_behavior",
+    "os_input_stack_behavior",
+    "report_payload_semantics_beyond_identity_scaffold"
+  ],
+  "registry_ids": [
+    "firmware_handler_correctness",
+    "hid_1_11",
+    "hid_over_i2c",
+    "hid_usage_tables",
+    "hub_class_behavior",
+    "os_input_stack_behavior",
+    "report_payload_semantics_beyond_identity_scaffold"
+  ],
+  "error_count": 0,
+  "errors": [],
+  "findings": []
+}

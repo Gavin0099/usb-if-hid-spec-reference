@@ -1,0 +1,16 @@
+{
+  "receipt_id": "source_authority",
+  "command": [
+    "python",
+    "-X",
+    "utf8",
+    "scripts/validate_source_authority.py"
+  ],
+  "claim_ceiling": "source_authority_structural_validation_only",
+  "result": "PASS",
+  "returncode": 0,
+  "stdout": [
+    "PASS validate_source_authority"
+  ],
+  "stderr": []
+}

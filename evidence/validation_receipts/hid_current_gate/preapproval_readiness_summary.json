@@ -1,0 +1,18 @@
+{
+  "receipt_id": "preapproval_readiness_summary",
+  "command": [
+    "python",
+    "-X",
+    "utf8",
+    "scripts/generate_preapproval_readiness_summary.py",
+    "--receipt-out",
+    "evidence/validation_receipt_preapproval_readiness_summary.json"
+  ],
+  "claim_ceiling": "preapproval_readiness_summary_only",
+  "result": "PASS",
+  "returncode": 0,
+  "stdout": [
+    "Generated pre-approval readiness summary: 19 report(s), 19 accepted packet(s), 19 verified entry(s)"
+  ],
+  "stderr": []
+}

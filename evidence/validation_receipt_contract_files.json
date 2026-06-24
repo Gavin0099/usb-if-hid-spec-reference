@@ -1,0 +1,53 @@
+{
+  "validator": "validate_contract_files.py",
+  "authority_ceiling": "contract_structural_consistency_only",
+  "result": "PASS",
+  "checked_contracts": [
+    "authority_levels.yaml",
+    "claim_rules.yaml",
+    "evidence_packet_schema.yaml",
+    "evidence_requirements.yaml",
+    "version_scope.yaml"
+  ],
+  "checked_authority_levels": [
+    "community_reference",
+    "excluded",
+    "normative_official",
+    "official_index",
+    "official_secondary"
+  ],
+  "checked_forbidden_claims": [
+    "firmware_correctness_from_reference",
+    "hub_class_behavior",
+    "os_stack_behavior_from_hid_spec",
+    "scaffold_as_verified",
+    "usage_tables_before_import"
+  ],
+  "source_authority_sections": [
+    "6.2.1",
+    "6.2.2",
+    "7.2"
+  ],
+  "version_scope_sections": [
+    "6.2.1",
+    "6.2.2",
+    "7.2"
+  ],
+  "manifest_claim_ceiling": "scaffold_identity_reference_only",
+  "manifest_claim_counts": {
+    "tracked": 19,
+    "scaffold": 0,
+    "reviewed": 0,
+    "verified": 19
+  },
+  "evidence_packet_schema": {
+    "authority_ceiling": "verified_preflight_contract_only",
+    "verified_gate": {
+      "review_level": 3,
+      "required_packet_status": "accepted"
+    }
+  },
+  "error_count": 0,
+  "errors": [],
+  "findings": []
+}
