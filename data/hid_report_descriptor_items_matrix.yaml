@@ -11,8 +11,8 @@ claim_boundary:
   current_imported_usage: true
   claim_level_default: reviewed
   evidence_status_default: not_verified
-  verified_entries: 0
-  reviewed_entries: 6
+  verified_entries: 1
+  reviewed_entries: 5
   non_claims:
     - parser_behavior
     - report_descriptor_semantics
@@ -23,7 +23,7 @@ entries:
     item_name: short_item_prefix
     item_kind: item_prefix
     summary: "Short item prefix identity, including item-size/type/tag prefix role only."
-    claim_level: reviewed
+    claim_level: verified
     evidence_status: not_verified
     source_anchor:
       source_id: hid_1_11
