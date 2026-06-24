@@ -20,18 +20,43 @@ import yaml
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_PROPOSAL = ROOT / "evidence" / "usage_tables_matrix_proposals" / "usage_page_identity_matrix_proposal.json"
 DEFAULT_MARKDOWN = ROOT / "docs" / "evidence" / "usage_tables_matrix_proposals" / "usage_page_identity_matrix_proposal.md"
+DEFAULT_USAGE_ID_PROPOSAL = (
+    ROOT / "evidence" / "usage_tables_matrix_proposals" / "usage_id_identity_matrix_proposal.json"
+)
+DEFAULT_USAGE_ID_MARKDOWN = (
+    ROOT / "docs" / "evidence" / "usage_tables_matrix_proposals" / "usage_id_identity_matrix_proposal.md"
+)
 DEFAULT_SOURCE_AUTHORITY = ROOT / "data" / "source_authority.yaml"
 DEFAULT_RECEIPT = ROOT / "evidence" / "validation_receipt_usage_tables_matrix_proposals.json"
 
-REQUIRED_SCHEMA_FIELDS = {
-    "entry_id",
-    "usage_page_id",
-    "usage_page_name",
-    "source_id",
-    "source_section",
-    "status",
-    "claim_level",
-    "notes",
+MATRIX_REQUIREMENTS = {
+    "usage_page_identity_matrix": {
+        "required_schema_fields": {
+            "entry_id",
+            "usage_page_id",
+            "usage_page_name",
+            "source_id",
+            "source_section",
+            "status",
+            "claim_level",
+            "notes",
+        },
+        "future_matrix_path": "data/hid_usage_page_identity_matrix.yaml",
+    },
+    "usage_id_identity_matrix": {
+        "required_schema_fields": {
+            "entry_id",
+            "usage_page_id",
+            "usage_id",
+            "usage_id_name",
+            "source_id",
+            "source_section",
+            "status",
+            "claim_level",
+            "notes",
+        },
+        "future_matrix_path": "data/hid_usage_id_identity_matrix.yaml",
+    },
 }
 REQUIRED_NON_CLAIMS = {
     "no Usage Tables source authority import in this proposal",
@@ -125,10 +150,19 @@ def validate(
         add_error("SOURCE_ID_INVALID", "source_id must be hid_usage_tables")
     if proposal.get("source_authority_status_required") != "not_imported":
         add_error("SOURCE_STATUS_REQUIREMENT_INVALID", "source_authority_status_required must be not_imported")
-    if proposal.get("matrix_id") != "usage_page_identity_matrix":
-        add_error("MATRIX_ID_INVALID", "matrix_id must be usage_page_identity_matrix")
-    if proposal.get("future_matrix_path") != "data/hid_usage_page_identity_matrix.yaml":
-        add_error("FUTURE_MATRIX_PATH_INVALID", "future_matrix_path must be data/hid_usage_page_identity_matrix.yaml")
+    matrix_id = proposal.get("matrix_id")
+    matrix_requirements = MATRIX_REQUIREMENTS.get(matrix_id)
+    if matrix_requirements is None:
+        add_error(
+            "MATRIX_ID_INVALID",
+            f"matrix_id must be one of: {', '.join(sorted(MATRIX_REQUIREMENTS))}",
+        )
+    if matrix_requirements is not None:
+        if proposal.get("future_matrix_path") != matrix_requirements["future_matrix_path"]:
+            add_error(
+                "FUTURE_MATRIX_PATH_INVALID",
+                f"future_matrix_path must be {matrix_requirements['future_matrix_path']}",
+            )
     if proposal.get("matrix_created") is not False:
         add_error("MATRIX_CREATED", "matrix_created must be false")
     if proposal.get("usage_tables_entries_created") is not False:
@@ -139,9 +173,14 @@ def validate(
         add_error("INITIAL_STATUS_INVALID", "proposed_initial_status must be scaffold")
 
     schema_fields = (
-        set(proposal.get("proposed_schema_fields", [])) if isinstance(proposal.get("proposed_schema_fields"), list) else set()
+        set(proposal.get("proposed_schema_fields", []))
+        if isinstance(proposal.get("proposed_schema_fields"), list)
+        else set()
     )
-    missing_fields = sorted(REQUIRED_SCHEMA_FIELDS - schema_fields)
+    required_fields = set(
+        matrix_requirements["required_schema_fields"] if matrix_requirements is not None else set()
+    )
+    missing_fields = sorted(required_fields - schema_fields)
     if missing_fields:
         add_error("SCHEMA_FIELDS_INCOMPLETE", f"missing schema field(s): {', '.join(missing_fields)}")
 

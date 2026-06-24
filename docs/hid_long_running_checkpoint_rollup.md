@@ -4925,3 +4925,46 @@ Commit Checkpoint:
   - cannot claim product-specific HID behavior.
 - Residual risk:
   - production matrix creation remains a separate post-source-import transition.
+
+## Batch: HID-LRA-93 (Usage ID Identity Matrix Schema Proposal)
+
+- Commit: this checkpoint
+- Scope: add a Usage Tables usage ID identity matrix schema proposal and
+  validator without creating a production matrix.
+- Changed files:
+  - `docs/evidence/usage_tables_matrix_proposals/usage_id_identity_matrix_proposal.md`
+  - `evidence/usage_tables_matrix_proposals/usage_id_identity_matrix_proposal.json`
+  - `scripts/validate_usage_tables_matrix_proposals.py`
+  - `tests/test_usage_tables_matrix_proposals.py`
+  - `governance/hid_work_queue.yaml`
+  - `docs/hid_hub_parity_completion_plan.md`
+  - `docs/hid_long_running_roadmap.md`
+  - `docs/hid_long_running_checkpoint_rollup.md`
+- Validation:
+  - NOT RUN: no verification commands were executed in this slice.
+- Stats before/after:
+  - source authority imports: unchanged
+  - Usage Tables governed matrices: 0 -> 0
+  - tracked entries: unchanged at 19
+  - verified entries: unchanged at 19
+  - validation receipt index gate commands: unchanged at 18
+  - work queue entries: 41 -> 42
+- Can claim:
+  - usage ID identity matrix schema proposal exists.
+  - validator now checks usage-page/usage-id matrix proposal shape and required
+    proposal-only guardrails by matrix ID.
+- Cannot claim:
+  - cannot claim HID Usage Tables are imported.
+  - cannot claim Usage Tables citation authority.
+  - cannot claim Usage Tables coverage.
+  - cannot claim Usage Tables entries are tracked, reviewed, or verified.
+  - cannot claim Usage Tables matrices exist.
+  - cannot claim report descriptor semantic completeness.
+  - cannot claim report payload semantics.
+  - cannot claim firmware behavior correctness.
+  - cannot claim OS input stack behavior.
+  - cannot claim parser/runtime behavior.
+  - cannot claim product-specific HID behavior.
+- Residual risk:
+  - receipt index gate command count remains unchanged because usage-id proposal
+    validation is currently run manually by this slice.

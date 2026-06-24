@@ -112,6 +112,8 @@ the first allowed post-approval slice while still not importing Usage Tables.
 actual Usage Tables publication identity as a Level 3 approval input.
 `HID-LRA-92` adds the first Usage Tables matrix schema proposal and validator
 without creating a production Usage Tables matrix.
+`HID-LRA-93` adds a usage ID identity matrix schema proposal and keeps
+HID Usage Tables source authority unchanged.
 
 Actions:
 

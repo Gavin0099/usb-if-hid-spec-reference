@@ -1,0 +1,57 @@
+{
+  "authority_ceiling": "usage_tables_matrix_schema_proposal_only",
+  "proposal_status": "proposal_only",
+  "source_id": "hid_usage_tables",
+  "source_authority_status_required": "not_imported",
+  "matrix_id": "usage_id_identity_matrix",
+  "future_matrix_path": "data/hid_usage_id_identity_matrix.yaml",
+  "matrix_created": false,
+  "usage_tables_entries_created": false,
+  "verified_uplift": false,
+  "proposed_initial_status": "scaffold",
+  "proposed_schema_fields": [
+    "entry_id",
+    "usage_page_id",
+    "usage_id",
+    "usage_id_name",
+    "source_id",
+    "source_section",
+    "status",
+    "claim_level",
+    "notes"
+  ],
+  "required_validator_plan": [
+    "reject source_id other than hid_usage_tables",
+    "reject status above scaffold for initial import",
+    "reject claim_level verified",
+    "reject missing source_section",
+    "reject future_matrix_path mismatch",
+    "reject entries before source authority import"
+  ],
+  "required_negative_fixtures": [
+    "wrong source_id",
+    "verified claim_level",
+    "missing source_section",
+    "future_matrix_path mismatch",
+    "matrix exists while source authority remains not_imported"
+  ],
+  "required_evidence_plan": [
+    "candidate packet shell for each selected usage id entry",
+    "preapproval checklist before accepted packet creation",
+    "accepted packet only after Level 3 gate",
+    "verified promotion only after accepted evidence packet"
+  ],
+  "required_fingerprint_plan": [
+    "add matrix to governed surface manifest only when production matrix exists",
+    "add table fingerprint baseline only when production matrix is governed",
+    "reject fingerprint drift after baseline creation"
+  ],
+  "non_claims": [
+    "no Usage Tables source authority import in this proposal",
+    "no Usage Tables matrix exists in this proposal",
+    "no Usage Tables entries are tracked in this proposal",
+    "no Usage Tables coverage claim in this proposal",
+    "no verified uplift in this proposal",
+    "no report payload semantics in this proposal"
+  ]
+}

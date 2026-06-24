@@ -7,6 +7,8 @@ import yaml
 
 from scripts.validate_usage_tables_matrix_proposals import (
     DEFAULT_MARKDOWN,
+    DEFAULT_USAGE_ID_MARKDOWN,
+    DEFAULT_USAGE_ID_PROPOSAL,
     DEFAULT_PROPOSAL,
     DEFAULT_SOURCE_AUTHORITY,
     ROOT,
@@ -27,6 +29,15 @@ def _write_yaml(path: Path, data: dict) -> None:
 class UsageTablesMatrixProposalTests(unittest.TestCase):
     def test_current_usage_page_identity_proposal_passes(self) -> None:
         errors, receipt = validate()
+        self.assertEqual(errors, [])
+        self.assertEqual(receipt["result"], "PASS")
+        self.assertFalse(receipt["future_matrix_exists"])
+
+    def test_current_usage_id_identity_proposal_passes(self) -> None:
+        errors, receipt = validate(
+            proposal_path=DEFAULT_USAGE_ID_PROPOSAL,
+            markdown_path=DEFAULT_USAGE_ID_MARKDOWN,
+        )
         self.assertEqual(errors, [])
         self.assertEqual(receipt["result"], "PASS")
         self.assertFalse(receipt["future_matrix_exists"])
@@ -66,6 +77,21 @@ class UsageTablesMatrixProposalTests(unittest.TestCase):
             errors, _receipt = validate(proposal_path, markdown_path=DEFAULT_MARKDOWN)
 
         self.assertTrue(any("source_section" in error for error in errors))
+
+    def test_missing_usage_id_field_in_usage_id_matrix_fails(self) -> None:
+        with tempfile.TemporaryDirectory(prefix="tmp_usage_matrix_proposal_", dir=ROOT) as tempdir:
+            temp = Path(tempdir)
+            proposal = json.loads(DEFAULT_USAGE_ID_PROPOSAL.read_text(encoding="utf-8"))
+            proposal["proposed_schema_fields"].remove("usage_id_name")
+            proposal_path = temp / "proposal.json"
+            _write_json(proposal_path, proposal)
+
+            errors, _receipt = validate(
+                proposal_path,
+                markdown_path=DEFAULT_USAGE_ID_MARKDOWN,
+            )
+
+        self.assertTrue(any("usage_id_name" in error for error in errors))
 
     def test_imported_source_authority_status_fails(self) -> None:
         with tempfile.TemporaryDirectory(prefix="tmp_usage_matrix_proposal_", dir=ROOT) as tempdir:
