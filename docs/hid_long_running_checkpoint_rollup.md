@@ -4362,3 +4362,49 @@ Commit Checkpoint:
   - cannot claim product-specific HID behavior.
 - Residual risk:
   - No payload parser/runtime or host-side behavior verification was added.
+
+## Batch: HID-LRA-81 (work queue status synchronization)
+
+- Commit: 79668ad
+- Scope: align `governance/hid_work_queue.yaml` with completed execution state by updating residual `reviewed` task statuses to `verified`.
+- Changed files:
+  - `governance/hid_work_queue.yaml`
+  - `docs/hid_long_running_roadmap.md`
+- Validation:
+  - PASS `python -c "import yaml; q=yaml.safe_load(open('governance/hid_work_queue.yaml', encoding='utf-8').read())['queue']; print(sum(1 for e in q if e['status'] == 'verified'))"`
+- Stats before/after:
+  - work_queue reviewed count: 34 -> 0
+  - work_queue verified count: 1 -> 35
+  - manifest/verification status: unchanged at tracked 19, verified 19, reviewed 0
+  - proposal/accepted artifacts unchanged
+- Review level:
+  - governance bookkeeping alignment only.
+- Can claim:
+  - all `governance/hid_work_queue.yaml` entries now reflect completed verified states.
+  - roadmap status labels for `HID-LRA-3` through `HID-LRA-8` now read `Completed`.
+  - no count-movement semantics were changed.
+- Cannot claim:
+  - cannot claim firmware behavior correctness.
+  - cannot claim OS input stack behavior.
+  - cannot claim parser/runtime behavior.
+  - cannot claim product-specific HID behavior.
+  - cannot claim any additional source-authority import.
+- Residual risk:
+  - governance documentation is now aligned for this scope, but it does not itself validate underlying HID semantics.
+
+### Checkpoint memory entry for HID-LRA-81
+
+- Commit: 79668ad
+- Scope: record the `HID-LRA-81` governance bookkeeping alignment checkpoint in repo-local memory.
+- Changed files:
+  - `governance/hid_work_queue.yaml`
+  - `docs/hid_long_running_roadmap.md`
+  - `docs/hid_long_running_checkpoint_rollup.md`
+  - `memory/2026-06-23.md`
+- Validation:
+  - PASS `python -X utf8 scripts/validate_memory_records.py`
+  - PASS `python -c "import yaml; yaml.safe_load(open('governance/hid_work_queue.yaml', encoding='utf-8').read())"`
+- Stats before/after:
+  - work_queue reviewed count: 34 -> 0
+  - work_queue verified count: 1 -> 35
+  - no tracked table scope changes

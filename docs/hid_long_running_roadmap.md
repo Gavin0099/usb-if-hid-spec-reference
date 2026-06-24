@@ -20,7 +20,7 @@
 
 ### HID-LRA-3: HID-REQ-1 Slice
 
-- status: Completed (reviewed)
+- status: Completed
 - objective: GET_REPORT reviewed draft under Section 7.2 with human approval.
 - gate: no scaffold status promotion without approval.
 - latest checkpoint commit: 939a61b
@@ -28,7 +28,7 @@
 
 ### HID-LRA-4: HID-REQ-2 Slice
 
-- status: Completed (reviewed)
+- status: Completed
 - objective: SET_REPORT reviewed draft under Section 7.2 with quick human checkpoint.
 - gate: reviewed-draft preparation only.
 - latest checkpoint commit: 3d158d1
@@ -36,7 +36,7 @@
 
 ### HID-LRA-5: HID-REQ-3 Slice
 
-- status: Completed (reviewed)
+- status: Completed
 - objective: GET_IDLE reviewed draft under Section 7.2 with quick human checkpoint.
 - gate: reviewed-draft preparation only.
 - latest checkpoint commit: f114274
@@ -44,7 +44,7 @@
 
 ### HID-LRA-6: HID-REQ-4 Slice
 
-- status: Completed (reviewed)
+- status: Completed
 - objective: SET_IDLE reviewed draft under Section 7.2 with quick human checkpoint.
 - gate: reviewed-draft preparation only.
 - latest checkpoint commit: 2425f09
@@ -52,7 +52,7 @@
 
 ### HID-LRA-7: HID-REQ-5 Slice
 
-- status: Completed (reviewed)
+- status: Completed
 - objective: GET_PROTOCOL reviewed draft under Section 7.2 with quick human checkpoint.
 - gate: reviewed-draft preparation only.
 - latest checkpoint commit: c3939e8
@@ -60,7 +60,7 @@
 
 ### HID-LRA-8: HID-REQ-6 Slice
 
-- status: Completed (reviewed)
+- status: Completed
 - objective: SET_PROTOCOL reviewed draft under Section 7.2 with quick human checkpoint.
 - gate: reviewed-draft preparation only.
 - latest checkpoint commit: 0b9eec2
