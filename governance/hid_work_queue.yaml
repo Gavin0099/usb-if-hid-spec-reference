@@ -236,6 +236,32 @@ queue:
       shells and does not create verified entries.
       checkpoint commit: 92c3296.
 
+  - id: HID-EXT-4
+    title: HID Usage Tables import preflight
+    authority: HID Usage Tables secondary authority boundary
+    status: verified
+    allowed_status_change: preflight_only
+    requires_human_approval: false
+    review_level: 1
+    gate: validation_required
+    future_authorized: false
+    forbidden_claims:
+      - HID Usage Tables imported authority
+      - Usage Tables coverage
+      - report payload semantics
+      - report parser semantics
+      - firmware behavior correctness
+      - OS input stack behavior
+      - product-specific HID behavior
+      - verified status uplift without evidence
+    notes: >
+      Define the Level 3 preflight and eligibility criteria for future HID Usage
+      Tables source-authority import. Evidence artifact:
+      `docs/hid_usage_tables_import_preflight.md`. This does not update
+      `data/source_authority.yaml`, does not cite Usage Tables as authority,
+      does not create Usage Tables matrices, and does not change current
+      governed subset counts.
+
   - id: HID-RD-1
     title: 6.2.2 report descriptor item reviewed wording pass
     authority: HID 1.11 Section 6.2.2

@@ -4612,3 +4612,58 @@ Commit Checkpoint:
 - Residual risk:
   - this validates receipt archive consistency only; broader HUB-style source
     monitoring and wiki/source coverage remain future phases.
+
+## Batch: HID-LRA-86 (HID Usage Tables Import Preflight)
+
+- Commit: this checkpoint
+- Scope: define preflight and eligibility criteria for future HID Usage Tables
+  source-authority import without importing the source or creating Usage Tables
+  governed entries.
+- Changed files:
+  - `docs/hid_usage_tables_import_preflight.md`
+  - `docs/hid_hub_parity_completion_plan.md`
+  - `governance/hid_work_queue.yaml`
+  - `docs/hid_long_running_roadmap.md`
+  - `docs/hid_long_running_checkpoint_rollup.md`
+  - `memory/2026-06-23.md`
+  - validation receipt index artifacts
+- Validation:
+  - PASS `python -X utf8 scripts/generate_validation_receipt_index.py`
+  - PASS `python -X utf8 scripts/generate_validation_receipt_index.py --check-only --assert-match evidence/validation_receipt_index.json`
+  - PASS `python -X utf8 scripts/validate_validation_receipt_index.py --receipt-out evidence/validation_receipt_validation_receipt_index.json`
+  - PASS `python -X utf8 scripts/validate_source_authority.py`
+  - PASS `python -X utf8 scripts/validate_contract_files.py`
+  - PASS `python -X utf8 scripts/validate_hid_governed_surface_manifest.py`
+  - PASS `python -X utf8 scripts/validate_verification_status.py`
+  - PASS `python -X utf8 scripts/validate_hid_class_request_matrix.py`
+  - PASS `python -X utf8 scripts/validate_hid_descriptor_fields_matrix.py`
+  - PASS `python -X utf8 scripts/validate_hid_report_descriptor_items_matrix.py`
+  - PASS `python -X utf8 scripts/validate_evidence_packet_schema.py`
+  - PASS `python -X utf8 scripts/validate_accepted_packet_proposals.py`
+  - PASS `python -X utf8 scripts/probe_table_fingerprint.py --mode check --manifest exports/hid_governed_surface_manifest.yaml --baseline-in evidence/table_fingerprint_baseline.jsonl`
+  - PASS `python -X utf8 scripts/validate_memory_records.py`
+  - PASS `python -X utf8 -c "import yaml; yaml.safe_load(open('governance/hid_work_queue.yaml', encoding='utf-8').read())"`
+  - PASS `python -B -m unittest discover -s tests`
+- Stats before/after:
+  - source authority imports: unchanged
+  - Usage Tables governed matrices: 0 -> 0
+  - tracked entries: unchanged at 19
+  - verified entries: unchanged at 19
+  - work queue entries: 35 -> 36
+- Can claim:
+  - HID Usage Tables import preflight and eligibility criteria now exist.
+  - queue has a completed preflight entry for future Level 3 source-authority
+    work.
+- Cannot claim:
+  - cannot claim HID Usage Tables are imported.
+  - cannot claim Usage Tables coverage.
+  - cannot claim Usage Tables entries are tracked, reviewed, or verified.
+  - cannot claim report descriptor semantic completeness.
+  - cannot claim report payload semantics.
+  - cannot claim firmware behavior correctness.
+  - cannot claim OS input stack behavior.
+  - cannot claim parser/runtime behavior.
+  - cannot claim product-specific HID behavior.
+- Residual risk:
+  - the next source-authority import remains a separate Level 3 transition and
+    must not be inferred from this preflight.

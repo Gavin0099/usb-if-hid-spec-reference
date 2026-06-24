@@ -99,6 +99,10 @@ Gate:
 
 Purpose: prepare secondary authority expansion without silently importing it.
 
+Status: in progress. `HID-LRA-86` adds the preflight/eligibility artifact for
+HID Usage Tables import without importing the source or creating Usage Tables
+governed entries.
+
 Actions:
 
 - Define source authority extension criteria for HID Usage Tables.

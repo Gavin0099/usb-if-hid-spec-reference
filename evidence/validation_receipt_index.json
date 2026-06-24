@@ -1,7 +1,7 @@
 {
   "validator": "generate_validation_receipt_index.py",
   "authority_ceiling": "validation_receipt_index_only",
-  "generated_at": "2026-06-24T05:45:28+00:00",
+  "generated_at": "2026-06-24T06:20:58+00:00",
   "result": "PASS",
   "receipt_dir": "evidence/validation_receipts/hid_current_gate",
   "checked_commands": 16,
