@@ -404,4 +404,12 @@
 - gate: Level 3 verified status transition after human approval; no firmware or
   runtime behavior claims.
 
+### HID-LRA-76: HID_BLength Verified Promotion Gate
+
+- status: Completed
+- objective: promote `hid_bLength` to verified via the accepted packet evidence
+  gate and observed governance validators.
+- latest checkpoint: NO_COMMIT
+- gate: Level 3 verified status transition after human approval; no firmware or
+  runtime behavior claims.
 

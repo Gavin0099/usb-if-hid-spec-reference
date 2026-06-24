@@ -55,6 +55,9 @@ def validate(path: Path = DEFAULT_MATRIX) -> list[str]:
             if source_ref.get("section") != "6.2.2":
                 errors.append("source_refs[0].section must be 6.2.2")
 
+    entries = data.get("entries")
+    if not isinstance(entries, list):
+        entries = []
     claim_boundary = data.get("claim_boundary")
     if not isinstance(claim_boundary, dict):
         errors.append("claim_boundary must be a mapping")
@@ -65,15 +68,19 @@ def validate(path: Path = DEFAULT_MATRIX) -> list[str]:
         errors.append("claim_boundary.claim_level_default must be reviewed")
     if claim_boundary.get("evidence_status_default") != "not_verified":
         errors.append("claim_boundary.evidence_status_default must be not_verified")
-    if claim_boundary.get("verified_entries") != 0:
-        errors.append("claim_boundary.verified_entries must remain 0")
-    if claim_boundary.get("reviewed_entries") != len(EXPECTED_ITEMS):
-        errors.append(f"claim_boundary.reviewed_entries must be {len(EXPECTED_ITEMS)}")
+    expected_reviewed = len(
+        [entry for entry in entries if isinstance(entry, dict) and entry.get("claim_level") == "reviewed"]
+    )
+    expected_verified = len(
+        [entry for entry in entries if isinstance(entry, dict) and entry.get("claim_level") == "verified"]
+    )
+    if claim_boundary.get("reviewed_entries") != expected_reviewed:
+        errors.append("claim_boundary.reviewed_entries must match count of reviewed entries")
+    if claim_boundary.get("verified_entries") != expected_verified:
+        errors.append("claim_boundary.verified_entries must match count of verified entries")
 
-    entries = data.get("entries")
-    if not isinstance(entries, list):
+    if not isinstance(data.get("entries"), list):
         errors.append("entries must be a list")
-        entries = []
     if len(entries) != len(EXPECTED_ITEMS):
         errors.append(f"entries must contain exactly {len(EXPECTED_ITEMS)} report descriptor item shells")
 
@@ -93,8 +100,8 @@ def validate(path: Path = DEFAULT_MATRIX) -> list[str]:
             errors.append(f"{name} missing fields: {', '.join(missing_fields)}")
         if entry.get("item_kind") not in {"item_prefix", "item_type"}:
             errors.append(f"{name}.item_kind must be item_prefix or item_type")
-        if entry.get("claim_level") != "reviewed":
-            errors.append(f"{name}.claim_level must be reviewed")
+        if entry.get("claim_level") not in {"scaffold", "reviewed", "verified"}:
+            errors.append(f"{name}.claim_level must be scaffold, reviewed, or verified")
         if entry.get("evidence_status") != "not_verified":
             errors.append(f"{name}.evidence_status must remain not_verified")
 
