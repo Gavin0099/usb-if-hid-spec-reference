@@ -412,3 +412,12 @@
 - latest checkpoint: b7004f6
 - gate: Level 3 verified status transition after human approval; no firmware or
   runtime behavior claims.
+
+### HID-LRA-77: report_descriptor_short_item_prefix Verified Promotion Gate
+
+- status: Completed
+- objective: promote `report_descriptor_short_item_prefix` to verified via the
+  accepted packet evidence gate and observed governance validators.
+  - latest checkpoint: this checkpoint
+- gate: Level 3 verified status transition after human approval; no firmware or
+  runtime behavior claims.
