@@ -114,6 +114,8 @@ actual Usage Tables publication identity as a Level 3 approval input.
 without creating a production Usage Tables matrix.
 `HID-LRA-93` adds a usage ID identity matrix schema proposal and keeps
 HID Usage Tables source authority unchanged.
+`HID-LRA-94` adds a usage type identity matrix schema proposal and keeps
+HID Usage Tables source authority unchanged.
 
 Actions:
 

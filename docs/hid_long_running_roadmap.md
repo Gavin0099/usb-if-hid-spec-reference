@@ -551,3 +551,14 @@
   Tables citation as authority, no production Usage Tables matrix, no matrix
   count movement, and no firmware, OS, parser/runtime, report payload, or
   product-specific behavior claims.
+
+### HID-LRA-94: Usage Type Identity Matrix Schema Proposal
+
+- status: Completed
+- objective: add a Usage Type identity matrix schema proposal while keeping HID
+  Usage Tables unimported.
+- latest checkpoint: this checkpoint
+- gate: matrix schema proposal only; no source authority import, no Usage
+  Tables citation as authority, no production Usage Tables matrix, no matrix
+  count movement, and no firmware, OS, parser/runtime, report payload, or
+  product-specific HID behavior claims.

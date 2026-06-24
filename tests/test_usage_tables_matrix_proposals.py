@@ -9,6 +9,8 @@ from scripts.validate_usage_tables_matrix_proposals import (
     DEFAULT_MARKDOWN,
     DEFAULT_USAGE_ID_MARKDOWN,
     DEFAULT_USAGE_ID_PROPOSAL,
+    DEFAULT_USAGE_TYPE_MARKDOWN,
+    DEFAULT_USAGE_TYPE_PROPOSAL,
     DEFAULT_PROPOSAL,
     DEFAULT_SOURCE_AUTHORITY,
     ROOT,
@@ -37,6 +39,15 @@ class UsageTablesMatrixProposalTests(unittest.TestCase):
         errors, receipt = validate(
             proposal_path=DEFAULT_USAGE_ID_PROPOSAL,
             markdown_path=DEFAULT_USAGE_ID_MARKDOWN,
+        )
+        self.assertEqual(errors, [])
+        self.assertEqual(receipt["result"], "PASS")
+        self.assertFalse(receipt["future_matrix_exists"])
+
+    def test_current_usage_type_identity_proposal_passes(self) -> None:
+        errors, receipt = validate(
+            proposal_path=DEFAULT_USAGE_TYPE_PROPOSAL,
+            markdown_path=DEFAULT_USAGE_TYPE_MARKDOWN,
         )
         self.assertEqual(errors, [])
         self.assertEqual(receipt["result"], "PASS")
@@ -92,6 +103,21 @@ class UsageTablesMatrixProposalTests(unittest.TestCase):
             )
 
         self.assertTrue(any("usage_id_name" in error for error in errors))
+
+    def test_missing_usage_type_field_in_usage_type_matrix_fails(self) -> None:
+        with tempfile.TemporaryDirectory(prefix="tmp_usage_matrix_proposal_", dir=ROOT) as tempdir:
+            temp = Path(tempdir)
+            proposal = json.loads(DEFAULT_USAGE_TYPE_PROPOSAL.read_text(encoding="utf-8"))
+            proposal["proposed_schema_fields"].remove("usage_type_name")
+            proposal_path = temp / "proposal.json"
+            _write_json(proposal_path, proposal)
+
+            errors, _receipt = validate(
+                proposal_path,
+                markdown_path=DEFAULT_USAGE_TYPE_MARKDOWN,
+            )
+
+        self.assertTrue(any("usage_type_name" in error for error in errors))
 
     def test_imported_source_authority_status_fails(self) -> None:
         with tempfile.TemporaryDirectory(prefix="tmp_usage_matrix_proposal_", dir=ROOT) as tempdir:

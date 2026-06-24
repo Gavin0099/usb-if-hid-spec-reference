@@ -26,6 +26,16 @@ DEFAULT_USAGE_ID_PROPOSAL = (
 DEFAULT_USAGE_ID_MARKDOWN = (
     ROOT / "docs" / "evidence" / "usage_tables_matrix_proposals" / "usage_id_identity_matrix_proposal.md"
 )
+DEFAULT_USAGE_TYPE_PROPOSAL = (
+    ROOT / "evidence" / "usage_tables_matrix_proposals" / "usage_type_identity_matrix_proposal.json"
+)
+DEFAULT_USAGE_TYPE_MARKDOWN = (
+    ROOT
+    / "docs"
+    / "evidence"
+    / "usage_tables_matrix_proposals"
+    / "usage_type_identity_matrix_proposal.md"
+)
 DEFAULT_SOURCE_AUTHORITY = ROOT / "data" / "source_authority.yaml"
 DEFAULT_RECEIPT = ROOT / "evidence" / "validation_receipt_usage_tables_matrix_proposals.json"
 
@@ -56,6 +66,19 @@ MATRIX_REQUIREMENTS = {
             "notes",
         },
         "future_matrix_path": "data/hid_usage_id_identity_matrix.yaml",
+    },
+    "usage_type_identity_matrix": {
+        "required_schema_fields": {
+            "entry_id",
+            "usage_type_id",
+            "usage_type_name",
+            "source_id",
+            "source_section",
+            "status",
+            "claim_level",
+            "notes",
+        },
+        "future_matrix_path": "data/hid_usage_type_identity_matrix.yaml",
     },
 }
 REQUIRED_NON_CLAIMS = {
