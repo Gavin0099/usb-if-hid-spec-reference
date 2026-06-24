@@ -4408,3 +4408,46 @@ Commit Checkpoint:
   - work_queue reviewed count: 34 -> 0
   - work_queue verified count: 1 -> 35
   - no tracked table scope changes
+
+## Batch: HID-LRA-82 (Program Completion Gate)
+
+- Commit: bfee612
+- Scope: close the long-running agent governance cycle by marking the contract
+  foundation (`HID-LRA-1`) as completed after all slice-level queue and rollout
+  bookkeeping reached verified state.
+- Changed files:
+  - `docs/hid_long_running_roadmap.md`
+- Validation:
+  - PASS `python -X utf8 scripts/validate_memory_records.py`
+- Stats before/after:
+  - active roadmap slice count: 1 -> 0 (`HID-LRA-1` set to Completed)
+  - queue residual reviewed count: 0 -> 0
+  - verified count: unchanged at 35
+  - no tracked content-table scope changes
+- Review level:
+  - governance completion bookkeeping only.
+- Can claim:
+  - `HID-LRA-1` is marked `Completed` to reflect queue governance steady state.
+  - all implemented slices remain documented as completed in roadmap.
+- Cannot claim:
+  - cannot claim firmware behavior correctness.
+  - cannot claim OS input stack behavior.
+  - cannot claim parser/runtime behavior.
+  - cannot claim product-specific HID behavior.
+  - cannot claim new source authority import.
+- Residual risk:
+  - this is a governance-status closure and does not add new technical evidence semantics.
+
+### Checkpoint memory entry for HID-LRA-82
+
+- Commit: bfee612
+- Scope: record the `HID-LRA-82` program-completion governance checkpoint in
+  repo-local memory.
+- Changed files:
+  - `docs/hid_long_running_roadmap.md`
+  - `docs/hid_long_running_checkpoint_rollup.md`
+  - `memory/2026-06-23.md`
+- Validation:
+  - PASS `python -X utf8 scripts/validate_memory_records.py`
+- Stats before/after:
+  - active roadmap slice count: 1 -> 0 (`HID-LRA-1` completed)

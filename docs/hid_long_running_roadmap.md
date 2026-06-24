@@ -4,7 +4,7 @@
 
 ### HID-LRA-1: Long-Running Agent Contract
 
-- status: Active
+- status: Completed
 - objective: define a repeatable execution contract and queue controls for docs-only
   long-running agent work.
 - outputs: `governance/hid_long_running_agent_contract.md`,
