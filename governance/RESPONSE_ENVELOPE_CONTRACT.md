@@ -4,7 +4,7 @@ Repo-local adoption: reporting convention only.
 
 Source baseline: `ai-governance-framework`
 `governance/RESPONSE_ENVELOPE_CONTRACT.md` at observed upstream `main`
-short commit `65b3388`.
+short commit `737fcd4`.
 
 Baseline version: v0.1.
 
@@ -139,3 +139,107 @@ This contract does not add:
 - CI gates
 - HID source validation
 - firmware behavior validation
+
+## Result-First Final Report Format
+
+Final reports should be result-first, not process-first.
+
+Content language should match the session language. Fixed vocabulary tokens
+remain in English where they are used as validation status labels: `PASS`,
+`FAIL`, `NOT RUN`, `NOT CLAIMED`, and `NOT PRESENT`.
+
+Recommended Chinese session format:
+
+```text
+1. 結果：完成 / 未完成
+2. 能力提升：
+3. 變更檔案：
+4. 驗證：
+   - structural:    PASS — <指令> | FAIL — <指令> | NOT RUN
+   - build:         PASS — <指令> | FAIL — <指令> | NOT RUN
+   - semantic:      NOT CLAIMED | PASS — 人工審查：[審查者/日期]
+   - behavioral:    NOT PRESENT | 已驗證 — [如何]
+   - ext evidence:  NOT PRESENT | [來源與範圍]
+5. 風險：
+   - scope drift:        none | [說明]
+   - claim inflation:    none | [說明]
+   - evidence maturity:  [一行說明]
+6. 附帶清理：   none | file=[路徑] reason=[原因] semantic_change=no
+7. Governance surface 變更：none / 列舉
+8. 剩餘阻擋：
+9. 本次無法宣告：
+   - [列出未驗證、未確認、未證明的項目；不得省略]
+```
+
+Recommended English session format:
+
+```text
+1. Result: Done / Not done
+2. Capability increased:
+3. Changed files:
+4. Validation:
+   - structural:    PASS — <command> | FAIL — <command> | NOT RUN
+   - build:         PASS — <command> | FAIL — <command> | NOT RUN
+   - semantic:      NOT CLAIMED | PASS — human review: [reviewer/date]
+   - behavioral:    NOT PRESENT | verified — [how]
+   - ext evidence:  NOT PRESENT | [source and scope]
+5. Risk:
+   - scope drift:        none | [description]
+   - claim inflation:    none | [description]
+   - evidence maturity:  [one line]
+6. Incidental cleanup:   none | file=[path] reason=[why] semantic_change=no
+7. Governance surface change: none / list
+8. Remaining blocker:
+9. Cannot claim this session:
+   - [list what was not validated, verified, or proven; never omit]
+```
+
+## Golden Examples
+
+Schema-only change:
+
+```text
+1. Result: Done
+2. Capability increased: section_refs schema extended
+3. Changed files: wiki/port-status.md
+4. Validation:
+   - structural:    PASS — grep section_refs wiki/port-status.md
+   - build:         NOT RUN — markdown-only change
+   - semantic:      NOT CLAIMED
+   - behavioral:    NOT PRESENT
+   - ext evidence:  NOT PRESENT
+5. Risk:
+   - scope drift:        none
+   - claim inflation:    none
+   - evidence maturity:  structural layer only; no semantic verification
+6. Incidental cleanup:   none
+7. Governance surface change: none
+8. Remaining blocker:     none
+9. Cannot claim this session:
+   - semantic correctness of section references
+   - PDF-level content verification
+```
+
+Partial validation:
+
+```text
+1. Result: Not done — build failed
+2. Capability increased: none
+3. Changed files: wiki/port-status.md (uncommitted)
+4. Validation:
+   - structural:    PASS — validate_wiki_frontmatter (exit 0)
+   - build:         FAIL — npm run build (exit 1)
+   - semantic:      NOT CLAIMED
+   - behavioral:    NOT PRESENT
+   - ext evidence:  NOT PRESENT
+5. Risk:
+   - scope drift:        none
+   - claim inflation:    none — task not complete
+   - evidence maturity:  build failure; no completion evidence
+6. Incidental cleanup:   none
+7. Governance surface change: none
+8. Remaining blocker:     build error must be resolved before commit
+9. Cannot claim this session:
+   - task complete
+   - validation above build layer
+```

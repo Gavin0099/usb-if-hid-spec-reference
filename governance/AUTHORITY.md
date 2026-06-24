@@ -106,6 +106,22 @@ Not imported:
 - agent runtime profile schema
 - trust boundary taxonomy as enforcement
 - CodeBurn observation as gate input
+- framework memory workflow implementation
+- framework mutation catalog as enforcement
 
 These surfaces may exist in the framework producer repo, but their presence
 there does not make them authority in this HID reference repo.
+
+---
+
+## Latest Framework Refresh Notes
+
+Observed upstream framework baseline `737fcd4` adds framework-side memory
+workflow and mutation-catalog surfaces, plus expanded result-first response
+reporting guidance.
+
+Repo-local adoption in this HID reference repo is limited to reporting
+convention refresh in `governance/RESPONSE_ENVELOPE_CONTRACT.md` and the
+framework lock baseline update. It does not import framework producer tooling,
+runtime gate policy, memory workflow implementation, mutation enforcement, or
+any new HID source authority.
