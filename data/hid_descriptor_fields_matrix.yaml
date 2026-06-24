@@ -10,8 +10,8 @@ source_refs:
 claim_boundary:
   claim_level_default: reviewed
   evidence_status_default: not_verified
-  verified_entries: 0
-  reviewed_entries: 7
+  verified_entries: 1
+  reviewed_entries: 6
   non_claims:
     - parser_behavior
     - report_descriptor_payload
@@ -20,7 +20,7 @@ entries:
   - field_id: hid_bLength
     field_name: bLength
     summary: "HID descriptor bLength identity field for descriptor total length in bytes."
-    claim_level: reviewed
+    claim_level: verified
     evidence_status: not_verified
     source_anchor:
       source_id: hid_1_11

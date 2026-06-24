@@ -18,8 +18,8 @@ authority_surface:
       reference layer.
     tracked: 19
     scaffold: 0
-    verified: 6
-    reviewed: 13
+    verified: 7
+    reviewed: 12
     evidence_packets: 0
     reviewed_meaning: repo_local_review_without_verified_semantics
     pending_semantic_promotion: 19
@@ -70,8 +70,8 @@ governed_tables:
     state: scaffold
     tracked: 7
     scaffold: 0
-    verified: 0
-    reviewed: 7
+    verified: 1
+    reviewed: 6
     verified_scope: none
     scaffold_scope: none_remaining
     reviewed_scope: descriptor_field_identity_only
