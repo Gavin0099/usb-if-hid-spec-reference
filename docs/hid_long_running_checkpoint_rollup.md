@@ -3770,6 +3770,184 @@ Commit Checkpoint:
   - cannot claim product-specific HID behavior.
 - Residual risk:
   - No parser/runtime or host-side behavior verification was verified in this slice.
+
+## Batch: HID-LRA-78 (report_descriptor_long_item_prefix verified promotion)
+
+- Commit: this checkpoint
+- Scope: promote `report_descriptor_long_item_prefix` from accepted candidate to verified claim level through Level 3 approved checkpoint, then reflect the change in governing matrices, manifest, and evidence packet metadata.
+- Changed files:
+  - `data/hid_report_descriptor_items_matrix.yaml`
+  - `docs/evidence/accepted/report_descriptor_long_item_prefix_accepted.yaml`
+  - `docs/evidence/candidates/report_descriptor_long_item_prefix_candidate.yaml`
+  - `docs/evidence/preapproval_summary.md`
+  - `evidence/preapproval_summary.json`
+  - `evidence/table_fingerprint_baseline.jsonl`
+  - `exports/hid_governed_surface_manifest.yaml`
+  - `specs/en/verification_status.md`
+  - `specs/verification_status.md`
+  - `tests/test_contract_files.py`
+  - `tests/test_preapproval_readiness_summary.py`
+  - `tests/test_verification_status_counts.py`
+- Validation:
+  - PASS `python -X utf8 scripts/validate_source_authority.py`
+  - PASS `python -X utf8 scripts/validate_hid_class_request_matrix.py`
+  - PASS `python -X utf8 scripts/validate_hid_descriptor_fields_matrix.py`
+  - PASS `python -X utf8 scripts/validate_hid_report_descriptor_items_matrix.py`
+  - PASS `python -X utf8 scripts/validate_verification_status.py`
+  - PASS `python -X utf8 scripts/validate_evidence_packet_schema.py`
+  - PASS `python -X utf8 scripts/validate_contract_files.py`
+  - PASS `python -X utf8 scripts/probe_table_fingerprint.py --mode check --manifest exports/hid_governed_surface_manifest.yaml --baseline-in evidence/table_fingerprint_baseline.jsonl`
+  - PASS `python -X utf8 scripts/validate_memory_records.py`
+  - PASS `python -m unittest discover -s tests`
+- Stats before/after:
+  - tracked: unchanged at 19
+  - scaffold: unchanged at 0
+  - reviewed: 11 -> 10
+  - verified: 8 -> 9
+  - accepted-packet proposals: unchanged at 19
+  - production accepted packets: unchanged at 19
+- Review level:
+  - Level 3 verified status transition only; no new production accepted packet emission.
+- Can claim:
+  - `report_descriptor_long_item_prefix` is now `verified` in
+    `data/hid_report_descriptor_items_matrix.yaml`.
+  - `exports/hid_governed_surface_manifest.yaml` now reports verified counts as
+    consistent.
+  - `docs/evidence/accepted/report_descriptor_long_item_prefix_accepted.yaml` now records `current_claim_level: verified`.
+  - `docs/evidence/candidates/report_descriptor_long_item_prefix_candidate.yaml` now records `current_claim_level: verified`.
+  - `docs/evidence/preapproval_summary.*` now tracks 9 verified entries.
+  - validation checks and tests pass with no claimed firmware/parser/OS behavior
+    semantics.
+- Cannot claim:
+  - cannot claim verified semantics beyond accepted identity-level scope for `report_descriptor_long_item_prefix`.
+  - cannot claim firmware behavior correctness.
+  - cannot claim OS input stack behavior.
+  - cannot claim parser/runtime behavior.
+  - cannot claim product-specific HID behavior.
+- Residual risk:
+  - No parser/runtime or host-side behavior verification was verified in this slice.
+
+### Checkpoint memory entry for HID-LRA-78
+
+- Commit: this checkpoint
+- Scope: record the `HID-LRA-78` verified promotion checkpoint in repo-local daily memory.
+- Changed files:
+  - `memory/2026-06-23.md`
+  - `docs/evidence/preapproval_summary.md`
+  - `evidence/preapproval_summary.json`
+  - `docs/hid_long_running_checkpoint_rollup.md`
+  - `docs/hid_long_running_roadmap.md`
+- Validation:
+  - PASS `python -X utf8 scripts/validate_memory_records.py`
+  - PASS `python -m unittest discover -s tests`
+- Stats before/after:
+  - tracked: unchanged at 19
+  - scaffold: unchanged at 0
+  - reviewed: 11 -> 10
+  - verified: 8 -> 9
+  - accepted-packet proposals: unchanged at 19
+  - production accepted packets: unchanged at 19
+- Can claim:
+  - `memory/2026-06-23.md` contains a bound entry for commit this checkpoint.
+- Cannot claim:
+  - cannot claim firmware behavior correctness.
+  - cannot claim OS input stack behavior.
+  - cannot claim parser/runtime behavior.
+  - cannot claim product-specific HID behavior.
+- Residual risk:
+  - No parser/runtime or host-side behavior verification was added.
+
+## Batch: HID-LRA-79 (report descriptor identity verified promotion batch)
+
+- Commit: this checkpoint
+- Scope: promote all remaining report descriptor item-type identities from accepted candidate state to verified (`report_descriptor_main_item_type`, `report_descriptor_global_item_type`, `report_descriptor_local_item_type`, `report_descriptor_reserved_item_type`), then reconcile governing matrix counts, manifest counts, and evidence packet metadata.
+- Changed files:
+  - `data/hid_report_descriptor_items_matrix.yaml`
+  - `docs/evidence/accepted/report_descriptor_main_item_type_accepted.yaml`
+  - `docs/evidence/accepted/report_descriptor_global_item_type_accepted.yaml`
+  - `docs/evidence/accepted/report_descriptor_local_item_type_accepted.yaml`
+  - `docs/evidence/accepted/report_descriptor_reserved_item_type_accepted.yaml`
+  - `docs/evidence/candidates/report_descriptor_main_item_type_candidate.yaml`
+  - `docs/evidence/candidates/report_descriptor_global_item_type_candidate.yaml`
+  - `docs/evidence/candidates/report_descriptor_local_item_type_candidate.yaml`
+  - `docs/evidence/candidates/report_descriptor_reserved_item_type_candidate.yaml`
+  - `docs/evidence/preapproval_summary.md`
+  - `evidence/preapproval_summary.json`
+  - `evidence/table_fingerprint_baseline.jsonl`
+  - `exports/hid_governed_surface_manifest.yaml`
+  - `specs/en/verification_status.md`
+  - `specs/verification_status.md`
+  - `tests/test_contract_files.py`
+  - `tests/test_preapproval_readiness_summary.py`
+  - `tests/test_verification_status_counts.py`
+- Validation:
+  - PASS `python -X utf8 scripts/validate_source_authority.py`
+  - PASS `python -X utf8 scripts/validate_hid_class_request_matrix.py`
+  - PASS `python -X utf8 scripts/validate_hid_descriptor_fields_matrix.py`
+  - PASS `python -X utf8 scripts/validate_hid_report_descriptor_items_matrix.py`
+  - PASS `python -X utf8 scripts/validate_verification_status.py`
+  - PASS `python -X utf8 scripts/validate_evidence_packet_schema.py`
+  - PASS `python -X utf8 scripts/validate_contract_files.py`
+  - PASS `python -X utf8 scripts/probe_table_fingerprint.py --mode check --manifest exports/hid_governed_surface_manifest.yaml --baseline-in evidence/table_fingerprint_baseline.jsonl`
+  - PASS `python -X utf8 scripts/validate_memory_records.py`
+  - PASS `python -m unittest discover -s tests`
+- Stats before/after:
+  - tracked: unchanged at 19
+  - scaffold: unchanged at 0
+  - reviewed: 10 -> 6
+  - verified: 9 -> 13
+  - accepted-packet proposals: unchanged at 19
+  - production accepted packets: unchanged at 19
+- Review level:
+  - Level 3 verified status transition only; no new production accepted packet emission.
+- Can claim:
+  - `report_descriptor_main_item_type` is now `verified` in `data/hid_report_descriptor_items_matrix.yaml`.
+  - `report_descriptor_global_item_type` is now `verified` in `data/hid_report_descriptor_items_matrix.yaml`.
+  - `report_descriptor_local_item_type` is now `verified` in `data/hid_report_descriptor_items_matrix.yaml`.
+  - `report_descriptor_reserved_item_type` is now `verified` in `data/hid_report_descriptor_items_matrix.yaml`.
+  - `exports/hid_governed_surface_manifest.yaml` now reports verified counts as consistent.
+  - accepted and candidate packet metadata for the four report-descriptor item identities now records `current_claim_level: verified`.
+  - `docs/evidence/preapproval_summary.*` now tracks 13 verified entries.
+  - validation checks and tests pass with no claimed firmware/parser/OS behavior semantics.
+- Cannot claim:
+  - cannot claim verified semantics beyond accepted identity-level scope for the four promoted report-descriptor item types.
+  - cannot claim firmware behavior correctness.
+  - cannot claim OS input stack behavior.
+  - cannot claim parser/runtime behavior.
+  - cannot claim product-specific HID behavior.
+- Residual risk:
+  - No parser/runtime or host-side behavior verification was verified in this slice.
+
+### Checkpoint memory entry for HID-LRA-79
+
+- Commit: this checkpoint
+- Scope: record the `HID-LRA-79` verified promotion checkpoint in repo-local daily memory.
+- Changed files:
+  - `memory/2026-06-23.md`
+  - `docs/evidence/preapproval_summary.md`
+  - `evidence/preapproval_summary.json`
+  - `docs/hid_long_running_checkpoint_rollup.md`
+  - `docs/hid_long_running_roadmap.md`
+- Validation:
+  - PASS `python -X utf8 scripts/validate_memory_records.py`
+  - PASS `python -m unittest discover -s tests`
+- Stats before/after:
+  - tracked: unchanged at 19
+  - scaffold: unchanged at 0
+  - reviewed: 10 -> 6
+  - verified: 9 -> 13
+  - accepted-packet proposals: unchanged at 19
+  - production accepted packets: unchanged at 19
+- Can claim:
+  - `memory/2026-06-23.md` contains a bound entry for commit this checkpoint.
+- Cannot claim:
+  - cannot claim firmware behavior correctness.
+  - cannot claim OS input stack behavior.
+  - cannot claim parser/runtime behavior.
+  - cannot claim product-specific HID behavior.
+- Residual risk:
+  - No parser/runtime or host-side behavior verification was added.
+
 ## Batch: HID-LRA-71 (SET_REPORT verified promotion)
 
 - Commit: fa8e5d4

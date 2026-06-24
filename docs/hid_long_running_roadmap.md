@@ -421,3 +421,24 @@
   - latest checkpoint: this checkpoint
 - gate: Level 3 verified status transition after human approval; no firmware or
   runtime behavior claims.
+
+### HID-LRA-78: report_descriptor_long_item_prefix Verified Promotion Gate
+
+- status: Completed
+- objective: promote `report_descriptor_long_item_prefix` to verified via the
+  accepted packet evidence gate and observed governance validators.
+- latest checkpoint: this checkpoint
+- gate: Level 3 verified status transition after human approval; no firmware or
+  runtime behavior claims.
+
+### HID-LRA-79: report descriptor item identity batch verified promotion
+
+- status: Completed
+- objective: promote remaining report descriptor item identities
+  (`report_descriptor_main_item_type`, `report_descriptor_global_item_type`,
+  `report_descriptor_local_item_type`, `report_descriptor_reserved_item_type`) to
+  verified through existing accepted packet evidence gates and observed governance
+  validators.
+- latest checkpoint: this checkpoint
+- gate: Level 3 verified status transition after human approval; no firmware or
+  runtime behavior claims.

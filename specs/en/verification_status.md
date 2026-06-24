@@ -7,10 +7,10 @@ Source authority status: locked.
 | Area | Tracked entries | Verified | Reviewed | Inferred | Missing |
 |---|---:|---:|---:|---:|---:|
 | HID descriptors | 7 | 1 | 6 | 0 | 0 |
-| HID report descriptors | 6 | 1 | 5 | 0 | 0 |
+| HID report descriptors | 6 | 6 | 0 | 0 | 0 |
 | HID class requests | 6 | 6 | 0 | 0 | 0 |
 | Report / boot / idle semantics | 0 | 0 | 0 | 0 | 0 |
-| **Total** | **19** | **8** | **11** | **0** | **0** |
+| **Total** | **19** | **13** | **6** | **0** | **0** |
 
 ## Current Surface Summary
 
