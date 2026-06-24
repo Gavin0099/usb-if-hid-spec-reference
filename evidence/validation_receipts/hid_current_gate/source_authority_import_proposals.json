@@ -1,0 +1,19 @@
+{
+  "receipt_id": "source_authority_import_proposals",
+  "command": [
+    "python",
+    "-X",
+    "utf8",
+    "scripts/validate_source_authority_import_proposals.py",
+    "--receipt-out",
+    "evidence/validation_receipt_source_authority_import_proposals.json"
+  ],
+  "claim_ceiling": "source_authority_import_proposal_validation_only",
+  "result": "PASS",
+  "returncode": 0,
+  "stdout": [
+    "PASS validate_source_authority_import_proposals",
+    "- checked proposal: evidence/source_authority_proposals/hid_usage_tables_import_proposal.json"
+  ],
+  "stderr": []
+}

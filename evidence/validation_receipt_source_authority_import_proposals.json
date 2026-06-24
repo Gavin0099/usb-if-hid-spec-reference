@@ -1,0 +1,13 @@
+{
+  "validator": "validate_source_authority_import_proposals.py",
+  "authority_ceiling": "source_authority_import_proposal_validation_only",
+  "result": "PASS",
+  "checked_proposal": "evidence/source_authority_proposals/hid_usage_tables_import_proposal.json",
+  "checked_markdown": "docs/evidence/source_authority_proposals/hid_usage_tables_import_proposal.md",
+  "checked_checklist": "docs/evidence/source_authority_proposals/hid_usage_tables_import_preapproval_checklist.md",
+  "source_authority_status": "not_imported",
+  "source_registry_sections": [],
+  "error_count": 0,
+  "errors": [],
+  "findings": []
+}

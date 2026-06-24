@@ -484,3 +484,14 @@
   Usage Tables citation as authority, no Usage Tables matrices, no matrix count
   movement, and no firmware, OS, parser/runtime, report payload, or
   product-specific behavior claims.
+
+### HID-LRA-87: HID Usage Tables Source-Authority Import Proposal
+
+- status: Completed
+- objective: add proposal/checklist artifacts and a validator for a future Level
+  3 HID Usage Tables source-authority import.
+- latest checkpoint: this checkpoint
+- gate: proposal/checklist validation only; no source authority import, no Usage
+  Tables citation as authority, no Usage Tables matrices, no matrix count
+  movement, and no firmware, OS, parser/runtime, report payload, or
+  product-specific behavior claims.

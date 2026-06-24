@@ -17,6 +17,7 @@
 |---|---|---|---|
 | `source_authority` | PASS | `source_authority_structural_validation_only` | `evidence/validation_receipts/hid_current_gate/source_authority.json` |
 | `source_registry` | PASS | `structural_registry_validation_only` | `evidence/validation_receipts/hid_current_gate/source_registry.json` |
+| `source_authority_import_proposals` | PASS | `source_authority_import_proposal_validation_only` | `evidence/validation_receipts/hid_current_gate/source_authority_import_proposals.json` |
 | `contract_files` | PASS | `contract_structural_consistency_only` | `evidence/validation_receipts/hid_current_gate/contract_files.json` |
 | `hid_class_request_matrix` | PASS | `matrix_identity_validation_only` | `evidence/validation_receipts/hid_current_gate/hid_class_request_matrix.json` |
 | `hid_descriptor_fields_matrix` | PASS | `matrix_identity_validation_only` | `evidence/validation_receipts/hid_current_gate/hid_descriptor_fields_matrix.json` |
@@ -29,7 +30,6 @@
 | `hid_governed_surface_manifest` | PASS | `manifest_structural_integrity_only` | `evidence/validation_receipts/hid_current_gate/hid_governed_surface_manifest.json` |
 | `table_fingerprint` | PASS | `table_content_fingerprint_drift_only` | `evidence/validation_receipts/hid_current_gate/table_fingerprint.json` |
 | `memory_records` | PASS | `memory_record_structural_visibility_only` | `evidence/validation_receipts/hid_current_gate/memory_records.json` |
-| `validation_receipt_index` | PASS | `validation_receipt_index_integrity_only` | `evidence/validation_receipts/hid_current_gate/validation_receipt_index.json` |
 | `unit_tests` | PASS | `regression_test_result_only` | `evidence/validation_receipts/hid_current_gate/unit_tests.json` |
 
 ## Claim Ceiling

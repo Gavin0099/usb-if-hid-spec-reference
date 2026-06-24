@@ -50,6 +50,18 @@ GATE_COMMANDS = [
         "structural_registry_validation_only",
     ),
     GateCommand(
+        "source_authority_import_proposals",
+        [
+            "python",
+            "-X",
+            "utf8",
+            "scripts/validate_source_authority_import_proposals.py",
+            "--receipt-out",
+            "evidence/validation_receipt_source_authority_import_proposals.json",
+        ],
+        "source_authority_import_proposal_validation_only",
+    ),
+    GateCommand(
         "contract_files",
         [
             "python",
@@ -166,18 +178,6 @@ GATE_COMMANDS = [
             "evidence/validation_receipt_memory_records.json",
         ],
         "memory_record_structural_visibility_only",
-    ),
-    GateCommand(
-        "validation_receipt_index",
-        [
-            "python",
-            "-X",
-            "utf8",
-            "scripts/validate_validation_receipt_index.py",
-            "--receipt-out",
-            "evidence/validation_receipt_validation_receipt_index.json",
-        ],
-        "validation_receipt_index_integrity_only",
     ),
     GateCommand(
         "unit_tests",

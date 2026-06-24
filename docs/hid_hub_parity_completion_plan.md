@@ -102,6 +102,8 @@ Purpose: prepare secondary authority expansion without silently importing it.
 Status: in progress. `HID-LRA-86` adds the preflight/eligibility artifact for
 HID Usage Tables import without importing the source or creating Usage Tables
 governed entries.
+`HID-LRA-87` adds a source-authority import proposal/checklist and proposal
+validator while keeping HID Usage Tables not imported.
 
 Actions:
 

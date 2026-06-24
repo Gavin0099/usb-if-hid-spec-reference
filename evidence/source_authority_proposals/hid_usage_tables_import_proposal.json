@@ -1,0 +1,62 @@
+{
+  "authority_ceiling": "source_authority_import_proposal_only",
+  "proposal_status": "proposal_only",
+  "source_candidate": {
+    "source_id": "hid_usage_tables",
+    "current_role": "secondary",
+    "current_status": "not_imported",
+    "proposed_next_status": "pending_level3_source_authority_import"
+  },
+  "production_source_authority_change_created": false,
+  "usage_tables_governed_entries_created": false,
+  "verified_uplift": false,
+  "required_level3_gate": {
+    "approval_record": "TBD_LEVEL3_APPROVAL",
+    "approver": "TBD_HUMAN_APPROVER",
+    "checkpoint_commit": "TBD_LEVEL3_SOURCE_IMPORT_COMMIT",
+    "validation_receipt": "TBD_LEVEL3_VALIDATION_RECEIPT",
+    "direct_import": false
+  },
+  "first_implementation_slice_after_approval": [
+    "update data/source_authority.yaml",
+    "update evidence/source_registry.yaml",
+    "update docs/source_authority.md",
+    "update docs/claim_boundary.md",
+    "add candidate matrix queue entries",
+    "run validation receipt index gate"
+  ],
+  "required_validators": [
+    "python -X utf8 scripts/validate_source_authority.py",
+    "python -X utf8 scripts/validate_source_registry.py",
+    "python -X utf8 scripts/validate_validation_receipt_index.py",
+    "python -X utf8 scripts/generate_validation_receipt_index.py --check-only --assert-match evidence/validation_receipt_index.json",
+    "python -B -m unittest discover -s tests"
+  ],
+  "remaining_gaps": [
+    "Level 3 approval is not recorded",
+    "data/source_authority.yaml is not updated",
+    "evidence/source_registry.yaml is not updated",
+    "Usage Tables source version/publication identity is not selected",
+    "Imported scope is not selected",
+    "Excluded scope is not selected",
+    "Candidate Usage Tables matrices are not created",
+    "Usage Tables evidence packets are not created",
+    "Usage Tables validation receipts are not created"
+  ],
+  "claim_ceiling": [
+    "source_authority_import_proposal_only",
+    "no_source_authority_import",
+    "no_usage_tables_coverage",
+    "no_verified_uplift"
+  ],
+  "not_claimed": [
+    "HID Usage Tables are not imported",
+    "Usage Tables entries are not tracked, reviewed, or verified",
+    "Report payload semantics are not covered",
+    "Report descriptor semantic completeness is not claimed",
+    "Firmware behavior correctness is not claimed",
+    "OS input stack behavior is not claimed",
+    "Parser/runtime behavior is not claimed",
+    "Product-specific HID behavior is not claimed"
+  ]
+}

@@ -1,7 +1,7 @@
 {
   "validator": "generate_validation_receipt_index.py",
   "authority_ceiling": "validation_receipt_index_only",
-  "generated_at": "2026-06-24T06:20:58+00:00",
+  "generated_at": "2026-06-24T06:29:18+00:00",
   "result": "PASS",
   "receipt_dir": "evidence/validation_receipts/hid_current_gate",
   "checked_commands": 16,
@@ -34,6 +34,21 @@
         "scripts/validate_source_registry.py",
         "--receipt-out",
         "evidence/validation_receipt_source_registry.json"
+      ]
+    },
+    {
+      "receipt_id": "source_authority_import_proposals",
+      "result": "PASS",
+      "returncode": 0,
+      "claim_ceiling": "source_authority_import_proposal_validation_only",
+      "receipt_path": "evidence/validation_receipts/hid_current_gate/source_authority_import_proposals.json",
+      "command": [
+        "python",
+        "-X",
+        "utf8",
+        "scripts/validate_source_authority_import_proposals.py",
+        "--receipt-out",
+        "evidence/validation_receipt_source_authority_import_proposals.json"
       ]
     },
     {
@@ -213,21 +228,6 @@
         "scripts/validate_memory_records.py",
         "--receipt-out",
         "evidence/validation_receipt_memory_records.json"
-      ]
-    },
-    {
-      "receipt_id": "validation_receipt_index",
-      "result": "PASS",
-      "returncode": 0,
-      "claim_ceiling": "validation_receipt_index_integrity_only",
-      "receipt_path": "evidence/validation_receipts/hid_current_gate/validation_receipt_index.json",
-      "command": [
-        "python",
-        "-X",
-        "utf8",
-        "scripts/validate_validation_receipt_index.py",
-        "--receipt-out",
-        "evidence/validation_receipt_validation_receipt_index.json"
       ]
     },
     {

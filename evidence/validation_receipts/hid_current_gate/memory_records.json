@@ -14,7 +14,7 @@
   "stdout": [
     "PASS validate_memory_records",
     "- checked files: 3",
-    "- checked sections: 45"
+    "- checked sections: 46"
   ],
   "stderr": []
 }
