@@ -14,7 +14,7 @@ queue:
   - id: HID-REQ-1
     title: GET_REPORT reviewed draft
     authority: HID 1.11 Section 7.2
-    status: reviewed
+    status: verified
     allowed_status_change: scaffold_to_reviewed
     requires_human_approval: true
     review_level: 2
@@ -34,7 +34,7 @@ queue:
   - id: HID-REQ-2
     title: SET_REPORT reviewed draft
     authority: HID 1.11 Section 7.2
-    status: reviewed
+    status: verified
     allowed_status_change: scaffold_to_reviewed
     requires_human_approval: true
     review_level: 2
@@ -54,7 +54,7 @@ queue:
   - id: HID-REQ-3
     title: GET_IDLE reviewed draft
     authority: HID 1.11 Section 7.2
-    status: reviewed
+    status: verified
     allowed_status_change: scaffold_to_reviewed
     requires_human_approval: true
     review_level: 2
@@ -74,7 +74,7 @@ queue:
   - id: HID-REQ-4
     title: SET_IDLE reviewed draft
     authority: HID 1.11 Section 7.2
-    status: reviewed
+    status: verified
     allowed_status_change: scaffold_to_reviewed
     requires_human_approval: true
     review_level: 2
@@ -94,7 +94,7 @@ queue:
   - id: HID-REQ-5
     title: GET_PROTOCOL reviewed draft
     authority: HID 1.11 Section 7.2
-    status: reviewed
+    status: verified
     allowed_status_change: scaffold_to_reviewed
     requires_human_approval: true
     review_level: 2
@@ -113,7 +113,7 @@ queue:
   - id: HID-REQ-6
     title: SET_PROTOCOL reviewed draft
     authority: HID 1.11 Section 7.2
-    status: reviewed
+    status: verified
     allowed_status_change: scaffold_to_reviewed
     requires_human_approval: true
     review_level: 2
@@ -133,7 +133,7 @@ queue:
   - id: HID-DESC-1
     title: HID Descriptor field wording alignment pass
     authority: HID 1.11 Section 6.2.1
-    status: reviewed
+    status: verified
     allowed_status_change: scaffold_to_reviewed
     requires_human_approval: true
     review_level: 2
@@ -154,7 +154,7 @@ queue:
   - id: HID-EXT-1
     title: Source authority extension preflight
     authority: HID source authority boundary extension
-    status: reviewed
+    status: verified
     allowed_status_change: scaffold_to_reviewed
     requires_human_approval: true
     review_level: 2
@@ -176,7 +176,7 @@ queue:
   - id: HID-EXT-2
     title: Define 6.2.2 import eligibility
     authority: HID 1.11 Section 6.2.2
-    status: reviewed
+    status: verified
     allowed_status_change: scaffold_to_reviewed
     requires_human_approval: true
     review_level: 2
@@ -199,7 +199,7 @@ queue:
   - id: HID-GOV-1
     title: Checkpoint memory visibility tooling
     authority: Repo-local memory authority contract
-    status: reviewed
+    status: verified
     allowed_status_change: scaffold_to_reviewed
     requires_human_approval: false
     review_level: 1
@@ -217,7 +217,7 @@ queue:
   - id: HID-EXT-3
     title: Promote 6.2.2 to current imported scaffold
     authority: HID 1.11 Section 6.2.2
-    status: reviewed
+    status: verified
     allowed_status_change: future_authorized_to_current_scaffold
     requires_human_approval: true
     review_level: 3
@@ -239,7 +239,7 @@ queue:
   - id: HID-RD-1
     title: 6.2.2 report descriptor item reviewed wording pass
     authority: HID 1.11 Section 6.2.2
-    status: reviewed
+    status: verified
     allowed_status_change: scaffold_to_reviewed
     requires_human_approval: true
     review_level: 2
@@ -259,7 +259,7 @@ queue:
   - id: HID-DESC-2
     title: 6.2.1 HID descriptor field reviewed wording pass
     authority: HID 1.11 Section 6.2.1
-    status: reviewed
+    status: verified
     allowed_status_change: scaffold_to_reviewed
     requires_human_approval: true
     review_level: 2
@@ -279,7 +279,7 @@ queue:
   - id: HID-GOV-2
     title: Verified evidence packet preflight gate
     authority: Repo-local evidence packet governance
-    status: reviewed
+    status: verified
     allowed_status_change: governance_preflight_only
     requires_human_approval: false
     review_level: 1
@@ -324,7 +324,7 @@ queue:
   - id: HID-VER-2
     title: Remaining HID request verified candidate packet skeletons
     authority: HID 1.11 Section 7.2
-    status: reviewed
+    status: verified
     allowed_status_change: candidate_packet_only
     requires_human_approval: false
     review_level: 1
@@ -348,7 +348,7 @@ queue:
   - id: HID-VER-3
     title: Candidate packet source authority binding validator
     authority: Repo-local evidence packet governance
-    status: reviewed
+    status: verified
     allowed_status_change: validator_hardening_only
     requires_human_approval: false
     review_level: 1
@@ -370,7 +370,7 @@ queue:
   - id: HID-VER-4
     title: Candidate packet matrix source_refs binding validator
     authority: Repo-local evidence packet governance
-    status: reviewed
+    status: verified
     allowed_status_change: validator_hardening_only
     requires_human_approval: false
     review_level: 1
@@ -393,7 +393,7 @@ queue:
   - id: HID-VER-5
     title: Candidate packet source binding negative tests
     authority: Repo-local evidence packet governance
-    status: reviewed
+    status: verified
     allowed_status_change: test_coverage_only
     requires_human_approval: false
     review_level: 1
@@ -415,7 +415,7 @@ queue:
   - id: HID-VER-6
     title: Candidate accepted-gate negative tests
     authority: Repo-local evidence packet governance
-    status: reviewed
+    status: verified
     allowed_status_change: test_coverage_only
     requires_human_approval: false
     review_level: 1
@@ -437,7 +437,7 @@ queue:
   - id: HID-VER-7
     title: HID descriptor field verified candidate packet skeletons
     authority: HID 1.11 Section 6.2.1
-    status: reviewed
+    status: verified
     allowed_status_change: candidate_packet_only
     requires_human_approval: false
     review_level: 1
@@ -460,7 +460,7 @@ queue:
   - id: HID-VER-8
     title: HID report descriptor item verified candidate packet skeletons
     authority: HID 1.11 Section 6.2.2
-    status: reviewed
+    status: verified
     allowed_status_change: candidate_packet_only
     requires_human_approval: false
     review_level: 1
@@ -484,7 +484,7 @@ queue:
   - id: HID-VER-9
     title: Level 3 accepted packet workflow contract
     authority: Repo-local evidence packet governance
-    status: reviewed
+    status: verified
     allowed_status_change: workflow_contract_only
     requires_human_approval: false
     review_level: 1
@@ -506,7 +506,7 @@ queue:
   - id: HID-VER-10
     title: Level 3 accepted packet dry-run fixtures
     authority: Repo-local evidence packet governance
-    status: reviewed
+    status: verified
     allowed_status_change: test_coverage_only
     requires_human_approval: false
     review_level: 1
@@ -528,7 +528,7 @@ queue:
   - id: HID-VER-11
     title: Production accepted packet path and naming guard
     authority: Repo-local evidence packet governance
-    status: reviewed
+    status: verified
     allowed_status_change: validator_hardening_only
     requires_human_approval: false
     review_level: 1
@@ -550,7 +550,7 @@ queue:
   - id: HID-VER-12
     title: GET_REPORT accepted packet pre-approval checklist generator
     authority: Repo-local evidence packet governance
-    status: reviewed
+    status: verified
     allowed_status_change: preapproval_gap_report_only
     requires_human_approval: false
     review_level: 1
@@ -573,7 +573,7 @@ queue:
   - id: HID-VER-13
     title: Complete candidate pre-approval checklist surface
     authority: Repo-local evidence packet governance
-    status: reviewed
+    status: verified
     allowed_status_change: preapproval_gap_report_only
     requires_human_approval: false
     review_level: 1
@@ -595,7 +595,7 @@ queue:
   - id: HID-VER-14
     title: Pre-approval generator stale-report and path containment guard
     authority: Repo-local evidence packet governance
-    status: reviewed
+    status: verified
     allowed_status_change: generator_hardening_only
     requires_human_approval: false
     review_level: 1
@@ -617,7 +617,7 @@ queue:
   - id: HID-VER-15
     title: Accepted packet pre-approval readiness summary
     authority: Repo-local evidence packet governance
-    status: reviewed
+    status: verified
     allowed_status_change: readiness_summary_only
     requires_human_approval: false
     review_level: 1
@@ -639,7 +639,7 @@ queue:
   - id: HID-VER-16
     title: GET_REPORT accepted packet proposal generator
     authority: Repo-local evidence packet governance
-    status: reviewed
+    status: verified
     allowed_status_change: accepted_packet_proposal_only
     requires_human_approval: false
     review_level: 1
@@ -662,7 +662,7 @@ queue:
   - id: HID-VER-17
     title: Accepted packet proposal validator
     authority: Repo-local evidence packet governance
-    status: reviewed
+    status: verified
     allowed_status_change: proposal_validator_only
     requires_human_approval: false
     review_level: 1
@@ -684,7 +684,7 @@ queue:
   - id: HID-VER-18
     title: Accepted packet proposal validator receipt path containment
     authority: Repo-local evidence packet governance
-    status: reviewed
+    status: verified
     allowed_status_change: validator_hardening_only
     requires_human_approval: false
     review_level: 1
@@ -706,7 +706,7 @@ queue:
   - id: HID-VER-19
     title: Complete accepted packet proposal surface
     authority: Repo-local evidence packet governance
-    status: reviewed
+    status: verified
     allowed_status_change: accepted_packet_proposal_only
     requires_human_approval: false
     review_level: 1
@@ -729,7 +729,7 @@ queue:
   - id: HID-VER-20
     title: Accepted packet proposal coverage guard and summary
     authority: Repo-local evidence packet governance
-    status: reviewed
+    status: verified
     allowed_status_change: proposal_coverage_summary_only
     requires_human_approval: false
     review_level: 1
@@ -752,7 +752,7 @@ queue:
   - id: HID-VER-21
     title: Accepted packet proposal summary drift gate
     authority: Repo-local evidence packet governance
-    status: reviewed
+    status: verified
     allowed_status_change: summary_drift_gate_only
     requires_human_approval: false
     review_level: 1
