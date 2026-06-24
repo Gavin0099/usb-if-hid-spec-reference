@@ -442,3 +442,14 @@
 - latest checkpoint: this checkpoint
 - gate: Level 3 verified status transition after human approval; no firmware or
   runtime behavior claims.
+
+### HID-LRA-83: HUB-Parity Completion Plan and Claim Reconciliation
+
+- status: Completed
+- objective: define the plan to bring HID repo completeness toward
+  `usb-if-hub-spec-reference` maturity, then reconcile public docs with the
+  current 19/19 verified identity-level subset.
+- latest checkpoint: this checkpoint
+- gate: docs/governance only; no new source authority import, no matrix status
+  movement, no firmware, OS, parser/runtime, or product-specific behavior
+  claims.

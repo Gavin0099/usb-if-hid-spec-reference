@@ -10,13 +10,14 @@ class sub-surface.
 ## Current Status
 
 - Canonical visible reference surface: `specs/` and `specs/en/`
-- Initial focus: HID class request and HID descriptor field scaffold
+- Initial governed subset: HID class requests, HID descriptor fields, and
+  report descriptor item type identities
 - AI governance baseline: upstream formal release v1.2.0 plus latest observed
   `main` boundary snapshot (`65b3388`, 2026-06-04)
 - Tracked entries: 19
 - Scaffold entries: 0
-- Verified entries: 0
-- Reviewed entries: 19
+- Verified entries: 19
+- Reviewed entries: 0
 - Inferred entries: 0
 
 ## Scope
@@ -32,10 +33,11 @@ This repo may cover:
 
 Current covered surface:
 
-- HID class requests reviewed identity surface (6 entries)
-- HID descriptor field reviewed identity surface (7 entries)
-- HID report descriptor item reviewed identity surface (6 entries)
-- No verified or fully interpreted behavior claims
+- HID class requests verified identity surface (6 entries)
+- HID descriptor field verified identity surface (7 entries)
+- HID report descriptor item type verified identity surface (6 entries)
+- No fully interpreted behavior, parser/runtime, firmware, OS, or
+  product-specific HID behavior claims
 
 ## Source Authority
 
@@ -44,7 +46,7 @@ Current primary source:
 - Device Class Definition for Human Interface Devices (HID), Version 1.11
 - Publisher: USB Implementers Forum
 - URL: `https://www.usb.org/sites/default/files/documents/hid1_11.pdf`
-- Current imported usage: Section 7.2 Class-Specific Requests, Section 6.2.1 HID Descriptor, and Section 6.2.2 Report Descriptor item types are scaffolded
+- Current imported usage: Section 7.2 Class-Specific Requests, Section 6.2.1 HID Descriptor, and Section 6.2.2 Report Descriptor item type identities are imported as the current governed subset
 
 Source authority is registered in:
 
@@ -60,10 +62,9 @@ This repo does not cover:
 
 ## Claim Boundary
 
-Until evidence packets and verified governed tables are introduced, content in
-this repo remains reviewed or scaffold identity-level reference material only.
-
-No verified HID entries are claimed yet.
+The current imported subset has evidence-backed, accepted-packet verified
+identity entries. This does not establish full HID specification coverage or
+behavioral correctness.
 
 Verified promotion preflight is defined by:
 
@@ -71,8 +72,9 @@ Verified promotion preflight is defined by:
 - `docs/evidence_packet_schema.md`
 - `scripts/validate_evidence_packet_schema.py`
 
-These files define the future gate only. They do not promote any current HID
-entry to `verified`.
+These files define the Level 3 gate used for current and future verified
+promotion. Verified entries remain identity-level unless a narrower verified
+scope says otherwise.
 
 ## Governance Boundary
 
@@ -100,11 +102,11 @@ validator, or CodeBurn observation as enforcement.
 
 ## Machine-Readable Surfaces
 
-- `data/`: governed scaffold matrices for HID class requests, HID descriptor
-  fields, and HID report descriptor item identities.
+- `data/`: governed matrices for HID class requests, HID descriptor fields,
+  and HID report descriptor item identities.
 - `contract/`: repo-local authority, claim, evidence, and version-scope rules.
 - `exports/hid_governed_surface_manifest.yaml`: consumer-facing manifest for
-  the current HID scaffold surface.
+  the current HID governed subset.
 - `evidence/source_registry.yaml`: evidence-facing mirror of registered and
   excluded HID authority sources.
 - `evidence/table_fingerprint_baseline.jsonl`: content-hash baseline for
@@ -112,7 +114,7 @@ validator, or CodeBurn observation as enforcement.
 
 ## Consumer Integration
 
-Consuming repositories can integrate this scaffold surface through a two-step
+Consuming repositories can integrate this governed subset through a two-step
 advisory CI check:
 
 ```powershell
@@ -122,8 +124,16 @@ python scripts\probe_table_fingerprint.py --mode check `
   --baseline-in evidence\table_fingerprint_baseline.jsonl
 ```
 
-Both checks must pass before treating the scaffold surface as stable. Passing
-checks do not upgrade any HID entry to verified.
+Both checks must pass before treating the current governed subset as stable.
+Passing checks do not establish firmware, OS, parser/runtime, or
+product-specific HID behavior.
+
+## HUB-Parity Completion Plan
+
+The current HID subset is complete, but this repository is not yet as broad as
+`usb-if-hub-spec-reference`. The parity plan is tracked in:
+
+- `docs/hid_hub_parity_completion_plan.md`
 
 ## Validation
 

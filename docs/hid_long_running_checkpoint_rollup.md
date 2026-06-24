@@ -4451,3 +4451,53 @@ Commit Checkpoint:
   - PASS `python -X utf8 scripts/validate_memory_records.py`
 - Stats before/after:
   - active roadmap slice count: 1 -> 0 (`HID-LRA-1` completed)
+
+## Batch: HID-LRA-83 (HUB-Parity Plan and Claim Reconciliation)
+
+- Commit: this checkpoint
+- Scope: define a HUB-parity completion plan for the HID reference repo and
+  reconcile public-facing docs with the current `19 tracked / 19 verified`
+  identity-level governed subset.
+- Changed files:
+  - `README.md`
+  - `docs/claim_boundary.md`
+  - `docs/source_authority.md`
+  - `docs/hid_hub_parity_completion_plan.md`
+  - `docs/hid_long_running_roadmap.md`
+  - `docs/hid_long_running_checkpoint_rollup.md`
+  - `exports/hid_governed_surface_manifest.yaml`
+- Validation:
+  - PASS `python -X utf8 scripts/validate_source_authority.py`
+  - PASS `python -X utf8 scripts/validate_contract_files.py`
+  - PASS `python -X utf8 scripts/validate_hid_governed_surface_manifest.py`
+  - PASS `python -X utf8 scripts/validate_verification_status.py`
+  - PASS `python -X utf8 scripts/validate_hid_class_request_matrix.py`
+  - PASS `python -X utf8 scripts/validate_hid_descriptor_fields_matrix.py`
+  - PASS `python -X utf8 scripts/validate_hid_report_descriptor_items_matrix.py`
+  - PASS `python -X utf8 scripts/validate_evidence_packet_schema.py`
+  - PASS `python -X utf8 scripts/validate_accepted_packet_proposals.py`
+  - PASS `python -X utf8 scripts/probe_table_fingerprint.py --mode check --manifest exports/hid_governed_surface_manifest.yaml --baseline-in evidence/table_fingerprint_baseline.jsonl`
+  - PASS `python -X utf8 scripts/validate_memory_records.py`
+  - PASS `python -B -m unittest discover -s tests`
+- Stats before/after:
+  - tracked entries: unchanged at 19
+  - verified entries: unchanged at 19
+  - reviewed entries: unchanged at 0
+  - governed matrices: unchanged at 3
+  - new source authority imports: 0
+- Can claim:
+  - HID now has a documented plan to pursue HUB-style repo completeness.
+  - README, claim boundary, source authority, and manifest wording no longer
+    claim the current subset has zero verified entries.
+- Cannot claim:
+  - cannot claim full HID spec coverage.
+  - cannot claim HID Usage Tables coverage.
+  - cannot claim report descriptor semantic completeness.
+  - cannot claim report payload semantics.
+  - cannot claim firmware behavior correctness.
+  - cannot claim OS input stack behavior.
+  - cannot claim parser/runtime behavior.
+  - cannot claim product-specific HID behavior.
+- Residual risk:
+  - HUB parity remains future work; this slice establishes the plan and fixes
+    claim drift only.
