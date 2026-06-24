@@ -4789,3 +4789,47 @@ Commit Checkpoint:
   - cannot claim product-specific HID behavior.
 - Residual risk:
   - actual source-authority import remains a separate Level 3 transition.
+
+## Batch: HID-LRA-90 (HID Usage Tables Source-Authority Import Execution Plan Packet)
+
+- Commit: this checkpoint
+- Scope: add a machine-checkable execution-plan packet for the future Level 3
+  HID Usage Tables source-authority import first slice.
+- Changed files:
+  - `docs/evidence/source_authority_proposals/hid_usage_tables_import_execution_plan.md`
+  - `evidence/source_authority_proposals/hid_usage_tables_import_execution_plan.json`
+  - `scripts/validate_source_authority_import_proposals.py`
+  - `tests/test_source_authority_import_proposals.py`
+  - `scripts/generate_source_authority_import_proposal_summary.py`
+  - `tests/test_source_authority_import_proposal_summary.py`
+  - proposal summary and validation receipt artifacts
+  - `docs/hid_hub_parity_completion_plan.md`
+  - `governance/hid_work_queue.yaml`
+  - `docs/hid_long_running_roadmap.md`
+  - `docs/hid_long_running_checkpoint_rollup.md`
+- Validation:
+  - PASS `python -X utf8 scripts/validate_source_authority_import_proposals.py --receipt-out evidence/validation_receipt_source_authority_import_proposals.json`
+  - PASS `python -B -m unittest tests.test_source_authority_import_proposals tests.test_source_authority_import_proposal_summary`
+- Stats before/after:
+  - source authority imports: unchanged
+  - Usage Tables governed matrices: 0 -> 0
+  - tracked entries: unchanged at 19
+  - verified entries: unchanged at 19
+  - work queue entries: 38 -> 39
+- Can claim:
+  - HID Usage Tables source-authority import execution-plan packet exists.
+  - validator checks the execution plan remains proposal-only and forbids
+    direct import, Usage Tables entries, and verified uplift.
+- Cannot claim:
+  - cannot claim HID Usage Tables are imported.
+  - cannot claim Usage Tables coverage.
+  - cannot claim Usage Tables entries are tracked, reviewed, or verified.
+  - cannot claim Usage Tables matrices exist.
+  - cannot claim report descriptor semantic completeness.
+  - cannot claim report payload semantics.
+  - cannot claim firmware behavior correctness.
+  - cannot claim OS input stack behavior.
+  - cannot claim parser/runtime behavior.
+  - cannot claim product-specific HID behavior.
+- Residual risk:
+  - actual source-authority import remains a separate Level 3 transition.

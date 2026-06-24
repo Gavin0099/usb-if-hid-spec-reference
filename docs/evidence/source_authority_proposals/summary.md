@@ -7,6 +7,7 @@
 
 - proposal artifacts: 1
 - preapproval checklists: 1
+- execution plans: 1
 - source authority status: `not_imported`
 - source registry Usage Tables sections: 0
 - production source authority changes: 0

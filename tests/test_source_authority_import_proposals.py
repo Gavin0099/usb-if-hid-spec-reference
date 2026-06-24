@@ -7,6 +7,7 @@ import yaml
 
 from scripts.validate_source_authority_import_proposals import (
     DEFAULT_CHECKLIST,
+    DEFAULT_EXECUTION_PLAN,
     DEFAULT_MARKDOWN,
     DEFAULT_PROPOSAL,
     DEFAULT_SOURCE_AUTHORITY,
@@ -102,6 +103,40 @@ class SourceAuthorityImportProposalTests(unittest.TestCase):
             )
 
         self.assertTrue(any("registry sections must remain empty" in error for error in errors))
+
+    def test_execution_plan_with_direct_import_fails(self) -> None:
+        with tempfile.TemporaryDirectory(prefix="tmp_source_proposal_", dir=ROOT) as tempdir:
+            temp = Path(tempdir)
+            execution_plan = json.loads(DEFAULT_EXECUTION_PLAN.read_text(encoding="utf-8"))
+            execution_plan["direct_import"] = True
+            execution_plan_path = temp / "execution_plan.json"
+            _write_json(execution_plan_path, execution_plan)
+
+            errors, _receipt = validate(
+                DEFAULT_PROPOSAL,
+                markdown_path=DEFAULT_MARKDOWN,
+                checklist_path=DEFAULT_CHECKLIST,
+                execution_plan_path=execution_plan_path,
+            )
+
+        self.assertTrue(any("execution plan direct_import must be false" in error for error in errors))
+
+    def test_execution_plan_with_usage_table_entries_fails(self) -> None:
+        with tempfile.TemporaryDirectory(prefix="tmp_source_proposal_", dir=ROOT) as tempdir:
+            temp = Path(tempdir)
+            execution_plan = json.loads(DEFAULT_EXECUTION_PLAN.read_text(encoding="utf-8"))
+            execution_plan["usage_tables_governed_entries_created"] = True
+            execution_plan_path = temp / "execution_plan.json"
+            _write_json(execution_plan_path, execution_plan)
+
+            errors, _receipt = validate(
+                DEFAULT_PROPOSAL,
+                markdown_path=DEFAULT_MARKDOWN,
+                checklist_path=DEFAULT_CHECKLIST,
+                execution_plan_path=execution_plan_path,
+            )
+
+        self.assertTrue(any("usage_tables_governed_entries_created must be false" in error for error in errors))
 
 
 if __name__ == "__main__":

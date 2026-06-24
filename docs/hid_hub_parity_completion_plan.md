@@ -106,6 +106,8 @@ governed entries.
 validator while keeping HID Usage Tables not imported.
 `HID-LRA-88` adds a proposal summary/check gate so reviewers can inspect the
 Usage Tables import proposal surface without treating it as an import.
+`HID-LRA-90` adds a source-authority import execution-plan packet that defines
+the first allowed post-approval slice while still not importing Usage Tables.
 
 Actions:
 

@@ -507,3 +507,14 @@
   citation as authority, no Usage Tables matrices, no matrix count movement, and
   no firmware, OS, parser/runtime, report payload, or product-specific behavior
   claims.
+
+### HID-LRA-90: HID Usage Tables Source-Authority Import Execution Plan Packet
+
+- status: Completed
+- objective: add a machine-checkable execution-plan packet for the first future
+  post-approval Usage Tables source-authority import slice.
+- latest checkpoint: this checkpoint
+- gate: execution plan proposal only; no source authority import, no Usage
+  Tables citation as authority, no Usage Tables matrices, no matrix count
+  movement, and no firmware, OS, parser/runtime, report payload, or
+  product-specific behavior claims.

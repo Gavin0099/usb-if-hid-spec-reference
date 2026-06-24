@@ -21,6 +21,8 @@ ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_PROPOSAL = ROOT / "evidence" / "source_authority_proposals" / "hid_usage_tables_import_proposal.json"
 DEFAULT_MARKDOWN = ROOT / "docs" / "evidence" / "source_authority_proposals" / "hid_usage_tables_import_proposal.md"
 DEFAULT_CHECKLIST = ROOT / "docs" / "evidence" / "source_authority_proposals" / "hid_usage_tables_import_preapproval_checklist.md"
+DEFAULT_EXECUTION_PLAN = ROOT / "evidence" / "source_authority_proposals" / "hid_usage_tables_import_execution_plan.json"
+DEFAULT_EXECUTION_PLAN_MARKDOWN = ROOT / "docs" / "evidence" / "source_authority_proposals" / "hid_usage_tables_import_execution_plan.md"
 DEFAULT_SOURCE_AUTHORITY = ROOT / "data" / "source_authority.yaml"
 DEFAULT_SOURCE_REGISTRY = ROOT / "evidence" / "source_registry.yaml"
 DEFAULT_RECEIPT = ROOT / "evidence" / "validation_receipt_source_authority_import_proposals.json"
@@ -39,6 +41,22 @@ REQUIRED_NOT_CLAIMED = {
     "OS input stack behavior is not claimed",
     "Parser/runtime behavior is not claimed",
     "Product-specific HID behavior is not claimed",
+}
+REQUIRED_EXECUTION_NON_CLAIMS = {
+    "no direct source authority import in this plan",
+    "no Usage Tables governed entries in this plan",
+    "no Usage Tables coverage claim in this plan",
+    "no verified uplift in this plan",
+}
+ALLOWED_FIRST_SLICE_FILES = {
+    "data/source_authority.yaml",
+    "evidence/source_registry.yaml",
+    "docs/source_authority.md",
+    "docs/claim_boundary.md",
+    "governance/hid_work_queue.yaml",
+    "docs/hid_long_running_roadmap.md",
+    "docs/hid_long_running_checkpoint_rollup.md",
+    "memory/2026-06-23.md",
 }
 
 
@@ -104,6 +122,8 @@ def validate(
     *,
     markdown_path: Path = DEFAULT_MARKDOWN,
     checklist_path: Path = DEFAULT_CHECKLIST,
+    execution_plan_path: Path = DEFAULT_EXECUTION_PLAN,
+    execution_plan_markdown_path: Path = DEFAULT_EXECUTION_PLAN_MARKDOWN,
     source_authority_path: Path = DEFAULT_SOURCE_AUTHORITY,
     source_registry_path: Path = DEFAULT_SOURCE_REGISTRY,
 ) -> tuple[list[str], dict[str, Any]]:
@@ -118,6 +138,8 @@ def validate(
         (proposal_path, "PROPOSAL_JSON_MISSING"),
         (markdown_path, "PROPOSAL_MARKDOWN_MISSING"),
         (checklist_path, "PREAPPROVAL_CHECKLIST_MISSING"),
+        (execution_plan_path, "EXECUTION_PLAN_JSON_MISSING"),
+        (execution_plan_markdown_path, "EXECUTION_PLAN_MARKDOWN_MISSING"),
     ):
         if not required_path.exists():
             add_error(code, f"missing required artifact: {_display_path(required_path)}")
@@ -174,6 +196,59 @@ def validate(
     if missing_non_claims:
         add_error("NON_CLAIMS_INCOMPLETE", f"missing non-claim(s): {', '.join(missing_non_claims)}")
 
+    execution_plan: dict[str, Any]
+    try:
+        execution_plan = _load_json(execution_plan_path)
+    except Exception as exc:
+        add_error("EXECUTION_PLAN_JSON_LOAD_FAILED", str(exc))
+        execution_plan = {}
+
+    if execution_plan.get("authority_ceiling") != "source_authority_import_execution_plan_only":
+        add_error(
+            "EXECUTION_PLAN_AUTHORITY_CEILING_INVALID",
+            "execution plan authority_ceiling must be source_authority_import_execution_plan_only",
+        )
+    if execution_plan.get("plan_status") != "proposal_only":
+        add_error("EXECUTION_PLAN_STATUS_INVALID", "execution plan plan_status must be proposal_only")
+    if execution_plan.get("source_id") != "hid_usage_tables":
+        add_error("EXECUTION_PLAN_SOURCE_ID_INVALID", "execution plan source_id must be hid_usage_tables")
+    if execution_plan.get("production_change_created") is not False:
+        add_error("EXECUTION_PLAN_PRODUCTION_CHANGE_CREATED", "execution plan production_change_created must be false")
+    if execution_plan.get("direct_import") is not False:
+        add_error("EXECUTION_PLAN_DIRECT_IMPORT", "execution plan direct_import must be false")
+    if execution_plan.get("usage_tables_governed_entries_created") is not False:
+        add_error(
+            "EXECUTION_PLAN_USAGE_TABLE_ENTRIES_CREATED",
+            "execution plan usage_tables_governed_entries_created must be false",
+        )
+    if execution_plan.get("verified_uplift") is not False:
+        add_error("EXECUTION_PLAN_VERIFIED_UPLIFT", "execution plan verified_uplift must be false")
+
+    proposed_first_slice_files = execution_plan.get("proposed_first_slice_files", [])
+    if not isinstance(proposed_first_slice_files, list):
+        add_error("EXECUTION_PLAN_FILES_INVALID", "execution plan proposed_first_slice_files must be a list")
+        proposed_first_slice_files = []
+    unknown_files = sorted(set(proposed_first_slice_files) - ALLOWED_FIRST_SLICE_FILES)
+    if unknown_files:
+        add_error("EXECUTION_PLAN_FILES_OUT_OF_SCOPE", f"execution plan contains out-of-scope files: {', '.join(unknown_files)}")
+
+    forbidden_first_slice_files = execution_plan.get("forbidden_first_slice_files", [])
+    if not isinstance(forbidden_first_slice_files, list):
+        add_error("EXECUTION_PLAN_FORBIDDEN_FILES_INVALID", "execution plan forbidden_first_slice_files must be a list")
+        forbidden_first_slice_files = []
+    if not any("data/hid_" in str(path) and "matrix" in str(path) for path in forbidden_first_slice_files):
+        add_error("EXECUTION_PLAN_FORBIDDEN_MATRICES_MISSING", "execution plan must forbid Usage Tables matrix creation in first slice")
+
+    execution_non_claims = (
+        set(execution_plan.get("non_claims", [])) if isinstance(execution_plan.get("non_claims"), list) else set()
+    )
+    missing_execution_non_claims = sorted(REQUIRED_EXECUTION_NON_CLAIMS - execution_non_claims)
+    if missing_execution_non_claims:
+        add_error(
+            "EXECUTION_PLAN_NON_CLAIMS_INCOMPLETE",
+            f"execution plan missing non-claim(s): {', '.join(missing_execution_non_claims)}",
+        )
+
     try:
         source_status = _usage_tables_source_authority_status(source_authority_path)
         if source_status != "not_imported":
@@ -197,6 +272,8 @@ def validate(
         "checked_proposal": _display_path(proposal_path),
         "checked_markdown": _display_path(markdown_path),
         "checked_checklist": _display_path(checklist_path),
+        "checked_execution_plan": _display_path(execution_plan_path),
+        "checked_execution_plan_markdown": _display_path(execution_plan_markdown_path),
         "source_authority_status": source_status,
         "source_registry_sections": registry_sections,
         "error_count": len(errors),
@@ -211,6 +288,8 @@ def main() -> int:
     parser.add_argument("--proposal")
     parser.add_argument("--markdown")
     parser.add_argument("--checklist")
+    parser.add_argument("--execution-plan")
+    parser.add_argument("--execution-plan-markdown")
     parser.add_argument("--source-authority")
     parser.add_argument("--source-registry")
     parser.add_argument("--receipt-out")
@@ -220,6 +299,8 @@ def main() -> int:
         proposal = _resolve_under_root(args.proposal, DEFAULT_PROPOSAL)
         markdown = _resolve_under_root(args.markdown, DEFAULT_MARKDOWN)
         checklist = _resolve_under_root(args.checklist, DEFAULT_CHECKLIST)
+        execution_plan = _resolve_under_root(args.execution_plan, DEFAULT_EXECUTION_PLAN)
+        execution_plan_markdown = _resolve_under_root(args.execution_plan_markdown, DEFAULT_EXECUTION_PLAN_MARKDOWN)
         source_authority = _resolve_under_root(args.source_authority, DEFAULT_SOURCE_AUTHORITY)
         source_registry = _resolve_under_root(args.source_registry, DEFAULT_SOURCE_REGISTRY)
         receipt_out = _resolve_under_root(args.receipt_out, DEFAULT_RECEIPT)
@@ -231,6 +312,8 @@ def main() -> int:
         proposal,
         markdown_path=markdown,
         checklist_path=checklist,
+        execution_plan_path=execution_plan,
+        execution_plan_markdown_path=execution_plan_markdown,
         source_authority_path=source_authority,
         source_registry_path=source_registry,
     )
