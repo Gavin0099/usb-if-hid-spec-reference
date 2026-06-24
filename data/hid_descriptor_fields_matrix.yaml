@@ -10,8 +10,8 @@ source_refs:
 claim_boundary:
   claim_level_default: reviewed
   evidence_status_default: not_verified
-  verified_entries: 1
-  reviewed_entries: 6
+  verified_entries: 7
+  reviewed_entries: 0
   non_claims:
     - parser_behavior
     - report_descriptor_payload
@@ -29,7 +29,7 @@ entries:
   - field_id: hid_bDescriptorType
     field_name: bDescriptorType
     summary: "HID descriptor bDescriptorType identity field for descriptor type code."
-    claim_level: reviewed
+    claim_level: verified
     evidence_status: not_verified
     source_anchor:
       source_id: hid_1_11
@@ -38,7 +38,7 @@ entries:
   - field_id: hid_bcdHID
     field_name: bcdHID
     summary: "HID descriptor bcdHID identity field for HID class specification release number."
-    claim_level: reviewed
+    claim_level: verified
     evidence_status: not_verified
     source_anchor:
       source_id: hid_1_11
@@ -47,7 +47,7 @@ entries:
   - field_id: hid_bCountryCode
     field_name: bCountryCode
     summary: "HID descriptor bCountryCode identity field for hardware country code."
-    claim_level: reviewed
+    claim_level: verified
     evidence_status: not_verified
     source_anchor:
       source_id: hid_1_11
@@ -56,7 +56,7 @@ entries:
   - field_id: hid_bNumDescriptors
     field_name: bNumDescriptors
     summary: "HID descriptor bNumDescriptors identity field for subordinate descriptor entry count."
-    claim_level: reviewed
+    claim_level: verified
     evidence_status: not_verified
     source_anchor:
       source_id: hid_1_11
@@ -65,7 +65,7 @@ entries:
   - field_id: hid_bDescriptorType_subordinate
     field_name: bDescriptorType_subordinate
     summary: "Subordinate descriptor bDescriptorType identity field for each subordinate descriptor entry."
-    claim_level: reviewed
+    claim_level: verified
     evidence_status: not_verified
     source_anchor:
       source_id: hid_1_11
@@ -74,7 +74,7 @@ entries:
   - field_id: hid_wDescriptorLength
     field_name: wDescriptorLength
     summary: "Subordinate descriptor wDescriptorLength identity field for each subordinate descriptor length value."
-    claim_level: reviewed
+    claim_level: verified
     evidence_status: not_verified
     source_anchor:
       source_id: hid_1_11

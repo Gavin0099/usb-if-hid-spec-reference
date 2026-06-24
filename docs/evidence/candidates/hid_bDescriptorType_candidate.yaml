@@ -7,7 +7,7 @@ packet_identity:
 governed_entry_binding:
   matrix: hid_descriptor_fields_matrix
   entry_id: hid_bDescriptorType
-  current_claim_level: reviewed
+  current_claim_level: verified
   current_evidence_status: not_verified
 
 source_trace:
