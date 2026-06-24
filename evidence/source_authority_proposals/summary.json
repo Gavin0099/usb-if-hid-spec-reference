@@ -1,0 +1,42 @@
+{
+  "authority_ceiling": "source_authority_import_proposal_summary_only",
+  "proposal_count": 1,
+  "checklist_count": 1,
+  "source_authority_status": "not_imported",
+  "source_registry_section_count": 0,
+  "production_source_authority_change_count": 0,
+  "usage_tables_governed_entry_count": 0,
+  "verified_uplift_count": 0,
+  "ready_for_level3_import": true,
+  "remaining_gap_count": 9,
+  "proposals": [
+    {
+      "source_id": "hid_usage_tables",
+      "current_status": "not_imported",
+      "proposed_next_status": "pending_level3_source_authority_import",
+      "proposal_json": "evidence/source_authority_proposals/hid_usage_tables_import_proposal.json",
+      "proposal_markdown": "docs/evidence/source_authority_proposals/hid_usage_tables_import_proposal.md",
+      "preapproval_checklist": "docs/evidence/source_authority_proposals/hid_usage_tables_import_preapproval_checklist.md",
+      "approval_record": "TBD_LEVEL3_APPROVAL",
+      "approver": "TBD_HUMAN_APPROVER",
+      "direct_import": false,
+      "remaining_gap_count": 9
+    }
+  ],
+  "claim_ceiling": [
+    "source_authority_import_proposal_summary_only",
+    "no_source_authority_import",
+    "no_usage_tables_coverage",
+    "no_verified_uplift"
+  ],
+  "not_claimed": [
+    "HID Usage Tables are not imported",
+    "Usage Tables entries are not tracked, reviewed, or verified",
+    "Usage Tables source version is not selected",
+    "Report payload semantics are not covered",
+    "Firmware behavior correctness is not claimed",
+    "OS input stack behavior is not claimed",
+    "Parser/runtime behavior is not claimed",
+    "Product-specific HID behavior is not claimed"
+  ]
+}

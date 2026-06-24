@@ -1,0 +1,12 @@
+{
+  "validator": "generate_source_authority_import_proposal_summary.py",
+  "authority_ceiling": "source_authority_import_proposal_summary_only",
+  "result": "PASS",
+  "assert_match": "evidence/source_authority_proposals/summary.json",
+  "proposal_count": 1,
+  "source_authority_status": "not_imported",
+  "source_registry_section_count": 0,
+  "ready_for_level3_import": true,
+  "error_count": 0,
+  "errors": []
+}

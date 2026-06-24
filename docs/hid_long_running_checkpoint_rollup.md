@@ -4728,3 +4728,64 @@ Commit Checkpoint:
   - cannot claim product-specific HID behavior.
 - Residual risk:
   - actual source-authority import remains a separate Level 3 transition.
+
+## Batch: HID-LRA-88 (HID Usage Tables Source-Authority Import Proposal Summary)
+
+- Commit: this checkpoint
+- Scope: add summary artifacts, generator, tests, and current-gate receipt
+  coverage for the HID Usage Tables source-authority import proposal surface.
+- Changed files:
+  - `docs/evidence/source_authority_proposals/summary.md`
+  - `evidence/source_authority_proposals/summary.json`
+  - `scripts/generate_source_authority_import_proposal_summary.py`
+  - `tests/test_source_authority_import_proposal_summary.py`
+  - `scripts/generate_validation_receipt_index.py`
+  - `docs/hid_hub_parity_completion_plan.md`
+  - `governance/hid_work_queue.yaml`
+  - `docs/hid_long_running_roadmap.md`
+  - `docs/hid_long_running_checkpoint_rollup.md`
+  - `memory/2026-06-23.md`
+  - validation receipt index artifacts
+- Validation:
+  - PASS `python -B -m unittest tests.test_source_authority_import_proposal_summary tests.test_source_authority_import_proposals`
+  - PASS `python -X utf8 scripts/generate_source_authority_import_proposal_summary.py --assert-match evidence/source_authority_proposals/summary.json --check-only --receipt-out evidence/validation_receipt_source_authority_import_proposal_summary.json`
+  - PASS `python -X utf8 scripts/validate_source_authority_import_proposals.py --receipt-out evidence/validation_receipt_source_authority_import_proposals.json`
+  - PASS `python -X utf8 scripts/generate_validation_receipt_index.py`
+  - PASS `python -X utf8 scripts/generate_validation_receipt_index.py --check-only --assert-match evidence/validation_receipt_index.json`
+  - PASS `python -X utf8 scripts/validate_validation_receipt_index.py --receipt-out evidence/validation_receipt_validation_receipt_index.json`
+  - PASS `python -X utf8 scripts/validate_source_authority.py`
+  - PASS `python -X utf8 scripts/validate_source_registry.py --receipt-out evidence/validation_receipt_source_registry.json`
+  - PASS `python -X utf8 scripts/validate_contract_files.py`
+  - PASS `python -X utf8 scripts/validate_hid_governed_surface_manifest.py`
+  - PASS `python -X utf8 scripts/validate_verification_status.py`
+  - PASS `python -X utf8 scripts/validate_hid_class_request_matrix.py`
+  - PASS `python -X utf8 scripts/validate_hid_descriptor_fields_matrix.py`
+  - PASS `python -X utf8 scripts/validate_hid_report_descriptor_items_matrix.py`
+  - PASS `python -X utf8 scripts/validate_evidence_packet_schema.py`
+  - PASS `python -X utf8 scripts/validate_accepted_packet_proposals.py`
+  - PASS `python -X utf8 scripts/probe_table_fingerprint.py --mode check --manifest exports/hid_governed_surface_manifest.yaml --baseline-in evidence/table_fingerprint_baseline.jsonl`
+  - PASS `python -X utf8 scripts/validate_memory_records.py`
+  - PASS `python -B -m unittest discover -s tests`
+- Stats before/after:
+  - source authority imports: unchanged
+  - Usage Tables governed matrices: 0 -> 0
+  - tracked entries: unchanged at 19
+  - verified entries: unchanged at 19
+  - validation receipt index gate commands: 16 -> 17
+  - work queue entries: 37 -> 38
+- Can claim:
+  - HID Usage Tables source-authority import proposal summary exists.
+  - current gate checks the proposal summary against the committed JSON summary.
+  - summary reports Usage Tables source authority status as `not_imported`.
+- Cannot claim:
+  - cannot claim HID Usage Tables are imported.
+  - cannot claim Usage Tables coverage.
+  - cannot claim Usage Tables entries are tracked, reviewed, or verified.
+  - cannot claim report descriptor semantic completeness.
+  - cannot claim report payload semantics.
+  - cannot claim firmware behavior correctness.
+  - cannot claim OS input stack behavior.
+  - cannot claim parser/runtime behavior.
+  - cannot claim product-specific HID behavior.
+- Residual risk:
+  - actual source-authority import remains a separate Level 3 transition.

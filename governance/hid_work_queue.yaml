@@ -288,6 +288,32 @@ queue:
       does not create Usage Tables matrices, and does not change current
       governed subset counts.
 
+  - id: HID-EXT-6
+    title: HID Usage Tables source-authority import proposal summary
+    authority: HID Usage Tables secondary authority boundary
+    status: verified
+    allowed_status_change: proposal_summary_only
+    requires_human_approval: false
+    review_level: 1
+    gate: validation_required
+    future_authorized: false
+    forbidden_claims:
+      - HID Usage Tables imported authority
+      - Usage Tables coverage
+      - Usage Tables governed entries
+      - report payload semantics
+      - report parser semantics
+      - firmware behavior correctness
+      - OS input stack behavior
+      - product-specific HID behavior
+      - verified status uplift without evidence
+    notes: >
+      Add a summary generator and current-gate receipt for the Usage Tables
+      source-authority import proposal surface. This summarizes proposal and
+      readiness state only; it does not update `data/source_authority.yaml`,
+      does not cite Usage Tables as authority, does not create Usage Tables
+      matrices, and does not change current governed subset counts.
+
   - id: HID-RD-1
     title: 6.2.2 report descriptor item reviewed wording pass
     authority: HID 1.11 Section 6.2.2

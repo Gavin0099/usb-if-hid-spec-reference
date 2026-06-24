@@ -104,6 +104,8 @@ HID Usage Tables import without importing the source or creating Usage Tables
 governed entries.
 `HID-LRA-87` adds a source-authority import proposal/checklist and proposal
 validator while keeping HID Usage Tables not imported.
+`HID-LRA-88` adds a proposal summary/check gate so reviewers can inspect the
+Usage Tables import proposal surface without treating it as an import.
 
 Actions:
 

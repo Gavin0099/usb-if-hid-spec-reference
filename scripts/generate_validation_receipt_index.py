@@ -62,6 +62,21 @@ GATE_COMMANDS = [
         "source_authority_import_proposal_validation_only",
     ),
     GateCommand(
+        "source_authority_import_proposal_summary",
+        [
+            "python",
+            "-X",
+            "utf8",
+            "scripts/generate_source_authority_import_proposal_summary.py",
+            "--assert-match",
+            "evidence/source_authority_proposals/summary.json",
+            "--check-only",
+            "--receipt-out",
+            "evidence/validation_receipt_source_authority_import_proposal_summary.json",
+        ],
+        "source_authority_import_proposal_summary_only",
+    ),
+    GateCommand(
         "contract_files",
         [
             "python",

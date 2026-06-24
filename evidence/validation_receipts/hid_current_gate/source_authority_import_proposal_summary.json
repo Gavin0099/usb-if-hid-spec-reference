@@ -1,0 +1,21 @@
+{
+  "receipt_id": "source_authority_import_proposal_summary",
+  "command": [
+    "python",
+    "-X",
+    "utf8",
+    "scripts/generate_source_authority_import_proposal_summary.py",
+    "--assert-match",
+    "evidence/source_authority_proposals/summary.json",
+    "--check-only",
+    "--receipt-out",
+    "evidence/validation_receipt_source_authority_import_proposal_summary.json"
+  ],
+  "claim_ceiling": "source_authority_import_proposal_summary_only",
+  "result": "PASS",
+  "returncode": 0,
+  "stdout": [
+    "PASS source authority import proposal summary matches evidence/source_authority_proposals/summary.json"
+  ],
+  "stderr": []
+}

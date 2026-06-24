@@ -6,8 +6,8 @@
 ## Summary
 
 - result: PASS
-- checked commands: 16
-- pass count: 16
+- checked commands: 17
+- pass count: 17
 - fail count: 0
 - receipt directory: `evidence/validation_receipts/hid_current_gate`
 
@@ -18,6 +18,7 @@
 | `source_authority` | PASS | `source_authority_structural_validation_only` | `evidence/validation_receipts/hid_current_gate/source_authority.json` |
 | `source_registry` | PASS | `structural_registry_validation_only` | `evidence/validation_receipts/hid_current_gate/source_registry.json` |
 | `source_authority_import_proposals` | PASS | `source_authority_import_proposal_validation_only` | `evidence/validation_receipts/hid_current_gate/source_authority_import_proposals.json` |
+| `source_authority_import_proposal_summary` | PASS | `source_authority_import_proposal_summary_only` | `evidence/validation_receipts/hid_current_gate/source_authority_import_proposal_summary.json` |
 | `contract_files` | PASS | `contract_structural_consistency_only` | `evidence/validation_receipts/hid_current_gate/contract_files.json` |
 | `hid_class_request_matrix` | PASS | `matrix_identity_validation_only` | `evidence/validation_receipts/hid_current_gate/hid_class_request_matrix.json` |
 | `hid_descriptor_fields_matrix` | PASS | `matrix_identity_validation_only` | `evidence/validation_receipts/hid_current_gate/hid_descriptor_fields_matrix.json` |
